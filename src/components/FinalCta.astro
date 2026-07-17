@@ -14,12 +14,10 @@ import { site, waLink } from '../data/site';
         </h2>
         <p class="mx-auto mt-4 max-w-xl text-text-muted text-sm sm:text-base">Activated in minutes. Cancel any time. No auto-renewal.</p>
 
-        <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
-          <a href={waLink()} class="btn-primary px-7 py-4" rel="nofollow noopener">
-            <Icon name="whatsapp" size={18} /> Order via WhatsApp
-          </a>
-          <a href="/order" class="btn-secondary px-7 py-4">
-            <Icon name="card" size={18} /> Pay by Card
+        <div class="mt-8 flex justify-center">
+          <a href={waLink()} class="btn-primary px-8 py-4 text-base" rel="nofollow noopener">
+            Get My Trial — {site.currencySymbol}{site.price}
+            <Icon name="arrow" size={18} />
           </a>
         </div>
       </div>

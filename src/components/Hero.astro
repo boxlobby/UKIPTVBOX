@@ -25,12 +25,11 @@ import { site, waLink } from '../data/site';
       plus thousands of movies and series in 4K — on any device, activated in minutes.
     </p>
 
-    <div class="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
-      <a href={waLink()} class="btn-primary text-base px-7 py-4" rel="nofollow noopener">
-        Get My Trial ({site.currencySymbol}{site.price})
+    <div class="mt-7 flex justify-center max-w-md sm:max-w-none mx-auto">
+      <a href={waLink()} class="btn-primary text-base px-8 py-4" rel="nofollow noopener">
+        Get My Trial — {site.currencySymbol}{site.price}
         <Icon name="arrow" size={18} />
       </a>
-      <a href="#features" class="btn-secondary px-7 py-4">See What’s Included</a>
     </div>
 
     <ul class="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-text-muted">

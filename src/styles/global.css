@@ -1,18 +1,23 @@
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/space-grotesk/500.css';
-@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    background-color: #0A0F1E;
+    color: #F5F7FA;
   }
 
   body {
@@ -23,8 +28,17 @@
     background-attachment: fixed;
   }
 
+  /* Belt-and-braces: enforce readable colour on every text element */
+  h1, h2, h3, h4, h5, h6, p, span, li, a, strong, em, blockquote, figcaption, summary, details, label {
+    color: inherit;
+  }
+
   h1, h2, h3, h4 {
-    @apply font-display tracking-tight;
+    @apply font-display tracking-tight text-text-primary;
+  }
+
+  summary, details {
+    color: inherit;
   }
 
   ::selection {
@@ -32,7 +46,6 @@
     color: #fff;
   }
 
-  /* Bigger tap targets on mobile */
   button, a {
     touch-action: manipulation;
   }
@@ -48,11 +61,11 @@
   }
 
   .btn-primary {
-    @apply btn bg-brand text-white shadow-glow hover:bg-brand-hover hover:-translate-y-0.5 active:translate-y-0;
+    @apply btn bg-brand !text-white shadow-glow hover:bg-brand-hover hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-secondary {
-    @apply btn border border-border-subtle bg-elevated/60 text-text-primary hover:border-brand/60 hover:text-brand-light;
+    @apply btn border border-border-subtle bg-elevated/60 !text-text-primary hover:border-brand/60 hover:!text-brand-light;
   }
 
   .eyebrow {
@@ -60,7 +73,7 @@
   }
 
   .card {
-    @apply rounded-2xl border border-border-subtle bg-elevated/70 backdrop-blur-sm;
+    @apply rounded-2xl border border-border-subtle bg-elevated/70 backdrop-blur-sm text-text-primary;
   }
 
   .section {
@@ -73,21 +86,11 @@
     opacity: 0.7;
   }
 
-  /* Horizontal slider primitive — CSS scroll-snap, mobile-first, no JS required */
+  /* Horizontal slider — CSS scroll-snap, mobile-first, no JS required */
   .slider {
     @apply flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0;
     scrollbar-width: none;
   }
   .slider::-webkit-scrollbar { display: none; }
   .slider > * { @apply snap-start shrink-0; }
-
-  .slider-dots {
-    @apply mt-3 flex items-center justify-center gap-1.5;
-  }
-  .slider-dots span {
-    @apply h-1.5 w-1.5 rounded-full bg-border-subtle;
-  }
-  .slider-dots span.active {
-    @apply w-6 bg-brand;
-  }
 }
