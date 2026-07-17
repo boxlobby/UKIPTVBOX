@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+import { faqs } from '../data/faqs';
+---
+<section id="faq" class="section">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="mt-4 text-3xl md:text-5xl font-bold">Everything you need to know</h2>
+      <p class="mt-4 text-text-muted">Still unsure? Message us on WhatsApp — we usually reply in under two minutes.</p>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-3xl divide-y divide-border-subtle rounded-2xl border border-border-subtle bg-elevated/70">
+      {faqs.map((f, i) => (
+        <details class="group px-6" name="faq" open={i === 0}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-base font-semibold text-text-primary [&::-webkit-details-marker]:hidden">
+            <span>{f.q}</span>
+            <span class="shrink-0 text-signal transition group-open:rotate-180">
+              <Icon name="chevron-down" size={20} />
+            </span>
+          </summary>
+          <p class="pb-5 pr-8 text-sm text-text-muted leading-relaxed">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

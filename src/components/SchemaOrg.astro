@@ -1,0 +1,70 @@
+---
+import { site } from '../data/site';
+import { faqs } from '../data/faqs';
+
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/favicon.svg`,
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      areaServed: 'GB',
+      availableLanguage: ['en'],
+      telephone: `+${site.whatsapp}`,
+    },
+  ],
+  sameAs: [] as string[],
+};
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: site.url,
+};
+
+const priceValidUntil = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+  .toISOString()
+  .slice(0, 10);
+
+const product = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: `${site.name} — 30-Day IPTV UK Trial`,
+  description:
+    'A 30-day IPTV UK trial with 35,000+ live channels, sports, movies and series in 4K. Instant activation on any device.',
+  brand: { '@type': 'Brand', name: site.name },
+  offers: {
+    '@type': 'Offer',
+    url: site.url,
+    priceCurrency: site.currency,
+    price: site.price,
+    priceValidUntil,
+    availability: 'https://schema.org/InStock',
+    seller: { '@type': 'Organization', name: site.name },
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: site.reviews.rating,
+    reviewCount: site.reviews.count,
+  },
+};
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(org)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(website)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(product)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(faqPage)} />

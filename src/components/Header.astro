@@ -1,0 +1,51 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, waLink } from '../data/site';
+---
+<header class="sticky top-0 z-40 border-b border-border-subtle/60 bg-base/80 backdrop-blur-md">
+  <div class="container-x flex h-16 items-center justify-between">
+    <Logo />
+    <nav class="hidden md:flex items-center gap-8 text-sm text-text-muted" aria-label="Primary">
+      <a href="#features" class="hover:text-text-primary transition">Features</a>
+      <a href="#pricing" class="hover:text-text-primary transition">Pricing</a>
+      <a href="#devices" class="hover:text-text-primary transition">Devices</a>
+      <a href="#faq" class="hover:text-text-primary transition">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href={waLink()} class="btn-primary hidden sm:inline-flex" rel="nofollow noopener">
+        Start Trial — {site.currencySymbol}{site.price}
+      </a>
+      <button
+        id="mnav-toggle"
+        class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border-subtle text-text-muted"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mnav"
+      >
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mnav" class="md:hidden hidden border-t border-border-subtle bg-base">
+    <nav class="container-x flex flex-col gap-1 py-3 text-sm">
+      <a href="#features" class="rounded-lg px-3 py-2 hover:bg-elevated">Features</a>
+      <a href="#pricing" class="rounded-lg px-3 py-2 hover:bg-elevated">Pricing</a>
+      <a href="#devices" class="rounded-lg px-3 py-2 hover:bg-elevated">Devices</a>
+      <a href="#faq" class="rounded-lg px-3 py-2 hover:bg-elevated">FAQ</a>
+      <a href={waLink()} class="btn-primary mt-2" rel="nofollow noopener">
+        Start Trial — {site.currencySymbol}{site.price}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mnav-toggle');
+  const menu = document.getElementById('mnav');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+</script>

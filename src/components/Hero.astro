@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+import { site, waLink } from '../data/site';
+---
+<section class="relative overflow-hidden">
+  <div class="pointer-events-none absolute inset-0 -z-10">
+    <div class="absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-signal/10 blur-3xl"></div>
+    <div class="absolute top-40 -right-20 h-[400px] w-[400px] rounded-full bg-uk-red/10 blur-3xl"></div>
+  </div>
+
+  <div class="container-x pt-20 pb-16 md:pt-28 md:pb-24 text-center">
+    <span class="eyebrow mb-6">
+      <span class="h-1.5 w-1.5 rounded-full bg-uk-red"></span>
+      Made for UK viewers
+    </span>
+
+    <h1 class="mx-auto max-w-4xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]">
+      <span class="text-text-primary">IPTV UK Trial — </span>
+      <span class="bg-grad-uk bg-clip-text text-transparent">30 Days for {site.currencySymbol}{site.price}</span>
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-text-muted leading-relaxed">
+      Test the UK’s fastest IPTV service risk-free. <strong class="text-text-primary">35,000+ live channels</strong>
+      plus thousands of movies and series in 4K — on any device, activated in minutes.
+    </p>
+
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a href={waLink()} class="btn-primary text-base px-8 py-4" rel="nofollow noopener">
+        Get My Trial ({site.currencySymbol}{site.price})
+        <Icon name="arrow" size={18} />
+      </a>
+      <a href="#features" class="btn-secondary px-8 py-4">See What’s Included</a>
+    </div>
+
+    <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-text-muted">
+      <li class="flex items-center gap-2"><Icon name="star" class="text-signal" size={16} /> 4.9 / 5 from {site.reviews.count} reviews</li>
+      <li class="flex items-center gap-2"><Icon name="clock" class="text-signal" size={16} /> Full 30-day trial</li>
+      <li class="flex items-center gap-2"><Icon name="zap" class="text-signal" size={16} /> Instant activation</li>
+      <li class="flex items-center gap-2"><Icon name="shield" class="text-signal" size={16} /> UK support</li>
+    </ul>
+  </div>
+
+  <div class="h-divider container-x"></div>
+</section>

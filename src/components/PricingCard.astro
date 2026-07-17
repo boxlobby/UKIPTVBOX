@@ -1,0 +1,73 @@
+---
+import Icon from './Icon.astro';
+import { site, waLink } from '../data/site';
+
+const included = [
+  '35,000+ live channels (UK & international)',
+  'Sports channels, movies and series library',
+  '4K UHD, FHD & HD streams',
+  'Anti-buffer UK & EU servers, 99.9% uptime',
+  'Works on any device — full setup guides',
+  'Instant activation (usually under 5 minutes)',
+  '24/7 UK-hours WhatsApp support',
+  'One-time payment, no auto-renewal',
+];
+---
+<section id="pricing" class="section">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">One simple package</span>
+      <h2 class="mt-4 text-3xl md:text-5xl font-bold">The {site.currencySymbol}{site.price} IPTV Trial</h2>
+      <p class="mt-4 text-text-muted">A genuine 30-day trial. No tiers, no upsells, no auto-renewal. If it’s not for you, walk away.</p>
+    </div>
+
+    <div class="mt-14 mx-auto max-w-2xl">
+      <div class="relative rounded-3xl p-[1.5px] bg-grad-uk">
+        <div class="rounded-[calc(1.5rem-1.5px)] bg-elevated p-8 md:p-10">
+          <div class="flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <p class="text-xs font-medium uppercase tracking-widest text-signal">30-day IPTV UK trial</p>
+              <h3 class="mt-2 text-2xl md:text-3xl font-bold">Trial Package</h3>
+            </div>
+            <span class="rounded-full bg-uk-red/15 border border-uk-red/40 px-3 py-1 text-xs font-semibold text-uk-red uppercase tracking-wider">
+              Cheapest UK IPTV
+            </span>
+          </div>
+
+          <div class="mt-6 flex items-end gap-3">
+            <span class="text-6xl md:text-7xl font-display font-bold leading-none bg-grad-signal bg-clip-text text-transparent">
+              {site.currencySymbol}{site.price}
+            </span>
+            <span class="pb-2 text-text-muted">/ {site.trialDays} days</span>
+          </div>
+
+          <ul class="mt-8 space-y-3">
+            {included.map((line) => (
+              <li class="flex items-start gap-3 text-sm text-text-primary">
+                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-success/20 text-success shrink-0">
+                  <Icon name="check" size={14} />
+                </span>
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <a href={waLink()} class="btn-primary py-4" rel="nofollow noopener">
+              <Icon name="whatsapp" size={18} /> Order via WhatsApp
+            </a>
+            <a href="/order" class="btn-secondary py-4">
+              <Icon name="card" size={18} /> Pay by Card
+            </a>
+          </div>
+
+          <p class="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-text-muted">
+            <span class="flex items-center gap-1.5"><Icon name="shield" size={14} class="text-signal" /> Secure checkout</span>
+            <span class="flex items-center gap-1.5"><Icon name="zap" size={14} class="text-signal" /> Instant delivery</span>
+            <span class="flex items-center gap-1.5"><Icon name="check" size={14} class="text-signal" /> No auto-renewal</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

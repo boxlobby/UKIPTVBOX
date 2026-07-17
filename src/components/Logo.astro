@@ -1,0 +1,13 @@
+---
+export interface Props { class?: string }
+const { class: className = '' } = Astro.props;
+---
+<a href="/" class={`inline-flex items-center gap-2 font-display font-bold text-xl tracking-tight ${className}`} aria-label="IPTV Trial — home">
+  <span class="relative flex h-8 w-8 items-center justify-center rounded-lg bg-grad-uk shadow-glow">
+    <span class="absolute inset-0.5 rounded-md bg-base"></span>
+    <span class="relative text-signal font-black">▶</span>
+  </span>
+  <span>
+    <span class="text-signal">IPTV</span><span class="text-text-primary">Trial</span>
+  </span>
+</a>

@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import { categories } from '../data/categories';
+---
+<section class="py-12 bg-subtle/40" aria-label="Content categories">
+  <div class="container-x">
+    <p class="text-center text-xs font-medium uppercase tracking-widest text-text-muted mb-6">
+      Everything you already watch — in one place
+    </p>
+    <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+      {categories.map((c) => (
+        <li class="card flex items-center gap-3 px-4 py-3 text-sm text-text-muted hover:text-text-primary hover:border-signal/40 transition">
+          <Icon name={c.icon} class="text-signal shrink-0" size={20} />
+          <span>{c.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

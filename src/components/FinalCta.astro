@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import { site, waLink } from '../data/site';
+---
+<section class="section">
+  <div class="container-x">
+    <div class="relative overflow-hidden rounded-3xl border border-border-subtle bg-elevated p-10 md:p-14 text-center">
+      <div class="absolute -top-32 left-1/2 h-72 w-[600px] -translate-x-1/2 rounded-full bg-signal/20 blur-3xl"></div>
+      <div class="absolute -bottom-32 right-0 h-72 w-72 rounded-full bg-uk-red/20 blur-3xl"></div>
+
+      <div class="relative">
+        <h2 class="text-3xl md:text-5xl font-bold">
+          Start your <span class="bg-grad-uk bg-clip-text text-transparent">{site.currencySymbol}{site.price}</span> IPTV UK trial today
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-text-muted">Activated in minutes. Cancel any time. No auto-renewal.</p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href={waLink()} class="btn-primary px-8 py-4" rel="nofollow noopener">
+            <Icon name="whatsapp" size={18} /> Order via WhatsApp
+          </a>
+          <a href="/order" class="btn-uk px-8 py-4">Pay by Card</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

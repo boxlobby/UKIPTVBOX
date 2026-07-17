@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { features } from '../data/features';
+---
+<section id="features" class="section">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">Why choose us</span>
+      <h2 class="mt-4 text-3xl md:text-5xl font-bold">Built for the UK, priced for everyone</h2>
+      <p class="mt-4 text-text-muted">The cheapest UK IPTV trial that doesn’t cut corners — same lineup, same servers, same 4K quality as our long-term plans.</p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {features.map((f) => (
+        <article class="card p-6 hover:border-signal/40 transition group">
+          <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-signal/10 text-signal group-hover:bg-signal group-hover:text-base transition">
+            <Icon name={f.icon} size={22} />
+          </div>
+          <h3 class="text-lg font-semibold text-text-primary">{f.title}</h3>
+          <p class="mt-2 text-sm text-text-muted leading-relaxed">{f.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

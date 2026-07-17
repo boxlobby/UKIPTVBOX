@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+const steps = [
+  {
+    n: '01',
+    icon: 'card',
+    title: 'Order your trial',
+    body: `Pay ${site.currencySymbol}${site.price} via WhatsApp or card. Takes less than a minute — no long forms.`,
+  },
+  {
+    n: '02',
+    icon: 'zap',
+    title: 'Receive your login',
+    body: 'We send your credentials by email or WhatsApp within minutes of payment.',
+  },
+  {
+    n: '03',
+    icon: 'tv',
+    title: 'Start watching',
+    body: 'Follow our device guide, plug in your login, and you’re live in under five minutes.',
+  },
+];
+---
+<section class="section">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">How it works</span>
+      <h2 class="mt-4 text-3xl md:text-5xl font-bold">From order to live TV in 5 minutes</h2>
+    </div>
+
+    <ol class="mt-14 grid gap-5 md:grid-cols-3">
+      {steps.map((s) => (
+        <li class="card p-6 relative">
+          <span class="absolute right-6 top-6 font-display text-4xl font-bold text-signal/20">{s.n}</span>
+          <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-signal/10 text-signal">
+            <Icon name={s.icon} size={22} />
+          </div>
+          <h3 class="text-lg font-semibold">{s.title}</h3>
+          <p class="mt-2 text-sm text-text-muted leading-relaxed">{s.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

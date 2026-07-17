@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout
+  title="IPTV UK Blog — Guides & Reviews | iptvtrial.org"
+  description="Guides, reviews and setup tutorials for IPTV in the UK. Coming soon."
+  noIndex
+  includeSchema={false}
+>
+  <Header />
+  <main id="main" class="container-x py-24 text-center max-w-2xl mx-auto">
+    <span class="eyebrow">Blog</span>
+    <h1 class="mt-6 text-4xl md:text-5xl font-bold">Coming soon</h1>
+    <p class="mt-4 text-text-muted">
+      We’re publishing UK-focused IPTV setup guides, device tutorials and honest reviews. Check back soon.
+    </p>
+    <a href="/" class="btn-secondary mt-8">Back to home</a>
+  </main>
+  <Footer />
+</BaseLayout>

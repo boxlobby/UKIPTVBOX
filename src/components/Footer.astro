@@ -1,0 +1,47 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-border-subtle bg-subtle/50 mt-10">
+  <div class="container-x py-14 grid gap-10 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <Logo />
+      <p class="mt-4 max-w-sm text-sm text-text-muted leading-relaxed">
+        The UK’s cheapest IPTV trial — 30 days of 35,000+ live channels, sports, movies and series in 4K for just {site.currencySymbol}{site.price}.
+      </p>
+      <p class="mt-4 text-xs text-text-muted">
+        {site.domain} — Made in the UK 🇬🇧
+      </p>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-widest text-text-primary mb-4">Product</p>
+      <ul class="space-y-2 text-sm text-text-muted">
+        <li><a href="/#features" class="hover:text-text-primary">Features</a></li>
+        <li><a href="/#pricing" class="hover:text-text-primary">Pricing</a></li>
+        <li><a href="/#devices" class="hover:text-text-primary">Devices</a></li>
+        <li><a href="/#faq" class="hover:text-text-primary">FAQ</a></li>
+        <li><a href="/order" class="hover:text-text-primary">Order</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-widest text-text-primary mb-4">Company</p>
+      <ul class="space-y-2 text-sm text-text-muted">
+        <li><a href="/blog" class="hover:text-text-primary">Blog</a></li>
+        <li><a href={`mailto:${site.supportEmail}`} class="hover:text-text-primary">Contact</a></li>
+        <li><a href="/privacy" class="hover:text-text-primary">Privacy Policy</a></li>
+        <li><a href="/terms" class="hover:text-text-primary">Terms of Service</a></li>
+        <li><a href="/refund" class="hover:text-text-primary">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border-subtle">
+    <div class="container-x py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-text-muted">
+      <p>&copy; {year} {site.name}. All rights reserved.</p>
+      <p>Customers are responsible for the legality of their use in their jurisdiction.</p>
+    </div>
+  </div>
+</footer>
