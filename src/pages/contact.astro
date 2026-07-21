@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, waLink } from '../data/site';
+
+const contactWaLink = waLink('Hello, I have a question about the IPTV trial.');
+const mailtoLink = `mailto:${site.supportEmail}?subject=${encodeURIComponent('IPTV Trial Enquiry')}&body=${encodeURIComponent('Hi,\n\nI have a question about your IPTV trial / IPTV subscription.\n\nMy question:\n\n')}`;
+---
+<BaseLayout
+  title={`Contact Us | ${site.name} — IPTV Trial & IPTV Subscription Support`}
+  description={`Reach the ${site.name} UK support team by WhatsApp or email. Get help with your IPTV trial, IPTV subscription, billing, or installation on any device. Fast, human replies — no bots.`}
+  canonical={`${site.url}/contact`}
+  noIndex={false}
+  includeSchema={true}
+>
+  <Header />
+  <main id="main">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-20 pb-16 md:pt-28 md:pb-20 max-w-3xl">
+        <span class="eyebrow">Support &amp; Contact</span>
+        <h1 class="mt-5 font-display text-4xl md:text-5xl font-bold tracking-tight text-text-primary">
+          Talk to a real human about your IPTV trial
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Questions about our <strong>IPTV trial</strong>, your <strong>IPTV subscription</strong>, billing, or installation?
+          Our UK-based support team answers every message personally — no chatbots, no ticket queues.
+          Pick the channel that works best for you below.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={contactWaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full bg-[#25d366] px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:bg-[#1ebe5d] hover:-translate-y-0.5"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+          <a href={mailtoLink} class="btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            Email us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact cards -->
+    <section class="container-x py-16 md:py-20 max-w-5xl">
+      <div class="grid gap-6 md:grid-cols-2">
+
+        <!-- WhatsApp -->
+        <div class="card p-8 flex flex-col gap-5">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:rgba(37,211,102,0.12)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="#25d366">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="font-display text-xl font-semibold text-text-primary">WhatsApp — fastest reply</h2>
+            <p class="mt-2 text-text-muted leading-relaxed">
+              The quickest way to reach us. Get help with your <strong>IPTV trial</strong> setup, stream issues,
+              or upgrading your <strong>IPTV subscription</strong> — all via a direct message.
+            </p>
+            <ul class="mt-4 space-y-2 text-sm text-text-muted">
+              <li class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#25d366]"></span>
+                Replies in minutes (9 am – 11 pm UK)
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#25d366]"></span>
+                Real human — no bots or auto-replies
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#25d366]"></span>
+                Send screenshots &amp; share your device type
+              </li>
+            </ul>
+          </div>
+          <a
+            href={contactWaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-auto inline-flex w-fit items-center gap-2 rounded-full bg-[#25d366] px-5 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:bg-[#1ebe5d] hover:-translate-y-0.5"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Open WhatsApp chat
+          </a>
+        </div>
+
+        <!-- Email -->
+        <div class="card p-8 flex flex-col gap-5">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl" style="background:rgba(27,198,255,0.10)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="#1bc6ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="font-display text-xl font-semibold text-text-primary">Email — for detailed queries</h2>
+            <p class="mt-2 text-text-muted leading-relaxed">
+              Prefer writing it all out? Email us about your <strong>IPTV UK trial</strong>, billing,
+              refunds, or anything else. We reply within a few hours — no generic auto-responses.
+            </p>
+            <ul class="mt-4 space-y-2 text-sm text-text-muted">
+              <li class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+                Reply within a few hours
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+                Ideal for billing, refund &amp; account queries
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+                Full paper trail for your records
+              </li>
+            </ul>
+            <p class="mt-4 text-sm text-text-muted">
+              Direct address: <a href={`mailto:${site.supportEmail}`} class="text-brand-light underline underline-offset-2 hover:text-white transition-colors">{site.supportEmail}</a>
+            </p>
+          </div>
+          <a
+            href={mailtoLink}
+            class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-border-subtle bg-elevated/60 px-5 py-3 text-sm font-semibold text-text-primary shadow transition-all hover:border-brand/60 hover:text-brand-light hover:-translate-y-0.5"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            Open email composer
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What we can help with -->
+    <section class="border-t border-border-subtle">
+      <div class="container-x py-16 md:py-20 max-w-5xl">
+        <div class="mb-12 max-w-2xl">
+          <span class="eyebrow">What we can help with</span>
+          <h2 class="mt-4 font-display text-3xl md:text-4xl font-bold text-text-primary">
+            Whatever you need help with
+          </h2>
+          <p class="mt-4 text-text-muted leading-relaxed">
+            Whether you are about to start your first <strong>IPTV trial</strong>, troubleshoot an existing
+            <strong>IPTV service</strong>, or compare our <strong>IPTV subscriptions</strong> against other UK providers,
+            our team has handled it before.
+          </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+          <div class="card p-6 flex flex-col gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl" style="background:rgba(27,198,255,0.10)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1bc6ff" class="h-5 w-5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-text-primary">Starting your IPTV trial</h3>
+            <p class="text-sm text-text-muted leading-relaxed">Not sure where to begin? We will walk you through payment, activation and your first login. You could be watching live TV within 15 minutes.</p>
+          </div>
+
+          <div class="card p-6 flex flex-col gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl" style="background:rgba(27,198,255,0.10)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1bc6ff" class="h-5 w-5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-text-primary">Stream &amp; buffering issues</h3>
+            <p class="text-sm text-text-muted leading-relaxed">Buffering during a match is frustrating. Message us with your device and we will diagnose and fix it live, usually in under 10 minutes.</p>
+          </div>
+
+          <div class="card p-6 flex flex-col gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl" style="background:rgba(27,198,255,0.10)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1bc6ff" class="h-5 w-5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-text-primary">Billing &amp; refunds</h3>
+            <p class="text-sm text-text-muted leading-relaxed">Questions about payment, renewal or our refund policy? We answer billing queries fast and honour our policy without arguments.</p>
+          </div>
+
+          <div class="card p-6 flex flex-col gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl" style="background:rgba(27,198,255,0.10)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1bc6ff" class="h-5 w-5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 8.25h3m-3 3h3m-6-3h.008v.015H7.5V9.75Zm0 3h.008v.015H7.5V12.75Z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-text-primary">Device installation help</h3>
+            <p class="text-sm text-text-muted leading-relaxed">Need help installing your IPTV service on a Fire Stick, Smart TV, iOS, Android or MAG box? We support every major device.</p>
+          </div>
+
+          <div class="card p-6 flex flex-col gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl" style="background:rgba(27,198,255,0.10)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1bc6ff" class="h-5 w-5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-text-primary">Upgrading your IPTV subscription</h3>
+            <p class="text-sm text-text-muted leading-relaxed">Enjoyed the trial? We will match you to the right long-term IPTV subscription plan and apply a loyalty discount automatically.</p>
+          </div>
+
+          <div class="card p-6 flex flex-col gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl" style="background:rgba(27,198,255,0.10)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1bc6ff" class="h-5 w-5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.015H12v-.015Z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-text-primary">General IPTV questions</h3>
+            <p class="text-sm text-text-muted leading-relaxed">Unsure if an IPTV service is right for you? Wondering how ours compares to Sky or Virgin? Ask us anything, with no pressure or hard sell.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Mini FAQ -->
+    <section class="border-t border-border-subtle">
+      <div class="container-x py-16 md:py-20 max-w-3xl">
+        <span class="eyebrow">Common questions</span>
+        <h2 class="mt-4 font-display text-3xl font-bold text-text-primary">Before you reach out</h2>
+        <p class="mt-3 text-text-muted">Quick answers to the questions we get most often.</p>
+
+        <div class="mt-10 space-y-4">
+
+          <details class="card overflow-hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 font-semibold text-text-primary">
+              <span>How quickly will you reply?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-text-muted" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </summary>
+            <div class="border-t border-border-subtle px-5 pb-5 pt-4 text-sm text-text-muted leading-relaxed">
+              WhatsApp messages are answered within minutes during UK hours (9 am to 11 pm). Email is answered within a few hours.
+            </div>
+          </details>
+
+          <details class="card overflow-hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 font-semibold text-text-primary">
+              <span>I already bought the IPTV trial — how do I get my login?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-text-muted" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </summary>
+            <div class="border-t border-border-subtle px-5 pb-5 pt-4 text-sm text-text-muted leading-relaxed">
+              Credentials are sent to your WhatsApp within 15 minutes of payment. If you have not received them, message us directly and we will sort it immediately.
+            </div>
+          </details>
+
+          <details class="card overflow-hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 font-semibold text-text-primary">
+              <span>Can I upgrade from the trial to a longer IPTV subscription?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-text-muted" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </summary>
+            <div class="border-t border-border-subtle px-5 pb-5 pt-4 text-sm text-text-muted leading-relaxed">
+              Yes. Message us any time during your trial and we will apply a loyalty discount to any extended IPTV subscription plan.
+            </div>
+          </details>
+
+          <details class="card overflow-hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 font-semibold text-text-primary">
+              <span>My stream is buffering — what should I do?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-text-muted" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </summary>
+            <div class="border-t border-border-subtle px-5 pb-5 pt-4 text-sm text-text-muted leading-relaxed">
+              Contact us on WhatsApp with your device type and we will troubleshoot live. Most buffering issues are resolved in under 10 minutes.
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="border-t border-border-subtle">
+      <div class="container-x py-16 md:py-20 max-w-3xl text-center">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-text-primary">
+          Ready to start your IPTV trial?
+        </h2>
+        <p class="mt-4 text-text-muted leading-relaxed max-w-xl mx-auto">
+          The fastest way to test our <strong>IPTV service</strong> is to try it.
+          {site.currencySymbol}{site.price} for a full 30-day <strong>IPTV subscription</strong> — no commitment,
+          no auto-renewal, and a support team that actually answers.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href={contactWaLink} target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Start my {site.currencySymbol}{site.price} IPTV trial
+          </a>
+          <a href="/#faq" class="btn-secondary">Read the FAQ</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

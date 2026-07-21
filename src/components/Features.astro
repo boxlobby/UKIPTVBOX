@@ -1,18 +1,51 @@
 ---
 import Icon from './Icon.astro';
 import { features } from '../data/features';
+
+// Duplicate for the seamless mobile auto-scroll loop.
+const track = [...features, ...features];
 ---
 <section id="features" class="section">
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center">
-      <span class="eyebrow">Why choose us</span>
-      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Built for the UK, priced for everyone</h2>
-      <p class="mt-4 text-text-muted text-sm sm:text-base">The cheapest UK IPTV trial that doesn’t cut corners — same lineup, same servers, same 4K quality as our long-term plans.</p>
+      <span class="eyebrow">Why choose IPTV TRIAL</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">An IPTV Service Built for the UK</h2>
+      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+        The cheapest UK IPTV trial that doesn’t cut corners, same 50,000+ channels and 4K quality as our long-term IPTV subscriptions.
+        Every feature below is included from day one, risk-free.
+      </p>
     </div>
+  </div>
 
-    <ul class="slider mt-10 md:mt-14 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5" role="list">
+  <!-- Mobile: auto-scrolling, scrubbable carousel (same speed as CategoryStrip) -->
+  <div
+    class="features-marquee group relative mt-10 md:hidden"
+    role="region"
+    aria-label="Why choose IPTV Trial, swipe or wait for auto-scroll"
+    data-auto-scroll
+    data-speed="0.6"
+  >
+    <ul class="features-track flex gap-4 px-4" role="list">
+      {track.map((f, i) => (
+        <li
+          class="card p-5 sm:p-6 shrink-0 w-[260px]"
+          aria-hidden={i >= features.length ? 'true' : 'false'}
+        >
+          <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand-light transition">
+            <Icon name={f.icon} size={22} />
+          </div>
+          <h3 class="text-base sm:text-lg font-semibold text-text-primary">{f.title}</h3>
+          <p class="mt-2 text-sm text-text-muted leading-relaxed">{f.body}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Desktop: static grid -->
+  <div class="container-x hidden md:block">
+    <ul class="mt-10 md:mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
       {features.map((f) => (
-        <li class="card p-5 sm:p-6 hover:border-brand/40 transition group w-[85%] sm:w-[55%] md:w-auto">
+        <li class="card p-5 sm:p-6 hover:border-brand/40 transition group">
           <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand-light group-hover:bg-brand group-hover:text-white transition">
             <Icon name={f.icon} size={22} />
           </div>
@@ -21,9 +54,23 @@ import { features } from '../data/features';
         </li>
       ))}
     </ul>
-
-    <p class="mt-2 text-center text-[11px] uppercase tracking-widest text-text-muted md:hidden">
-      Swipe to see more →
-    </p>
   </div>
 </section>
+
+<style>
+  .features-marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+    overscroll-behavior-x: contain;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  }
+  .features-marquee::-webkit-scrollbar { display: none; }
+  .features-track {
+    width: max-content;
+    touch-action: pan-x;
+  }
+</style>

@@ -6,22 +6,100 @@ import { faqs } from '../data/faqs';
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">FAQ</span>
-      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Everything you need to know</h2>
-      <p class="mt-4 text-text-muted text-sm sm:text-base">Still unsure? Message us on WhatsApp — we usually reply in under two minutes.</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">IPTV Trial FAQs, Everything you need to know</h2>
+      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+        Everything on our IPTV UK trial, pricing, devices and long-term IPTV subscriptions, in plain English.
+        Still unsure? Message us on WhatsApp, we reply in under two minutes.
+      </p>
     </div>
 
     <div class="mx-auto mt-10 max-w-3xl divide-y divide-border-subtle rounded-2xl border border-border-subtle bg-elevated/70">
       {faqs.map((f, i) => (
-        <details class="group px-5 sm:px-6" name="faq" open={i === 0}>
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-[15px] sm:text-base font-semibold text-text-primary [&::-webkit-details-marker]:hidden">
-            <span>{f.q}</span>
-            <span class="shrink-0 text-brand-light transition group-open:rotate-180">
+        <details class="faq-item group px-5 sm:px-6" name="faq" open={i === 0}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-[15px] sm:text-base font-semibold !text-text-primary [&::-webkit-details-marker]:hidden">
+            <span class="!text-text-primary">{f.q}</span>
+            <span class="shrink-0 text-brand-light transition-transform duration-300 group-open:rotate-180">
               <Icon name="chevron-down" size={20} />
             </span>
           </summary>
-          <p class="pb-5 pr-8 text-sm text-text-muted leading-relaxed">{f.a}</p>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p class="pb-5 pr-8 text-sm text-text-muted leading-relaxed">{f.a}</p>
+            </div>
+          </div>
         </details>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  /* Keep collapsed content in flow so we can animate it, override the UA default. */
+  .faq-item .faq-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item[open]:not(.is-closing) .faq-content {
+    grid-template-rows: 1fr;
+  }
+  .faq-content-inner {
+    min-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 240ms ease, transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item[open]:not(.is-closing) .faq-content-inner {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-content,
+    .faq-content-inner { transition: none; }
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll<HTMLDetailsElement>('.faq-item');
+  items.forEach((el) => {
+    const summary = el.querySelector('summary');
+    const content = el.querySelector<HTMLElement>('.faq-content');
+    if (!summary || !content) return;
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      if (el.open) {
+        // Closing: run the CSS transition, then flip the attribute.
+        el.classList.add('is-closing');
+        const onEnd = (ev: TransitionEvent) => {
+          if (ev.propertyName !== 'grid-template-rows') return;
+          content.removeEventListener('transitionend', onEnd);
+          el.classList.remove('is-closing');
+          el.open = false;
+        };
+        content.addEventListener('transitionend', onEnd);
+      } else {
+        // Opening: close any sibling in the same [name] group first, then open.
+        if (el.name) {
+          document.querySelectorAll<HTMLDetailsElement>(
+            `details.faq-item[name="${el.name}"][open]`
+          ).forEach((s) => {
+            if (s === el) return;
+            s.classList.add('is-closing');
+            const c = s.querySelector<HTMLElement>('.faq-content');
+            const off = (ev: TransitionEvent) => {
+              if (ev.propertyName !== 'grid-template-rows') return;
+              c?.removeEventListener('transitionend', off);
+              s.classList.remove('is-closing');
+              s.open = false;
+            };
+            c?.addEventListener('transitionend', off);
+          });
+        }
+        el.open = true;
+      }
+    });
+  });
+</script>

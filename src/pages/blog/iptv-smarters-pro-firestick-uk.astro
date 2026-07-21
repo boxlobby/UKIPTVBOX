@@ -1,0 +1,376 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('iptv-smarters-pro-firestick-uk')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+const ogImage = post.image.startsWith('http') ? post.image : site.url + post.image;
+
+const steps = [
+  {
+    n: 1,
+    title: 'Enable "Apps from Unknown Sources" on your Fire Stick',
+    detail:
+      'From the Fire Stick home screen: Settings → My Fire TV → Developer Options → Install unknown apps → toggle "Downloader" to ON. On older Fire OS versions the toggle is called "Apps from Unknown Sources" — either way, you are giving the Downloader app permission to install the IPTV Smarters Pro APK. This is a normal Amazon setting; the Downloader app itself is a fully-listed app in the Amazon Appstore.',
+  },
+  {
+    n: 2,
+    title: 'Install the Downloader app from the Amazon Appstore',
+    detail:
+      'Long-press the Fire Stick home button → Search icon → type "Downloader" → install the official orange Downloader app by AFTVnews. This is the standard sideloading tool used by millions of Fire Stick owners.',
+  },
+  {
+    n: 3,
+    title: 'Open Downloader and enter the IPTV Smarters Pro URL',
+    detail:
+      'Launch Downloader and enter the URL of the official IPTV Smarters Pro APK. Download the file, click Install, then Delete to keep your Fire Stick storage clean. The app now appears under "Your Apps & Channels".',
+  },
+  {
+    n: 4,
+    title: 'Launch IPTV Smarters Pro and pick your login type',
+    detail:
+      'On first launch you get three login options: Xtream Codes API, M3U URL, or Load your Playlist. If we sent you a username + password + server URL, pick Xtream Codes API. If we sent you a single long M3U link, pick M3U URL. If unsure, WhatsApp us — we\'ll tell you in ten seconds.',
+  },
+  {
+    n: 5,
+    title: 'Enter your IPTV credentials',
+    detail:
+      'Xtream Codes login is three fields: any name (e.g. "IPTV Trial UK"), your username, your password, and the server URL exactly as we sent it (including http:// and the port number). Tap "Add User" and Smarters will pull down your full channel list and EPG in under a minute.',
+  },
+  {
+    n: 6,
+    title: 'Set up your EPG for a proper TV guide experience',
+    detail:
+      'By default Smarters uses the EPG data included with your subscription. If it does not load automatically, go to Settings → EPG → Update EPG. A properly-populated EPG shows now/next, 7-day scheduling and catch-up markers. If yours is blank, the fix is nearly always a stale cache — force close the app and reopen.',
+  },
+  {
+    n: 7,
+    title: 'Enable Auto-Boot (optional, recommended)',
+    detail:
+      'Settings → General → Auto Start on Boot. This makes IPTV Smarters launch automatically when you power on the Fire Stick — closer to the "turn on and watch" feel of a satellite box.',
+  },
+  {
+    n: 8,
+    title: 'Pin IPTV Smarters to the Fire Stick home screen',
+    detail:
+      'Home → scroll down to "Your Apps & Channels" → hover on IPTV Smarters Pro → press the menu button (three lines) on your remote → "Move to Front". Now the app is the first thing your household sees when they pick up the remote.',
+  },
+];
+
+const troubleshoot = [
+  {
+    q: 'Nothing plays / black screen',
+    a: 'Almost always a decoder mismatch. Settings → Player Settings → change from Native to IJK Player, or vice versa. This fixes 80% of "no video, no error" Fire Stick problems.',
+  },
+  {
+    q: '"No stream found" or "Cannot load stream"',
+    a: 'Server URL is wrong or missing the port number. Copy-paste it from the WhatsApp message we sent — do not retype. Also check that Wi-Fi is connected; a dropped connection produces the same error.',
+  },
+  {
+    q: 'Buffering every few seconds',
+    a: 'Nine times out of ten this is Wi-Fi. Run a Speedtest in the Amazon Appstore — if you are under 20 Mbps at the Fire Stick location, either wire it with an Ethernet adapter or move the router closer. Ofcom publishes reference streaming speed guidance if you want the numbers.',
+  },
+  {
+    q: 'EPG is blank or wrong',
+    a: 'Settings → EPG → Update EPG. If still blank after 5 minutes, the EPG XML is temporarily unreachable — WhatsApp us and we will refresh it server-side.',
+  },
+  {
+    q: 'App crashes on launch',
+    a: 'Uninstall, reboot the Fire Stick (Settings → My Fire TV → Restart), reinstall via Downloader. Do not update Smarters through the "Update" button inside the app — always redownload the latest APK.',
+  },
+  {
+    q: 'Fire Stick 2nd gen runs slow',
+    a: 'Older Fire Sticks (pre-4K Max) struggle with heavy EPGs. Turn off the parental control PIN screen, disable auto-preview on the Fire Stick home, and consider upgrading to the 4K Max — see our IPTV boxes UK 2026 ranking for options.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is IPTV Smarters Pro on Firestick legal in the UK?',
+    a: 'Yes — IPTV Smarters Pro is a player app, like VLC or Kodi. The app itself is neutral and lawful. Legality depends entirely on the IPTV subscription you log in with. Our £14.99 30-day trial gives you a legitimate provider to pair with the app — see our "Is IPTV legal UK" explainer for the full detail.',
+  },
+  {
+    q: 'How much does IPTV Smarters Pro cost?',
+    a: 'The IPTV Smarters Pro app is free to install on Fire Stick, Android and iOS. You need a separate IPTV subscription to actually play any channels. Our £14.99 30-day trial provides those credentials.',
+  },
+  {
+    q: 'Does IPTV Smarters Pro support 4K on Fire Stick?',
+    a: 'Yes — on the Fire TV Stick 4K and Fire TV Stick 4K Max (2nd gen). Older Fire Sticks max out at 1080p. Change Player Settings to IJK Player for the smoothest 4K playback with hardware decoding.',
+  },
+  {
+    q: 'Can I use IPTV Smarters Pro on multiple Fire Sticks?',
+    a: 'Yes — the app is free, and one Xtream Codes login can typically be used on two devices simultaneously (subject to your provider\'s concurrency limit). We provide a single-connection line by default and two-connection on request.',
+  },
+  {
+    q: 'What is the Downloader code for IPTV Smarters Pro?',
+    a: 'We send the current official Downloader URL directly on WhatsApp when your trial starts, because the safest source changes over time and we want you on the freshest, cleanest build. Message us on WhatsApp and we will send the exact URL to type into Downloader.',
+  },
+  {
+    q: 'Do I need a VPN to use IPTV Smarters on Fire Stick?',
+    a: 'Not required for a legal, licensed IPTV subscription. Some viewers still use one for privacy or to avoid ISP video throttling in the evening. If you do, pick a reputable provider with UK server capacity — see the Wikipedia VPN article for a neutral technical overview.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@type': 'Person', name: post.author, url: `${site.url}/about#team` },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Setup Guides',
+      keywords: post.keywords.join(', '),
+    },
+    {
+      '@type': 'HowTo',
+      name: 'How to install IPTV Smarters Pro on Firestick (UK)',
+      totalTime: 'PT10M',
+      step: steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.title,
+        text: s.detail,
+      })),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">IPTV Smarters Pro on Firestick</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          The complete UK walkthrough for installing <strong>IPTV Smarters Pro on a Fire TV Stick</strong> in 2026 —
+          the Downloader sideload, Xtream Codes vs M3U login, EPG setup, and every fix for the most
+          common "black screen" and "no stream" errors. Everything you need to pair with your
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I'd like the Downloader URL and IPTV Smarters login for the £${site.price} trial.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Get my Downloader URL + trial login
+          </a>
+          <a href="#steps" class="btn-secondary">Jump to the 8 steps</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img src={post.image} alt={post.imageAlt} width="1200" height="630" loading="eager" decoding="async" fetchpriority="high" class="w-full h-auto" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          The Fire TV Stick and IPTV Smarters Pro are the most popular IPTV combination in the UK for
+          one very simple reason: it is under £70 of hardware, the app is free, and the whole thing
+          takes about ten minutes to install. This guide walks you through every screen with no
+          skipped steps and no assumed knowledge.
+        </p>
+
+        <h2>Before you start — what you need</h2>
+        <ul>
+          <li>An <a href="https://en.wikipedia.org/wiki/Amazon_Fire_TV" target="_blank" rel="noopener noreferrer nofollow">Amazon Fire TV Stick</a> (any generation, but 4K Max recommended).</li>
+          <li>Home Wi-Fi or, ideally, a Fire Stick Ethernet adapter for wired connection.</li>
+          <li>An IPTV subscription that provides Xtream Codes or M3U credentials — for example our <a href="/#pricing">£{site.price} 30-day trial</a>.</li>
+          <li>About 10 minutes.</li>
+        </ul>
+
+        <h2 id="steps">The 8-step install (Fire Stick + IPTV Smarters Pro)</h2>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {steps.map((s) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold text-white shadow-glow">
+                {s.n}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{s.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed">{s.detail}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <article class="legal-prose mt-14">
+        <h2>Xtream Codes vs M3U — which login should you use?</h2>
+        <p>
+          Both work with IPTV Smarters Pro, but they behave differently once installed:
+        </p>
+        <ul>
+          <li>
+            <strong>Xtream Codes API</strong> — username, password and server URL. Recommended for
+            almost everyone. Gives you a categorised channel list, a proper EPG, VOD sections and
+            series metadata. This is what we send you by default on the £{site.price} trial.
+          </li>
+          <li>
+            <strong>M3U URL</strong> — one long HTTP link that contains every channel as a raw playlist.
+            Faster to set up, but no VOD categories and often no EPG. Use only if requested.
+          </li>
+        </ul>
+
+        <h2>Player settings that fix most Fire Stick IPTV problems</h2>
+        <ol>
+          <li><strong>Player type:</strong> IJK Player is smoothest on modern Fire Sticks; Native is safer on older ones.</li>
+          <li><strong>Time format:</strong> switch to 24-hour if you prefer the UK convention.</li>
+          <li><strong>EPG time shift:</strong> set to 0 hours for UK viewers. Some resellers ship EPGs in +2 or +3 — the "guide is wrong" issue almost always comes from this setting.</li>
+          <li><strong>Stream format:</strong> HLS by default; MPEG-TS for specific troublesome channels.</li>
+          <li><strong>Auto restart on stream failure:</strong> ON. Fire Sticks occasionally drop Wi-Fi packets; this recovers automatically.</li>
+        </ol>
+
+        <h2>Troubleshooting the common Fire Stick errors</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {troubleshoot.map((t) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{t.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{t.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>What internet speed do you need for IPTV Smarters on Fire Stick?</h2>
+        <p>
+          Ofcom's <a href="https://www.ofcom.org.uk/phones-and-broadband/broadband-and-landlines/what-broadband-speeds-do-i-need" target="_blank" rel="noopener noreferrer nofollow">reference speeds</a>
+          for streaming apply the same way to IPTV:
+        </p>
+        <ul>
+          <li>SD channel: ~3 Mbps</li>
+          <li>HD: ~8 Mbps</li>
+          <li>Full HD: ~12 Mbps</li>
+          <li>4K UHD: ~25 Mbps sustained per stream</li>
+        </ul>
+        <p>
+          Anything above 30 Mbps at the Fire Stick location is comfortable. Anything under 15 Mbps
+          means you should stick to HD channels and either move the router or wire in an
+          Ethernet adapter.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>Ready to go live?</h2>
+        <p>
+          Take our <a href="/#pricing">£{site.price} 30-day IPTV UK trial</a> and we will WhatsApp you
+          the current Downloader URL, your Xtream Codes credentials and a two-line reminder of the
+          steps above — all within 15 minutes of your payment. If anything on your Fire Stick doesn't
+          behave, we screenshot the fix back to you the same day.
+        </p>
+        <p>
+          <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp to start.</a>
+        </p>
+      </article>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">More Fire Stick + IPTV help</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <li><a href="/installation-guides/firestick/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">Full Fire Stick installation guide</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+          <li><a href="/blog/top-5-iptv-boxes-uk-2026/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">Top 5 IPTV Boxes UK 2026</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+          <li><a href="/blog/best-iptv-player-apps-2026-uk/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">Best IPTV player apps 2026</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+          <li><a href="/blog/iptv-subscription-uk-buyers-guide/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">IPTV subscription UK buyer's guide</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

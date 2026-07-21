@@ -4,30 +4,150 @@
     <loc>https://iptvtrial.org/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <lastmod>2026-07-21</lastmod>
   </url>
   <url>
-    <loc>https://iptvtrial.org/order</loc>
+    <loc>https://iptvtrial.org/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-21</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/contact/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-21</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/testimonials/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-21</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <lastmod>2026-07-21</lastmod>
   </url>
   <url>
-    <loc>https://iptvtrial.org/blog</loc>
+    <loc>https://iptvtrial.org/installation-guides/firestick/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/smart-tv/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/apple-tv/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/nvidia-shield/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/mag-box/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/enigma2-formuler/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/mobile-tablet/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/installation-guides/windows-mac/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/blog/</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+    <lastmod>2026-07-21</lastmod>
   </url>
   <url>
-    <loc>https://iptvtrial.org/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://iptvtrial.org/blog/best-iptv-player-apps-2026-uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-14</lastmod>
   </url>
   <url>
-    <loc>https://iptvtrial.org/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://iptvtrial.org/blog/iptv-smarters-pro-firestick-uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-14</lastmod>
   </url>
   <url>
-    <loc>https://iptvtrial.org/refund</loc>
+    <loc>https://iptvtrial.org/blog/cheap-iptv-uk-scam-or-legit/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/blog/iptv-subscription-uk-buyers-guide/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/blog/is-iptv-legal-uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/blog/iptv-free-trial-uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-07-21</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/blog/top-5-iptv-boxes-uk-2026/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-21</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/terms/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/refund/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+    <lastmod>2026-07-01</lastmod>
+  </url>
+  <url>
+    <loc>https://iptvtrial.org/dmca/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+    <lastmod>2026-07-01</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('iptv-free-trial-uk')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+const ogImage = post.image.startsWith('http') ? post.image : site.url + post.image;
+
+const testChecklist = [
+  {
+    title: 'Live channel switching speed',
+    detail:
+      'Flick through 20 different live channels one after the other. On a healthy IPTV trial each switch should take 1–3 seconds. Anything past 5 seconds hints at an over-loaded server — a red flag before you pay for a year.',
+  },
+  {
+    title: '4K and Full HD picture quality',
+    detail:
+      'Load a 4K entertainment channel, a Full HD movie stream and an SD news channel. Look for macro-blocking, audio drift and stutter. A legitimate provider will hold 4K at 25 Mbps steady — see the BBC iPlayer help pages for reference broadband requirements.',
+  },
+  {
+    title: 'EPG (TV guide) accuracy',
+    detail:
+      'Open the electronic programme guide and check that "now & next" data matches the actual live feed. An EPG that is 20 minutes off is a sign of a lazy provider that rebroadcasts someone else\'s feed without paying for proper metadata.',
+  },
+  {
+    title: 'Catch-up and rewind',
+    detail:
+      'A serious trial gives you at least 3 days of catch-up on the top channels. Try scrubbing back a few hours on last night\'s film. If catch-up is missing, you are looking at a stripped-down reseller line.',
+  },
+  {
+    title: 'Peak-time stability (7pm–10pm)',
+    detail:
+      'Do your trial testing during UK evening peak. This is when weak servers crumble. If a trial only works well at 2pm, it will disappoint you when you actually sit down to watch.',
+  },
+  {
+    title: 'Second-device concurrency',
+    detail:
+      'Log in on a phone while the TV is playing. A properly-provisioned IPTV subscription lets you watch two streams from one line without disconnects.',
+  },
+];
+
+const redFlags = [
+  '"Totally free forever" links posted in Facebook groups — these are almost always M3U scrapes that die within days',
+  'A 24-hour trial that asks for full card details up front',
+  'Providers with no WhatsApp or email support — only a Telegram username',
+  'Server IPs that change every few days (you have to reconfigure the app constantly)',
+  'No refund policy anywhere on the site',
+  'Prices under £5 a month for "20,000 channels + all sports + all VOD" — that maths does not work legally',
+];
+
+const faqs = [
+  {
+    q: 'Is there such a thing as a genuinely free IPTV trial in the UK?',
+    a: 'Almost never. Running an IPTV server costs money — bandwidth, transcoding, EPG feeds and licences all cost the provider per user, per hour. The nearest thing to "free" is a short paid trial like our £14.99 30-day plan, which is designed to cover the raw hosting cost and nothing more so you can fully test the service before paying for a year.',
+  },
+  {
+    q: 'What is the difference between a 24-hour trial and a 30-day trial?',
+    a: 'A 24-hour trial only tells you the servers were online today. A 30-day trial like ours lets you test evening peak-time for four consecutive weekends, catch-up over a full month, EPG accuracy across every day of the week, and 4K stability across live sport, films and series. It is the difference between kicking the tyres and actually driving the car home.',
+  },
+  {
+    q: 'Do I need special hardware to try an IPTV trial?',
+    a: `Not at all. You can test our £${site.price} IPTV trial on the phone in your pocket, a laptop, a Smart TV you already own, or a Fire Stick. We usually recommend installing IPTV Smarters Pro on whatever device you plan to actually use long-term — see our free installation guides for step-by-step help.`,
+  },
+  {
+    q: 'How do I start the trial without giving my card details?',
+    a: `Message us on WhatsApp (${site.whatsapp}) with the device you want to test on. We send you your login, invoice you £${site.price} for the 30-day trial, and you can pay by bank transfer, PayPal or card — never on a hidden auto-renew. If you love the service after 30 days you upgrade to a longer plan. If not, you walk away.`,
+  },
+  {
+    q: 'Will an IPTV trial work outside the UK?',
+    a: 'Yes. Our servers are UK-based but the streams are available worldwide — many British expats in Spain, France, Cyprus and Dubai use the trial to test whether their local broadband can handle a UK IPTV feed before committing to a full year.',
+  },
+  {
+    q: 'Can I try IPTV on Smart TV without downloading anything?',
+    a: 'Most modern Samsung and LG Smart TVs support the Smart IPTV or IPTV Smarters apps directly from the store — no sideloading required. Our trial works out of the box on both. Older TVs may need a small Fire Stick or Android box paired with the same subscription.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@type': 'Person', name: post.author, url: `${site.url}/about#team` },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Trial Guides',
+      keywords: post.keywords.join(', '),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedGuides = [
+  { slug: 'firestick', label: 'Install IPTV on Fire Stick' },
+  { slug: 'smart-tv', label: 'Install IPTV on Smart TV' },
+  { slug: 'mobile-tablet', label: 'Install IPTV on Mobile' },
+  { slug: 'windows-mac', label: 'Install IPTV on Windows / Mac' },
+];
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">IPTV Free Trial UK</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          A no-nonsense guide to running an <strong>IPTV free trial in the UK</strong> the right way in 2026 — what to test in the first hour, what the red flags look like, and why our
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} 30-day IPTV trial</a>
+          beats a "free 24-hour link" every time.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I read the IPTV free trial UK guide and would like to start my £${site.price} 30-day trial.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} IPTV trial
+          </a>
+          <a href="#checklist" class="btn-secondary">Trial checklist</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src={post.image}
+            alt={post.imageAlt}
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          If you have typed <em>"free trial IPTV UK"</em> into Google, you have almost certainly landed on
+          a dozen sites offering a "100% free 24-hour test line". Some of them are safe. Most are
+          M3U scrapes that die within a week, or worse — a lead-magnet for a scam that vanishes the moment
+          you pay. This guide explains what a <strong>legitimate IPTV trial in the UK</strong> actually
+          looks like, how to test one properly, and how our own <a href="/#pricing">£{site.price} 30-day
+          trial</a> is structured to give you the truth about a service before you buy a year of it.
+        </p>
+
+        <p>
+          Short on time? Here is the honest summary:
+        </p>
+        <ul>
+          <li><strong>Truly free 24-hour trials are almost always throwaway lines</strong> — the server behind them changes weekly.</li>
+          <li><strong>A short, low-cost paid trial (£10–£15 for 30 days) is the industry-standard "safe test"</strong> in 2026.</li>
+          <li><strong>What you test matters more than how long you test</strong> — 30 minutes of the right checks beats a week of channel-flipping.</li>
+        </ul>
+
+        <h2 id="what-is">What "IPTV" actually means (and why the trial format exists)</h2>
+        <p>
+          IPTV — <a href="https://en.wikipedia.org/wiki/IPTV" target="_blank" rel="noopener noreferrer nofollow">Internet Protocol television</a> —
+          delivers live TV over the same broadband connection that runs your Netflix or YouTube. Unlike
+          satellite, there is no dish and no set-top receiver required — the signal is a stream, and the
+          quality depends entirely on the provider's server infrastructure and your home internet.
+        </p>
+        <p>
+          Because two IPTV services can look identical on paper ("12,000 channels + VOD + 4K") but perform
+          wildly differently in your living room, <strong>the trial is the only honest way to compare
+          them</strong>. Any provider that refuses to offer any form of trial is asking you to buy blind.
+          That is the single biggest reason we structured our own offer as a 30-day
+          <a href="/#pricing">IPTV UK trial</a> rather than a locked 12-month contract.
+        </p>
+
+        <h2>Free vs paid IPTV trial — the honest comparison</h2>
+        <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+          <table class="w-full min-w-[640px] text-left text-sm">
+            <thead class="bg-elevated/70 text-text-primary">
+              <tr>
+                <th class="p-3 font-semibold">What you get</th>
+                <th class="p-3 font-semibold">"Free" 24-hour link</th>
+                <th class="p-3 font-semibold">£{site.price} 30-day trial</th>
+              </tr>
+            </thead>
+            <tbody class="text-text-muted">
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">Time to test peak-hour stability</td>
+                <td class="p-3">1 evening</td>
+                <td class="p-3 text-brand-light font-medium">4 evenings + weekends</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">Catch-up / rewind included</td>
+                <td class="p-3">Usually no</td>
+                <td class="p-3 text-brand-light font-medium">Yes, full 3–7 days</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">VOD library access</td>
+                <td class="p-3">Limited demo</td>
+                <td class="p-3 text-brand-light font-medium">Full library</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">4K channels</td>
+                <td class="p-3">Rarely</td>
+                <td class="p-3 text-brand-light font-medium">Yes</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">Human WhatsApp support</td>
+                <td class="p-3">No</td>
+                <td class="p-3 text-brand-light font-medium">Yes — real UK reply times</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">Refund policy</td>
+                <td class="p-3">N/A</td>
+                <td class="p-3 text-brand-light font-medium">Documented on-site</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="checklist">The 6-point IPTV trial checklist (test this in your first hour)</h2>
+        <p>
+          Whether you take our trial or someone else's, run these six checks the moment your login
+          arrives. Do not wait — the first hour of any trial is when you find the deal-breakers.
+        </p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {testChecklist.map((item, i) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold text-white shadow-glow">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{item.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed">{item.detail}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <article class="legal-prose mt-14">
+        <h2>Six red flags of a fake IPTV free trial</h2>
+        <p>
+          If you spot any of the below on a trial page, close the tab. The <a href="https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online" target="_blank" rel="noopener noreferrer nofollow">UK National Cyber Security Centre</a>
+          publishes similar guidance on unlicensed streaming sites — the pattern is identical.
+        </p>
+        <ul>
+          {redFlags.map((r) => <li>{r}</li>)}
+        </ul>
+
+        <h2>What our £{site.price} IPTV UK trial actually includes</h2>
+        <p>
+          A quick, honest breakdown so you know exactly what you are getting for the price of a takeaway:
+        </p>
+        <ul>
+          <li><strong>Full 30 days</strong> on the same premium servers our annual customers use — no stripped-down demo line.</li>
+          <li><strong>4K and Full HD live channels</strong> covering UK entertainment, sports, films, kids, news and international categories.</li>
+          <li><strong>Multi-thousand VOD library</strong> with a proper metadata-driven interface — searchable, filterable, updated weekly.</li>
+          <li><strong>Full EPG with 3–7 day catch-up</strong> on the top channels.</li>
+          <li><strong>Works on every device</strong> you already own — Fire Stick, Smart TV, Android box, Formuler, MAG, iPhone, Android, Windows, Mac.</li>
+          <li><strong>Human WhatsApp support</strong> on {site.whatsapp} — real replies, not chatbots.</li>
+          <li><strong>No hidden auto-renew</strong> — you actively choose to upgrade at the end of 30 days or walk away.</li>
+        </ul>
+
+        <h2>How to actually run the trial (30-minute plan)</h2>
+        <ol>
+          <li><strong>0–5 min:</strong> WhatsApp us on <a href={waLink('Hi, I would like to start my £14.99 30-day IPTV trial.')} target="_blank" rel="nofollow noopener noreferrer">{site.whatsapp}</a>. We reply with a payment link and a device recommendation.</li>
+          <li><strong>5–10 min:</strong> Pay the £{site.price} and receive Xtream Codes / portal credentials via WhatsApp.</li>
+          <li><strong>10–20 min:</strong> Install IPTV Smarters Pro on your chosen device. Full walkthroughs live at <a href="/installation-guides/">our installation guides hub</a>.</li>
+          <li><strong>20–30 min:</strong> Run the 6-point checklist above. If anything fails, message us — we will diagnose it before you spend any more time.</li>
+        </ol>
+
+        <h2>What internet speed do I need for the trial?</h2>
+        <p>
+          IPTV bandwidth is almost identical to the numbers <a href="https://www.ofcom.org.uk/phones-and-broadband/broadband-and-landlines/what-broadband-speeds-do-i-need" target="_blank" rel="noopener noreferrer nofollow">Ofcom</a>
+          publish for streaming services in general:
+        </p>
+        <ul>
+          <li><strong>SD channel:</strong> ~3 Mbps</li>
+          <li><strong>HD channel:</strong> ~8 Mbps</li>
+          <li><strong>Full HD:</strong> ~12 Mbps</li>
+          <li><strong>4K UHD:</strong> ~25 Mbps sustained per stream</li>
+        </ul>
+        <p>
+          If your <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer nofollow">Speedtest</a>
+          result is above 30 Mbps you can run a 4K trial without any drama. Below 15 Mbps you should stick to
+          HD channels and use a wired Ethernet connection wherever possible.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>The verdict — worth taking an IPTV trial in 2026?</h2>
+        <p>
+          Yes — but only a properly-structured one. A £{site.price} 30-day trial from a provider that
+          runs the <em>same</em> servers as their annual customers, hands you real credentials, and
+          answers on WhatsApp is worth ten "free 24-hour" links from a Facebook group. If you use the
+          checklist above you will know in the first evening whether the service is worth staying with
+          for the next twelve months.
+        </p>
+        <p>
+          Ready to test it properly? <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp</a>
+          and we will have you live on a device you already own inside 15 minutes.
+        </p>
+      </article>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Install the trial on your device</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedGuides.map((g) => (
+            <li>
+              <a href={`/installation-guides/${g.slug}/`} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50">
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

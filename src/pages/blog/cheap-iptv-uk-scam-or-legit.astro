@@ -1,0 +1,362 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('cheap-iptv-uk-scam-or-legit')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+const ogImage = post.image.startsWith('http') ? post.image : site.url + post.image;
+
+const redFlags = [
+  {
+    title: 'Lifetime IPTV for £30',
+    detail:
+      'No IPTV operator on earth can pay bandwidth, EPG, transcoding and licensing for a lifetime of service for £30. "Lifetime" here means "until we vanish" — typically 30–90 days. It is the single most common IPTV scam pattern in the UK.',
+  },
+  {
+    title: 'Sellers who only accept crypto or gift cards',
+    detail:
+      'Card payments come with chargeback protection. PayPal comes with buyer protection. Crypto and gift cards come with neither. Any seller that pushes you toward untraceable payment methods is protecting themselves from refunds — a huge red flag.',
+  },
+  {
+    title: 'Facebook Marketplace and Telegram-only sellers',
+    detail:
+      'A legitimate UK provider has a website, terms of service, refund policy and a business identity. A Telegram handle and a WhatsApp number alone is not a business — it is a person who can disappear tomorrow.',
+  },
+  {
+    title: '"20,000 channels + all sports + all films + VOD" for £3 a month',
+    detail:
+      'The numbers do not add up. Even the biggest legitimate providers list 8,000–15,000 channels because that is the realistic universe of streams worth actually watching. Sellers advertising 20,000+ are counting duplicates, dead streams and test feeds.',
+  },
+  {
+    title: 'No trial, no refund policy',
+    detail:
+      'A serious provider always offers some form of trial or documented refund window. A seller who insists you pay 12 months up-front with zero visibility is protecting themselves from the truth about their service.',
+  },
+  {
+    title: 'Server IPs that change every few days',
+    detail:
+      'If your app stops working every week and the seller sends you a new URL, you are on a nomadic reseller line that keeps getting shut down. This is not a service — it is a chase.',
+  },
+  {
+    title: 'A copied website with stolen testimonials',
+    detail:
+      'Reverse-image search the testimonial photos on a suspicious site. Stock photos and reused reviews are near-universal signs of a scam operation.',
+  },
+  {
+    title: 'Zero UK contact channel',
+    detail:
+      'Even overseas-operated providers serving UK viewers should have a UK-reachable email or WhatsApp with real reply times. A contact form that never gets answered is a scam signal.',
+  },
+];
+
+const valueSignals = [
+  'Published UK business address or company registration',
+  'Documented refund policy on-site (linked in the footer, not buried)',
+  'WhatsApp with a normal reply time under 30 minutes during UK hours',
+  'Card and PayPal accepted alongside bank transfer',
+  'A structured trial (24 hours minimum, ideally 30 days)',
+  'Written terms of service and privacy policy',
+  'Realistic pricing (£8–£15 per month equivalent when billed annually)',
+  'A single stable panel URL — no "new server" messages every week',
+];
+
+const faqs = [
+  {
+    q: 'Is cheap IPTV in the UK always a scam?',
+    a: `Not always — but "cheap" in this market has a floor. Anything under £5 per month for a full-featured IPTV service is almost certainly unlicensed and unreliable. A properly-run UK provider costs £8–£15 per month at annual pricing. Our £${site.price} 30-day trial sits at the honest end of that range specifically to let you verify quality without committing to a year.`,
+  },
+  {
+    q: 'What is the cheapest safe way to test an IPTV service?',
+    a: `Take a low-cost 30-day trial from a provider with a documented refund policy and human WhatsApp support. Ours is £${site.price} — the equivalent of a takeaway — and gives you a full month on the same premium servers our annual customers use. That is the cheapest way to buy without getting burned.`,
+  },
+  {
+    q: 'I paid a Facebook seller and my IPTV stopped working — can I get my money back?',
+    a: 'If you paid by card, contact your card issuer immediately and open a chargeback dispute. If you paid via PayPal Goods and Services, open a dispute in the PayPal resolution centre. If you paid by crypto or gift card, unfortunately there is no recovery mechanism. See consumer protection guidance on gov.uk for the process.',
+  },
+  {
+    q: 'What is the difference between "cheap" and "affordable" IPTV?',
+    a: 'Affordable IPTV is £8–£15 a month for a legitimate, licensed service with real support and stable servers. Cheap IPTV is a £3 "lifetime" link from a Telegram seller. Same word, completely different products — one is a smart purchase, the other is a scam waiting to happen.',
+  },
+  {
+    q: 'Why does your trial cost £14.99 instead of being free?',
+    a: 'Because running an IPTV server for 30 days costs real money — bandwidth, transcoding, EPG feeds, support time. Charging £14.99 filters out abuse and lets us hand you the same infrastructure our annual customers use, not a stripped-down demo. It is the honest price of a proper 30-day test.',
+  },
+  {
+    q: 'How do I report an IPTV scam in the UK?',
+    a: 'Report the seller to Action Fraud (the UK national fraud reporting centre) via actionfraud.police.uk. If you paid by card, notify your bank the same day. If the seller\'s site is hosted in the UK, a takedown request via Nominet or the hosting provider is possible for repeat offenders.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@type': 'Person', name: post.author, url: `${site.url}/about#team` },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Buying Guides',
+      keywords: post.keywords.join(', '),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedLinks = [
+  { href: '/blog/iptv-subscription-uk-buyers-guide/', label: "IPTV Subscription UK — 2026 Buyer's Guide" },
+  { href: '/blog/iptv-free-trial-uk/', label: 'IPTV Free Trial UK — What a Legit Test Looks Like' },
+  { href: '/blog/is-iptv-legal-uk/', label: 'Is IPTV Legal in the UK? 2026 Explainer' },
+  { href: '/blog/top-5-iptv-boxes-uk-2026/', label: 'Top 5 IPTV Boxes UK 2026 — Ranked & Tested' },
+];
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">Cheap IPTV UK</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          The UK's <strong>cheap IPTV</strong> market is a minefield. Genuine bargains exist. So do
+          hundreds of "£3 a month for everything" scams that vanish two weeks after you pay. This
+          guide teaches you to spot the difference — and how our
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} monitored 30-day trial</a>
+          is the safest cheap-entry route in 2026.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I read the cheap IPTV UK guide — I would like to start the £${site.price} monitored trial instead.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Skip the risk — start £{site.price} trial
+          </a>
+          <a href="#red-flags" class="btn-secondary">See the 8 red flags</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img src={post.image} alt={post.imageAlt} width="1200" height="630" loading="eager" decoding="async" fetchpriority="high" class="w-full h-auto" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Every week we get messages on WhatsApp from viewers who paid a Facebook seller £30 for a
+          "lifetime" IPTV subscription and lost access three weeks later. Same pattern, every time —
+          the seller vanishes, the channels die, the money is gone. This guide exists so that next
+          person is not you.
+        </p>
+
+        <h2>The economics of legitimate IPTV — why "cheap" has a floor</h2>
+        <p>
+          A properly-run IPTV service pays real costs every month per subscriber:
+        </p>
+        <ul>
+          <li><strong>Bandwidth and CDN egress</strong> — the biggest single cost.</li>
+          <li><strong>Transcoding</strong> — converting streams into multiple resolutions for different devices.</li>
+          <li><strong>EPG feeds</strong> — accurate TV guide data is licensed per market.</li>
+          <li><strong>Content licensing</strong> — the biggest cost, and the one scam operators skip entirely.</li>
+          <li><strong>Support staff</strong> — real humans answering messages.</li>
+          <li><strong>Payment processing fees</strong> — 2–4% of every transaction.</li>
+        </ul>
+        <p>
+          Add these up and the minimum viable price for a legal, sustainable IPTV subscription lands
+          around £8–£10 per month on annual billing. Anything materially cheaper is either skipping
+          licensing (illegal), oversold to breaking point (unreliable), or a straight scam. That is
+          not opinion — that is the industry <a href="https://en.wikipedia.org/wiki/IPTV" target="_blank" rel="noopener noreferrer nofollow">IPTV economics</a>
+          working the way they always have.
+        </p>
+
+        <h2 id="red-flags">The 8 red flags of a cheap IPTV scam</h2>
+        <p>If a listing has more than two of these, close the tab.</p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {redFlags.map((r, i) => (
+          <li class="card p-5 md:p-6 border-red-500/20">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-500/20 text-sm font-bold text-red-300">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{r.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed">{r.detail}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <article class="legal-prose mt-14">
+        <h2>The 8 value signals of a legitimate cheap IPTV provider</h2>
+        <p>
+          Flip the red flags on their head and you get the checklist for a provider worth paying:
+        </p>
+        <ul>
+          {valueSignals.map((s) => <li>{s}</li>)}
+        </ul>
+
+        <h2>How our £{site.price} trial fits the "safe cheap" definition</h2>
+        <p>
+          We designed our <a href="/#pricing">£{site.price} 30-day IPTV trial</a> to hit every single
+          value signal above and none of the red flags:
+        </p>
+        <ul>
+          <li>Not "free" — because "free" is where the scams live. £{site.price} is the honest cost of running a genuine 30-day test.</li>
+          <li>Same servers our annual customers use — not a stripped-down demo line.</li>
+          <li>Card, PayPal or bank transfer — never crypto-only.</li>
+          <li>WhatsApp support on {site.whatsapp} with real reply times.</li>
+          <li>Documented <a href="/refund/">refund policy</a> and <a href="/terms/">terms of service</a> on-site.</li>
+          <li>Realistic annual pricing on request via WhatsApp — no "lifetime" fantasies.</li>
+          <li>Multi-thousand VOD, real 4K, full EPG, catch-up on the top channels.</li>
+        </ul>
+        <p>
+          If you have been scammed before by a cheap IPTV listing, the £{site.price} trial is designed
+          to rebuild trust in the category before you commit to anything longer.
+        </p>
+
+        <h2>Payment safety when buying any IPTV subscription</h2>
+        <p>
+          Regardless of which provider you end up with, protect yourself:
+        </p>
+        <ol>
+          <li>
+            Always pay by card or PayPal Goods &amp; Services. Both trigger chargeback protection under
+            <a href="https://www.gov.uk/consumer-protection-rights" target="_blank" rel="noopener noreferrer nofollow">UK consumer protection law</a>.
+          </li>
+          <li>Never share your card details in a Telegram chat or a Facebook DM.</li>
+          <li>Screenshot the sales page and refund policy before paying.</li>
+          <li>
+            If you fall victim to a scam, report it to
+            <a href="https://www.actionfraud.police.uk/" target="_blank" rel="noopener noreferrer nofollow">Action Fraud</a> immediately.
+          </li>
+          <li>
+            Use the <a href="https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online" target="_blank" rel="noopener noreferrer nofollow">National Cyber Security Centre's</a> online-safety guidance as your baseline.
+          </li>
+        </ol>
+
+        <h2>How much is the "right" amount to pay for IPTV in the UK?</h2>
+        <p>
+          For most UK households, the honest answer in 2026 is £{site.price} for a 30-day trial and
+          then around £90–£140 for a full 12 months once you have verified the service. That range
+          buys you full-featured IPTV: 4K live channels, VOD, EPG, catch-up and multi-device access,
+          from a provider that will still be here in a year.
+        </p>
+        <p>
+          Under-paying is not a saving — it is a bet on a provider surviving. Over-paying (anything
+          above £25/month) is usually a reseller markup with no added quality.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>The verdict — is cheap IPTV worth the risk?</h2>
+        <p>
+          Ultra-cheap IPTV (under £5/month, "lifetime" deals, Facebook resellers) is almost never
+          worth it. You either lose the money or lose the service — usually both. The correct
+          interpretation of "cheap IPTV UK" in 2026 is <em>affordable</em>: £{site.price} for a
+          genuine 30-day trial, then £8–£11/month equivalent on an annual plan.
+        </p>
+        <p>
+          Skip the risk. <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Start the £{site.price} trial on WhatsApp</a>
+          and we will have you live in 15 minutes — on servers you can actually trust for the next
+          twelve months.
+        </p>
+      </article>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Related guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedLinks.map((g) => (
+            <li><a href={g.href} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span><span class="text-brand-light shrink-0"><Icon name="arrow" size={16} /></span></a></li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

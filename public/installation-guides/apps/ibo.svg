@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="IBO Player Pro">
+  <rect width="96" height="96" rx="20" fill="#0f1420"/>
+  <text x="20" y="60" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="26" fill="#0e8df2">ibo</text>
+  <polygon points="60,34 60,62 82,48" fill="#e11d48"/>
+</svg>

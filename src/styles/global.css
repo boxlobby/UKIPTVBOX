@@ -23,9 +23,15 @@
   body {
     @apply bg-base text-text-primary font-sans antialiased;
     background-image:
-      radial-gradient(900px 500px at 50% -10%, rgba(37, 99, 235, 0.14), transparent 60%),
+      radial-gradient(900px 500px at 50% -10%, rgba(27, 198, 255, 0.18), transparent 60%),
       radial-gradient(700px 400px at 100% 20%, rgba(34, 211, 238, 0.08), transparent 60%);
     background-attachment: fixed;
+    position: relative;
+  }
+
+  @keyframes grid-drift {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 56px 56px, 56px 56px; }
   }
 
   /* Belt-and-braces: enforce readable colour on every text element */
@@ -33,16 +39,23 @@
     color: inherit;
   }
 
+  /* Force muted text (section descriptions, eyebrows, etc.) to a readable value. */
+  .text-text-muted { color: #FFFFFF !important; }
+  .text-text-primary { color: #FFFFFF !important; }
+
   h1, h2, h3, h4 {
     @apply font-display tracking-tight text-text-primary;
   }
 
   summary, details {
+    color: #F5F7FA;
+  }
+  summary > span, details > p {
     color: inherit;
   }
 
   ::selection {
-    background: rgba(37, 99, 235, 0.4);
+    background: rgba(27, 198, 255, 0.45);
     color: #fff;
   }
 
@@ -80,17 +93,136 @@
     @apply py-16 sm:py-20 md:py-24;
   }
 
+  /* Opt-in animated grid backdrop for individual sections. */
+  .grid-bg { position: relative; isolation: isolate; }
+  .grid-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgba(148, 179, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 179, 255, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+            mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+    animation: grid-drift 45s linear infinite;
+    will-change: background-position;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .grid-bg::before { animation: none; }
+  }
+
   .h-divider {
-    background: linear-gradient(90deg, transparent, #1E2740 20%, #2563EB 50%, #1E2740 80%, transparent);
+    background: linear-gradient(90deg, transparent, #1E2740 20%, #1bc6ff 50%, #1E2740 80%, transparent);
     height: 1px;
     opacity: 0.7;
   }
 
-  /* Horizontal slider — CSS scroll-snap, mobile-first, no JS required */
+  /* Horizontal slider, CSS scroll-snap, mobile-first, no JS required */
   .slider {
     @apply flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0;
     scrollbar-width: none;
   }
   .slider::-webkit-scrollbar { display: none; }
   .slider > * { @apply snap-start shrink-0; }
+
+  /* Infinite marquee, scroll-driven so touch/mouse can scrub. JS drives scrollLeft. */
+  .marquee {
+    @apply relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+    overscroll-behavior-x: contain;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee::-webkit-scrollbar { display: none; }
+  .marquee-track {
+    @apply flex gap-3 sm:gap-4 w-max;
+    touch-action: pan-x;
+  }
+
+  /* Legal / long-form prose (Privacy, Refund, Terms). */
+  .legal-prose {
+    @apply text-[15px] leading-relaxed text-text-muted;
+  }
+  .legal-prose > * + * { @apply mt-5; }
+  .legal-prose h2 {
+    @apply mt-14 mb-4 text-2xl md:text-[26px] font-semibold text-text-primary tracking-tight scroll-mt-24;
+  }
+  .legal-prose h2:first-child { @apply mt-0; }
+  .legal-prose h3 {
+    @apply mt-8 mb-3 text-lg md:text-xl font-semibold text-text-primary tracking-tight;
+  }
+  .legal-prose p { @apply text-text-muted; }
+  .legal-prose strong { @apply text-text-primary font-semibold; }
+  .legal-prose a { @apply text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light; }
+  .legal-prose ul, .legal-prose ol { @apply pl-5 space-y-2; }
+  .legal-prose ul { @apply list-disc marker:text-brand-light/70; }
+  .legal-prose ol { @apply list-decimal marker:text-brand-light/70; }
+  .legal-prose li { @apply text-text-muted; }
+  .legal-prose li::marker { color: theme('colors.brand.light'); }
+  .legal-prose hr { @apply my-10 border-border-subtle; }
+  .legal-prose blockquote {
+    @apply border-l-2 border-brand/60 pl-4 italic text-text-primary/90;
+  }
+}
+
+@layer utilities {
+  /* Scroll-reveal animation. Applied by an IntersectionObserver in BaseLayout. */
+  [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  [data-reveal="fade"]        { transform: translate3d(0, 0, 0); }
+  [data-reveal="up"]          { transform: translate3d(0, 24px, 0); }
+  [data-reveal="left"]        { transform: translate3d(-32px, 0, 0); }
+  [data-reveal="right"]       { transform: translate3d(32px, 0, 0); }
+  [data-reveal="zoom"]        { transform: scale(0.96); }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  /* Stagger children of any [data-reveal-group] container */
+  [data-reveal-group] > * {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    transition:
+      opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  [data-reveal-group].is-visible > * {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  [data-reveal-group].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+  [data-reveal-group].is-visible > *:nth-child(2) { transition-delay: 80ms; }
+  [data-reveal-group].is-visible > *:nth-child(3) { transition-delay: 160ms; }
+  [data-reveal-group].is-visible > *:nth-child(4) { transition-delay: 240ms; }
+  [data-reveal-group].is-visible > *:nth-child(5) { transition-delay: 320ms; }
+  [data-reveal-group].is-visible > *:nth-child(6) { transition-delay: 400ms; }
+  [data-reveal-group].is-visible > *:nth-child(7) { transition-delay: 480ms; }
+  [data-reveal-group].is-visible > *:nth-child(8) { transition-delay: 560ms; }
+  [data-reveal-group].is-visible > *:nth-child(n+9) { transition-delay: 640ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal],
+    [data-reveal-group] > * {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
 }

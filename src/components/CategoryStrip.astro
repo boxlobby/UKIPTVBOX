@@ -1,20 +1,91 @@
 ---
 import Icon from './Icon.astro';
 import { categories } from '../data/categories';
----
-<section class="py-10 sm:py-12 bg-subtle/50" aria-label="Content categories">
-  <div class="container-x">
-    <p class="text-center text-[11px] font-medium uppercase tracking-widest text-text-muted mb-5">
-      Everything you already watch — in one place
-    </p>
 
-    <ul class="slider md:grid md:grid-cols-5 md:gap-3">
-      {categories.map((c) => (
-        <li class="card flex items-center gap-2.5 px-4 py-3 text-sm text-text-muted hover:text-text-primary hover:border-brand/40 transition w-[45%] sm:w-[30%] md:w-auto">
-          <Icon name={c.icon} class="text-brand-light shrink-0" size={20} />
-          <span class="whitespace-nowrap">{c.label}</span>
+// Duplicate the list so scrollLeft can wrap seamlessly.
+const track = [...categories, ...categories];
+---
+<section class="py-12 sm:py-16 bg-subtle/50 overflow-hidden" aria-label="Content categories">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center mb-8">
+      <span class="eyebrow">Content categories</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+        Everything you already watch, <span class="bg-grad-brand bg-clip-text text-transparent">in one place</span>
+      </h2>
+      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+        UK terrestrial, sports, movies, series and international channels bundled into one IPTV subscription.
+        Every category unlocked from day one of your IPTV UK trial.
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="category-marquee group relative"
+    role="region"
+    aria-label="Content categories, swipe or wait for auto-scroll"
+    data-auto-scroll
+    data-speed="0.6"
+  >
+    <ul class="category-track flex gap-4 sm:gap-5 px-4 sm:px-6" role="list">
+      {track.map((c, i) => (
+        <li
+          class="category-card group/card relative shrink-0 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60 w-[260px] sm:w-[300px] md:w-[320px] lg:w-[340px]"
+          aria-hidden={i >= categories.length ? 'true' : 'false'}
+        >
+          <div class="relative aspect-[4/5] w-full overflow-hidden">
+            {'img' in c && c.img ? (
+              <>
+                <img
+                  src={c.img}
+                  alt={'alt' in c ? c.alt : c.label}
+                  width={680}
+                  height={850}
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute inset-0 w-full h-full object-cover"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-elevated/95 to-transparent"></div>
+              </>
+            ) : (
+              <>
+                <div class="absolute inset-0 bg-grad-brand-soft"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.35),transparent_55%)]"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_90%,rgba(34,211,238,0.18),transparent_55%)]"></div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+                  <Icon name={c.icon} size={28} class="text-brand-light/80" />
+                  <span class="text-[11px] font-medium uppercase tracking-widest">{c.label}</span>
+                </div>
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-elevated/95 to-transparent"></div>
+              </>
+            )}
+          </div>
+
+          <div class="p-5 sm:p-6">
+            <span class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">{c.label}</span>
+            <h3 class="mt-2 text-base sm:text-lg font-semibold text-text-primary leading-snug">{c.title}</h3>
+            <p class="mt-2 text-xs sm:text-sm text-text-muted leading-relaxed">{c.body}</p>
+          </div>
         </li>
       ))}
     </ul>
   </div>
 </section>
+
+<style>
+  .category-marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+    overscroll-behavior-x: contain;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+  .category-marquee::-webkit-scrollbar { display: none; }
+
+  .category-track {
+    width: max-content;
+    touch-action: pan-x;
+  }
+</style>

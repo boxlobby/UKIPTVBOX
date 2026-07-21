@@ -1,0 +1,614 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { site, waLink } from '../../data/site';
+
+const canonical = `${site.url}/installation-guides/nvidia-shield/`;
+const ogImage = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Nvidia_Shield_IPTV_guide_graphic_202607210429.jpeg';
+const publishedFmt = '20 July 2026';
+const updatedFmt = '20 July 2026';
+
+type App = {
+  slug: string;
+  name: string;
+  tag: 'free' | 'paid';
+  price?: string;
+  logo: string;
+  login: string;
+  supported: string;
+  activateUrl?: string;
+  copy: string;
+  steps: { title: string; body: string }[];
+  tips?: string[];
+};
+
+const apps: App[] = [
+  {
+    slug: 'tivimate',
+    name: 'TiviMate',
+    tag: 'paid',
+    price: 'Free tier · Premium ~£4.99/yr · 7-day trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/tivimate.webp',
+    login: 'M3U URL or Xtream Codes API',
+    supported: 'Nvidia Shield · Shield Pro · Fire TV · every Android TV device',
+    activateUrl: 'https://tivimate.com',
+    copy: `TiviMate is the gold standard IPTV player on Nvidia Shield — the smoothest EPG on any Android TV device, multi-playlist support, recording, catch-up TV and the cleanest channel switching in the business. The free tier is fully usable for one playlist; Premium (~£4.99/yr) unlocks multiple playlists and reminders. Perfect first pick for a Shield-based iptv subscription.`,
+    steps: [
+      { title: 'Install TiviMate from Google Play', body: 'Shield home → Google Play Store → search "TiviMate IPTV Player". Install directly — no sideloading needed on Nvidia Shield, unlike Fire Stick.' },
+      { title: 'Add a playlist', body: 'Open TiviMate → "Add Playlist" → "Enter URL" (for M3U) or "Xtream Codes" (recommended). Press Next.' },
+      { title: 'Enter your login', body: 'For Xtream Codes: paste the server URL, username and password from your welcome message. For M3U: paste the M3U link we sent you.' },
+      { title: 'Choose an EPG source', body: 'When prompted select "Use TiviMate EPG" — your electronic programme guide comes bundled with your iptv service and populates every channel automatically.' },
+      { title: 'Customise and stream', body: 'Sort channels, hide categories you don\'t use, pick a skin and set default audio language. Hit OK on the Shield remote from anywhere to open the on-screen guide.' },
+    ],
+    tips: ['TiviMate Premium is a one-off ~£4.99/yr paid directly to TiviMate — completely separate from your iptv subscription with us. Worth it if you juggle multiple iptv subscriptions on one Shield.'],
+  },
+  {
+    slug: 'smarters',
+    name: 'IPTV Smarters Pro',
+    tag: 'free',
+    price: 'Free',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/iptv-smarters.webp',
+    login: 'Xtream Codes API or M3U URL',
+    supported: 'Nvidia Shield · Shield Pro · Android TV · Fire TV · Android phones',
+    activateUrl: 'https://www.iptvsmarters.com',
+    copy: `IPTV Smarters Pro is the free universal fallback on Nvidia Shield — the same app every UK IPTV provider (including us) writes documentation for, available on Google Play with a single click. Not as pretty as TiviMate, but rock-solid, easy to configure and the fastest way onto our iptv service for a fresh Shield out of the box.`,
+    steps: [
+      { title: 'Install from Google Play', body: 'Shield → Google Play Store → search "IPTV Smarters Pro". Install (free).' },
+      { title: 'Add a new user', body: 'Open the app → Accept terms → "Add New User" → "Login with Xtream Codes API".' },
+      { title: 'Enter your credentials', body: 'Any name (e.g. "Living Room"), then paste the username, password and server URL from your iptv trial welcome message. Save.' },
+      { title: 'Start streaming', body: 'You land on a home screen with Live TV, Movies, Series and TV Guide tiles. Every channel from your iptv subscription is grouped by category — UK, sports, films, kids, international.' },
+      { title: 'Optional: enable external decoder', body: 'Settings → General → Preferred Player → set to "MX Player" if any channel refuses to play with the built-in decoder — a common Shield quirk on HEVC 10-bit streams.' },
+    ],
+  },
+  {
+    slug: 'ott-navigator',
+    name: 'OTT Navigator',
+    tag: 'free',
+    price: 'Free · Premium ~£2/month',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/ott%20navigator.png',
+    login: 'M3U URL · Xtream Codes API · Stalker Portal emulation',
+    supported: 'Nvidia Shield · Shield Pro · every Android TV device',
+    activateUrl: 'https://play.google.com/store/search?q=ott+navigator&c=apps',
+    copy: `OTT Navigator is the most feature-rich free IPTV player for Android TV — multi-playlist, custom HTTP headers, Stalker Portal emulation (rare on Android), multi-EPG, DVR/recording, and one of the very few Shield apps with proper catch-up TV support. If you run multiple iptv subscriptions (ours plus a foreign one for e.g. Arabic or Spanish content), this is the app that lets them coexist on one Shield.`,
+    steps: [
+      { title: 'Install OTT Navigator on Shield', body: 'Google Play Store → search "OTT Navigator". Install (free tier is fully usable).' },
+      { title: 'Add your playlist', body: 'Open OTT Navigator → Settings → Playlists → Add → choose Xtream Codes (recommended) or M3U. Give it a nickname such as "IPTV UK".' },
+      { title: 'Paste your login', body: 'For Xtream Codes: server URL + username + password from your welcome message. For M3U: paste the M3U link. Save.' },
+      { title: 'Configure the EPG', body: 'Settings → EPG → Add EPG source. OTT Navigator auto-detects the XMLTV EPG bundled with your iptv subscription. If it doesn\'t appear, WhatsApp us for the direct XMLTV URL.' },
+      { title: 'Enable catch-up TV', body: 'On any channel with a catch-up icon, long-press with the Shield remote → Timeshift. Rewind up to 7 days on supported UK channels — a killer feature of our iptv service on Shield.' },
+    ],
+    tips: ['OTT Navigator Premium (~£2/month) unlocks reminders, unlimited EPG sources and DVR — worth it for heavy users. Payment is directly to the developer, separate from your iptv subscriptions with us.'],
+  },
+  {
+    slug: 'kodi-pvr',
+    name: 'Kodi + PVR IPTV Simple Client',
+    tag: 'free',
+    price: 'Free (open-source)',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/kodi.webp',
+    login: 'M3U URL + XMLTV EPG',
+    supported: 'Nvidia Shield · Shield Pro · every Android TV device',
+    activateUrl: 'https://kodi.tv',
+    copy: `The open-source route. Kodi with PVR IPTV Simple Client is the free power-user setup on Nvidia Shield — infinitely customisable through skins and add-ons, and the only route if you already run a full Kodi media centre and want your IPTV channels alongside your local library. A bit more setup than TiviMate, but the flexibility is unmatched.`,
+    steps: [
+      { title: 'Install Kodi from Google Play', body: 'Shield → Google Play Store → search "Kodi". Install the official Kodi Foundation build (free).' },
+      { title: 'Enable PVR IPTV Simple Client', body: 'Open Kodi → Add-ons → Install from repository → Kodi Add-on repository → PVR clients → PVR IPTV Simple Client → Install.' },
+      { title: 'Configure the M3U source', body: 'PVR IPTV Simple Client → Configure → General → M3U Play List URL → paste the M3U URL from your welcome message. Save.' },
+      { title: 'Add the XMLTV EPG', body: 'Same settings pane → EPG Settings → XMLTV URL → paste the XMLTV link (WhatsApp us if you need it). Save and enable the add-on.' },
+      { title: 'Restart Kodi and open TV', body: 'Fully close Kodi and re-open. The "TV" section on the home screen now shows every channel from your iptv subscription with a full 7-day EPG.' },
+    ],
+    tips: ['Install the Estuary MOD V2 skin from the Kodi repo — it adds a proper "live TV" home screen row that mimics a cable-box interface.'],
+  },
+  {
+    slug: 'sparkle',
+    name: 'Sparkle TV',
+    tag: 'paid',
+    price: '£4.99 one-off',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Sparkle%20TV.webp',
+    login: 'M3U URL or Xtream Codes API',
+    supported: 'Nvidia Shield · Shield Pro · Android TV',
+    activateUrl: 'https://play.google.com/store/search?q=sparkle+tv&c=apps',
+    copy: `Sparkle TV is the premium interface pick on Android TV — a Netflix-style poster grid, native Android TV navigation and one of the cleanest EPGs on Nvidia Shield. A one-off ~£4.99 (no subscription) unlocks the whole app. Ideal for viewers who want their iptv service to look and feel like a native streaming app rather than a channel list.`,
+    steps: [
+      { title: 'Install Sparkle TV', body: 'Google Play Store on Shield → search "Sparkle TV". Buy the one-off ~£4.99 unlock and install.' },
+      { title: 'Add a playlist', body: 'Open Sparkle TV → Settings → Add Playlist → choose Xtream Codes or M3U.' },
+      { title: 'Enter your details', body: 'Nickname → server URL / M3U link → username → password (Xtream Codes only). Save. Sparkle downloads your playlist and matches poster art automatically.' },
+      { title: 'Wait for the EPG', body: 'The full electronic programme guide populates within about 60 seconds for a UK line-up. Poster art continues to fill in over the next few minutes as Sparkle scrapes metadata.' },
+      { title: 'Set up your remote controls', body: 'Settings → Remote → assign the Shield remote number keys to your favourite channels for one-click zapping.' },
+    ],
+    tips: ['Sparkle TV is the best-looking IPTV app on Shield if you have a partner or family who find TiviMate too "technical" — the poster grid is much more forgiving.'],
+  },
+];
+
+const faqs = [
+  {
+    q: 'Which is the best Nvidia Shield IPTV app in 2026?',
+    a: 'For most UK viewers on a Shield, TiviMate is the best Nvidia Shield IPTV app — the free tier alone beats every other free option, and the ~£4.99/yr Premium tier is the cheapest EPG upgrade in the market. If you want completely free with zero fuss, install IPTV Smarters Pro. Power users running multiple iptv subscriptions should install OTT Navigator for its Stalker emulation and multi-playlist support.',
+  },
+  {
+    q: 'Do I need to sideload apps on Nvidia Shield?',
+    a: 'No — every app in this guide is on the Google Play Store on Shield, so it installs with a single click. This is a big advantage over Fire Stick, where several apps have to be sideloaded via Downloader. Your iptv uk trial credentials work the same way — Xtream Codes username, password and server URL — no matter which of the five apps you pick.',
+  },
+  {
+    q: 'Shield or Shield Pro — which is better for IPTV?',
+    a: 'Both run every app in this guide at full 4K HEVC HDR. Shield Pro adds more RAM (3 GB vs 2 GB) and a full-size Ethernet port, which matters if you plan to run TiviMate + Kodi side-by-side or hard-wire the Shield. For pure IPTV on a single app the standard Shield (2019) is more than enough for our iptv service.',
+  },
+  {
+    q: 'Can I use the same iptv subscription on Shield and my Fire Stick or phone?',
+    a: `Yes. One ${site.name} iptv subscription covers every device you own — Nvidia Shield, Fire Stick, Apple TV, Smart TV, phone, tablet. Just enter the same Xtream Codes credentials (or paste the same M3U URL) in each app. See our Fire Stick, Apple TV and Mobile & Tablet installation guides for those devices.`,
+  },
+  {
+    q: 'Do these apps support 4K HDR and Dolby Atmos on Shield?',
+    a: `Yes — TiviMate, Kodi, Sparkle TV and OTT Navigator all support 4K HEVC, HDR10 and Dolby Atmos passthrough on Nvidia Shield. Enable "Match frame rate" in Shield → Settings → Device Preferences → Display for the smoothest UK sport playback on your iptv subscription. The Shield's dedicated video chip means it handles the highest bitrates on our iptv service without a stutter.`,
+  },
+  {
+    q: 'Is IPTV on Nvidia Shield safe and legal in the UK?',
+    a: `Installing the apps in this guide is 100% legal — TiviMate, IPTV Smarters Pro, OTT Navigator, Kodi and Sparkle TV are all legitimate players sold on the official Google Play Store, so they've passed Google's review. What you watch through them depends on your iptv subscription. Every ${site.name} iptv trial ships from licensed servers with a full UK support team on WhatsApp.`,
+  },
+  {
+    q: 'How long does the Shield IPTV setup take?',
+    a: `Under 3 minutes end-to-end for TiviMate — that's the fastest path in this guide. Install from Google Play (30s), add playlist → Xtream Codes (30s), paste credentials (1 min), pick EPG source (30s) and you're watching UK channels. Every ${site.name} iptv uk trial customer with a Shield follows this exact flow.`,
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Installation Guides', item: `${site.url}/installation-guides/` },
+        { '@type': 'ListItem', position: 3, name: 'Nvidia Shield', item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: 'How to install IPTV on Nvidia Shield & Shield Pro — 5 best apps ranked (2026)',
+      description: 'Complete Nvidia Shield IPTV setup guide. Step-by-step for TiviMate, IPTV Smarters Pro, OTT Navigator, Kodi with PVR IPTV Simple Client and Sparkle TV — all working with your iptv uk trial on Shield and Shield Pro.',
+      image: ogImage,
+      author: { '@type': 'Organization', name: `${site.name} Editorial`, url: site.url },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: '2026-07-20',
+      dateModified: '2026-07-20',
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Installation Guides',
+      keywords: 'iptv trial, iptv uk trial, iptv subscriptions, iptv subscription, iptv service, nvidia shield iptv, shield pro iptv, tivimate, iptv smarters pro, ott navigator, kodi, sparkle tv',
+    },
+    {
+      '@type': 'HowTo',
+      name: 'How to install IPTV on Nvidia Shield and Shield Pro',
+      totalTime: 'PT3M',
+      step: apps.flatMap((app) => app.steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        name: `${app.name} — ${s.title}`,
+        text: s.body,
+        position: i + 1,
+      }))),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedGuides = [
+  { slug: 'firestick', label: 'Set up IPTV on Fire Stick', device: 'Fire Stick' },
+  { slug: 'apple-tv', label: 'Set up IPTV on Apple TV', device: 'Apple TV' },
+  { slug: 'smart-tv', label: 'Set up IPTV on Smart TV', device: 'Smart TV' },
+  { slug: 'mobile-tablet', label: 'Set up IPTV on Mobile & Tablet', device: 'Mobile' },
+];
+---
+<BaseLayout
+  title={`Nvidia Shield IPTV setup — 5 best apps for Shield & Shield Pro (2026) | ${site.name}`}
+  description="Install IPTV on Nvidia Shield or Shield Pro in under 3 minutes. Step-by-step guides for TiviMate, IPTV Smarters Pro, OTT Navigator, Kodi and Sparkle TV — all direct from Google Play, all working with your iptv uk trial."
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/installation-guides/" class="hover:text-brand-light">Installation Guides</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">Nvidia Shield</span>
+        </nav>
+
+        <div class="mt-6 flex items-center gap-4">
+          <span class="flex h-14 w-14 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand-light">
+            <Icon name="box" size={28} />
+          </span>
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">
+              3 min read · Step-by-step
+            </p>
+            <span class="eyebrow mt-1 block">Nvidia Shield &amp; Shield Pro setup</span>
+          </div>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          Nvidia Shield IPTV — 5 best apps for Shield &amp; Shield Pro (2026)
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Nvidia Shield is the most powerful Android TV device on the market and a perfect
+          match for high-bitrate <strong>IPTV</strong>. This guide walks through the five apps
+          we support on every Shield and Shield Pro — from the smoothest EPG in the business
+          (<strong>TiviMate</strong>) to the universal free fallback (<strong>IPTV Smarters
+          Pro</strong>), all direct from Google Play, no sideloading required. Every one works
+          with our
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I'd like to start my £${site.price} IPTV trial on my Nvidia Shield.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} IPTV trial
+          </a>
+          <a href="#apps" class="btn-secondary">Choose an app</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Nvidia_Shield_IPTV_guide_graphic_202607210429.jpeg"
+            alt="Nvidia Shield IPTV setup — TiviMate, IPTV Smarters Pro, OTT Navigator, Kodi and Sparkle TV on Nvidia Shield"
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-auto"
+            onerror="this.src='/installation-guides/smart-tv-hero.svg'"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Every <strong>Nvidia Shield</strong> ever sold — from the 2015 Shield TV to the 2019
+          Shield Pro — runs full 4K HDR <strong>IPTV</strong> without breaking a sweat, and every
+          IPTV app you'd want is on the Google Play Store with a single click. This guide covers
+          the five apps we actively support on Shield, ranked by how quickly you can go from
+          "just unboxed the Shield" to watching UK channels, sports, films and series on your
+          first <strong>iptv trial</strong>. All five work with the same Xtream Codes credentials
+          or M3U playlist that come with your <strong>iptv subscription</strong> — no re-buying,
+          no per-device fee.
+        </p>
+
+        <p>Short on time? The three apps that cover 95% of Shield setups:</p>
+        <ul>
+          <li><a href="#tivimate"><strong>TiviMate</strong></a> — the gold standard on Shield, free tier + ~£4.99/yr Premium</li>
+          <li><a href="#smarters"><strong>IPTV Smarters Pro</strong></a> — 100% free, universal Xtream Codes login</li>
+          <li><a href="#ott-navigator"><strong>OTT Navigator</strong></a> — the power-user pick, multi-playlist + Stalker emulation</li>
+        </ul>
+      </article>
+
+      <!-- Paid apps callout -->
+      <div class="mt-10 rounded-2xl border border-brand/25 bg-brand/5 p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-light">
+            <Icon name="sparkles" size={16} />
+          </span>
+          <div class="min-w-0">
+            <p class="font-semibold text-text-primary">About the paid apps</p>
+            <p class="mt-2 text-sm text-text-muted leading-relaxed">
+              TiviMate Premium, OTT Navigator Premium and Sparkle TV are all
+              <span class="text-brand-light font-medium">one-off or low-cost purchases</span>
+              paid directly to the app developer — completely separate from your iptv subscription
+              with us. Tap any app card below for exact steps.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <a href="https://tivimate.com" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">TiviMate ↗</a>
+              <a href="https://play.google.com/store/search?q=ott+navigator&c=apps" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">OTT Navigator ↗</a>
+              <a href="https://play.google.com/store/search?q=sparkle+tv&c=apps" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">Sparkle TV ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App selector list -->
+      <h2 id="apps" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        Choose an app
+      </h2>
+      <p class="mt-3 text-text-muted">
+        Tap any app to jump to its full step-by-step Shield IPTV setup.
+      </p>
+      <ul class="mt-6 space-y-3">
+        {apps.map((app) => (
+          <li>
+            <a
+              href={`#${app.slug}`}
+              class="card group flex items-center gap-4 p-4 transition hover:border-brand/50"
+            >
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="48"
+                height="48"
+                loading="lazy"
+                decoding="async"
+                class="h-12 w-12 shrink-0 rounded-xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-base font-semibold text-text-primary group-hover:text-brand-light">{app.name}</span>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Paid app</span>
+                  )}
+                  {app.price && (
+                    <span class="rounded-full border border-border-subtle bg-elevated/60 px-2 py-0.5 text-[10px] text-text-muted">
+                      {app.price}
+                    </span>
+                  )}
+                </div>
+                <p class="mt-1 text-xs text-text-muted line-clamp-1">{app.supported}</p>
+              </div>
+              <span class="text-brand-light shrink-0"><Icon name="chevron-right" size={18} /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Per-app deep cards -->
+      <div class="mt-14 space-y-14">
+        {apps.map((app, idx) => (
+          <article id={app.slug} class="card p-6 md:p-8 scroll-mt-24">
+            <div class="flex items-start gap-4">
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+                class="h-16 w-16 md:h-[72px] md:w-[72px] shrink-0 rounded-2xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">
+                    App {idx + 1} of {apps.length}
+                  </p>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Paid app</span>
+                  )}
+                </div>
+                <h2 class="mt-1 font-display text-2xl md:text-[28px] font-bold text-text-primary">
+                  {app.name}
+                </h2>
+                {app.price && (
+                  <p class="mt-1 text-sm text-text-muted">{app.price}</p>
+                )}
+              </div>
+            </div>
+
+            <p class="mt-6 text-text-muted leading-relaxed">{app.copy}</p>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Log in via</p>
+                <p class="mt-1 text-sm text-text-primary">{app.login}</p>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Supported devices</p>
+                <p class="mt-1 text-sm text-text-primary">{app.supported}</p>
+              </div>
+            </div>
+
+            <h3 class="mt-8 font-display text-lg md:text-xl font-semibold text-text-primary">Step-by-step</h3>
+            <ol class="mt-4 space-y-4">
+              {app.steps.map((s, i) => (
+                <li class="flex gap-4">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold text-white shadow-glow">
+                    {i + 1}
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm md:text-base font-semibold text-text-primary">{s.title}</p>
+                    <p class="mt-1 text-sm text-text-muted leading-relaxed">{s.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            {app.tips && app.tips.length > 0 && (
+              <div class="mt-6 rounded-xl border border-brand/25 bg-brand/5 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">Tip</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {app.tips.map((t) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center text-brand-light">
+                        <Icon name="check" size={14} />
+                      </span>
+                      <span set:html={t}></span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href={waLink(`Hi, I'd like to set up ${app.name} on my Nvidia Shield with your £${site.price} IPTV trial.`)}
+                class="btn-primary"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                Activate my {app.name}
+              </a>
+              {app.activateUrl && (
+                <a href={app.activateUrl} target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary">
+                  Official site ↗
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Comparison -->
+      <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        Nvidia Shield IPTV apps — side-by-side
+      </h2>
+      <p class="mt-3 text-text-muted">All five apps at a glance.</p>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-elevated/70 text-text-primary">
+            <tr>
+              <th class="p-3 font-semibold">App</th>
+              <th class="p-3 font-semibold">Type</th>
+              <th class="p-3 font-semibold">Install</th>
+              <th class="p-3 font-semibold">Login</th>
+              <th class="p-3 font-semibold">Price</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-muted">
+            {apps.map((app) => (
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary font-medium">{app.name}</td>
+                <td class="p-3">{app.tag === 'free' ? 'Free' : 'Paid'}</td>
+                <td class="p-3">Google Play</td>
+                <td class="p-3">{app.login.split('·')[0].trim()}</td>
+                <td class="p-3">{app.tag === 'free' ? 'Free' : (app.price?.split('·')[0]?.trim() ?? '—')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Buyer's guide -->
+      <article class="legal-prose mt-16">
+        <h2>Which Nvidia Shield IPTV app should I actually use?</h2>
+        <p>
+          If you want the shortest possible answer: install <strong>TiviMate</strong> first —
+          even the free tier beats every other free option on Shield, and the ~£4.99/yr Premium
+          upgrade is trivial. If the interface feels overwhelming, <strong>IPTV Smarters
+          Pro</strong> is simpler and 100% free. Power users who juggle multiple
+          <strong>iptv subscriptions</strong> or need Stalker Portal emulation should reach for
+          <strong>OTT Navigator</strong>.
+        </p>
+
+        <h3>Nvidia Shield (2019, standard) owners</h3>
+        <p>
+          The standard Shield handles every app in this guide at full 4K HEVC HDR. Stick to one
+          app at a time to keep the 2 GB RAM comfortable. TiviMate + our
+          <strong>iptv service</strong> is the classic combo.
+        </p>
+
+        <h3>Nvidia Shield Pro owners</h3>
+        <p>
+          Shield Pro is our top recommendation for a serious UK <strong>iptv service</strong> —
+          3 GB RAM lets you keep TiviMate + Kodi + Sparkle TV all warm in memory for instant
+          switching, and the full-size Ethernet port means you can hard-wire the Shield for
+          the smoothest possible 4K UK sport.
+        </p>
+
+        <h3>Match frame rate, HDR &amp; Dolby Atmos</h3>
+        <p>
+          Turn on "Match content frame rate" in Shield → Settings → Device Preferences →
+          Display. This makes the Shield switch automatically between 50Hz (UK sport, drama),
+          60Hz (US content) and 24Hz (film) — a difference you feel immediately on any
+          <strong>iptv subscription</strong>. Enable Dolby Atmos passthrough in the same menu
+          for cinema-grade audio on films.
+        </p>
+
+        <h2>Try our IPTV UK trial on any of these apps</h2>
+        <p>
+          Every app on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a> —
+          same Xtream Codes credentials or M3U playlist, same UK support on WhatsApp. If you buy
+          Premium on TiviMate or Sparkle TV, that purchase is completely separate from your
+          <strong>iptv subscription</strong> with us. One set of
+          <strong>iptv subscriptions</strong> credentials works across Nvidia Shield, Fire Stick,
+          Apple TV, Smart TV, phone and tablet.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <!-- FAQ -->
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- Help card -->
+      <aside class="mt-14 card p-6 md:p-8">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-text-muted">Stuck?</p>
+        <h2 class="mt-2 font-display text-2xl font-semibold text-text-primary">We'll set it up for you</h2>
+        <p class="mt-3 text-text-muted">
+          Every {site.name} subscription includes free hands-on Nvidia Shield setup support.
+          Message us on WhatsApp with your Shield model (2019 standard or Pro) and we'll walk
+          you through it, or push your playlist across remotely.
+        </p>
+        <div class="mt-6">
+          <a href={waLink(`Hi, I need help setting up IPTV on my Nvidia Shield.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            <Icon name="whatsapp" size={16} class="mr-2" />
+            Chat with UK support
+          </a>
+        </div>
+      </aside>
+
+      <!-- Related guides -->
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Other installation guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedGuides.map((g) => (
+            <li>
+              <a
+                href={`/installation-guides/${g.slug}/`}
+                class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"
+              >
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

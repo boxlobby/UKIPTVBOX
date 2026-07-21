@@ -1,49 +1,109 @@
 ---
-import Logo from './Logo.astro';
 import Icon from './Icon.astro';
+import Logo from './Logo.astro';
 import { site } from '../data/site';
 const year = new Date().getFullYear();
+const phoneDisplay = '+44 7441 346459';
+const phoneHref = 'tel:+447441346459';
 ---
-<footer class="border-t border-border-subtle bg-subtle/50 mt-6">
-  <div class="container-x py-12 sm:py-14 grid gap-10 sm:grid-cols-2 md:grid-cols-4">
-    <div class="md:col-span-2">
-      <Logo />
-      <p class="mt-4 max-w-sm text-sm text-text-muted leading-relaxed">
-        The UK’s cheapest IPTV trial — 30 days of 35,000+ live channels, sports, movies and series in 4K for just {site.currencySymbol}{site.price}.
+<footer class="border-t border-border-subtle bg-base mt-6">
+  <div class="container-x pt-14 sm:pt-16 pb-8 grid gap-10 md:gap-8 md:grid-cols-12">
+    <!-- Brand -->
+    <div class="md:col-span-5">
+      <Logo height={64} />
+      <p class="mt-5 max-w-md text-sm leading-relaxed text-text-muted">
+        {site.name} is a trusted IPTV service in the United Kingdom, offering a genuine 30-day IPTV trial and long-term IPTV subscriptions. Premium live TV, sports, movies and series since 2022.
       </p>
-      <p class="mt-4 inline-flex items-center gap-2 text-xs text-text-muted">
-        <Icon name="union-jack" size={14} class="text-brand-light" />
-        {site.domain} — Made in the UK
-      </p>
+
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a href="/dmca" aria-label="DMCA Protected">
+          <img
+            src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/dmca-badge-w250-2x1-01.png"
+            alt="DMCA Protected IPTV service"
+            width="125"
+            height="50"
+            loading="lazy"
+            decoding="async"
+            class="h-[30px] w-auto"
+          />
+        </a>
+        <a href="https://transparencyreport.google.com/safe-browsing/search?url=iptvtrial.org&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Safe Browsing verified">
+          <img
+            src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/google-safe.webp"
+            alt="Google Safe Browsing verified IPTV trial site"
+            width="120"
+            height="50"
+            loading="lazy"
+            decoding="async"
+            class="h-[30px] w-auto"
+          />
+        </a>
+        <a href="https://www.ssl.org/" target="_blank" rel="noopener noreferrer" aria-label="SSL Secured">
+          <img
+            src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/google-ssl.webp"
+            alt="SSL secured IPTV subscription website"
+            width="120"
+            height="50"
+            loading="lazy"
+            decoding="async"
+            class="h-[30px] w-auto"
+          />
+        </a>
+      </div>
     </div>
 
-    <div>
-      <p class="text-[11px] font-semibold uppercase tracking-widest text-text-primary mb-4">Product</p>
-      <ul class="space-y-2 text-sm text-text-muted">
-        <li><a href="/#features" class="hover:text-text-primary">Features</a></li>
-        <li><a href="/#pricing" class="hover:text-text-primary">Pricing</a></li>
-        <li><a href="/#devices" class="hover:text-text-primary">Devices</a></li>
-        <li><a href="/#faq" class="hover:text-text-primary">FAQ</a></li>
-        <li><a href="/order" class="hover:text-text-primary">Order</a></li>
+    <!-- Navigate -->
+    <div class="md:col-span-4 md:pl-4">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-5">Navigate</p>
+      <ul class="space-y-4 text-[15px] text-text-primary">
+        <li><a href="/installation-guides/" class="transition-colors hover:text-brand-light">Installation Guides</a></li>
+        <li><a href="/testimonials" class="transition-colors hover:text-brand-light">Reviews</a></li>
+        <li><a href="/contact" class="transition-colors hover:text-brand-light">Contact Us</a></li>
+        <li><a href="/about" class="transition-colors hover:text-brand-light">About Us</a></li>
+        <li><a href="/blog/" class="transition-colors hover:text-brand-light">Blog</a></li>
       </ul>
     </div>
 
-    <div>
-      <p class="text-[11px] font-semibold uppercase tracking-widest text-text-primary mb-4">Company</p>
-      <ul class="space-y-2 text-sm text-text-muted">
-        <li><a href="/blog" class="hover:text-text-primary">Blog</a></li>
-        <li><a href={`mailto:${site.supportEmail}`} class="hover:text-text-primary">Contact</a></li>
-        <li><a href="/privacy" class="hover:text-text-primary">Privacy Policy</a></li>
-        <li><a href="/terms" class="hover:text-text-primary">Terms of Service</a></li>
-        <li><a href="/refund" class="hover:text-text-primary">Refund Policy</a></li>
+    <!-- Contact -->
+    <div class="md:col-span-3">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-5">Contact</p>
+      <ul class="space-y-4 text-[15px] text-text-primary">
+        <li>
+          <a href={`mailto:${site.supportEmail}`} class="group inline-flex items-center gap-3 transition-colors hover:text-brand-light">
+            <span class="inline-flex h-5 w-5 items-center justify-center text-brand-light">
+              <Icon name="mail" size={18} />
+            </span>
+            <span>{site.supportEmail}</span>
+          </a>
+        </li>
+        <li>
+          <a href={phoneHref} class="group inline-flex items-center gap-3 transition-colors hover:text-brand-light">
+            <span class="inline-flex h-5 w-5 items-center justify-center text-brand-light">
+              <Icon name="phone" size={18} />
+            </span>
+            <span>{phoneDisplay}</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 
   <div class="border-t border-border-subtle">
-    <div class="container-x py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-text-muted text-center md:text-left">
-      <p>&copy; {year} {site.name}. All rights reserved.</p>
-      <p>Customers are responsible for the legality of their use in their jurisdiction.</p>
+    <div class="container-x py-6 flex flex-col-reverse gap-4 md:flex-row md:items-center md:justify-between text-xs text-text-muted">
+      <p class="text-center md:text-left">&copy; {year} {site.name}. Premium IPTV Subscriptions.</p>
+      <nav aria-label="Legal">
+        <ul class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 md:justify-end">
+          <li><a href="/privacy" class="transition-colors hover:text-text-primary">Privacy Policy</a></li>
+          <li aria-hidden="true" class="text-border-subtle">|</li>
+          <li><a href="/refund" class="transition-colors hover:text-text-primary">Refund Policy</a></li>
+          <li aria-hidden="true" class="text-border-subtle">|</li>
+          <li><a href="/terms" class="transition-colors hover:text-text-primary">Terms of Service</a></li>
+          <li aria-hidden="true" class="text-border-subtle">|</li>
+          <li><a href="/privacy#cookies" class="transition-colors hover:text-text-primary">Cookie Policy</a></li>
+          <li aria-hidden="true" class="text-border-subtle">|</li>
+          <li><a href="/dmca#dmca" class="transition-colors hover:text-text-primary">DMCA</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
 </footer>

@@ -1,34 +1,141 @@
 ---
-import Icon from './Icon.astro';
-import { testimonials } from '../data/testimonials';
+import Placeholder from './Placeholder.astro';
 import { site } from '../data/site';
+
+const reviewImages = [
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_1.webp',
+    alt: 'WhatsApp chat screenshot from a UK viewer reviewing their IPTV trial setup',
+  },
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_2.webp',
+    alt: 'WhatsApp conversation screenshot showing IPTV trial support for a UK customer',
+  },
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_3.webp',
+    alt: 'Customer WhatsApp feedback screenshot about starting an IPTV trial in the UK',
+  },
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_4.webp',
+    alt: 'WhatsApp proof screenshot from a satisfied IPTV trial customer in the UK',
+  },
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_5.webp',
+    alt: 'IPTV trial WhatsApp support chat screenshot from a UK viewer',
+  },
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF1.webp',
+    alt: 'Customer proof screenshot showing a successful IPTV trial experience in the UK',
+  },
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF2.webp',
+    alt: 'IPTV trial customer proof screenshot from a UK viewer after setup',
+  },
+  {
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF3.webp',
+    alt: 'UK IPTV trial proof screenshot showing customer feedback and service results',
+  },
+];
 ---
 <section class="section bg-subtle/50">
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">Loved by UK viewers</span>
-      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">{site.reviews.rating} / 5 from {site.reviews.count}+ customers</h2>
-      <p class="mt-4 text-text-muted text-sm sm:text-base">Real customers from London to Glasgow. Setup takes minutes, support responds in under two.</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">34,000+ satisfied customers</h2>
+      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+        Real UK customers who started with the IPTV trial and stayed on a longer IPTV subscription.
+        Setup in minutes, WhatsApp support in under two.
+      </p>
     </div>
 
-    <div class="slider mt-10 md:mt-14 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-5">
-      {testimonials.map((t) => (
-        <figure class="card p-5 sm:p-6 w-[85%] sm:w-[55%] md:w-auto">
-          <div class="flex items-center gap-1 text-accent">
-            {Array.from({ length: t.rating }).map(() => <Icon name="star" size={14} />)}
-          </div>
-          <blockquote class="mt-4 text-sm text-text-primary leading-relaxed">“{t.body}”</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3 text-xs text-text-muted">
-            <span class="flex h-9 w-9 items-center justify-center rounded-full bg-grad-brand font-semibold text-white">
-              {t.name.charAt(0)}
-            </span>
-            <span>
-              <span class="block font-semibold text-text-primary">{t.name}</span>
-              <span>{t.city}, UK</span>
-            </span>
-          </figcaption>
+    <div class="reviews-carousel mt-10 md:mt-14" data-reviews-carousel>
+      {reviewImages.map((image) => (
+        <figure class="review-slide card p-5 sm:p-6 shrink-0 snap-center">
+          <Placeholder
+            src={image.src}
+            alt={image.alt}
+            aspect="aspect-[9/16]"
+            class="rounded-lg"
+            width={900}
+            height={1600}
+          />
         </figure>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .reviews-carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    scrollbar-width: none;
+  }
+  .reviews-carousel::-webkit-scrollbar { display: none; }
+
+  .review-slide {
+    flex: 0 0 80%;
+  }
+
+  @media (min-width: 640px) {
+    .review-slide { flex-basis: 55%; }
+  }
+
+  @media (min-width: 768px) {
+    .reviews-carousel {
+      gap: 1.25rem;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .review-slide {
+      flex-basis: calc((100% - 2 * 1.25rem) / 3);
+    }
+  }
+</style>
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>('[data-reviews-carousel]');
+  carousels.forEach((el) => {
+    let idx = 0;
+    let timer: number | undefined;
+    let paused = false;
+
+    const perView = () => (window.matchMedia('(min-width: 768px)').matches ? 3 : 1);
+
+    const step = () => {
+      if (paused) return;
+      const slides = el.querySelectorAll<HTMLElement>('.review-slide');
+      if (!slides.length) return;
+      const maxIdx = Math.max(0, slides.length - perView());
+      idx = idx >= maxIdx ? 0 : idx + 1;
+      const target = slides[idx];
+      el.scrollTo({ left: target.offsetLeft - el.offsetLeft, behavior: 'smooth' });
+    };
+
+    const start = () => {
+      stop();
+      timer = window.setInterval(step, 3500);
+    };
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    el.addEventListener('pointerdown', () => { paused = true; });
+    el.addEventListener('pointerup', () => { paused = false; });
+    el.addEventListener('pointerleave', () => { paused = false; });
+    window.addEventListener('resize', () => { idx = 0; start(); });
+
+    start();
+  });
+</script>

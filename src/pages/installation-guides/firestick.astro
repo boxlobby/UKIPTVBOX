@@ -1,0 +1,603 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { site, waLink } from '../../data/site';
+
+const canonical = `${site.url}/installation-guides/firestick/`;
+const ogImage = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Fire_Stick_IPTV_guide_banner_202607210422.jpeg';
+const publishedFmt = '20 July 2026';
+const updatedFmt = '20 July 2026';
+
+type App = {
+  slug: string;
+  name: string;
+  tag: 'free' | 'paid';
+  price?: string;
+  logo: string;
+  login: string;
+  supported: string;
+  activateUrl?: string;
+  copy: string;
+  steps: { title: string; body: string }[];
+  tips?: string[];
+};
+
+const apps: App[] = [
+  {
+    slug: 'smarters',
+    name: 'IPTV Smarters Pro',
+    tag: 'free',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/iptv-smarters.webp',
+    login: 'Xtream Codes API (username + password + server URL)',
+    supported: 'Fire TV Stick · Fire Stick 4K · Fire Stick 4K Max · Fire TV Cube · Fire TV Lite',
+    copy: `IPTV Smarters Pro is the number-one IPTV app on Amazon Fire Stick and Fire TV Cube — it's the app every UK IPTV provider (including us) writes its setup docs for. It logs in with a simple Xtream Codes username, password and server URL, which is why you can go from a factory-fresh Fire Stick to watching UK channels on your first ${site.name} iptv trial in under 5 minutes. Sideloaded via the free Downloader app.`,
+    steps: [
+      { title: 'Enable apps from unknown sources', body: 'Fire Stick home → Settings → My Fire TV → Developer Options → Install unknown apps. Toggle "Downloader" ON. (On older devices this is labelled "Apps from Unknown Sources".)' },
+      { title: 'Install the Downloader app', body: 'Back on the home screen search "Downloader" in the Amazon Appstore. Install and open it.' },
+      { title: 'Download the Smarters APK', body: 'In Downloader\'s URL bar enter the short code we send you on WhatsApp (or type the official IPTV Smarters Pro APK URL). Press Go, then Install when the APK finishes downloading.' },
+      { title: 'Log in with Xtream Codes API', body: 'Open IPTV Smarters Pro → Add New User → Login with Xtream Codes API. Paste the username, password and server URL from your welcome message. Save.' },
+      { title: 'Move it to the front row', body: 'Long-press the IPTV Smarters icon on the Fire TV home screen and choose "Move to front" — one-click launch every time.' },
+    ],
+    tips: ['If Amazon has hidden IPTV Smarters Pro from your regional Downloader search, message us — we\'ll send you the current APK short code.'],
+  },
+  {
+    slug: 'hot',
+    name: 'Hot Player / Hot IPTV',
+    tag: 'paid',
+    price: '€5.99/yr · €14.99 lifetime · 30-day free trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/hot-player.webp',
+    login: 'M3U playlist URL (uploaded at hotplayer.app/upload)',
+    supported: 'Fire TV Stick · Fire Stick 4K · Fire Stick 4K Max · Fire TV Cube · Android TV · Smart TV · iOS',
+    activateUrl: 'https://hotplayer.app/activation',
+    copy: `Hot Player has the longest free trial of any Fire Stick IPTV app — a full 30 days — which makes it the perfect partner for a monthly iptv uk trial. It uses an M3U URL uploaded against your Fire Stick's MAC on hotplayer.app/upload, so once you send us the MAC we handle the whole upload for you. Works flawlessly on Fire Stick 4K Max and Fire TV Cube.`,
+    steps: [
+      { title: 'Search and install Hot Player', body: 'On the Fire TV home screen search "Hot Player" or "Hot IPTV" in the Amazon Appstore. Install it directly — no sideload needed.' },
+      { title: 'Read your MAC address', body: 'Open the app. The welcome screen shows a MAC in the format 00:1A:79:XX:XX:XX. Take a photo of it.' },
+      { title: 'Send us the MAC on WhatsApp', body: 'Message us the MAC with your order name. We generate a personal M3U playlist URL for your iptv subscription.' },
+      { title: 'Upload on hotplayer.app/upload', body: 'On your phone or laptop visit hotplayer.app/upload, enter the MAC, paste the M3U URL we sent you and save.' },
+      { title: 'Reload the app', body: 'Restart Hot Player on the Fire Stick — channels appear immediately. 30 days free, then €5.99/yr or €14.99 lifetime on hotplayer.app/activation.' },
+    ],
+    tips: ['/upload is where you paste your playlist (free during the trial). /activation is where you pay when the 30-day trial ends. Don\'t mix them up.'],
+  },
+  {
+    slug: 'ibo',
+    name: 'IBO Player Pro',
+    tag: 'paid',
+    price: '≈ €8 lifetime · 7-day free trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/ibo-player.webp',
+    login: 'Device Key + MAC (activated on iboproapp.com)',
+    supported: 'Fire TV Stick · Fire TV Cube · Android TV · Smart TV · Apple TV · iOS · Windows',
+    activateUrl: 'https://iboproapp.com',
+    copy: `IBO Player Pro is the most polished paid app on Fire Stick — a Netflix-style interface with per-category posters, a fast EPG and full catch-up support. 7-day free trial baked in, and a one-off €8 unlocks it for life on that specific Fire Stick. A perfect step up from IPTV Smarters Pro if you use your iptv service every night.`,
+    steps: [
+      { title: 'Install IBO Player Pro', body: 'Amazon Appstore → search "IBO Player Pro" (or "IBO Player"). Install directly, no sideload.' },
+      { title: 'Read your Device Key AND MAC', body: 'Open the app — the first screen shows both a Device Key and a MAC address. You need both. Take a photo.' },
+      { title: 'Send us both codes', body: 'WhatsApp us the Device Key + MAC. We attach your playlist within about 10 minutes and confirm when it\'s live.' },
+      { title: 'Reload and enjoy the 7-day trial', body: 'Restart the app — your channels, VOD and series appear. Enjoy 7 days free.' },
+      { title: 'Activate for life on iboproapp.com', body: 'When the trial ends, visit iboproapp.com, enter the same Device Key + MAC and pay the one-off lifetime fee. Your playlist keeps working exactly as before.' },
+    ],
+    tips: ['Payment for IBO Player Pro is made directly to IBO on their site — completely separate from your iptv subscription with us.'],
+  },
+  {
+    slug: 'tivimate',
+    name: 'TiviMate',
+    tag: 'paid',
+    price: 'Free tier · Premium €4.99/yr · 7-day trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/tivimate.webp',
+    login: 'M3U URL or Xtream Codes API',
+    supported: 'Fire TV Stick · Fire Stick 4K · Fire Stick 4K Max · Fire TV Cube · Android TV',
+    activateUrl: 'https://tivimate.com',
+    copy: `TiviMate is the connoisseur's choice on Fire Stick — the cleanest EPG in the business, multi-playlist support, catch-up TV and the smoothest channel switching of any IPTV player. The free tier is fully usable; Premium (€4.99/yr) unlocks multiple playlists and recording. Sideload via Downloader — not on the Amazon Appstore itself.`,
+    steps: [
+      { title: 'Enable Downloader (if you haven\'t)', body: 'Settings → My Fire TV → Developer Options → Install unknown apps → toggle Downloader ON.' },
+      { title: 'Get the TiviMate APK', body: 'Open Downloader. Enter the current TiviMate APK short code (message us on WhatsApp for the latest one — it changes when TiviMate updates). Press Go.' },
+      { title: 'Install and open', body: 'Once the APK finishes downloading, choose Install → Open.' },
+      { title: 'Add a playlist', body: 'Add playlist → Xtream Codes → paste the username, password and server URL from your welcome message. TiviMate loads channels + EPG automatically.' },
+      { title: 'Optional: upgrade to Premium', body: 'Settings → TiviMate Companion → Premium. €4.99/yr adds multiple playlists and recording — everything else works on the free tier.' },
+    ],
+  },
+  {
+    slug: 'xciptv',
+    name: 'XCIPTV Player',
+    tag: 'free',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/xciptv.webp',
+    login: 'Xtream Codes API or M3U URL',
+    supported: 'Fire TV Stick · Fire TV Cube · Android TV · Android phones & tablets',
+    copy: `XCIPTV is a fully free Fire Stick IPTV app that logs in with the exact same Xtream Codes credentials as IPTV Smarters Pro. It's the standard fallback we recommend if Smarters is temporarily removed from Downloader — same login, same channel list, no cost. Great secondary app to keep installed on a Fire TV Cube in case Smarters ever breaks.`,
+    steps: [
+      { title: 'Enable Downloader (if you haven\'t)', body: 'Settings → My Fire TV → Developer Options → Install unknown apps → Downloader ON.' },
+      { title: 'Download the XCIPTV APK', body: 'Open Downloader, enter the XCIPTV APK short code we send on WhatsApp, press Go.' },
+      { title: 'Install and open', body: 'Install the APK, then Open.' },
+      { title: 'Log in with Xtream Codes API', body: 'Choose Xtream Codes, paste username, password and server URL from your welcome message. Save.' },
+      { title: 'Start streaming', body: 'Channels, EPG, VOD and series all load automatically — identical to what you\'d see in Smarters.' },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: 'Which is the best Fire Stick IPTV app in 2026?',
+    a: 'For most UK viewers on their first iptv trial, IPTV Smarters Pro is the best Fire Stick IPTV app — it\'s free, logs in with a single Xtream Codes username and password, and works identically on Fire TV Stick, Fire Stick 4K Max and Fire TV Cube. If you want a longer trial window before paying anything, Hot Player gives you 30 days free. For the cleanest interface and the best EPG on any Fire TV, install TiviMate.',
+  },
+  {
+    q: 'Do I need to sideload apps on Fire Stick?',
+    a: 'Sometimes yes, sometimes no. Hot Player and IBO Player Pro are on the Amazon Appstore and install with a single click. IPTV Smarters Pro, TiviMate and XCIPTV are usually sideloaded via the free Downloader app — a 30-second one-off step: enable "Install unknown apps" for Downloader, enter a short code we send you and press Install. Every iptv subscription customer we onboard uses the same process.',
+  },
+  {
+    q: 'Will these apps work on Fire TV Cube and Fire Stick 4K Max?',
+    a: 'Yes — every app in this guide runs on Fire TV Cube, Fire Stick 4K Max, Fire Stick 4K, Fire TV Stick Lite and the standard Fire TV Stick. For 4K IPTV playback and the smoothest channel switching we specifically recommend the Fire Stick 4K Max or Fire TV Cube — the older Lite can struggle with high-bitrate 4K streams.',
+  },
+  {
+    q: 'How do I get IPTV Smarters Pro back if Amazon removes it?',
+    a: 'Amazon occasionally hides IPTV Smarters Pro from Downloader search in certain regions. Two fallbacks: (1) message us on WhatsApp for the latest APK short code — the Downloader install still works even when the search is blocked; (2) install XCIPTV or IBO Player Pro instead — the same Xtream Codes credentials we send you work on both, so your iptv service keeps working with zero downtime.',
+  },
+  {
+    q: 'Can I use the same iptv subscription on Fire Stick and my phone?',
+    a: 'Yes. One ' + site.name + ' iptv subscription includes the same Xtream Codes credentials for every device you own — Fire Stick, Smart TV, iPhone, Android tablet, Apple TV. You just enter the same username, password and server URL in each app. See our Mobile & Tablet installation guide for phones and tablets.',
+  },
+  {
+    q: 'How long does the Fire Stick IPTV setup take?',
+    a: `Under 5 minutes end-to-end for IPTV Smarters Pro — that's the fastest path in this guide. Enable Downloader (30 seconds), install Downloader (1 min), sideload the Smarters APK (1 min), log in with Xtream Codes API (1 min) and you're watching UK channels. Every ${site.name} iptv uk trial customer follows this exact flow on their first day.`,
+  },
+  {
+    q: 'Is IPTV on Fire Stick safe and legal in the UK?',
+    a: 'Installing the apps in this guide is 100% legal — IPTV Smarters Pro, Hot Player, IBO Player Pro, TiviMate and XCIPTV are all legitimate players sold or given away on their own official sites. What you watch through them depends on your iptv subscription. Every ' + site.name + ' iptv trial ships from licensed servers with a full UK support team on WhatsApp.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Installation Guides', item: `${site.url}/installation-guides/` },
+        { '@type': 'ListItem', position: 3, name: 'Fire Stick & Cube', item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: 'How to install IPTV on Amazon Fire Stick & Fire TV Cube — 5 best apps ranked',
+      description: 'The complete Fire Stick IPTV setup guide for Fire TV Stick, Fire Stick 4K Max and Fire TV Cube. Compares IPTV Smarters Pro, Hot Player, IBO Player Pro, TiviMate and XCIPTV — all compatible with your iptv uk trial.',
+      image: ogImage,
+      author: { '@type': 'Organization', name: `${site.name} Editorial`, url: site.url },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: '2026-07-20',
+      dateModified: '2026-07-20',
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Installation Guides',
+      keywords: 'iptv trial, iptv uk trial, iptv subscriptions, iptv subscription, iptv service, fire stick iptv, fire tv cube iptv, iptv smarters pro, hot player, ibo player pro, tivimate, xciptv',
+    },
+    {
+      '@type': 'HowTo',
+      name: 'How to install IPTV on Amazon Fire Stick and Fire TV Cube',
+      totalTime: 'PT5M',
+      step: apps.flatMap((app) => app.steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        name: `${app.name} — ${s.title}`,
+        text: s.body,
+        position: i + 1,
+      }))),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedGuides = [
+  { slug: 'smart-tv', label: 'Set up IPTV on Smart TV', device: 'Smart TV' },
+  { slug: 'mobile-tablet', label: 'Set up IPTV on Mobile & Tablet', device: 'Mobile' },
+  { slug: 'apple-tv', label: 'Set up IPTV on Apple TV', device: 'Apple TV' },
+  { slug: 'nvidia-shield', label: 'Set up IPTV on Nvidia Shield', device: 'Nvidia Shield' },
+];
+---
+<BaseLayout
+  title={`Fire Stick IPTV setup — 5 best apps for Fire TV Stick & Cube (2026) | ${site.name}`}
+  description="Install IPTV on any Amazon Fire TV Stick, Fire Stick 4K Max or Fire TV Cube in under 5 minutes. Step-by-step guides for IPTV Smarters Pro, Hot Player, IBO Player Pro, TiviMate and XCIPTV — all working with your iptv uk trial."
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/installation-guides/" class="hover:text-brand-light">Installation Guides</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">Fire Stick &amp; Cube</span>
+        </nav>
+
+        <div class="mt-6 flex items-center gap-4">
+          <span class="flex h-14 w-14 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand-light">
+            <Icon name="zap" size={28} />
+          </span>
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">
+              5 min read · Step-by-step
+            </p>
+            <span class="eyebrow mt-1 block">Fire Stick &amp; Cube setup</span>
+          </div>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          Fire Stick IPTV — 5 best apps for Fire TV Stick &amp; Cube (2026)
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Amazon Fire Stick is by far the most popular way to run <strong>IPTV</strong> in the UK.
+          This guide walks through the five apps we support on every Fire TV Stick, Fire Stick 4K Max
+          and Fire TV Cube — from the classic free option (<strong>IPTV Smarters Pro</strong>) to the
+          longest free trial on the market (<strong>Hot Player</strong>, 30 days) and the smoothest
+          paid EPG (<strong>TiviMate</strong>). All work with our
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I'd like to start my £${site.price} IPTV trial on my Fire Stick.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} IPTV trial
+          </a>
+          <a href="#apps" class="btn-secondary">Choose an app</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Fire_Stick_IPTV_guide_banner_202607210422.jpeg"
+            alt="Fire Stick IPTV setup — IPTV Smarters Pro, Hot Player, IBO Player Pro and TiviMate on Amazon Fire TV"
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-auto"
+            onerror="this.src='/installation-guides/smart-tv-hero.svg'"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Every Amazon <strong>Fire Stick</strong> and <strong>Fire TV Cube</strong> sold in the UK
+          can run <strong>IPTV</strong> in under 5 minutes — you just need to pick the right player
+          and (in most cases) sideload it via the free Downloader app. This guide covers the five
+          apps we actively support, ranked by how quickly you can go from "just plugged the Fire Stick
+          into the TV" to watching UK channels, sports, films and series on your first
+          <strong>iptv trial</strong>. Every app works with the same Xtream Codes credentials or M3U
+          playlist that comes with your <strong>iptv subscription</strong> — no re-buying, no per-device fee.
+        </p>
+
+        <p>Short on time? The three options that cover 95% of Fire Stick setups:</p>
+        <ul>
+          <li><a href="#smarters"><strong>IPTV Smarters Pro</strong></a> — 100% free, Xtream Codes login, the classic Fire Stick IPTV app</li>
+          <li><a href="#hot"><strong>Hot Player / Hot IPTV</strong></a> — 30-day free trial, best if you're only running a monthly iptv uk trial</li>
+          <li><a href="#ibo"><strong>IBO Player Pro</strong></a> — ≈€8 lifetime, 7-day free trial, the most polished paid app</li>
+        </ul>
+      </article>
+
+      <!-- Paid apps callout -->
+      <div class="mt-10 rounded-2xl border border-brand/25 bg-brand/5 p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-light">
+            <Icon name="sparkles" size={16} />
+          </span>
+          <div class="min-w-0">
+            <p class="font-semibold text-text-primary">About the paid apps</p>
+            <p class="mt-2 text-sm text-text-muted leading-relaxed">
+              Hot Player, IBO Player Pro and TiviMate each come with a <span class="text-brand-light font-medium">free trial</span> — install one, load your playlist and test it properly.
+              When the trial ends, you activate (pay for) the app on its <strong>own official site</strong> below. Tap any app card for its exact steps.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <a href="https://hotplayer.app/activation" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">Activate Hot Player / Hot IPTV ↗</a>
+              <a href="https://iboproapp.com" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">Activate IBO Player Pro ↗</a>
+              <a href="https://tivimate.com" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">Activate TiviMate Premium ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App selector list -->
+      <h2 id="apps" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        Choose an app
+      </h2>
+      <p class="mt-3 text-text-muted">
+        Tap any app to jump to its full step-by-step Fire Stick IPTV setup.
+      </p>
+      <ul class="mt-6 space-y-3">
+        {apps.map((app) => (
+          <li>
+            <a
+              href={`#${app.slug}`}
+              class="card group flex items-center gap-4 p-4 transition hover:border-brand/50"
+            >
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="48"
+                height="48"
+                loading="lazy"
+                decoding="async"
+                class="h-12 w-12 shrink-0 rounded-xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-base font-semibold text-text-primary group-hover:text-brand-light">{app.name}</span>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Paid app</span>
+                  )}
+                  {app.price && (
+                    <span class="rounded-full border border-border-subtle bg-elevated/60 px-2 py-0.5 text-[10px] text-text-muted">
+                      {app.price}
+                    </span>
+                  )}
+                </div>
+                <p class="mt-1 text-xs text-text-muted line-clamp-1">{app.supported}</p>
+              </div>
+              <span class="text-brand-light shrink-0"><Icon name="chevron-right" size={18} /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Per-app deep cards -->
+      <div class="mt-14 space-y-14">
+        {apps.map((app, idx) => (
+          <article id={app.slug} class="card p-6 md:p-8 scroll-mt-24">
+            <div class="flex items-start gap-4">
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+                class="h-16 w-16 md:h-[72px] md:w-[72px] shrink-0 rounded-2xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">
+                    App {idx + 1} of {apps.length}
+                  </p>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Paid app</span>
+                  )}
+                </div>
+                <h2 class="mt-1 font-display text-2xl md:text-[28px] font-bold text-text-primary">
+                  {app.name}
+                </h2>
+                {app.price && (
+                  <p class="mt-1 text-sm text-text-muted">{app.price}</p>
+                )}
+              </div>
+            </div>
+
+            <p class="mt-6 text-text-muted leading-relaxed">{app.copy}</p>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Log in via</p>
+                <p class="mt-1 text-sm text-text-primary">{app.login}</p>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Supported devices</p>
+                <p class="mt-1 text-sm text-text-primary">{app.supported}</p>
+              </div>
+            </div>
+
+            <h3 class="mt-8 font-display text-lg md:text-xl font-semibold text-text-primary">Step-by-step</h3>
+            <ol class="mt-4 space-y-4">
+              {app.steps.map((s, i) => (
+                <li class="flex gap-4">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold text-white shadow-glow">
+                    {i + 1}
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm md:text-base font-semibold text-text-primary">{s.title}</p>
+                    <p class="mt-1 text-sm text-text-muted leading-relaxed">{s.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            {app.tips && app.tips.length > 0 && (
+              <div class="mt-6 rounded-xl border border-brand/25 bg-brand/5 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">Tip</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {app.tips.map((t) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center text-brand-light">
+                        <Icon name="check" size={14} />
+                      </span>
+                      <span set:html={t}></span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href={waLink(`Hi, I'd like to set up ${app.name} on my Fire Stick with your £${site.price} IPTV trial.`)}
+                class="btn-primary"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                Activate my {app.name}
+              </a>
+              {app.activateUrl && (
+                <a href={app.activateUrl} target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary">
+                  Official site ↗
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Comparison -->
+      <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        Fire Stick IPTV apps — side-by-side
+      </h2>
+      <p class="mt-3 text-text-muted">All five apps at a glance.</p>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-elevated/70 text-text-primary">
+            <tr>
+              <th class="p-3 font-semibold">App</th>
+              <th class="p-3 font-semibold">Type</th>
+              <th class="p-3 font-semibold">Free trial</th>
+              <th class="p-3 font-semibold">Login</th>
+              <th class="p-3 font-semibold">Price</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-muted">
+            {apps.map((app) => (
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary font-medium">{app.name}</td>
+                <td class="p-3">{app.tag === 'free' ? 'Free' : 'Paid'}</td>
+                <td class="p-3">{app.tag === 'free' ? '—' : (app.price?.match(/\d+-day free trial|7-day trial|7-day free trial|30-day free trial/)?.[0] ?? '7 days')}</td>
+                <td class="p-3">{app.login.split('(')[0].trim()}</td>
+                <td class="p-3">{app.tag === 'free' ? 'Free' : (app.price?.split('·')[0]?.trim() ?? '—')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Buyer's guide -->
+      <article class="legal-prose mt-16">
+        <h2>Which Fire Stick IPTV app should I actually use?</h2>
+        <p>
+          If you want the shortest possible answer: sideload <strong>IPTV Smarters Pro</strong> first
+          because it's free and it's what every UK IPTV provider tests against. If the interface feels
+          basic, install <strong>TiviMate</strong> next — the free tier is fully usable and the EPG is
+          the best on any Fire TV. If you're on a very short iptv uk trial and want the longest
+          free window before committing, <strong>Hot Player</strong>'s 30-day trial is unbeatable.
+        </p>
+
+        <h3>Fire TV Stick Lite &amp; standard Fire TV Stick owners</h3>
+        <p>
+          Stick to the lightweight apps: <strong>IPTV Smarters Pro</strong> and <strong>XCIPTV</strong>
+          run smoothly on the Lite. Skip 4K streams — the Lite tops out at 1080p and can stutter on
+          very high-bitrate feeds. All the paid apps still work; you just won't see a 4K benefit.
+        </p>
+
+        <h3>Fire Stick 4K &amp; Fire Stick 4K Max owners</h3>
+        <p>
+          The 4K Max is our top recommendation for a serious <strong>iptv service</strong> — enough
+          memory to keep two IPTV apps installed side-by-side (Smarters + TiviMate is our favourite
+          pairing) and enough grunt for 4K HEVC without frame drops. All five apps in this guide run
+          at full 4K on 4K Max.
+        </p>
+
+        <h3>Fire TV Cube owners</h3>
+        <p>
+          The Fire TV Cube is the fastest Fire TV device on the market and handles every app in this
+          guide effortlessly, including 4K HEVC via IBO Player Pro and TiviMate. Its Ethernet port
+          means you can hard-wire the Cube for the smoothest possible 4K IPTV — the difference over
+          Wi-Fi is night and day on channels above 15 Mbps.
+        </p>
+
+        <h2>Try our IPTV UK trial on any of these apps</h2>
+        <p>
+          Every app on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a> —
+          same Xtream Codes credentials or M3U playlist, same UK support on WhatsApp. If you install
+          one of the paid apps, your free trial from the app developer runs <em>in parallel</em> with
+          our <strong>iptv subscription</strong> trial, so you can genuinely test both before spending
+          a penny more. One set of <strong>iptv subscriptions</strong> credentials works across Fire
+          Stick, Smart TV, phone and tablet — no per-device fee.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <!-- FAQ -->
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- Help card -->
+      <aside class="mt-14 card p-6 md:p-8">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-text-muted">Stuck?</p>
+        <h2 class="mt-2 font-display text-2xl font-semibold text-text-primary">We'll set it up for you</h2>
+        <p class="mt-3 text-text-muted">
+          Every {site.name} subscription includes free hands-on Fire Stick setup support. Message us
+          on WhatsApp with your Fire TV model and we'll walk you through it, or push your playlist
+          across remotely.
+        </p>
+        <div class="mt-6">
+          <a href={waLink(`Hi, I need help setting up IPTV on my Fire Stick.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            <Icon name="whatsapp" size={16} class="mr-2" />
+            Chat with UK support
+          </a>
+        </div>
+      </aside>
+
+      <!-- Related guides -->
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Other installation guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedGuides.map((g) => (
+            <li>
+              <a
+                href={`/installation-guides/${g.slug}/`}
+                class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"
+              >
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

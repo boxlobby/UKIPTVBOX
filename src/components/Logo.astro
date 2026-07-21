@@ -1,14 +1,16 @@
 ---
-import Icon from './Icon.astro';
-export interface Props { class?: string }
-const { class: className = '' } = Astro.props;
+export interface Props { class?: string; height?: number }
+const { class: className = '', height = 56 } = Astro.props;
+const width = Math.round(height * 2);
 ---
-<a href="/" class={`inline-flex items-center gap-2.5 font-display font-bold text-lg sm:text-xl tracking-tight ${className}`} aria-label="IPTV Trial — home">
-  <span class="relative flex h-8 w-8 items-center justify-center rounded-lg bg-grad-brand shadow-glow">
-    <span class="absolute inset-[2px] rounded-md bg-base"></span>
-    <Icon name="play" class="relative text-brand-light" size={14} />
-  </span>
-  <span>
-    <span class="text-brand-light">IPTV</span><span class="text-text-primary">Trial</span>
-  </span>
+<a href="/" class={`inline-flex items-center ${className}`} aria-label="IPTV Trial, home">
+  <img
+    src="/logo.png"
+    alt="IPTV Trial logo"
+    width={width}
+    height={height}
+    style={`height:${height}px;width:auto`}
+    loading="eager"
+    decoding="async"
+  />
 </a>

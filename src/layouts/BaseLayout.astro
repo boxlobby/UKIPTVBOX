@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SchemaOrg from '../components/SchemaOrg.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { site } from '../data/site';
 
 export interface Props {
@@ -13,10 +14,10 @@ export interface Props {
 }
 
 const {
-  title = 'IPTV UK Trial — 30 Days for £12.99 | Cheap UK IPTV | iptvtrial.org',
-  description = 'Get an IPTV UK trial for just £12.99/month. 35,000+ live channels plus sports, movies and series in 4K. Instant activation, works on any device.',
+  title = 'IPTV Trial, 30-Day UK IPTV Subscription for £14.99',
+  description = 'Start your IPTV trial for £14.99 — a full 30-day UK IPTV subscription with 50,000+ channels, sports, movies & series in 4K. Instant activation.',
   canonical = Astro.url.href,
-  ogImage = `${site.url}/og-image.svg`,
+  ogImage = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp',
   noIndex = false,
   includeSchema = true,
 } = Astro.props;
@@ -35,7 +36,7 @@ const {
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap.xml" />
 
     <!-- Open Graph -->
@@ -47,6 +48,7 @@ const {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:locale" content="en_GB" />
 
     <!-- Twitter -->
@@ -55,6 +57,7 @@ const {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <link rel="preconnect" href="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev" />
     <link rel="preconnect" href="https://wa.me" />
 
     {includeSchema && <SchemaOrg />}
@@ -62,5 +65,131 @@ const {
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-signal focus:px-3 focus:py-2 focus:text-base">Skip to content</a>
     <slot />
+
+    <WhatsAppFloat />
+
+    <script is:inline>
+      (() => {
+        if (typeof window === 'undefined') return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) return;
+
+        // Auto-tag top-level sections inside <main> so every section animates in.
+        const main = document.getElementById('main');
+        if (main) {
+          Array.from(main.children).forEach((el) => {
+            if (!el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', 'up');
+          });
+        }
+
+        const targets = document.querySelectorAll('[data-reveal], [data-reveal-group]');
+        if (!targets.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+          targets.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+        );
+
+        targets.forEach((el) => io.observe(el));
+      })();
+    </script>
+
+    <script is:inline>
+      // Shared auto-scroll driver for scrubbable carousels.
+      // Any container with [data-auto-scroll] gets its scrollLeft nudged each frame,
+      // wraps seamlessly at half-width (content must be duplicated in markup),
+      // and pauses while the user is interacting so they can freely scrub.
+      (() => {
+        if (typeof window === 'undefined') return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) return;
+
+        const containers = document.querySelectorAll('[data-auto-scroll]');
+        if (!containers.length) return;
+
+        containers.forEach((el) => {
+          const speed = parseFloat(el.getAttribute('data-speed') || '0.5');
+          const direction = el.getAttribute('data-direction') === 'reverse' ? -1 : 1;
+          let paused = false;
+          let resumeTimer = 0;
+          let visible = true;
+
+          // Content is duplicated, so the seamless loop length is scrollWidth / 2.
+          // Any scrollLeft in [0, half) has an identical pixel at scrollLeft + half.
+          const halfWidth = () => el.scrollWidth / 2;
+
+          let pos = 0;
+          const seed = () => {
+            pos = direction === -1 ? halfWidth() : 0;
+            el.scrollLeft = pos;
+          };
+          seed();
+          window.addEventListener('load', seed, { once: true });
+
+          const tick = () => {
+            if (!paused && visible) {
+              const half = halfWidth();
+              if (half > 0) {
+                pos += speed * direction;
+                if (pos >= half) pos -= half;
+                else if (pos < 0) pos += half;
+                el.scrollLeft = pos;
+              }
+            }
+            requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+
+          const pause = () => {
+            paused = true;
+            if (resumeTimer) window.clearTimeout(resumeTimer);
+          };
+          const scheduleResume = () => {
+            if (resumeTimer) window.clearTimeout(resumeTimer);
+            resumeTimer = window.setTimeout(() => {
+              // Re-sync virtual position from where the user left the scroller,
+              // normalising into [0, half) so the next tick continues smoothly.
+              const half = halfWidth();
+              if (half > 0) {
+                pos = el.scrollLeft % half;
+                if (pos < 0) pos += half;
+              } else {
+                pos = el.scrollLeft;
+              }
+              paused = false;
+            }, 1500);
+          };
+
+          el.addEventListener('pointerdown', pause);
+          el.addEventListener('pointerup', scheduleResume);
+          el.addEventListener('pointercancel', scheduleResume);
+          el.addEventListener('pointerleave', scheduleResume);
+          el.addEventListener('touchstart', pause, { passive: true });
+          el.addEventListener('touchend', scheduleResume, { passive: true });
+          el.addEventListener('wheel', () => { pause(); scheduleResume(); }, { passive: true });
+          el.addEventListener('mouseenter', pause);
+          el.addEventListener('mouseleave', scheduleResume);
+
+          if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => { visible = entry.isIntersecting; });
+            }, { threshold: 0 });
+            io.observe(el);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

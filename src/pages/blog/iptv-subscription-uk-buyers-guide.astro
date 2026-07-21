@@ -1,0 +1,391 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('iptv-subscription-uk-buyers-guide')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+const ogImage = post.image.startsWith('http') ? post.image : site.url + post.image;
+
+const criteria = [
+  {
+    n: 1,
+    title: 'Server uptime and peak-hour stability',
+    detail:
+      'The single most important spec of any IPTV subscription — and the one nobody advertises. A serious UK provider will hold above 99% uptime and keep servers stable between 7 pm and 11 pm when everyone sits down to watch. Ask directly. If the provider dodges the question, walk away.',
+  },
+  {
+    n: 2,
+    title: 'EPG (electronic programme guide) quality',
+    detail:
+      'A proper EPG shows now/next data, next-7-days scheduling, catch-up markers and series metadata. Cheap resellers copy an unreliable public EPG that is 15 minutes off the live signal. The EPG is what turns "a list of streams" into an actual TV experience — see the Wikipedia page on the electronic programme guide for the underlying tech.',
+  },
+  {
+    n: 3,
+    title: 'Catch-up window (3–7 days minimum)',
+    detail:
+      'Any modern IPTV subscription worth paying for gives you the ability to rewind to programmes from the last 3–7 days. Providers that offer zero catch-up are usually running raw scraped streams — the sign of a rushed, unmaintained service.',
+  },
+  {
+    n: 4,
+    title: 'Resolution — real 4K, not just badged',
+    detail:
+      'Most IPTV panels advertise "4K channels" but only deliver 4K on a handful of premium entertainment feeds. During a trial, load a channel labelled 4K and check the stream in your player: real 4K is 3840×2160 with ~25 Mbps bitrate. Anything less is upscaled Full HD.',
+  },
+  {
+    n: 5,
+    title: 'Trial length and refund policy',
+    detail:
+      'The industry gold-standard in the UK is a 30-day paid trial with a documented refund window. A provider without a trial is asking you to pay a year up-front with zero visibility. Our £14.99 30-day trial exists specifically to remove that risk.',
+  },
+  {
+    n: 6,
+    title: 'Support channel — WhatsApp beats email',
+    detail:
+      'Live TV problems are time-sensitive: a stream dying five minutes before kick-off cannot wait 48 hours for a support-desk reply. UK-friendly IPTV providers use WhatsApp because it is instant, familiar, and enables screenshot troubleshooting.',
+  },
+  {
+    n: 7,
+    title: 'Payment security',
+    detail:
+      'Legitimate providers accept card, PayPal and bank transfer. Crypto-only, gift-card-only, or Bitcoin-preferred pricing is one of the strongest red flags in the entire market. See the National Cyber Security Centre\'s guidance on online payment safety.',
+  },
+  {
+    n: 8,
+    title: 'Device compatibility',
+    detail:
+      'A serious provider works on every mainstream device out of the box: Fire Stick, Smart TV, Formuler, MAG, Nvidia Shield, Apple TV, Android box, phone, laptop. If you have to buy special hardware to use it, that is a provider limitation, not yours.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is the best IPTV subscription in the UK for 2026?',
+    a: `"Best" depends on how you watch. For most UK households the winning combination is a mid-price IPTV subscription (~£10–£15 a month equivalent) tested on a Fire Stick 4K Max or Formuler Z11. Our own £${site.price} 30-day trial lets you validate all eight criteria above before you commit to a year.`,
+  },
+  {
+    q: 'How much should an IPTV subscription cost in the UK?',
+    a: 'A properly-licensed IPTV subscription with a full channel list, 4K support and a working EPG typically costs £8–£15 per month when paid annually. Anything under £5 per month is almost certainly running on unlicensed infrastructure. Anything over £25 per month is usually a reseller marking up the same servers others sell for half.',
+  },
+  {
+    q: 'Can I pay monthly for an IPTV subscription?',
+    a: 'Yes — but monthly billing is normally 30–50% more expensive per month than an annual plan. The middle ground most UK viewers pick is a low-cost 30-day trial (like our £14.99 offer) to prove the service, followed by a 6- or 12-month plan for the discount.',
+  },
+  {
+    q: 'What devices work with a UK IPTV subscription?',
+    a: 'Everything mainstream: Amazon Fire TV Stick, Formuler Z11 / CC / Zx, MAG boxes, Nvidia Shield, Apple TV, Android boxes, Samsung / LG Smart TVs, iPhone, Android phone, iPad, Windows PC, MacBook. Full step-by-step guides live on our installation guides hub.',
+  },
+  {
+    q: 'How do I switch from an existing IPTV subscription without losing days?',
+    a: 'Take our £14.99 30-day trial in parallel with your current provider. Run both for the first two weeks, compare EPG accuracy, peak-time buffering and channel line-up, and only then decide whether to renew with your existing provider or move over. Overlap is a smart £14.99 insurance policy.',
+  },
+  {
+    q: 'Is a VPN required for a UK IPTV subscription?',
+    a: 'No. A legal, licensed IPTV subscription does not require a VPN. Some viewers still use one for general privacy or to bypass ISP throttling during peak-hour congestion. If you use a VPN, pick one with proven UK server capacity so 4K streams do not suffer.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@type': 'Person', name: post.author, url: `${site.url}/about#team` },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Buying Guides',
+      keywords: post.keywords.join(', '),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedLinks = [
+  { href: '/blog/iptv-free-trial-uk/', label: 'IPTV Free Trial UK — What a Legit Test Looks Like' },
+  { href: '/blog/cheap-iptv-uk-scam-or-legit/', label: 'Cheap IPTV UK: Scam or Legit?' },
+  { href: '/blog/is-iptv-legal-uk/', label: 'Is IPTV Legal in the UK? 2026 Explainer' },
+  { href: '/installation-guides/', label: 'Set Up IPTV on Your Device — All Guides' },
+];
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">IPTV Subscription UK Guide</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Picking an <strong>IPTV subscription in the UK</strong> in 2026 is harder than it should be —
+          hundreds of resellers, wildly different quality, and almost no honest reviews. This is a
+          no-fluff buyer's guide built from two years of testing real UK <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">IPTV trials</a>
+          against evening peak-hour reality. Read the eight criteria, use the checklist, and you will
+          not waste money.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I read the IPTV subscription UK buyer's guide and would like to start my £${site.price} trial.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} trial
+          </a>
+          <a href="#criteria" class="btn-secondary">The 8 criteria</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img src={post.image} alt={post.imageAlt} width="1200" height="630" loading="eager" decoding="async" fetchpriority="high" class="w-full h-auto" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          There are probably five hundred IPTV subscriptions marketed to UK viewers this month alone.
+          Nine out of ten are resellers of the same handful of upstream servers — which is why they all
+          look the same on paper. The differences that matter (uptime, EPG polish, catch-up depth,
+          support quality) never appear on the sales page. This guide gives you the eight things to
+          actually check <em>before</em> you pay.
+        </p>
+
+        <h2>Why the IPTV subscription market is so noisy</h2>
+        <p>
+          <a href="https://en.wikipedia.org/wiki/IPTV" target="_blank" rel="noopener noreferrer nofollow">IPTV</a>
+          is a low-barrier-to-entry business: rent a slice of an upstream panel, spin up a domain, take
+          card payments. This is why the market is flooded with unreliable operators. The winners in
+          this space are a small number of providers that invest in owned server capacity, proper
+          EPG feeds, real support, and — critically — a trial mechanism so buyers can verify quality
+          before spending a year's worth of money. Everyone else is churn.
+        </p>
+
+        <h2 id="criteria">The 8 criteria of a real UK IPTV subscription</h2>
+        <p>Every point below is testable in a 30-day trial. Do not skip any.</p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {criteria.map((c) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold text-white shadow-glow">
+                {c.n}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{c.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed">{c.detail}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <article class="legal-prose mt-14">
+        <h2>Realistic UK IPTV subscription pricing in 2026</h2>
+        <p>
+          Prices have stabilised over the past two years. Here is the honest range across the UK
+          market for a full-featured IPTV subscription (4K + EPG + catch-up + multi-device):
+        </p>
+        <div class="not-prose mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+          <table class="w-full min-w-[560px] text-left text-sm">
+            <thead class="bg-elevated/70 text-text-primary">
+              <tr>
+                <th class="p-3 font-semibold">Plan length</th>
+                <th class="p-3 font-semibold">Fair market price (£)</th>
+                <th class="p-3 font-semibold">Per-month equivalent</th>
+                <th class="p-3 font-semibold">Our offer</th>
+              </tr>
+            </thead>
+            <tbody class="text-text-muted">
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">30-day trial</td>
+                <td class="p-3">£10 – £18</td>
+                <td class="p-3">—</td>
+                <td class="p-3 text-brand-light font-medium">£{site.price}</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">3 months</td>
+                <td class="p-3">£30 – £45</td>
+                <td class="p-3">~£12 / month</td>
+                <td class="p-3">On request via WhatsApp</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">6 months</td>
+                <td class="p-3">£50 – £75</td>
+                <td class="p-3">~£10 / month</td>
+                <td class="p-3">On request via WhatsApp</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">12 months</td>
+                <td class="p-3">£90 – £140</td>
+                <td class="p-3">~£8 – £11 / month</td>
+                <td class="p-3">On request via WhatsApp</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-sm text-text-muted italic">
+          Prices well outside these bands are worth questioning. Under £5/month usually means the
+          provider is not paying licensing costs; over £25/month is almost always a reseller markup.
+        </p>
+
+        <h2>The single smartest way to buy an IPTV subscription in the UK</h2>
+        <p>
+          Do not commit to 12 months on day one. The lowest-risk path — the one we recommend to
+          every friend, family member and customer who asks — is:
+        </p>
+        <ol>
+          <li>Start with a <a href="/#pricing">£{site.price} 30-day trial</a> on a device you already own (Fire Stick, phone, Smart TV).</li>
+          <li>Test all eight criteria above in the first two weeks. Focus on evening peak time.</li>
+          <li>Only then, if the service passed the test, upgrade to a longer plan at the annual price.</li>
+        </ol>
+        <p>
+          Total downside: £{site.price}. Upside: a year of properly-tested, working IPTV that you know
+          will hold up when it matters.
+        </p>
+
+        <h2>How to compare IPTV subscription providers side-by-side</h2>
+        <p>
+          The trap most buyers fall into is comparing marketing pages. Marketing pages are identical.
+          What you should compare is what happens in the app once you log in. Run our checklist on any
+          two providers during a trial and the honest one will pull ahead within an hour.
+        </p>
+        <p>
+          Not sure what a "portal" or "Xtream Codes login" means? Our
+          <a href="/blog/top-5-iptv-boxes-uk-2026/">IPTV boxes UK guide</a>
+          walks through how each of the popular apps handle login, EPG and playback.
+        </p>
+
+        <h2>Devices worth pairing with a good IPTV subscription</h2>
+        <ul>
+          <li><strong>Amazon Fire TV Stick 4K Max</strong> — the entry-level winner for most UK households.</li>
+          <li><strong>Formuler Z11 Pro Max</strong> — best portal experience if you want the very best EPG polish.</li>
+          <li><strong>Nvidia Shield TV Pro</strong> — the enthusiast choice, unbeatable UI speed.</li>
+          <li><strong>Samsung or LG Smart TV</strong> — install a native IPTV app directly, no extra hardware.</li>
+          <li><strong>Your existing phone or laptop</strong> — perfect for running a trial before you spend on hardware.</li>
+        </ul>
+        <p>
+          Every one of these has a full step-by-step walkthrough on our
+          <a href="/installation-guides/">installation guides page</a>.
+        </p>
+
+        <h2>Consumer protection when buying an IPTV subscription</h2>
+        <p>
+          Any UK purchase should be backed by <a href="https://www.gov.uk/consumer-protection-rights" target="_blank" rel="noopener noreferrer nofollow">standard UK consumer protection rights</a>,
+          a documented refund policy, and mainstream payment methods (which trigger card-issuer
+          chargeback protection if something goes wrong). If a provider does not offer any of these,
+          treat it as a hard "no" — no matter how attractive the channel list looks.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>The verdict</h2>
+        <p>
+          A great IPTV subscription in the UK is not the one with the biggest channel list on its
+          homepage — it is the one that stays fast, accurate and supported at 9 pm on a Saturday night.
+          The only way to find out which is which is to test. A £{site.price} 30-day trial is the
+          cheapest form of insurance you will ever buy against wasting £100+ on a bad annual plan.
+        </p>
+        <p>
+          Ready to try? <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Start the trial on WhatsApp</a>
+          and we will have you live in under 15 minutes.
+        </p>
+      </article>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Related guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedLinks.map((g) => (
+            <li>
+              <a href={g.href} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50">
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light shrink-0"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

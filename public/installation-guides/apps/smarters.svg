@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Smarters Player Lite">
+  <rect width="96" height="96" rx="20" fill="#0f1420"/>
+  <circle cx="48" cy="48" r="24" fill="none" stroke="#f97316" stroke-width="6"/>
+  <polygon points="42,36 42,60 62,48" fill="#f97316"/>
+</svg>

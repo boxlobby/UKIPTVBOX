@@ -4,7 +4,7 @@ import { site, waLink } from '../data/site';
 ---
 <section class="section">
   <div class="container-x">
-    <div class="relative overflow-hidden rounded-3xl border border-border-subtle bg-elevated p-8 sm:p-10 md:p-14 text-center">
+    <div class="grid-bg relative overflow-hidden rounded-3xl border border-border-subtle bg-elevated p-8 sm:p-10 md:p-14 text-center">
       <div class="absolute -top-32 left-1/2 h-72 w-[600px] -translate-x-1/2 rounded-full bg-brand/25 blur-3xl"></div>
       <div class="absolute -bottom-32 right-0 h-72 w-72 rounded-full bg-accent/20 blur-3xl"></div>
 
@@ -12,11 +12,14 @@ import { site, waLink } from '../data/site';
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold">
           Start your <span class="bg-grad-brand bg-clip-text text-transparent">{site.currencySymbol}{site.price}</span> IPTV UK trial today
         </h2>
-        <p class="mx-auto mt-4 max-w-xl text-text-muted text-sm sm:text-base">Activated in minutes. Cancel any time. No auto-renewal.</p>
+        <p class="mx-auto mt-4 max-w-xl !text-text-primary/90 text-sm sm:text-base leading-relaxed">
+          Unlock 50,000+ channels on the UK’s risk-free IPTV trial. Activated in minutes. No auto-renewal.
+          Test the full IPTV service before choosing a longer IPTV subscription.
+        </p>
 
         <div class="mt-8 flex justify-center">
-          <a href={waLink()} class="btn-primary px-8 py-4 text-base" rel="nofollow noopener">
-            Get My Trial — {site.currencySymbol}{site.price}
+          <a href={waLink()} class="btn-primary px-8 py-4 text-base" target="_blank" rel="nofollow noopener noreferrer">
+            Get My Trial, {site.currencySymbol}{site.price}
             <Icon name="arrow" size={18} />
           </a>
         </div>

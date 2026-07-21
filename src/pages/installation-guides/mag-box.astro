@@ -1,0 +1,598 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { site, waLink } from '../../data/site';
+
+const canonical = `${site.url}/installation-guides/mag-box/`;
+const ogImage = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/MAG_Box_IPTV_Setup_Guide_202607210428.jpeg';
+const publishedFmt = '20 July 2026';
+const updatedFmt = '20 July 2026';
+
+type App = {
+  slug: string;
+  name: string;
+  tag: 'free' | 'paid';
+  price?: string;
+  logo: string;
+  login: string;
+  supported: string;
+  activateUrl?: string;
+  copy: string;
+  steps: { title: string; body: string }[];
+  tips?: string[];
+};
+
+const apps: App[] = [
+  {
+    slug: 'auto-portal',
+    name: 'Auto-provisioned Stalker Portal',
+    tag: 'free',
+    price: 'Included with your iptv subscription',
+    logo: '/installation-guides/apps/mag.svg',
+    login: 'MAC address (WhatsApp us — we do the rest)',
+    supported: 'MAG 250 · 254 · 256 · 322 · 324 · 349 · 420 · 424 · 522 · 524',
+    copy: `The fastest MAG Box setup on the planet. You send us the MAC address printed on the sticker under your MAG (format 00:1A:79:XX:XX:XX), we register it against your iptv uk trial on our Stalker server, and 60 seconds later your box boots into a fully populated UK channel line-up — sports, films, series, EPG, catch-up, everything. Zero typing, zero risk of pasting the portal URL wrong. This is the default path we recommend to every new ${site.name} MAG customer.`,
+    steps: [
+      { title: 'Plug in your MAG and boot to the home menu', body: 'Connect the MAG to the TV via HDMI, plug in Ethernet (strongly recommended over Wi-Fi for MAG), power on. Wait for the "Home Menu" to appear.' },
+      { title: 'Read the MAC address from the sticker', body: 'Flip the MAG over. The sticker on the base shows a MAC address in the format 00:1A:79:XX:XX:XX. Photograph it — it uniquely identifies your box on our iptv service.' },
+      { title: 'WhatsApp us the MAC + your order name', body: 'Send us the MAC address and the name your iptv trial was ordered under. Our team whitelists it on our Stalker portal and pushes your personal playlist within about 10 minutes.' },
+      { title: 'Reboot the MAG', body: 'On the MAG remote hit the Menu button → Reboot Portal (or unplug and re-plug the power for 10 seconds). No settings to change — our server has already done the work.' },
+      { title: 'Start watching', body: 'Your channel grid appears grouped by category — UK, entertainment, sports, movies, series, kids, international. Use the number keys on the remote to jump straight to a favourite.' },
+    ],
+    tips: ['This method requires zero configuration on your side — if you\'re not confident with menus, this is the only setup path you need.'],
+  },
+  {
+    slug: 'manual-portal',
+    name: 'Manual Portal 1 setup',
+    tag: 'free',
+    price: 'Free',
+    logo: '/installation-guides/apps/mag.svg',
+    login: 'Stalker Portal URL (typed into Settings → Servers)',
+    supported: 'MAG 254 · 256 · 322 · 324 · 420 · 424 · 522 · 524',
+    copy: `The classic MAG setup that every provider documents. You enter the Stalker Portal URL yourself into Portal 1 on the MAG, save, and reboot the portal. Use this method if you want your MAG configured before you contact us — perfect for a same-day iptv uk trial where you already have the portal URL from your welcome email.`,
+    steps: [
+      { title: 'Open System settings → Servers', body: 'From the MAG home menu press Settings on the remote → System settings → Servers → Portals.' },
+      { title: 'Name Portal 1', body: 'Set "Portal 1 name" to something memorable, e.g. IPTV UK. Leave Portal 2 empty for now (it can host your M3U later).' },
+      { title: 'Paste the Stalker Portal URL', body: `Set "Portal 1 URL" to the exact URL we send in your welcome message — typical format http://server.${site.name.toLowerCase().replace(/\s/g, '')}.tv:8080/stalker_portal/c/. Case-sensitive; one wrong character breaks the portal.` },
+      { title: 'Save with OK, then EXIT', body: 'Press OK to save. Hit EXIT twice to return to the home menu. The MAG will prompt you to reboot the portal — accept.' },
+      { title: 'Confirm channels load', body: 'The portal reloads and your channel categories appear. If it hangs on "Loading portal…", double-check the MAC has been whitelisted on our side (WhatsApp us the MAC).' },
+    ],
+    tips: ['Portal URLs are case-sensitive — capital "C" at the end of /stalker_portal/c/ matters on some MAG firmware versions.'],
+  },
+  {
+    slug: 'm3u-playlist',
+    name: 'M3U playlist (Portal 2 or IPTV app)',
+    tag: 'free',
+    price: 'Free',
+    logo: '/installation-guides/apps/m3u.svg',
+    login: 'M3U URL (loaded via IPTV app menu)',
+    supported: 'MAG 322 · 324 · 420 · 424 · 522 · 524',
+    copy: `Some MAG models (particularly newer 4xx / 5xx boxes) ship with a built-in "IPTV" app that reads M3U playlists directly — no Stalker portal required. This is our recommended backup method: if the Stalker portal is ever blocked by your ISP, the M3U playlist route almost always still works. Same iptv subscription credentials on our side.`,
+    steps: [
+      { title: 'Request your M3U URL from us', body: 'WhatsApp us and ask for the M3U version of your playlist. We generate a personal M3U URL tied to your iptv subscription and send it back within minutes.' },
+      { title: 'Open the built-in IPTV app', body: 'On the MAG home menu scroll to the "IPTV" tile (or "IPTV Channels" on older firmware). Open it.' },
+      { title: 'Add a playlist source', body: 'Menu → Settings → Playlists → Add. Choose "External playlist (URL)". Name it "IPTV UK M3U".' },
+      { title: 'Paste the M3U URL', body: 'Enter the full M3U URL we sent — usually starts http:// and ends with .m3u or .m3u8. Save.' },
+      { title: 'Reload and browse', body: 'Return to the IPTV app main screen — your full channel list loads. Channel categories are inferred from the M3U group-title tags.' },
+    ],
+    tips: ['If the built-in IPTV app can\'t reach your M3U, try adding it into Portal 2 slot instead (Settings → System settings → Servers → Portals → Portal 2 URL) — some MAG firmware routes M3U through Portal 2 more reliably.'],
+  },
+  {
+    slug: 'ministra',
+    name: 'Ministra TV (custom middleware)',
+    tag: 'paid',
+    price: 'Free with our iptv service',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/big_logo.png',
+    login: 'Ministra portal URL (same MAC whitelisting)',
+    supported: 'MAG 322 · 324 · 420 · 424 · 522 · 524',
+    copy: `Ministra TV is the modern successor to the classic Stalker middleware — better EPG rendering, catch-up TV up to 7 days, and a much more responsive UI on newer MAG boxes. Every ${site.name} iptv subscription is compatible with Ministra out of the box; you just enter the Ministra portal URL instead of the classic Stalker one. Best-in-class experience on MAG 522 / 524.`,
+    steps: [
+      { title: 'Ask us for the Ministra portal URL', body: 'WhatsApp us and request the Ministra portal URL for your account. It looks similar to the Stalker URL but ends /stalker_portal/c/ministra.php or /ministra/c/ depending on server.' },
+      { title: 'Open Portals settings', body: 'MAG → Settings → System settings → Servers → Portals.' },
+      { title: 'Paste into Portal 1', body: 'Replace your existing Portal 1 URL with the Ministra URL. Save.' },
+      { title: 'Reboot the portal', body: 'Return to home menu, wait for the portal to reload. The Ministra interface loads with a new sidebar layout and richer EPG.' },
+      { title: 'Enable catch-up', body: 'Inside Ministra, press MENU on any channel that has a catch-up icon (usually a rewind arrow) — you can rewind up to 7 days on supported UK channels.' },
+    ],
+    tips: ['Ministra is much more sensitive to slow internet than Stalker. If the portal loads slowly, switch from Wi-Fi to Ethernet — usually solves it instantly on MAG.'],
+  },
+];
+
+const faqs = [
+  {
+    q: 'Which MAG boxes does this guide work with in 2026?',
+    a: `Every MAG box we ship an iptv subscription for — MAG 250, 254, 256, 322, 324, 349, 420, 424, 522 and 524. All four setup methods above work on the newer 322+ models; the 250/254/256 are Stalker-only. Every ${site.name} iptv trial customer using a MAG box follows one of these four paths on day one.`,
+  },
+  {
+    q: 'Do I have to send you my MAC address?',
+    a: 'Yes — MAG boxes identify themselves to our Stalker server by MAC address, so nothing works until we whitelist that MAC on our side. It\'s a 30-second WhatsApp message with the MAC printed on the sticker under your box. This is the same process every UK IPTV provider uses for every iptv service that supports MAG.',
+  },
+  {
+    q: 'Ethernet or Wi-Fi on MAG?',
+    a: 'Always Ethernet if you can — MAG boxes have famously weak built-in Wi-Fi antennas that struggle with HD and 4K bitrates. If you must use Wi-Fi, sit within about 3 metres of your router. We rejected more support tickets for "buffering" on MAG boxes running Wi-Fi than for any other issue on our iptv subscriptions.',
+  },
+  {
+    q: 'What\'s the difference between Stalker Portal and Ministra TV?',
+    a: `Stalker is the classic MAG middleware that's been standard since MAG 250 — reliable and boring. Ministra is the modern successor built by the same company (Infomir), with a nicer EPG, catch-up TV up to 7 days, and a more responsive UI. Both work with the same ${site.name} iptv uk trial credentials on our side; you just paste a different portal URL. Ministra is our default on MAG 522/524.`,
+  },
+  {
+    q: 'Can I use the same iptv subscription on my MAG and other devices?',
+    a: `Yes. One ${site.name} iptv subscription covers every device you own — MAG box, Fire Stick, Apple TV, Smart TV, phone, tablet. On MAG you use MAC whitelisting; on other devices you use the Xtream Codes username, password and server URL that came in the same welcome message. See our Fire Stick and Apple TV installation guides for those paths.`,
+  },
+  {
+    q: 'My MAG says "Loading portal" forever — what do I do?',
+    a: `Three things to check, in order: (1) the MAC you sent us matches the sticker exactly (letters case-sensitive on older MAG firmware); (2) the Portal 1 URL is pasted with no leading/trailing spaces; (3) you're on Ethernet, not Wi-Fi. If all three are right, WhatsApp us the MAC and we'll ping your box from our end. Every ${site.name} iptv subscription includes free MAG setup support.`,
+  },
+  {
+    q: 'How long does the MAG IPTV setup take?',
+    a: `Under 5 minutes for the auto-portal method — you send us the MAC on WhatsApp, we whitelist it, you reboot the portal. Under 10 minutes for the manual Portal 1 method (typing a URL on a MAG remote is slower than it looks). Every ${site.name} iptv trial customer with a MAG is watching UK channels within one WhatsApp exchange.`,
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Installation Guides', item: `${site.url}/installation-guides/` },
+        { '@type': 'ListItem', position: 3, name: 'MAG Box', item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: 'How to set up IPTV on a MAG Box (250, 254, 322, 420, 524) — 2026 guide',
+      description: 'Complete MAG Box IPTV setup guide for MAG 250, 254, 256, 322, 324, 420, 424, 522 and 524. Covers auto-provisioned Stalker Portal, manual portal entry, M3U playlist and Ministra TV — all working with your iptv uk trial.',
+      image: ogImage,
+      author: { '@type': 'Organization', name: `${site.name} Editorial`, url: site.url },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: '2026-07-20',
+      dateModified: '2026-07-20',
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Installation Guides',
+      keywords: 'iptv trial, iptv uk trial, iptv subscriptions, iptv subscription, iptv service, mag box iptv, mag 322, mag 524, stalker portal, ministra tv, mag box setup',
+    },
+    {
+      '@type': 'HowTo',
+      name: 'How to set up IPTV on a MAG Box',
+      totalTime: 'PT5M',
+      step: apps.flatMap((app) => app.steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        name: `${app.name} — ${s.title}`,
+        text: s.body,
+        position: i + 1,
+      }))),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedGuides = [
+  { slug: 'firestick', label: 'Set up IPTV on Fire Stick', device: 'Fire Stick' },
+  { slug: 'smart-tv', label: 'Set up IPTV on Smart TV', device: 'Smart TV' },
+  { slug: 'enigma2-formuler', label: 'Set up IPTV on Enigma2 & Formuler', device: 'Enigma2' },
+  { slug: 'apple-tv', label: 'Set up IPTV on Apple TV', device: 'Apple TV' },
+];
+---
+<BaseLayout
+  title={`MAG Box IPTV setup — 4 methods for MAG 254, 322, 420 & 524 (2026) | ${site.name}`}
+  description="Complete MAG Box IPTV setup guide for MAG 254, 322, 420, 524 and every model in between. Step-by-step Stalker Portal, Ministra TV, M3U playlist and auto-provisioned MAC whitelisting — all working with your iptv uk trial."
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/installation-guides/" class="hover:text-brand-light">Installation Guides</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">MAG Box</span>
+        </nav>
+
+        <div class="mt-6 flex items-center gap-4">
+          <span class="flex h-14 w-14 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand-light">
+            <Icon name="router" size={28} />
+          </span>
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">
+              5 min read · Step-by-step
+            </p>
+            <span class="eyebrow mt-1 block">MAG 254 → MAG 524 setup</span>
+          </div>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          MAG Box IPTV — 4 setup methods for MAG 254, 322, 420 &amp; 524 (2026)
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          MAG boxes are the original dedicated <strong>IPTV</strong> hardware in the UK — no
+          Android layer, no sideloading, no app store; just fast, purpose-built middleware. This
+          guide covers the four setup methods we support on every MAG 250, 254, 256, 322, 324,
+          349, 420, 424, 522 and 524 — from the 60-second auto-provisioned Stalker Portal (our
+          default) to the manual Portal 1 method and modern Ministra TV. All work with our
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I'd like to start my £${site.price} IPTV trial on my MAG box.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} IPTV trial
+          </a>
+          <a href="#apps" class="btn-secondary">Choose a setup method</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/MAG_Box_IPTV_Setup_Guide_202607210428.jpeg"
+            alt="MAG Box IPTV setup — Stalker Portal and Ministra TV on MAG 254, 322 and 524"
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-auto"
+            onerror="this.src='/installation-guides/smart-tv-hero.svg'"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Every <strong>MAG box</strong> ever sold — from the ageing MAG 250 to the flagship
+          MAG 524 — can run <strong>IPTV</strong> in under 5 minutes because the middleware is
+          already built into the firmware. There's nothing to install; you either send us the
+          MAC address and we push a playlist to your box, or you paste a portal URL yourself.
+          Every method below works with the same MAC whitelisting on our side, so you can start
+          a <strong>iptv trial</strong> and swap methods later without losing anything.
+        </p>
+
+        <p>Short on time? The three methods that cover 95% of MAG setups:</p>
+        <ul>
+          <li><a href="#auto-portal"><strong>Auto-provisioned Stalker Portal</strong></a> — you send us the MAC, we do the rest (recommended)</li>
+          <li><a href="#manual-portal"><strong>Manual Portal 1 setup</strong></a> — paste the Stalker URL yourself</li>
+          <li><a href="#ministra"><strong>Ministra TV</strong></a> — modern middleware with catch-up TV on MAG 522/524</li>
+        </ul>
+      </article>
+
+      <!-- Ethernet callout -->
+      <div class="mt-10 rounded-2xl border border-brand/25 bg-brand/5 p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-light">
+            <Icon name="sparkles" size={16} />
+          </span>
+          <div class="min-w-0">
+            <p class="font-semibold text-text-primary">Before you start: use Ethernet</p>
+            <p class="mt-2 text-sm text-text-muted leading-relaxed">
+              MAG boxes are notorious for
+              <span class="text-brand-light font-medium">weak built-in Wi-Fi</span> — the antenna
+              is fine for SD but stutters on HD and buckles on 4K. Every method below assumes
+              Ethernet. If you can't run a cable, sit within 3 m of your router and expect the
+              occasional buffer. This single change resolves more MAG support tickets than any
+              other tweak on our iptv service.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- App selector list -->
+      <h2 id="apps" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        Choose a setup method
+      </h2>
+      <p class="mt-3 text-text-muted">
+        Tap any method to jump to its full step-by-step MAG Box IPTV setup.
+      </p>
+      <ul class="mt-6 space-y-3">
+        {apps.map((app) => (
+          <li>
+            <a
+              href={`#${app.slug}`}
+              class="card group flex items-center gap-4 p-4 transition hover:border-brand/50"
+            >
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="48"
+                height="48"
+                loading="lazy"
+                decoding="async"
+                class="h-12 w-12 shrink-0 rounded-xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-base font-semibold text-text-primary group-hover:text-brand-light">{app.name}</span>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Included</span>
+                  )}
+                  {app.price && (
+                    <span class="rounded-full border border-border-subtle bg-elevated/60 px-2 py-0.5 text-[10px] text-text-muted">
+                      {app.price}
+                    </span>
+                  )}
+                </div>
+                <p class="mt-1 text-xs text-text-muted line-clamp-1">{app.supported}</p>
+              </div>
+              <span class="text-brand-light shrink-0"><Icon name="chevron-right" size={18} /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Per-app deep cards -->
+      <div class="mt-14 space-y-14">
+        {apps.map((app, idx) => (
+          <article id={app.slug} class="card p-6 md:p-8 scroll-mt-24">
+            <div class="flex items-start gap-4">
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+                class="h-16 w-16 md:h-[72px] md:w-[72px] shrink-0 rounded-2xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">
+                    Method {idx + 1} of {apps.length}
+                  </p>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Included</span>
+                  )}
+                </div>
+                <h2 class="mt-1 font-display text-2xl md:text-[28px] font-bold text-text-primary">
+                  {app.name}
+                </h2>
+                {app.price && (
+                  <p class="mt-1 text-sm text-text-muted">{app.price}</p>
+                )}
+              </div>
+            </div>
+
+            <p class="mt-6 text-text-muted leading-relaxed">{app.copy}</p>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Log in via</p>
+                <p class="mt-1 text-sm text-text-primary">{app.login}</p>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Supported models</p>
+                <p class="mt-1 text-sm text-text-primary">{app.supported}</p>
+              </div>
+            </div>
+
+            <h3 class="mt-8 font-display text-lg md:text-xl font-semibold text-text-primary">Step-by-step</h3>
+            <ol class="mt-4 space-y-4">
+              {app.steps.map((s, i) => (
+                <li class="flex gap-4">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold text-white shadow-glow">
+                    {i + 1}
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm md:text-base font-semibold text-text-primary">{s.title}</p>
+                    <p class="mt-1 text-sm text-text-muted leading-relaxed">{s.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            {app.tips && app.tips.length > 0 && (
+              <div class="mt-6 rounded-xl border border-brand/25 bg-brand/5 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">Tip</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {app.tips.map((t) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center text-brand-light">
+                        <Icon name="check" size={14} />
+                      </span>
+                      <span set:html={t}></span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href={waLink(`Hi, I'd like to set up my MAG box using ${app.name} with your £${site.price} IPTV trial.`)}
+                class="btn-primary"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                WhatsApp us my MAC
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Comparison -->
+      <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        MAG Box setup methods — side-by-side
+      </h2>
+      <p class="mt-3 text-text-muted">All four methods at a glance.</p>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-elevated/70 text-text-primary">
+            <tr>
+              <th class="p-3 font-semibold">Method</th>
+              <th class="p-3 font-semibold">Difficulty</th>
+              <th class="p-3 font-semibold">Setup time</th>
+              <th class="p-3 font-semibold">Login</th>
+              <th class="p-3 font-semibold">Cost</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-muted">
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">Auto-provisioned Stalker Portal</td>
+              <td class="p-3">Beginner</td>
+              <td class="p-3">≈ 1 min</td>
+              <td class="p-3">MAC (we handle it)</td>
+              <td class="p-3">Included</td>
+            </tr>
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">Manual Portal 1 setup</td>
+              <td class="p-3">Intermediate</td>
+              <td class="p-3">≈ 5 min</td>
+              <td class="p-3">Portal URL (typed)</td>
+              <td class="p-3">Free</td>
+            </tr>
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">M3U playlist</td>
+              <td class="p-3">Intermediate</td>
+              <td class="p-3">≈ 5 min</td>
+              <td class="p-3">M3U URL</td>
+              <td class="p-3">Free</td>
+            </tr>
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">Ministra TV</td>
+              <td class="p-3">Intermediate</td>
+              <td class="p-3">≈ 5 min</td>
+              <td class="p-3">Ministra URL</td>
+              <td class="p-3">Included</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Buyer's guide -->
+      <article class="legal-prose mt-16">
+        <h2>Which MAG setup method should I actually use?</h2>
+        <p>
+          If you want the shortest possible answer: send us the MAC and use the
+          <strong>auto-provisioned Stalker Portal</strong>. It's the fastest, most reliable
+          setup and it's what every {site.name} MAG customer uses by default. Only step up to
+          <strong>Ministra TV</strong> if you own a MAG 522 or 524 and want the modern EPG and
+          catch-up TV interface. The M3U playlist method is a useful fallback if your ISP ever
+          blocks the Stalker portal.
+        </p>
+
+        <h3>MAG 250 / 254 / 256 owners</h3>
+        <p>
+          These older MAGs only support the classic Stalker Portal — no Ministra, no M3U app.
+          Use the auto-provisioned method: send us the MAC and reboot the portal. Skip 4K
+          streams entirely as these boxes cap out at 1080p and struggle with high-bitrate feeds
+          on our iptv subscriptions.
+        </p>
+
+        <h3>MAG 322 / 324 / 349 owners</h3>
+        <p>
+          The middle-generation MAGs handle Stalker, Ministra and M3U equally well. This is the
+          sweet-spot MAG for a UK <strong>iptv service</strong> — cheap secondhand, still
+          responsive, plenty for 1080p sport and film on any <strong>iptv subscription</strong>.
+        </p>
+
+        <h3>MAG 420 / 424 / 522 / 524 owners</h3>
+        <p>
+          Flagship MAGs with 4K HEVC hardware decode. Use Ministra TV to get the full modern
+          interface with catch-up TV, then hard-wire Ethernet — the difference over Wi-Fi is
+          night and day on 4K UK sport channels included with our
+          <strong>iptv subscriptions</strong>.
+        </p>
+
+        <h2>Try our IPTV UK trial on any MAG box</h2>
+        <p>
+          Every method on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a> —
+          same MAC whitelisting, same UK support on WhatsApp. Your MAC address is registered
+          the instant you send it to us on WhatsApp, and one set of credentials from your
+          <strong>iptv subscriptions</strong> works across MAG, Fire Stick, Apple TV, Smart TV,
+          phone and tablet.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <!-- FAQ -->
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- Help card -->
+      <aside class="mt-14 card p-6 md:p-8">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-text-muted">Stuck?</p>
+        <h2 class="mt-2 font-display text-2xl font-semibold text-text-primary">We'll set your MAG up for you</h2>
+        <p class="mt-3 text-text-muted">
+          Every {site.name} subscription includes free hands-on MAG setup support. WhatsApp us
+          the MAC address printed under your MAG and we'll whitelist it, push your playlist and
+          confirm when it's live — usually within 10 minutes.
+        </p>
+        <div class="mt-6">
+          <a href={waLink(`Hi, I need help setting up IPTV on my MAG box. My MAC is:`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            <Icon name="whatsapp" size={16} class="mr-2" />
+            Chat with UK support
+          </a>
+        </div>
+      </aside>
+
+      <!-- Related guides -->
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Other installation guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedGuides.map((g) => (
+            <li>
+              <a
+                href={`/installation-guides/${g.slug}/`}
+                class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"
+              >
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { guides } from '../../data/guides';
+import { site, waLink } from '../../data/site';
+
+const canonical = `${site.url}/installation-guides/`;
+
+const faqItems = [
+  {
+    q: 'Which device is easiest to set up IPTV on?',
+    a: 'Amazon Fire Stick is the easiest device for most UK households. Install the Downloader app, sideload IPTV Smarters Pro, enter your Xtream Codes credentials and you are watching channels in under 5 minutes. Mobile phones (Android or iPhone) are the second quickest — IPTV Smarters Pro is available directly in the Google Play and App Store.',
+  },
+  {
+    q: 'Do I need to download anything to watch IPTV?',
+    a: 'Yes — you need a free IPTV player app on your device. IPTV Smarters Pro works on Fire Stick, Android, iOS, Windows and Mac. Smart TVs use XOTT, IBO Player Pro or Smarters Player Lite from the TV store. MAG boxes and Formuler use their built-in portal. All apps are free to install and compatible with our IPTV UK trial credentials.',
+  },
+  {
+    q: 'How long does IPTV setup take?',
+    a: 'Between 3 and 10 minutes depending on the device. Fire Stick takes about 5 minutes including the sideload step. Smart TV setup (via MAC upload) takes 5–10 minutes because our team processes the MAC. Mobile and Windows/Mac setups take around 3 minutes — direct Xtream Codes login, no MAC required.',
+  },
+  {
+    q: 'Which IPTV app works on the most devices?',
+    a: 'IPTV Smarters Pro covers the widest range — Fire Stick, Android TV, Android phone, iPhone, iPad, Windows, Mac and some Samsung Tizen TVs. TiviMate is the best choice for Android TV (Nvidia Shield, Formuler) but is not available on iOS. For Smart TVs without the Play Store, IBO Player Pro or XOTT are the best alternatives.',
+  },
+  {
+    q: 'Can I use IPTV on more than one device at the same time?',
+    a: 'Our standard IPTV trial includes one simultaneous connection. You can install the app on multiple devices but only stream on one at a time. A second connection is available on request — message us on WhatsApp after you sign up.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Installation Guides', item: canonical },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': canonical + '#faq',
+      mainEntity: faqItems.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+---
+<BaseLayout
+  title={`IPTV Installation Guides — Set Up on Any Device | ${site.name}`}
+  description="Step-by-step IPTV installation guides for Smart TVs, Fire Stick, Apple TV, MAG boxes, Nvidia Shield, Enigma2, mobile and desktop. Set up in under 5 minutes."
+  canonical={canonical}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-16 pb-12 md:pt-24 md:pb-16 max-w-3xl text-center mx-auto">
+        <span class="eyebrow">Installation Guides</span>
+        <h1 class="mt-5 font-display text-4xl md:text-5xl font-bold tracking-tight text-text-primary">
+          Set up IPTV on <span class="text-brand-light">any device</span> in minutes
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Pick your device below to open a step-by-step guide. Every article uses the same activation
+          credentials we send you after purchase, no technical knowledge required.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href={waLink()} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Get my trial, {site.currencySymbol}{site.price}
+          </a>
+          <a href="/#faq" class="btn-secondary">Have a question?</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Device grid -->
+    <section class="section">
+      <div class="container-x">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {guides.map((g) => (
+            <li>
+              <a
+                href={`/installation-guides/${g.slug}/`}
+                class="group card block h-full p-6 sm:p-7 transition duration-200 hover:border-brand/50 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(27,198,255,0.45)]"
+                aria-label={`${g.device} installation guide`}
+              >
+                <div class="flex items-start gap-4">
+                  <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand-light transition group-hover:bg-brand/15 group-hover:border-brand/40">
+                    <Icon name={g.icon} size={24} />
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">{g.readMinutes} min read</p>
+                    <h2 class="mt-1 text-lg font-semibold text-text-primary group-hover:text-brand-light transition-colors">
+                      {g.device}
+                    </h2>
+                  </div>
+                </div>
+                <p class="mt-4 text-sm text-text-muted line-clamp-3">{g.summary}</p>
+                <span class="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-brand-light">
+                  Read guide
+                  <Icon name="arrow" size={14} class="transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ section -->
+    <section class="section border-t border-border-subtle">
+      <div class="container-x max-w-3xl">
+        <div class="text-center mb-10">
+          <span class="eyebrow">Common questions</span>
+          <h2 class="mt-4 text-2xl sm:text-3xl font-bold text-text-primary">IPTV installation FAQ</h2>
+        </div>
+        <div class="space-y-3">
+          {faqItems.map((f) => (
+            <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+                <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+                <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                  <Icon name="chevron-down" size={14} />
+                </span>
+              </summary>
+              <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

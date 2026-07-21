@@ -1,0 +1,48 @@
+---
+import { site } from '../data/site';
+
+const sections = [
+  {
+    title: 'Why Is IPTV So Popular in the UK?',
+    body: 'Thousands of UK households are making the switch to IPTV every month. The appeal is straightforward: you get access to over 50,000 live TV channels, covering UK and international sports, entertainment, news, documentaries and kids categories, plus a huge library of movies and TV series on demand, all for a fraction of what traditional providers charge. With a genuine 30-day IPTV UK trial from just ' + site.currencySymbol + site.price + ' and no contracts or auto-renewals, there is no commitment and no risk.',
+  },
+  {
+    title: 'How Does Our IPTV UK Trial Work?',
+    body: 'Getting started takes under 5 minutes. Choose the 30-day trial, receive your login credentials instantly on WhatsApp and email, then sign in on any compatible device. Our service works on Smart TVs, Fire Sticks, Android phones and tablets, iPhones and iPads, Windows and Mac computers, MAG boxes, Formuler, Nvidia Shield, Apple TV and Enigma2 receivers, all backed by anti-buffer UK & EU servers with 99.9% uptime and instant activation.',
+  },
+  {
+    title: 'Is IPTV Legal in the UK?',
+    body: 'IPTV technology itself is completely legal. Most major broadcasters and streaming platforms use IPTV to deliver their content. Legality depends on the source of the streams and the licensing arrangements of the provider. We recommend using an IPTV trial to complement your existing subscriptions and to comply with the content rules that apply in your region.',
+  },
+  {
+    title: 'What Makes Our UK IPTV Trial Different?',
+    body: 'No tiers, no upsells, no auto-renewal. Just the cheapest UK IPTV trial with the full lineup, live sports, movies, series, kids, news and international channels in 4K UHD, FHD and HD. Backed by 24/7 UK-hours WhatsApp support and a real refund window, so you can try the whole service risk-free before committing to anything longer.',
+  },
+];
+---
+<section id="about-iptv" class="section">
+  <div class="container-x">
+    <div class="mx-auto max-w-4xl text-center">
+      <span class="eyebrow">About IPTV</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+        What Is IPTV and Why Are <span class="bg-grad-brand bg-clip-text text-transparent">UK Viewers Switching?</span>
+      </h2>
+    </div>
+
+    <div class="mx-auto mt-10 md:mt-12 max-w-3xl">
+      <p class="text-text-muted text-base leading-relaxed">
+        IPTV (Internet Protocol Television) is a modern way to watch live TV, movies and series over the internet instead of through traditional cable or satellite. Unlike traditional cable and satellite TV packages, IPTV delivers content directly through your broadband connection to any compatible device, giving you more channels, more flexibility and significantly lower costs.
+      </p>
+
+      {sections.map((s) => (
+        <div class="mt-10">
+          <h3 class="flex items-start gap-3 text-xl sm:text-2xl font-bold text-text-primary">
+            <span class="mt-1 inline-block h-6 w-[3px] rounded-sm bg-brand-light shrink-0"></span>
+            <span>{s.title}</span>
+          </h3>
+          <p class="mt-4 pl-6 text-text-muted text-base leading-relaxed">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

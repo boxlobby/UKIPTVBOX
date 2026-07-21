@@ -1,0 +1,128 @@
+---
+import Placeholder from './Placeholder.astro';
+
+// Bento grid, swap `src` on each Placeholder for R2 URLs when ready.
+const cards = [
+  {
+    title: 'Live Action',
+    body: 'Enjoy fast access to live events, premium channels, and high-energy viewing.',
+    badge: '4K QUALITY',
+    label: 'Live Action',
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp',
+    alt: 'Men watching a live football match on an IPTV trial UK service in stunning 4K quality',
+    area: 'live',
+  },
+  {
+    title: 'Smooth Playback',
+    body: 'Built for speed, stability, and a better streaming experience.',
+    label: 'Smooth Playback',
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Couple_watching_TV_on_couch_202607200432.webp',
+    alt: 'Couple enjoying smooth buffer-free streaming on an IPTV subscription UK service from their sofa',
+    area: 'smooth',
+  },
+  {
+    title: 'VPN Protection',
+    body: 'Stream privately and securely with built-in VPN-friendly access, your connection stays yours.',
+    badge: 'PRIVATE & SECURE',
+    label: 'VPN Protection',
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Woman_using_tablet_in_bed_202607200436.webp',
+    alt: 'Woman streaming IPTV service UK privately on a tablet with VPN-friendly secure access',
+    area: 'multi',
+  },
+  {
+    title: 'Endless VOD',
+    body: 'Explore a huge collection of movies, series, and on-demand entertainment in one place.',
+    badge: 'UPDATED DAILY',
+    label: 'Endless VOD',
+    src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Children_watching_TV_screen_202607200435.webp',
+    alt: 'Family enjoying an endless VOD library of movies and series on an IPTV subscription service',
+    area: 'vod',
+  },
+];
+---
+<section id="bento" class="section grid-bg">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">A better way to watch</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+        Everything you enjoy, with a smoother way to watch.
+      </h2>
+    </div>
+
+    <div class="bento mt-10 sm:mt-14" data-reveal-group>
+      {cards.map((c) => (
+        <article class={`bento-card bento-${c.area} group`}>
+          <Placeholder
+            label={c.label}
+            src={c.src || undefined}
+            alt={c.alt}
+            aspect=""
+            class="!absolute !inset-0 !rounded-none !border-0 h-full w-full"
+            width={800}
+            height={600}
+          />
+          <div class="bento-overlay"></div>
+          <div class="relative z-10 flex h-full flex-col justify-end p-6 sm:p-7 md:p-8">
+            {c.badge && (
+              <span class="mb-3 inline-flex w-fit items-center rounded-md bg-brand px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest text-white shadow-glow">
+                {c.badge}
+              </span>
+            )}
+            <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">{c.title}</h3>
+            <p class="mt-2 max-w-md text-sm sm:text-base text-text-muted">{c.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  .bento-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(30, 39, 64, 0.9);
+    background: #0F1730;
+    min-height: 260px;
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 300ms ease;
+  }
+  .bento-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(27, 198, 255, 0.6);
+  }
+  .bento-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(10, 15, 30, 0.92) 0%, rgba(10, 15, 30, 0.55) 45%, rgba(10, 15, 30, 0.15) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .bento-live    { min-height: 300px; }
+  .bento-smooth  { min-height: 260px; }
+  .bento-multi   { min-height: 260px; }
+  .bento-vod     { min-height: 300px; }
+
+  @media (min-width: 768px) {
+    .bento {
+      gap: 1.25rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(260px, 1fr));
+      grid-template-areas:
+        'live live vod'
+        'smooth multi vod';
+    }
+    .bento-live   { grid-area: live;   min-height: 340px; }
+    .bento-smooth { grid-area: smooth; min-height: 300px; }
+    .bento-multi  { grid-area: multi;  min-height: 300px; }
+    .bento-vod    { grid-area: vod;    min-height: auto; }
+  }
+</style>

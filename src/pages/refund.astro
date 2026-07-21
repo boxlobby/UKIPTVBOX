@@ -1,14 +1,61 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../data/site';
 ---
-<BaseLayout title="Refund Policy | IPTV Trial" description="Our refund policy." noIndex includeSchema={false}>
-  <Header />
-  <main id="main" class="container-x py-24 max-w-3xl mx-auto">
-    <span class="eyebrow">Refunds</span>
-    <h1 class="mt-6 text-4xl md:text-5xl font-bold">Refund Policy</h1>
-    <p class="mt-6 text-text-muted">Full refund policy coming soon. If the service isn’t working on your setup and we can’t resolve it, we offer a refund within the first 24 hours of activation.</p>
-  </main>
-  <Footer />
-</BaseLayout>
+<LegalLayout
+  title="Refund Policy"
+  description="Our 7-day refund policy, how it works, when you're eligible and how to request a refund from IPTV Trial."
+  eyebrow="Refunds"
+  heading="Refund Policy"
+  intro="We stand behind the quality of our service. If something isn’t working and our team can’t fix it for you, this policy explains exactly when and how you can get your money back."
+  updated="July 2026"
+>
+  <h2>1. 7-Day Refund Window</h2>
+  <p>
+    {site.name} offers a <strong>7-day refund window</strong> on all subscriptions. Refunds are only issued when you are <strong>not satisfied with the service</strong> and our support team has been <strong>unable to resolve the issue</strong> for you. This ensures every request is genuinely rooted in a service problem we could not fix.
+  </p>
+
+  <h2>2. Eligibility for a Refund</h2>
+  <p>You may request a refund within 7 days of purchase only if <strong>both</strong> of the following apply:</p>
+  <ul>
+    <li>You are not satisfied with the service.</li>
+    <li>You have contacted our support team and we have been unable to resolve the issue you reported.</li>
+  </ul>
+  <p>
+    This policy is offered in addition to your statutory rights under the <strong>UK Consumer Rights Act 2015</strong> and the <strong>Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013</strong>.
+  </p>
+
+  <h2>3. How to Request a Refund</h2>
+  <ol>
+    <li>Contact our support team by email at <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> or by phone at <a href="tel:+447441346459">+44 7441 346459</a> within the 7-day window.</li>
+    <li>Provide your order reference and a clear description of the issue you are experiencing.</li>
+    <li>Allow our team a reasonable opportunity to diagnose and attempt to resolve the issue.</li>
+    <li>If we are unable to resolve the issue and a refund is approved, expect it to be processed within <strong>5–7 business days</strong> back to your original payment method.</li>
+  </ol>
+
+  <h2>4. Refund Exceptions</h2>
+  <p>Refunds will <strong>not</strong> be issued in the following cases:</p>
+  <ul>
+    <li>The request is made after the 7-day window has expired.</li>
+    <li>You have not given our support team the opportunity to attempt to resolve the issue.</li>
+    <li>The issue has been resolved by our team or is capable of being resolved with our assistance.</li>
+    <li>The account has been terminated for a breach of our <a href="/terms">Terms of Service</a>.</li>
+    <li>The same subscription has already received a refund in a previous billing cycle.</li>
+    <li>The issue relates to third-party hardware, your internet connection or ISP restrictions outside our control.</li>
+  </ul>
+
+  <h2>5. Processing Time</h2>
+  <p>
+    Once approved, refunds are typically completed within 5–7 business days. The exact time it takes to appear on your statement depends on your bank or card issuer. For cryptocurrency payments, refunds are issued in the equivalent value at the time of the original transaction.
+  </p>
+
+  <h2>6. Changes to This Policy</h2>
+  <p>
+    We may update this Refund Policy from time to time to reflect changes in our service or legal obligations. The most current version will always be available on this page with an updated “Last updated” date.
+  </p>
+
+  <h2>7. Contact Information</h2>
+  <p>
+    To start a refund request or ask a question about this policy, contact us at <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> or <a href="tel:+447441346459">+44 7441 346459</a>.
+  </p>
+</LegalLayout>

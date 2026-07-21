@@ -1,0 +1,150 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../data/site';
+---
+<LegalLayout
+  title="DMCA Policy & Copyright Compliance"
+  description="How IPTV Trial handles Digital Millennium Copyright Act (DMCA) notices, takedown requests, counter-notifications and repeat-infringer complaints."
+  eyebrow="DMCA"
+  heading="DMCA Policy & Copyright Compliance"
+  intro="We respect the rights of copyright holders and take Digital Millennium Copyright Act (DMCA) complaints seriously. This page explains exactly how to notify us of a claimed infringement, what we do when we receive a notice, and how the process works from start to finish."
+  updated="July 2026"
+  noIndex={false}
+>
+  <p id="dmca">
+    {site.name} operates in accordance with the safe-harbour provisions of the Digital Millennium
+    Copyright Act (17 U.S.C. § 512) and complies with equivalent UK and EU copyright frameworks,
+    including the Copyright, Designs and Patents Act 1988 and the EU Copyright Directive. If you are a
+    rights holder — or an agent authorised to act on behalf of one — and you believe that any material
+    accessible via our website infringes on a copyright you own or control, this page tells you exactly
+    how to reach us and what to include so that we can act quickly.
+  </p>
+
+  <h2>1. Our commitment to rights holders</h2>
+  <p>
+    {site.name} is a UK-based provider of IPTV subscription services. We do not host, store or
+    distribute the copyrighted works of third parties on our own infrastructure. However, we recognise
+    that our name may appear in listings or aggregators that we do not control, and we take every
+    credible copyright complaint seriously regardless of where the material sits.
+  </p>
+  <p>
+    We will investigate every valid DMCA notice we receive, and where a legitimate infringement is
+    identified on any property we operate, we will act promptly — typically within one to three
+    business days of a properly-formed notice.
+  </p>
+
+  <h2>2. How to file a DMCA notice</h2>
+  <p>
+    To submit a takedown notice, please send a written communication to our designated agent (contact
+    details in Section 6 below) that includes <strong>all</strong> of the following. Incomplete notices
+    delay our ability to act.
+  </p>
+  <ol>
+    <li>
+      A physical or electronic signature of a person authorised to act on behalf of the owner of an
+      exclusive right that is allegedly infringed.
+    </li>
+    <li>
+      Identification of the copyrighted work claimed to have been infringed, or, if multiple works are
+      covered by a single notification, a representative list of such works.
+    </li>
+    <li>
+      Identification of the material that is claimed to be infringing or to be the subject of infringing
+      activity, and information reasonably sufficient to permit us to locate that material — typically
+      the exact URL(s) on our site.
+    </li>
+    <li>
+      Information reasonably sufficient to permit us to contact you, such as your address, telephone
+      number and email address.
+    </li>
+    <li>
+      A statement that you have a good-faith belief that use of the material in the manner complained
+      of is not authorised by the copyright owner, its agent or the law.
+    </li>
+    <li>
+      A statement that the information in the notification is accurate, and, under penalty of perjury,
+      that you are authorised to act on behalf of the owner of an exclusive right that is allegedly
+      infringed.
+    </li>
+  </ol>
+  <p>
+    Please be aware that under Section 512(f) of the DMCA, any person who knowingly materially
+    misrepresents that material is infringing may be liable for damages. Do not send frivolous or
+    automated notices.
+  </p>
+
+  <h2>3. What happens after we receive a notice</h2>
+  <p>
+    Once we receive a properly-formed DMCA notification, our workflow is as follows:
+  </p>
+  <ul>
+    <li><strong>Acknowledgement</strong> — you will receive confirmation of receipt, usually within 24 hours.</li>
+    <li><strong>Review</strong> — our team reviews the notice for completeness and validity, and checks the identified material against the claim.</li>
+    <li><strong>Action</strong> — where the claim is valid and the material is on infrastructure we control, we remove or disable access to it.</li>
+    <li><strong>Notification to the affected party</strong> — where applicable, the party who posted or hosted the material is notified of the removal and given the opportunity to file a counter-notification.</li>
+    <li><strong>Record-keeping</strong> — all notices are retained for our compliance records and to support any repeat-infringer analysis (Section 5 below).</li>
+  </ul>
+
+  <h2>4. Counter-notification</h2>
+  <p>
+    If you believe that material we removed was removed in error — for example, because you own the
+    material, because your use is licensed, or because you have a valid fair-use / fair-dealing basis —
+    you may submit a counter-notification to the same contact address. A valid counter-notification
+    must include:
+  </p>
+  <ol>
+    <li>Your physical or electronic signature.</li>
+    <li>Identification of the material that has been removed and the location at which it appeared before removal.</li>
+    <li>A statement, under penalty of perjury, that you have a good-faith belief the material was removed as a result of mistake or misidentification.</li>
+    <li>Your name, address and telephone number, and a statement that you consent to the jurisdiction of the courts in your judicial district (or, if outside the United States, of any judicial district in which we may be found), and that you will accept service of process from the person who provided the original notification.</li>
+  </ol>
+  <p>
+    Upon receipt of a valid counter-notification, we may restore the removed material within 10 to 14
+    business days unless the original complainant notifies us that they have filed a court action to
+    restrain the alleged infringement.
+  </p>
+
+  <h2>5. Repeat infringers</h2>
+  <p>
+    In appropriate circumstances, {site.name} will terminate the accounts of subscribers, contributors
+    or users who are found to be repeat infringers. Determinations are made on a case-by-case basis at
+    our sole discretion and take into account the number, nature and severity of the notifications
+    received.
+  </p>
+
+  <h2>6. Designated agent for DMCA notices</h2>
+  <p>
+    Please direct all DMCA notices, counter-notifications and copyright enquiries in writing to our
+    designated agent:
+  </p>
+  <p>
+    <strong>DMCA Agent, {site.name}</strong><br />
+    Email: <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a><br />
+    Subject line: <em>DMCA Notice, [copyright owner name]</em>
+  </p>
+  <p>
+    We accept notices by email as the primary and preferred channel. Notices sent through unrelated
+    channels (WhatsApp, social media, general enquiry forms) may be delayed while they are routed to
+    the correct team.
+  </p>
+
+  <h2>7. False claims and abuse</h2>
+  <p>
+    Filing a DMCA notice is a legal act and, under U.S. law, doing so knowingly and falsely can expose
+    the sender to civil liability. We reserve the right to reject and disregard notices that are
+    plainly abusive, automated at scale, or filed by parties without any credible connection to the
+    rights they claim to represent.
+  </p>
+
+  <h2>8. Modifications to this policy</h2>
+  <p>
+    We may update this DMCA policy from time to time to reflect changes in law, in our operations or in
+    industry best practice. The “last updated” date at the top of the page always reflects the current
+    version. Material changes will be communicated to active subscribers where legally required.
+  </p>
+
+  <p>
+    Thank you for helping us keep {site.name} a service that respects rights holders and treats every
+    legitimate copyright complaint with the seriousness it deserves.
+  </p>
+</LegalLayout>

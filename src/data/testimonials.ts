@@ -9,7 +9,7 @@ export const testimonials = [
     name: 'Priya K.',
     city: 'Birmingham',
     rating: 5,
-    body: '£12.99 for a full month is a bargain. Kept everything I already had on cable, cost me half the price.',
+    body: '£14.99 for a full month is a bargain. Kept everything I already had on cable, cost me half the price.',
   },
   {
     name: 'Ollie R.',
@@ -27,12 +27,12 @@ export const testimonials = [
     name: 'Sophie T.',
     city: 'Leeds',
     rating: 5,
-    body: 'Wanted a trial before committing — got exactly that. No auto-renewal, no hidden fees.',
+    body: 'Wanted a trial before committing, got exactly that. No auto-renewal, no hidden fees.',
   },
   {
     name: 'Daniel C.',
     city: 'Bristol',
     rating: 5,
-    body: 'Works flawlessly on both my Android box and phone. Best cheap UK IPTV I’ve tried.',
+    body: "Works flawlessly on both my Android box and phone. Best cheap UK IPTV I've tried.",
   },
 ] as const;

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="IPTV on Smart TV — Samsung, LG, Sony">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#0a1a33"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="960" cy="120" r="220" fill="#2563eb" opacity="0.18"/>
+  <circle cx="220" cy="520" r="180" fill="#22d3ee" opacity="0.15"/>
+  <rect x="180" y="140" width="840" height="470" rx="24" fill="#0f1a2e" stroke="#1f2a44" stroke-width="4"/>
+  <rect x="210" y="170" width="780" height="410" rx="14" fill="#0a1424"/>
+  <rect x="540" y="600" width="120" height="10" rx="4" fill="#1f2a44"/>
+  <rect x="480" y="608" width="240" height="16" rx="6" fill="#0f1a2e" stroke="#1f2a44" stroke-width="3"/>
+  <g transform="translate(240,210)">
+    <text x="0" y="34" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="34" fill="url(#brand)">SMART TV IPTV</text>
+    <text x="0" y="72" font-family="Inter,Arial,sans-serif" font-weight="600" font-size="18" fill="#94a3b8">Samsung · LG · Sony · Android TV</text>
+    <g transform="translate(0,110)">
+      <rect x="0"   y="0" width="140" height="140" rx="20" fill="#7c5cff"/>
+      <text x="70" y="82" text-anchor="middle" font-family="Inter" font-weight="800" font-size="72" fill="#fff">X</text>
+      <rect x="170" y="0" width="140" height="140" rx="20" fill="#0f1420"/>
+      <text x="184" y="88" font-family="Inter" font-weight="800" font-size="34" fill="#0e8df2">ibo</text>
+      <polygon points="252,50 252,90 292,70" fill="#e11d48"/>
+      <rect x="340" y="0" width="140" height="140" rx="20" fill="#fff"/>
+      <path d="M410 20c8 14 26 26 26 50a26 26 0 1 1-52 0c0-12 6-18 12-24-2 12 2 18 8 18 6 0 8-6 6-14-2-12 0-22 0-30z" fill="#ff5d6c"/>
+      <rect x="510" y="0" width="140" height="140" rx="20" fill="#0f1420"/>
+      <text x="524" y="88" font-family="Inter" font-weight="800" font-size="34" fill="#e5e7eb">boo</text>
+      <polygon points="596,60 596,88 620,74" fill="#38bdf8"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { site } from '../data/site';
+
+const reviewImages = [
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_1.webp', alt: 'WhatsApp chat screenshot from a UK viewer reviewing their IPTV trial setup' },
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_2.webp', alt: 'WhatsApp conversation screenshot showing IPTV trial support for a UK customer' },
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_3.webp', alt: 'Customer WhatsApp feedback screenshot about starting an IPTV trial in the UK' },
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_4.webp', alt: 'WhatsApp proof screenshot from a satisfied IPTV trial customer in the UK' },
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_5.webp', alt: 'IPTV trial WhatsApp support chat screenshot from a UK viewer' },
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF1.webp', alt: 'Customer proof screenshot showing a successful IPTV trial experience in the UK' },
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF2.webp', alt: 'IPTV trial customer proof screenshot from a UK viewer after setup' },
+  { src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF3.webp', alt: 'UK IPTV trial proof screenshot showing customer feedback and service results' },
+];
+---
+<BaseLayout
+  title={`Customer Reviews & WhatsApp Screenshots | ${site.name}`}
+  description={`Real IPTV trial reviews from UK customers. See the WhatsApp conversations, setup times and honest feedback behind our ${site.reviews.rating}/5 rating from ${site.reviews.count}+ subscribers.`}
+>
+  <Header />
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-20 pb-14 md:pt-28 md:pb-18 max-w-3xl">
+        <span class="eyebrow">Reviews &amp; WhatsApp screenshots</span>
+        <h1 class="mt-5 font-display text-4xl md:text-5xl font-bold tracking-tight text-text-primary">
+          IPTV Trial Reviews — 34,000+ Active Lines Streaming Across the UK
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Every one of these conversations started the same way — a {site.currencySymbol}{site.price} 30-day
+          IPTV trial, a WhatsApp message, and a real UK household putting our service on their own TV.
+          Below are unedited screenshots of what our customers said back.
+        </p>
+      </div>
+    </section>
+
+    <!-- What customers are getting -->
+    <section class="section">
+      <div class="container-x max-w-3xl">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold">What our customers are getting</h2>
+        <p class="mt-5 text-text-muted leading-relaxed">
+          When a UK viewer signs up for the {site.currencySymbol}{site.price} trial, they get the full
+          {site.name} experience — not a stripped-down demo. That means 50,000+ live channels covering UK
+          sports (Premier League, EFL, cricket, F1, boxing, UFC), full Sky, TNT, BT and international
+          packages, plus a genuine on-demand library of thousands of films and complete TV series in 4K
+          UHD, FHD and HD. The same servers, the same anti-buffer routing, the same UK-hours support
+          long-term subscribers use.
+        </p>
+        <p class="mt-4 text-text-muted leading-relaxed">
+          Setup takes minutes on any device they already own — Fire Stick, Smart TV, Android box, iPhone,
+          iPad, MAG, Formuler, Nvidia Shield, Apple TV, Windows, Mac and Enigma2 — and the whole thing is
+          organised on WhatsApp so there's a real person on the other end if anything doesn't work first
+          time. No auto-renewal, no hidden tier, no upsell mid-month.
+        </p>
+
+        <h2 class="mt-14 text-2xl sm:text-3xl md:text-4xl font-bold">How they're finding it</h2>
+        <p class="mt-5 text-text-muted leading-relaxed">
+          The pattern in the messages below is remarkably consistent. Customers arrive sceptical — most
+          have been burned by a previous IPTV provider that vanished after taking their money — and by
+          the end of the first evening they're asking about the 3, 6 or 12-month subscription. The
+          things they consistently call out:
+        </p>
+        <ul class="mt-5 space-y-3 text-text-muted leading-relaxed">
+          <li class="flex gap-3">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+            <span><strong class="text-text-primary">Sports actually stream without buffering</strong> — even on match nights when other services collapse.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+            <span><strong class="text-text-primary">Support replies in minutes on WhatsApp</strong> — usually under two, from a real human who knows the product.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+            <span><strong class="text-text-primary">Setup is genuinely 5 minutes</strong> — walk-through screenshots for whichever device they're on.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+            <span><strong class="text-text-primary">The channel list matches what was advertised</strong> — no padded counts, no dead links.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+            <span><strong class="text-text-primary">The price stays the same</strong> — {site.currencySymbol}{site.price} for the trial, and the long-term price they were quoted on day one.</span>
+          </li>
+        </ul>
+        <p class="mt-6 text-text-muted leading-relaxed">
+          These are not paid endorsements, affiliates or curated 5-star cherry-picks. They're the raw
+          messages that come through our WhatsApp line every week — the good, the surprised, and the
+          converted-from-sceptical.
+        </p>
+      </div>
+    </section>
+
+    <!-- Screenshot grid -->
+    <section class="section bg-subtle/50">
+      <div class="container-x">
+        <div class="mx-auto max-w-2xl text-center">
+          <span class="eyebrow">Straight from WhatsApp</span>
+          <h2 class="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold">Real conversations, unedited</h2>
+          <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+            Real WhatsApp conversations from our trial and long-term subscription customers.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-5">
+          {reviewImages.map((image) => (
+            <figure class="card p-3 sm:p-4">
+              <Placeholder
+                src={image.src}
+                alt={image.alt}
+                aspect="aspect-[9/16]"
+                class="rounded-lg"
+                width={900}
+                height={1600}
+              />
+            </figure>
+          ))}
+        </div>
+
+        <p class="mt-10 text-center text-xs text-text-muted">
+          Screenshots shown with customer permission. Phone numbers, names and identifying details are
+          blurred before publication.
+        </p>
+      </div>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+</BaseLayout>

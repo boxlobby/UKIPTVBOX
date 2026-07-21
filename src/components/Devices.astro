@@ -5,16 +5,32 @@ import { devices } from '../data/devices';
 <section id="devices" class="section bg-subtle/50">
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center">
-      <span class="eyebrow">Works everywhere</span>
-      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Compatible with every major device</h2>
-      <p class="mt-4 text-text-muted text-sm sm:text-base">Install our app or use any standard IPTV player — Firestick to Formuler, we’ve got a guide for it.</p>
+      <span class="eyebrow">Device compatibility</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Your IPTV Subscription on <span class="text-brand-light">All Your Devices</span></h2>
+      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+        One IPTV UK trial, every device, Fire Stick, Smart TV, Android, iOS, MAG and Apple TV.
+        Tap yours for a step-by-step IPTV setup guide.
+      </p>
     </div>
 
-    <ul class="mt-10 md:mt-14 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-9 gap-2.5 sm:gap-3">
+    <ul class="mt-10 md:mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
       {devices.map((d) => (
-        <li class="card flex flex-col items-center gap-2 px-2 py-4 sm:py-5 text-center hover:border-brand/40 transition">
-          <Icon name={d.icon} class="text-brand-light" size={26} />
-          <span class="text-[11px] sm:text-xs text-text-muted">{d.label}</span>
+        <li>
+          <a
+            href={d.href}
+            class="device-card group card block h-full p-5 sm:p-6 text-center cursor-pointer transition duration-200 hover:border-brand/50 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(27,198,255,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand/60"
+            aria-label={`${d.title} setup guide`}
+          >
+            <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand-light transition group-hover:bg-brand/15 group-hover:border-brand/40">
+              <Icon name={d.icon} size={24} />
+            </span>
+            <h3 class="mt-4 text-base sm:text-lg font-semibold text-text-primary">{d.title}</h3>
+            <p class="mt-1 text-xs sm:text-sm text-text-muted">{d.sub}</p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-brand-light">
+              Setup guide
+              <Icon name="arrow" size={14} class="transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </a>
         </li>
       ))}
     </ul>

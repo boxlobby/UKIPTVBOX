@@ -1,0 +1,520 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('best-iptv-player-apps-2026-uk')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+const ogImage = post.image.startsWith('http') ? post.image : site.url + post.image;
+
+const apps = [
+  {
+    rank: 1,
+    name: 'IPTV Smarters Pro',
+    tagline: 'The default choice — free, everywhere, works with any subscription',
+    verdict: 9.4,
+    price: 'Free',
+    platforms: 'Fire Stick, Android TV, iOS, Android, Windows, Mac, Smart TV (some)',
+    supports: 'Xtream Codes API, M3U URL',
+    bestFor: 'Anyone starting a new IPTV UK trial — plug in credentials, watch in 60 seconds',
+    pros: [
+      'Free forever — no premium tier to unlock',
+      'The easiest app to sideload on a Fire Stick (installs in 3 minutes)',
+      'Handles Xtream Codes, M3U and multi-user profiles cleanly',
+      'Full VOD, series and catch-up support out of the box',
+    ],
+    cons: [
+      'EPG polish is a step below TiviMate for hardcore users',
+      'UI feels dated on high-end Android TV compared to TiviMate',
+    ],
+    copy: `If you take one thing from this guide: IPTV Smarters Pro is the safest, most universal choice for UK viewers in 2026. It is the app we recommend to every new customer starting our £${site.price} trial because it runs on literally every device you might own, and the login flow is identical everywhere. Not the prettiest — but the least likely to give you a bad first impression of IPTV. See our full Firestick + Smarters setup guide for a step-by-step walkthrough.`,
+  },
+  {
+    rank: 2,
+    name: 'TiviMate',
+    tagline: 'The enthusiast champion — best EPG and channel-hopping speed',
+    verdict: 9.6,
+    price: 'Free tier; Premium ~£15/year',
+    platforms: 'Android TV, Fire TV (sideload), Nvidia Shield, Formuler, Chromecast with Google TV',
+    supports: 'Xtream Codes API, M3U URL, multi-playlist',
+    bestFor: 'Nvidia Shield / Formuler users who want the absolute best UI polish',
+    pros: [
+      'Best-in-class EPG — 7-day scheduling, catch-up markers, series metadata',
+      'Instant channel switching — feels closer to satellite than any competitor',
+      'Multi-view (Premium) — up to 4 streams at once, ideal for sports weekends',
+      'DVR recording to a USB drive on Nvidia Shield',
+    ],
+    cons: [
+      'Not on iOS — Apple users have to fall back to Smarters',
+      'Premium is required to unlock the good bits (worth every penny at £15/yr)',
+      'Fire Stick 2nd gen struggles with the heavy EPG',
+    ],
+    copy: 'TiviMate is what IPTV Smarters would be if a full team of UI designers had worked on it for four years straight. On an Nvidia Shield or Formuler Z11 it is a genuine "gold standard" IPTV app — silky-smooth EPG, instant channel hop, and multi-view that makes weekend sports feel like a proper broadcast setup. Only complaint: no iOS build.',
+  },
+  {
+    rank: 3,
+    name: 'OTT Navigator',
+    tagline: 'The power-user pick — deepest customisation, quirkiest UI',
+    verdict: 8.9,
+    price: 'Free tier; Premium subscription available',
+    platforms: 'Android TV, Fire TV (sideload), Android phone / tablet',
+    supports: 'Xtream Codes API, M3U URL, XSPF, JSON',
+    bestFor: 'Viewers with multiple IPTV subscriptions or unusual playlist formats',
+    pros: [
+      'Handles more playlist formats than any other IPTV player',
+      'Deep parental controls and per-user profiles',
+      'Excellent catch-up and archive browsing UI',
+      'Very active developer — regular updates',
+    ],
+    cons: [
+      'UI is denser and less friendly than Smarters or TiviMate',
+      'No polished iOS or Smart TV version',
+    ],
+    copy: 'OTT Navigator is what you graduate to once you have outgrown Smarters and want something more configurable. If you run two IPTV subscriptions in parallel (say, one from us and one for testing) or you have niche M3U files from other sources, OTT Navigator handles all of it in one clean interface.',
+  },
+  {
+    rank: 4,
+    name: 'Kodi + PVR IPTV Simple Client',
+    tagline: 'The open-source hacker option — infinitely extensible',
+    verdict: 8.2,
+    price: 'Free',
+    platforms: 'Everything — Windows, Mac, Linux, Fire Stick, Android, Raspberry Pi',
+    supports: 'M3U URL, Xtream Codes (via addon)',
+    bestFor: 'Tinkerers who want IPTV inside their existing Kodi media library',
+    pros: [
+      '100% open source — no ads, no tracking, no premium',
+      'Runs on genuinely everything, including Raspberry Pi',
+      'Deep customisation via skins and addons',
+      'Excellent library integration if you already use Kodi',
+    ],
+    cons: [
+      'The setup is not friendly for non-technical users',
+      'EPG configuration takes ten minutes vs Smarters\' one',
+      'UI overkill if all you want is live TV',
+    ],
+    copy: 'Kodi is the veteran open-source option — see the neutral overview on Wikipedia if you want the technical background. Fantastic for anyone who already runs a home media server and wants IPTV as one of many sources. Overkill for viewers who just want live channels on a Fire Stick.',
+  },
+  {
+    rank: 5,
+    name: 'Smart IPTV / SIPTV',
+    tagline: 'The Smart TV native — install directly on Samsung and LG',
+    verdict: 8.0,
+    price: 'One-time ~€5.49 activation per MAC',
+    platforms: 'Samsung Tizen TVs, LG WebOS TVs, some Android TVs',
+    supports: 'M3U URL',
+    bestFor: 'Smart TV owners who do not want to buy any extra hardware',
+    pros: [
+      'Installs directly on Samsung and LG TVs from the app store',
+      'No Fire Stick or set-top box required',
+      'Extremely low resource footprint — runs smoothly on 5-year-old TVs',
+    ],
+    cons: [
+      'One-time activation fee per device',
+      'M3U only — no Xtream Codes API support',
+      'EPG is functional but not fancy',
+    ],
+    copy: 'If you own a modern Samsung or LG TV and do not want to spend £70 on a Fire Stick just to run IPTV, Smart IPTV / SIPTV is the answer. Small one-off activation fee, single M3U link, and you are watching in five minutes. We support both on our £14.99 trial — see the Smart TV installation guide.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is the best IPTV player app in 2026?',
+    a: 'For most UK viewers, IPTV Smarters Pro is the best all-round pick — it is free, works on every device, and the login flow is universal. For Android TV / Formuler / Nvidia Shield enthusiasts who want the best possible EPG and multi-view, TiviMate Premium is the winner. Smart TV owners should install SIPTV directly on their Samsung or LG.',
+  },
+  {
+    q: 'Is IPTV Smarters Pro free?',
+    a: 'Yes — the app itself is free on Fire Stick, Android, iOS, Windows and Mac. What is not free is the IPTV subscription you log in with. Our £14.99 30-day trial gives you those credentials on the same premium servers our annual customers use.',
+  },
+  {
+    q: 'Which IPTV player is best for Windows / Mac?',
+    a: 'IPTV Smarters Pro has a dedicated Windows and Mac build that runs the same Xtream Codes / M3U flow as the mobile version. VLC will also play any IPTV M3U link if you drag it into the app, but you lose EPG and categorisation. See our Windows / Mac installation guide for step-by-step help.',
+  },
+  {
+    q: 'TiviMate vs IPTV Smarters — which is better?',
+    a: 'TiviMate is objectively the more polished app if you run it on Android TV, Nvidia Shield or Formuler. Smarters is objectively the more universal app — same experience on every device including iOS. For a first-time IPTV trial we recommend Smarters; once you know you love IPTV, upgrade to TiviMate Premium on your main TV.',
+  },
+  {
+    q: 'Can I use the same IPTV login in multiple apps?',
+    a: 'Yes — one Xtream Codes login works simultaneously in Smarters, TiviMate, OTT Navigator and any other player, subject to your provider\'s concurrency limit. Our default trial line allows one active connection; two-connection lines are available on request via WhatsApp.',
+  },
+  {
+    q: 'Are IPTV player apps legal to install in the UK?',
+    a: 'Yes. IPTV player apps are neutral software — like VLC or a web browser. Their legality depends entirely on the IPTV subscription you log in with. Pair a legal, licensed IPTV subscription (like our £14.99 trial) with any of the apps above and you are firmly on the right side of the line. See our "Is IPTV legal UK" article for the full detail.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@type': 'Person', name: post.author, url: `${site.url}/about#team` },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV App Reviews',
+      keywords: post.keywords.join(', '),
+    },
+    {
+      '@type': 'ItemList',
+      itemListOrder: 'https://schema.org/ItemListOrderDescending',
+      name: post.title,
+      numberOfItems: apps.length,
+      itemListElement: apps.map((a) => ({
+        '@type': 'ListItem',
+        position: a.rank,
+        name: a.name,
+        description: a.tagline,
+      })),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">Best IPTV Player Apps 2026</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          The five best <strong>IPTV player apps</strong> for UK viewers in 2026, ranked by EPG quality,
+          portal support, catch-up depth and cross-device polish. Every app was tested against a live
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>
+          on real Fire Stick, Android TV, Formuler, Nvidia Shield and Smart TV hardware.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I read the best IPTV player apps 2026 guide — I'd like the £${site.price} trial to test them.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} IPTV trial
+          </a>
+          <a href="#comparison" class="btn-secondary">Jump to comparison</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img src={post.image} alt={post.imageAlt} width="1200" height="630" loading="eager" decoding="async" fetchpriority="high" class="w-full h-auto" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          The IPTV app you pick matters almost as much as the subscription behind it. A great IPTV
+          service on a clunky player feels like satellite from 2005. A middling subscription on
+          TiviMate feels like something out of the future. Below are the five apps we recommend to
+          every customer starting our <a href="/#pricing">£{site.price} 30-day IPTV UK trial</a>,
+          ranked honestly.
+        </p>
+
+        <p>Short on time? Here is the ranking:</p>
+        <ol>
+          <li><strong>IPTV Smarters Pro</strong> — best all-round, universal, free</li>
+          <li><strong>TiviMate</strong> — best for Android TV / Formuler / Nvidia Shield enthusiasts</li>
+          <li><strong>OTT Navigator</strong> — deepest customisation, power-user favourite</li>
+          <li><strong>Kodi + PVR IPTV Simple Client</strong> — the open-source option</li>
+          <li><strong>Smart IPTV / SIPTV</strong> — the native Smart TV solution</li>
+        </ol>
+
+        <h2>How we ranked the best IPTV player apps</h2>
+        <ul>
+          <li><strong>EPG quality (25%)</strong> — how accurate, deep and fast the electronic programme guide is.</li>
+          <li><strong>Cross-device coverage (25%)</strong> — same experience on Fire Stick, Smart TV, phone and desktop.</li>
+          <li><strong>Portal / Xtream Codes support (20%)</strong> — how cleanly the app handles the standard IPTV login formats.</li>
+          <li><strong>Catch-up and multi-view (15%)</strong> — the "premium" features that separate serious apps from basic ones.</li>
+          <li><strong>UI polish and speed (15%)</strong> — channel-hop responsiveness and living-room feel.</li>
+        </ul>
+      </article>
+
+      <div class="mt-14 space-y-14">
+        {apps.map((a) => (
+          <article class="card p-6 md:p-8 scroll-mt-24">
+            <div class="flex items-start gap-4">
+              <span class="flex h-12 w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-full bg-grad-brand text-base md:text-lg font-bold text-white shadow-glow">
+                #{a.rank}
+              </span>
+              <div class="min-w-0">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">
+                  Rated {a.verdict} / 10
+                </p>
+                <h2 class="mt-1 font-display text-2xl md:text-[28px] font-bold text-text-primary">
+                  {a.name}
+                </h2>
+                <p class="mt-1 text-sm md:text-base text-text-muted">{a.tagline}</p>
+              </div>
+            </div>
+
+            <p class="mt-6 text-text-muted leading-relaxed">{a.copy}</p>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Best for</p>
+                <p class="mt-1 text-sm text-text-primary">{a.bestFor}</p>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Price</p>
+                <p class="mt-1 text-sm text-text-primary">{a.price}</p>
+              </div>
+            </div>
+
+            <dl class="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2 text-sm">
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2 sm:col-span-2">
+                <dt class="text-text-muted shrink-0">Platforms</dt>
+                <dd class="text-text-primary text-right">{a.platforms}</dd>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2 sm:col-span-2">
+                <dt class="text-text-muted shrink-0">Login formats</dt>
+                <dd class="text-text-primary text-right">{a.supports}</dd>
+              </div>
+            </dl>
+
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+              <div class="rounded-xl border border-brand/25 bg-brand/5 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">Pros</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {a.pros.map((p) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center text-brand-light">
+                        <Icon name="check" size={14} />
+                      </span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Cons</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {a.cons.map((c) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-text-muted"></span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        IPTV player apps — side-by-side comparison
+      </h2>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-elevated/70 text-text-primary">
+            <tr>
+              <th class="p-3 font-semibold">App</th>
+              <th class="p-3 font-semibold">Price</th>
+              <th class="p-3 font-semibold">Xtream Codes</th>
+              <th class="p-3 font-semibold">iOS</th>
+              <th class="p-3 font-semibold">EPG polish</th>
+              <th class="p-3 font-semibold">Score</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-muted">
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">#1 IPTV Smarters Pro</td>
+              <td class="p-3">Free</td>
+              <td class="p-3">✓</td>
+              <td class="p-3">✓</td>
+              <td class="p-3">Good</td>
+              <td class="p-3 text-brand-light font-semibold">9.4</td>
+            </tr>
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">#2 TiviMate</td>
+              <td class="p-3">Free / £15 yr</td>
+              <td class="p-3">✓</td>
+              <td class="p-3">✗</td>
+              <td class="p-3">Best-in-class</td>
+              <td class="p-3 text-brand-light font-semibold">9.6</td>
+            </tr>
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">#3 OTT Navigator</td>
+              <td class="p-3">Free / Premium</td>
+              <td class="p-3">✓</td>
+              <td class="p-3">✗</td>
+              <td class="p-3">Great</td>
+              <td class="p-3 text-brand-light font-semibold">8.9</td>
+            </tr>
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">#4 Kodi + PVR</td>
+              <td class="p-3">Free</td>
+              <td class="p-3">Via addon</td>
+              <td class="p-3">✓</td>
+              <td class="p-3">Configurable</td>
+              <td class="p-3 text-brand-light font-semibold">8.2</td>
+            </tr>
+            <tr class="border-t border-border-subtle/60">
+              <td class="p-3 text-text-primary font-medium">#5 Smart IPTV / SIPTV</td>
+              <td class="p-3">~€5.49 one-off</td>
+              <td class="p-3">M3U only</td>
+              <td class="p-3">✗</td>
+              <td class="p-3">Basic</td>
+              <td class="p-3 text-brand-light font-semibold">8.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <article class="legal-prose mt-16">
+        <h2>Which IPTV app should you install first?</h2>
+        <p>Match your device to the app — do not overthink it:</p>
+        <ul>
+          <li><strong>Fire TV Stick 4K / 4K Max:</strong> IPTV Smarters Pro (start here) → TiviMate (once you love IPTV).</li>
+          <li><strong>Nvidia Shield / Formuler Z11:</strong> TiviMate Premium — nothing else comes close.</li>
+          <li><strong>Samsung / LG Smart TV:</strong> Smart IPTV (SIPTV) — native, no hardware needed.</li>
+          <li><strong>iPhone / iPad:</strong> IPTV Smarters Pro (TiviMate has no iOS build).</li>
+          <li><strong>Android phone / tablet:</strong> IPTV Smarters Pro or OTT Navigator.</li>
+          <li><strong>Windows / Mac:</strong> IPTV Smarters Pro desktop build, or VLC as a fallback.</li>
+        </ul>
+        <p>
+          Every one of these device combinations is fully supported on our <a href="/#pricing">£{site.price} 30-day IPTV UK trial</a>.
+          We send you Xtream Codes credentials by WhatsApp and you enter them once — the same login
+          works across every app on the list.
+        </p>
+
+        <h2>What "Xtream Codes" and "M3U" mean (and why the app needs one)</h2>
+        <p>
+          Every IPTV player needs a way to know which channels to load. There are two standard formats:
+        </p>
+        <ul>
+          <li>
+            <strong>Xtream Codes API</strong> — username, password and server URL. Modern, categorised,
+            supports VOD and EPG cleanly. This is what serious providers ship.
+          </li>
+          <li>
+            <strong>M3U URL</strong> — one long link that contains a raw playlist. Simple, universal,
+            but no VOD categories. See the neutral background on
+            <a href="https://en.wikipedia.org/wiki/M3U" target="_blank" rel="noopener noreferrer nofollow">M3U on Wikipedia</a>.
+          </li>
+        </ul>
+        <p>
+          Our trial sends both — you can log in via Xtream Codes on Smarters / TiviMate / OTT Navigator,
+          and via the M3U link on Kodi or SIPTV. Same subscription, all your devices.
+        </p>
+
+        <h2>Free IPTV apps vs paid IPTV apps — the honest take</h2>
+        <p>
+          Four of the five apps above have a fully-featured free tier. Only TiviMate really benefits
+          from paying (the ~£15/year Premium unlocks multi-view, recording and skin customisation).
+          Everything else is free forever. So your money should go where it matters: a legitimate,
+          licensed IPTV subscription — not the app.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>The verdict — best IPTV player app for UK viewers</h2>
+        <p>
+          If we had to pick just one: <strong>IPTV Smarters Pro</strong> for its universal, works-everywhere
+          simplicity. If you already own an Nvidia Shield or Formuler and you want the absolute best
+          experience money can buy: <strong>TiviMate Premium</strong>. Every serious IPTV subscription
+          in the UK — including our £{site.price} 30-day trial — supports both apps out of the box, so
+          you never have to choose upfront.
+        </p>
+        <p>
+          Ready to pair one of these apps with a proper subscription? <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Start the £{site.price} trial on WhatsApp</a>
+          and we will have you logged in and watching in 15 minutes.
+        </p>
+      </article>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Set-up guides for these apps</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <li><a href="/blog/iptv-smarters-pro-firestick-uk/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">IPTV Smarters Pro on Firestick</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+          <li><a href="/installation-guides/nvidia-shield/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">TiviMate on Nvidia Shield</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+          <li><a href="/installation-guides/smart-tv/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">SIPTV on Smart TV</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+          <li><a href="/installation-guides/windows-mac/" class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">Smarters on Windows / Mac</span><span class="text-brand-light"><Icon name="arrow" size={16} /></span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

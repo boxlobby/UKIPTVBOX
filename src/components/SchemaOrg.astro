@@ -1,13 +1,24 @@
 ---
 import { site } from '../data/site';
 import { faqs } from '../data/faqs';
+import { testimonials } from '../data/testimonials';
+
+const logoUrl = `${site.url}/favicon.svg`;
+const imageUrl = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp';
 
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
   name: site.name,
   url: site.url,
-  logo: `${site.url}/favicon.svg`,
+  logo: logoUrl,
+  description:
+    'UK-based IPTV subscription service offering a genuine 30-day IPTV trial with 50,000+ live channels, sports, movies and series in 4K.',
+  areaServed: {
+    '@type': 'Country',
+    name: 'United Kingdom',
+  },
   contactPoint: [
     {
       '@type': 'ContactPoint',
@@ -15,48 +26,79 @@ const org = {
       areaServed: 'GB',
       availableLanguage: ['en'],
       telephone: `+${site.whatsapp}`,
+      email: site.supportEmail,
     },
   ],
-  sameAs: [] as string[],
 };
 
 const website = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
   name: site.name,
   url: site.url,
+  inLanguage: 'en-GB',
+  publisher: { '@id': `${site.url}/#organization` },
 };
 
 const priceValidUntil = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
   .toISOString()
   .slice(0, 10);
 
+const reviewNodes = testimonials.map((t) => ({
+  '@type': 'Review',
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: t.rating,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  author: {
+    '@type': 'Person',
+    name: `${t.name}, ${t.city}`,
+  },
+  reviewBody: t.body,
+}));
+
 const product = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: `${site.name} — 30-Day IPTV UK Trial`,
+  '@id': `${site.url}/#product`,
+  name: `${site.name}, 30-Day IPTV UK Trial Subscription`,
   description:
-    'A 30-day IPTV UK trial with 35,000+ live channels, sports, movies and series in 4K. Instant activation on any device.',
-  brand: { '@type': 'Brand', name: site.name },
+    'A 30-day IPTV trial and full UK IPTV subscription with 50,000+ live channels, sports, movies and series in 4K. Instant activation on any device.',
+  image: [imageUrl],
+  brand: {
+    '@type': 'Brand',
+    name: site.name,
+  },
+  sku: 'iptv-trial-30d',
+  category: 'IPTV Subscription',
   offers: {
     '@type': 'Offer',
+    '@id': `${site.url}/#offer`,
     url: site.url,
     priceCurrency: site.currency,
     price: site.price,
     priceValidUntil,
     availability: 'https://schema.org/InStock',
-    seller: { '@type': 'Organization', name: site.name },
+    itemCondition: 'https://schema.org/NewCondition',
+    seller: { '@id': `${site.url}/#organization` },
   },
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: site.reviews.rating,
     reviewCount: site.reviews.count,
+    bestRating: 5,
+    worstRating: 1,
   },
+  review: reviewNodes,
 };
 
 const faqPage = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  '@id': `${site.url}/#faq`,
   mainEntity: faqs.map((f) => ({
     '@type': 'Question',
     name: f.q,

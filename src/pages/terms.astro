@@ -1,14 +1,90 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../data/site';
 ---
-<BaseLayout title="Terms of Service | IPTV Trial" description="Terms of service." noIndex includeSchema={false}>
-  <Header />
-  <main id="main" class="container-x py-24 max-w-3xl mx-auto">
-    <span class="eyebrow">Terms</span>
-    <h1 class="mt-6 text-4xl md:text-5xl font-bold">Terms of Service</h1>
-    <p class="mt-6 text-text-muted">Full terms of service coming soon.</p>
-  </main>
-  <Footer />
-</BaseLayout>
+<LegalLayout
+  title="Terms of Service"
+  description="The terms and conditions that govern your use of the IPTV Trial subscription service."
+  eyebrow="Terms"
+  heading="Terms of Service"
+  intro="These Terms of Service govern your access to and use of our subscription. Please read them carefully, by subscribing, you agree to be bound by them."
+  updated="July 2026"
+>
+  <h2>1. Agreement to Terms</h2>
+  <p>
+    By purchasing a subscription or otherwise using services provided by {site.name} (“we”, “us”, “our”), you agree to comply with these Terms of Service. If you do not agree with any part of these terms, you must discontinue use of the service immediately.
+  </p>
+
+  <h2>2. Service Description</h2>
+  <p>
+    {site.name} provides Internet Protocol Television (IPTV) streaming services to subscribers in the United Kingdom. The service includes live channels, on-demand libraries and catch-up programming across a range of general-interest categories, delivered over an internet connection to compatible devices.
+  </p>
+
+  <h2>3. Eligibility</h2>
+  <p>
+    You must be at least <strong>18 years old</strong> to purchase or use the service. By subscribing, you confirm that all information you provide during registration is accurate, current and complete, and that you will keep it up to date.
+  </p>
+
+  <h2>4. Subscriptions and Payments</h2>
+  <ul>
+    <li>All subscriptions are <strong>pre-paid</strong>. There is no automatic renewal, you choose when to renew.</li>
+    <li>Accepted payment methods include debit and credit cards, cryptocurrency and UK bank transfer.</li>
+    <li>Prices are quoted in GBP and include any applicable taxes.</li>
+    <li>Once payment is confirmed, login credentials are typically delivered instantly by email and/or WhatsApp.</li>
+  </ul>
+
+  <h2>5. Acceptable Use</h2>
+  <p>You agree <strong>not</strong> to:</p>
+  <ul>
+    <li>Share your account credentials or allow multiple users to access the service simultaneously beyond the limits of your plan.</li>
+    <li>Use the service for any unlawful purpose or in breach of any applicable UK law.</li>
+    <li>Attempt to bypass, disable or interfere with any security or access-control feature of the service.</li>
+    <li>Record, reproduce, redistribute, publicly broadcast or resell any content delivered through the service.</li>
+    <li>Use bots, scrapers or other automated tools to access the service.</li>
+  </ul>
+
+  <h2>6. Account Security</h2>
+  <p>
+    You are responsible for maintaining the confidentiality of your account credentials and for all activity that takes place under your account. Notify us immediately if you suspect any unauthorised use. We are not liable for losses resulting from your failure to keep your credentials secure.
+  </p>
+
+  <h2>7. Service Availability</h2>
+  <p>
+    We aim to maintain <strong>99.9% uptime</strong>, but we do not guarantee that the service will be uninterrupted or error-free. Access may occasionally be disrupted by scheduled maintenance, upgrades, network incidents, force-majeure events or issues with third-party providers.
+  </p>
+
+  <h2>8. Content</h2>
+  <p>
+    The channel line-up, on-demand catalogue and category availability may change at any time without prior notice. This can be due to licensing changes, provider decisions or technical requirements outside our control.
+  </p>
+
+  <h2>9. Limitation of Liability</h2>
+  <p>
+    To the fullest extent permitted by law, our total liability to you for any claim arising out of or in connection with the service is limited to the amount you paid for the subscription in question. We exclude liability for any indirect, incidental, consequential or special damages, including loss of profits, data or goodwill. Nothing in these terms limits liability that cannot be excluded under UK law.
+  </p>
+
+  <h2>10. Termination</h2>
+  <p>
+    We reserve the right to suspend or terminate any account that breaches these Terms of Service, including the Acceptable Use rules, without notice and, where the breach is material, without refund. You may cancel your subscription at any time by simply not renewing.
+  </p>
+
+  <h2>11. Refunds</h2>
+  <p>
+    Refund eligibility is governed by our <a href="/refund">Refund Policy</a>, which forms part of these Terms of Service.
+  </p>
+
+  <h2>12. Changes to Terms</h2>
+  <p>
+    We may update these Terms of Service from time to time. Any changes will be posted on this page with an updated “Last updated” date. Continued use of the service after changes take effect constitutes acceptance of the revised terms.
+  </p>
+
+  <h2>13. Governing Law</h2>
+  <p>
+    These Terms of Service are governed by, and construed in accordance with, the laws of <strong>England and Wales</strong>. Any dispute arising out of or in connection with the service shall be subject to the exclusive jurisdiction of the courts of England and Wales.
+  </p>
+
+  <h2>14. Contact Information</h2>
+  <p>
+    For questions about these terms, contact us at <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> or <a href="tel:+447441346459">+44 7441 346459</a>.
+  </p>
+</LegalLayout>

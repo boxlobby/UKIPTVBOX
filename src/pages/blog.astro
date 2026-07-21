@@ -2,21 +2,92 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import FinalCta from '../components/FinalCta.astro';
+import { posts } from '../data/posts';
+import { site, waLink } from '../data/site';
+
+const fmt = (d: string) =>
+  new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <BaseLayout
-  title="IPTV UK Blog — Guides & Reviews | iptvtrial.org"
-  description="Guides, reviews and setup tutorials for IPTV in the UK. Coming soon."
-  noIndex
+  title="IPTV Trial Blog — UK Guides, Reviews & Buying Advice"
+  description="Honest IPTV buying guides, box reviews and setup walkthroughs for UK viewers. Ranked lists, comparisons and tips to get the most from your IPTV subscription."
   includeSchema={false}
 >
   <Header />
-  <main id="main" class="container-x py-24 text-center max-w-2xl mx-auto">
-    <span class="eyebrow">Blog</span>
-    <h1 class="mt-6 text-4xl md:text-5xl font-bold">Coming soon</h1>
-    <p class="mt-4 text-text-muted">
-      We’re publishing UK-focused IPTV setup guides, device tutorials and honest reviews. Check back soon.
-    </p>
-    <a href="/" class="btn-secondary mt-8">Back to home</a>
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-16 pb-12 md:pt-24 md:pb-16 max-w-3xl text-center mx-auto">
+        <span class="eyebrow">Blog</span>
+        <h1 class="mt-5 font-display text-4xl md:text-5xl font-bold tracking-tight text-text-primary">
+          IPTV UK — <span class="text-brand-light">guides, reviews & buying advice</span>
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Honest, UK-focused writing on the best IPTV boxes, apps and set-ups. Every article is
+          tested against a real IPTV subscription — no affiliate fluff.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href={waLink()} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start my £{site.price} IPTV trial
+          </a>
+          <a href="/installation-guides/" class="btn-secondary">Installation guides</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Posts grid -->
+    <section class="section">
+      <div class="container-x">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          {posts.map((p) => (
+            <li>
+              <a
+                href={`/blog/${p.slug}/`}
+                class="card group flex h-full flex-col overflow-hidden transition duration-200 hover:border-brand/50 hover:-translate-y-0.5"
+              >
+                <div class="border-b border-border-subtle bg-elevated/40">
+                  <img
+                    src={p.image}
+                    alt={p.imageAlt}
+                    width="1200"
+                    height="630"
+                    loading={posts.indexOf(p) < 3 ? 'eager' : 'lazy'}
+                    fetchpriority={posts.indexOf(p) === 0 ? 'high' : 'auto'}
+                    decoding={posts.indexOf(p) < 3 ? 'sync' : 'async'}
+                    class="aspect-[16/10] w-full object-cover"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-3 p-5 md:p-6">
+                  <div class="flex items-center gap-2 text-[11px] font-medium uppercase tracking-widest text-brand-light">
+                    <span>{p.category}</span>
+                    <span class="text-border-subtle">·</span>
+                    <span class="text-text-muted">{p.readMinutes} min read</span>
+                  </div>
+                  <h2 class="text-lg font-semibold text-text-primary leading-snug group-hover:text-brand-light transition-colors">
+                    {p.title}
+                  </h2>
+                  <p class="text-sm text-text-muted leading-relaxed line-clamp-3">{p.excerpt}</p>
+                  <div class="mt-auto flex items-center justify-between pt-2">
+                    <span class="text-xs text-text-muted">{fmt(p.published)}</span>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-brand-light">
+                      Read
+                      <Icon name="arrow" size={14} class="transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <FinalCta />
   </main>
   <Footer />
 </BaseLayout>

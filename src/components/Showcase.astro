@@ -8,21 +8,35 @@ import { showcase } from '../data/showcase';
     <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">See what’s inside</span>
       <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">A cleaner way to watch UK TV</h2>
-      <p class="mt-4 text-text-muted text-sm sm:text-base">Swipe through the interface. Same app on every device — Firestick to iPhone.</p>
+      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+        Swipe through the interface you’ll use on your IPTV UK trial, a clean UK-first guide with sports, movies and international feeds.
+        Same polished app on Fire Stick, Smart TV, Apple TV, Android and iPhone.
+      </p>
     </div>
 
     <div class="mt-10 md:mt-14">
       <ul class="slider" role="list">
         {showcase.map((s) => (
           <li class="card overflow-hidden w-[85%] sm:w-[60%] md:w-[42%] lg:w-[32%]">
-            <Placeholder
-              label={`${s.label} — R2`}
-              alt={s.title}
-              src={s.r2 || undefined}
-              aspect="aspect-[4/3]"
-              width={800}
-              height={600}
-            />
+            {s.r2 ? (
+              <img
+                src={s.r2}
+                alt={s.alt}
+                width={800}
+                height={600}
+                loading="lazy"
+                decoding="async"
+                class="w-full object-cover aspect-[4/3]"
+              />
+            ) : (
+              <Placeholder
+                label={`${s.label}`}
+                alt={s.alt}
+                aspect="aspect-[4/3]"
+                width={800}
+                height={600}
+              />
+            )}
             <div class="p-5">
               <span class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">{s.label}</span>
               <h3 class="mt-2 text-lg font-semibold">{s.title}</h3>

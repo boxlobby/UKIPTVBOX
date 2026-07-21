@@ -1,0 +1,623 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { site, waLink } from '../../data/site';
+
+const canonical = `${site.url}/installation-guides/smart-tv/`;
+const ogImage = `${site.url}/installation-guides/smart-tv-hero.svg`;
+const publishedFmt = '19 July 2026';
+const updatedFmt = '19 July 2026';
+
+type App = {
+  slug: string;
+  name: string;
+  tag: 'free' | 'paid';
+  price?: string;
+  logo: string; // path under /installation-guides/apps/  OR "placeholder"
+  login: string; // MAC / M3U URL / Xtream Codes
+  supported: string;
+  activateUrl?: string;
+  copy: string;
+  steps: { title: string; body: string }[];
+  tips?: string[];
+};
+
+const apps: App[] = [
+  {
+    slug: 'xott',
+    name: 'XOTT',
+    tag: 'free',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/XOTT.webp',
+    login: 'MAC address (auto-detected)',
+    supported: 'Samsung Tizen · LG WebOS · some Android TVs',
+    copy: `XOTT is the best free starting point for a Smart TV IPTV trial in the UK. It installs straight from the Samsung / LG app store, shows you a MAC address on first launch, and once we upload your playlist against that MAC the channels appear the next time you open the app — no typing URLs into a TV remote.`,
+    steps: [
+      { title: 'Install XOTT from your TV store', body: 'On Samsung open the Smart Hub, on LG open the Content Store. Search "XOTT" and install the free app.' },
+      { title: 'Open XOTT and note your MAC', body: 'Launch the app. The welcome screen shows a MAC address in the format 00:1A:79:XX:XX:XX. Take a photo of it — that\'s your device identifier.' },
+      { title: 'Send us your MAC on WhatsApp', body: 'Message us the MAC together with your order name. We upload your personal M3U playlist to the XOTT server within a few minutes.' },
+      { title: 'Reload the app and start streaming', body: 'Close XOTT completely, re-open it. Your UK channels, sports, films and series load automatically with a full EPG.' },
+    ],
+  },
+  {
+    slug: 'ibo',
+    name: 'IBO Player Pro',
+    tag: 'paid',
+    price: '≈ €8 lifetime · 7-day free trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/ibo-player.webp',
+    login: 'Device Key + MAC (activated on iboproapp.com)',
+    supported: 'Samsung Tizen · LG WebOS · Android TV · Fire TV · Apple TV · Windows',
+    activateUrl: 'https://iboproapp.com',
+    copy: `IBO Player Pro is the most polished paid Smart TV IPTV player. It comes with a 7-day free trial baked in — long enough to test our full IPTV UK trial line-up — and if you like it, one payment of about €8 unlocks the app for life on that specific TV. The interface is close to Netflix, with per-category posters, a fast EPG and catch-up support.`,
+    steps: [
+      { title: 'Install IBO Player Pro', body: 'From the Samsung or LG app store search "IBO Player Pro" and install it. On some older TVs it appears as "IBO Player".' },
+      { title: 'Read your Device Key and MAC', body: 'Open the app. The first screen shows a Device Key AND a MAC address. You\'ll need both. Take a photo.' },
+      { title: 'Send us both codes', body: 'WhatsApp us the Device Key and MAC. We upload your playlist against them and confirm when it\'s live — usually within 10 minutes.' },
+      { title: 'Enjoy the free trial, then activate', body: 'You get 7 days free. To keep it after that, visit iboproapp.com, enter the same Device Key + MAC, and pay the one-off lifetime fee. Your playlist stays exactly as it is.' },
+    ],
+    tips: ['Payment is handled by IBO directly on their site — separate from your IPTV subscription with us.'],
+  },
+  {
+    slug: 'hot',
+    name: 'Hot Player / Hot IPTV',
+    tag: 'paid',
+    price: '€5.99/yr · €14.99 lifetime · 30-day free trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/hot-player.webp',
+    login: 'M3U playlist URL (uploaded at hotplayer.app/upload)',
+    supported: 'Samsung Tizen · LG WebOS · Android TV · Fire TV · Apple TV · iOS · Windows',
+    activateUrl: 'https://hotplayer.app/activation',
+    copy: `Hot Player has the longest free trial on this list — a full 30 days — which makes it a strong pairing with a monthly IPTV trial. It uses an M3U URL rather than a MAC, so you upload your playlist link on the Hot Player website against your TV's MAC and the app pulls it down automatically.`,
+    steps: [
+      { title: 'Install Hot Player on your TV', body: 'Search "Hot Player" or "Hot IPTV" in the Samsung / LG store. Install it and open it once to reveal your MAC.' },
+      { title: 'Send us your MAC', body: 'WhatsApp us the MAC — we generate a personal M3U playlist URL for your account.' },
+      { title: 'Upload the playlist on hotplayer.app/upload', body: 'Open hotplayer.app/upload in a browser, enter your MAC and paste the M3U URL we sent you. Save.' },
+      { title: 'Reload the app', body: 'Restart Hot Player on the TV. Your channels appear. You have 30 days free — after that activate on hotplayer.app/activation for €5.99/yr or €14.99 lifetime.' },
+    ],
+    tips: ['Don\'t confuse the two Hot Player pages: /upload is where you paste your playlist (free during the trial), /activation is where you pay when the trial ends.'],
+  },
+  {
+    slug: 'bob',
+    name: 'Bob Player',
+    tag: 'paid',
+    price: '≈ €8/yr · €13 lifetime',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/bob.webp',
+    login: 'MAC address (activated on bobplayer.com/login)',
+    supported: 'Samsung Tizen · LG WebOS · Android TV · Fire TV',
+    activateUrl: 'https://bobplayer.com/login',
+    copy: `Bob Player is a cleaner, no-frills alternative to IBO. Cheaper on a lifetime plan (~€13 one-off), MAC-based, and includes a short free trial to test your Smart TV IPTV feed before you activate. Preferred by users who want the simplest possible interface.`,
+    steps: [
+      { title: 'Install Bob Player', body: 'Search "Bob Player" in the Samsung or LG store and install.' },
+      { title: 'Note your MAC', body: 'Open the app — the MAC appears on the welcome screen.' },
+      { title: 'Send it to us', body: 'WhatsApp us your MAC. We attach your IPTV playlist to it within minutes.' },
+      { title: 'Reload and activate', body: 'Restart Bob Player. Your channels appear. When the trial expires, activate on bobplayer.com/login.' },
+    ],
+  },
+  {
+    slug: 'siptv',
+    name: 'Smart IPTV (SIPTV)',
+    tag: 'paid',
+    price: '€5.49 lifetime · 7-day free trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/smart.webp',
+    login: 'M3U URL (uploaded at siptv.eu)',
+    supported: 'Samsung Tizen · LG WebOS · Android TV',
+    activateUrl: 'https://siptv.eu/mylist/',
+    copy: `Smart IPTV — usually shortened to SIPTV — is the veteran Smart TV IPTV player. It's the app most UK IPTV providers reference in their setup docs, including ours. Cheapest lifetime price in this list and by far the most reliable long-term choice on older Samsung / LG TVs.`,
+    steps: [
+      { title: 'Install "Smart IPTV" from the store', body: 'On Samsung and LG the app is called "Smart IPTV". Install it — some markets have removed it, in which case use one of the other apps in this guide.' },
+      { title: 'Open it and read your MAC', body: 'Launch the app. Your MAC address is printed on the welcome screen.' },
+      { title: 'Send us the MAC', body: 'WhatsApp it to us. We upload your M3U playlist directly to siptv.eu attached to your MAC.' },
+      { title: 'Restart to load channels', body: 'Close and re-open Smart IPTV. Your channels stream immediately. Activate on siptv.eu when the 7-day trial ends.' },
+    ],
+  },
+  {
+    slug: 'setiptv',
+    name: 'Set IPTV',
+    tag: 'paid',
+    price: '$6.99/yr · 7-day free trial',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/setiptv.webp',
+    login: 'M3U URL (uploaded at setiptv.com)',
+    supported: 'Samsung Tizen · LG WebOS · Android TV',
+    activateUrl: 'https://setiptv.com',
+    copy: `Set IPTV works exactly like Smart IPTV — MAC-based upload of an M3U link through a web portal — but has better support for the newest Samsung Tizen and LG WebOS 6/7 TVs where SIPTV has become unreliable.`,
+    steps: [
+      { title: 'Install Set IPTV', body: 'Search "Set IPTV" in the Samsung / LG store. Install and open.' },
+      { title: 'Grab your MAC address', body: 'The MAC is shown on the welcome screen.' },
+      { title: 'Send it to us', body: 'WhatsApp us the MAC. We upload your M3U to setiptv.com attached to your device.' },
+      { title: 'Reload to watch', body: 'Restart Set IPTV. Channels load. Trial lasts 7 days, then $6.99/year renewal on setiptv.com.' },
+    ],
+  },
+  {
+    slug: 'smarters',
+    name: 'Smarters Player Lite',
+    tag: 'free',
+    logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/iptv-smarters.webp',
+    login: 'Xtream Codes (username + password + server URL)',
+    supported: 'Samsung Tizen 2018+ · Apple TV · Android TV (via IPTV Smarters Pro)',
+    copy: `Smarters Player Lite is the free official Samsung Tizen version of the popular IPTV Smarters app. Instead of a MAC upload it logs in directly with Xtream Codes credentials — the same username / password / server URL we send to Fire Stick and Apple TV users — which makes it the fastest of all Smart TV apps to activate.`,
+    steps: [
+      { title: 'Install Smarters Player Lite', body: 'From the Samsung app store search "Smarters Player Lite" (Tizen 2018 or newer required). Install it.' },
+      { title: 'Choose Login with Xtream Codes API', body: 'Open the app, tap Add User, then pick "Login with Xtream Codes API" — the fastest, most reliable login method.' },
+      { title: 'Enter the details we sent you', body: 'Type any nickname (e.g. "Living Room"), then enter the username, password and server URL from your welcome message. Save.' },
+      { title: 'Start streaming', body: 'The app connects and loads your full channel list, EPG, VOD and series. No MAC upload, no waiting.' },
+    ],
+    tips: ['If Smarters Player Lite is missing from your regional Samsung store, use XOTT (free) or IBO Player Pro (paid) instead — the trial credentials we send you work on both.'],
+  },
+];
+
+const faqs = [
+  {
+    q: 'Which Smart TV IPTV app is the best in 2026?',
+    a: 'For a completely free Smart TV IPTV app in the UK, XOTT is the best starting point — it uses a MAC upload, has a clean interface and works on both Samsung Tizen and LG WebOS. If you don\'t mind paying once, IBO Player Pro (≈€8 lifetime) is the smoothest Netflix-style paid app; Hot Player has the longest free trial at 30 days. All three are compatible with our iptv uk trial.',
+  },
+  {
+    q: 'Do I need a paid app to use my IPTV subscription on Smart TV?',
+    a: 'No. XOTT and Smarters Player Lite are completely free. IBO Player Pro, Hot Player / Hot IPTV and Bob Player each come with a free trial (7 to 30 days) — install one, paste your playlist and test it properly. When the trial ends you activate (pay for) the app on its own official site: iboproapp.com, hotplayer.app/activation or bobplayer.com/login. Payment for those apps is completely separate from your IPTV subscription with us.',
+  },
+  {
+    q: 'Will these apps work on my Samsung / LG / Sony?',
+    a: 'Yes for the vast majority of TVs. Samsung Tizen 2018+ supports all the apps listed above. LG WebOS 4+ supports XOTT, IBO, Hot Player, Bob Player, Smart IPTV and Set IPTV. Sony Android TVs use the Google Play versions of the same apps. Very old Smart TVs (pre-2016) may need a Fire TV Stick 4K Max as a workaround — see our Fire Stick installation guide.',
+  },
+  {
+    q: 'What is a MAC address and where do I find it?',
+    a: 'A MAC address is a unique 12-character code (e.g. 00:1A:79:AB:CD:EF) that identifies your TV to the IPTV app\'s server. Every Smart TV IPTV app shows it on the welcome screen the first time you open it. Take a photo of it and WhatsApp it to us — that\'s how we attach your personal IPTV playlist to your TV without you having to type long URLs on the remote.',
+  },
+  {
+    q: 'Do these Smart TV apps support 4K IPTV?',
+    a: 'Yes. XOTT, IBO Player Pro, Hot Player, Bob Player and Smarters Player Lite all support 4K HEVC/H.265 playback on any Smart TV with a 4K panel and a decent internet connection (25 Mbps+ recommended). For the smoothest 4K experience use Ethernet rather than Wi-Fi.',
+  },
+  {
+    q: 'How long does the whole Smart TV setup take?',
+    a: `Under 10 minutes end-to-end. You install one app from the TV store (1–2 min), open it and read the MAC (30 seconds), WhatsApp us the MAC (30 seconds), we upload your playlist (usually 2–5 min), you reload the app and you\'re watching UK channels. That\'s the exact process every ${site.name} IPTV UK trial customer goes through on their first day.`,
+  },
+  {
+    q: 'What if my TV can\'t find any of these IPTV apps?',
+    a: 'Some Samsung / LG regions have removed Smart IPTV and Set IPTV from their app stores. If that\'s you, try XOTT and IBO Player Pro first — they\'re available in every UK region. If none of them install, the cheapest fix is a £59 Fire TV Stick 4K Max plugged into your TV\'s HDMI port — full walkthrough in our Fire Stick installation guide.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Installation Guides', item: `${site.url}/installation-guides/` },
+        { '@type': 'ListItem', position: 3, name: 'Smart TV', item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: 'How to install IPTV on a Smart TV (Samsung, LG, Sony) — 7 apps ranked',
+      description: 'The complete Smart TV IPTV setup guide for Samsung Tizen, LG WebOS, Sony and Android TVs. Compares XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV, Set IPTV and Smarters Player Lite.',
+      image: ogImage,
+      author: { '@type': 'Organization', name: `${site.name} Editorial`, url: site.url },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: '2026-07-19',
+      dateModified: '2026-07-19',
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Installation Guides',
+      keywords: 'iptv trial, iptv uk trial, smart tv iptv, samsung iptv, lg iptv, tizen iptv, webos iptv, iptv subscription',
+    },
+    {
+      '@type': 'HowTo',
+      name: 'How to install IPTV on a Smart TV',
+      totalTime: 'PT10M',
+      step: apps.flatMap((app) => app.steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        name: `${app.name} — ${s.title}`,
+        text: s.body,
+        position: i + 1,
+      }))),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedGuides = [
+  { slug: 'firestick', label: 'Set up IPTV on Fire Stick', device: 'Fire Stick' },
+  { slug: 'apple-tv', label: 'Set up IPTV on Apple TV', device: 'Apple TV' },
+  { slug: 'nvidia-shield', label: 'Set up IPTV on Nvidia Shield', device: 'Nvidia Shield' },
+  { slug: 'mobile-tablet', label: 'Set up IPTV on Mobile & Tablet', device: 'Mobile' },
+];
+---
+<BaseLayout
+  title={`Smart TV IPTV setup — 7 best apps for Samsung, LG & Sony | ${site.name}`}
+  description="Install IPTV on any Smart TV in under 10 minutes. Step-by-step Samsung Tizen and LG WebOS guides for XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV, Set IPTV and Smarters Player Lite. Free trials included."
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/installation-guides/" class="hover:text-brand-light">Installation Guides</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">Smart TV</span>
+        </nav>
+
+        <div class="mt-6 flex items-center gap-4">
+          <span class="flex h-14 w-14 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand-light">
+            <Icon name="tv" size={28} />
+          </span>
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">
+              8 min read · Step-by-step
+            </p>
+            <span class="eyebrow mt-1 block">Smart TV setup</span>
+          </div>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          Smart TV IPTV — 7 best apps for Samsung, LG & Sony (2026)
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          Install IPTV on any modern Samsung Tizen, LG WebOS, Sony or Android-based Smart TV in under
+          10 minutes. This guide covers every reliable player on the market — one free option (<strong>XOTT</strong>)
+          plus the paid apps every serious viewer uses (<strong>IBO Player Pro</strong>, <strong>Hot Player</strong>,
+          <strong>Bob Player</strong>) — all compatible with our <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I'd like to start my £${site.price} IPTV trial on my Smart TV.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} IPTV trial
+          </a>
+          <a href="#apps" class="btn-secondary">Choose an app</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src="/installation-guides/smart-tv-hero.svg"
+            alt="Smart TV IPTV setup — XOTT, IBO Player Pro, Hot Player and Bob Player on Samsung and LG"
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Every modern Smart TV in the UK can run <strong>IPTV</strong> without extra hardware —
+          you just need to pick the right player app. This guide walks through the seven apps we
+          actively support on Samsung Tizen and LG WebOS, ranked by how quickly you can go from
+          "just bought a TV" to watching UK channels, sports and films. Whichever app you pick,
+          the activation flow is the same: install it, note your TV's MAC address (or Device Key),
+          WhatsApp it to us, and reload the app. That's it.
+        </p>
+
+        <p>Short on time? The three options that cover 95% of Smart TV setups:</p>
+        <ul>
+          <li><a href="#xott"><strong>XOTT</strong></a> — 100% free, MAC upload, the best free Smart TV IPTV app</li>
+          <li><a href="#ibo"><strong>IBO Player Pro</strong></a> — ≈€8 lifetime, 7-day free trial, the most polished paid app</li>
+          <li><a href="#hot"><strong>Hot Player / Hot IPTV</strong></a> — 30-day free trial, best if you're only running a monthly IPTV UK trial</li>
+        </ul>
+      </article>
+
+      <!-- Paid apps callout -->
+      <div class="mt-10 rounded-2xl border border-brand/25 bg-brand/5 p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-light">
+            <Icon name="sparkles" size={16} />
+          </span>
+          <div class="min-w-0">
+            <p class="font-semibold text-text-primary">About the paid apps</p>
+            <p class="mt-2 text-sm text-text-muted leading-relaxed">
+              IBO Player Pro, Hot Player / Hot IPTV and Bob Player each come with a <span class="text-brand-light font-medium">free trial</span> — install one, paste your playlist and test it properly.
+              When the trial ends, you activate (pay for) the app on its <strong>own official site</strong> below. Tap any app card for its exact steps.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <a href="https://iboproapp.com" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">Activate IBO Player Pro ↗</a>
+              <a href="https://hotplayer.app/activation" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">Activate Hot Player / Hot IPTV ↗</a>
+              <a href="https://bobplayer.com/login" target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary text-xs">Activate Bob Player ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App selector list (compact) -->
+      <h2 id="apps" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        Choose an app
+      </h2>
+      <p class="mt-3 text-text-muted">
+        Tap any app to jump to its full step-by-step Smart TV IPTV setup.
+      </p>
+      <ul class="mt-6 space-y-3">
+        {apps.map((app) => (
+          <li>
+            <a
+              href={`#${app.slug}`}
+              class="card group flex items-center gap-4 p-4 transition hover:border-brand/50"
+            >
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="48"
+                height="48"
+                loading="lazy"
+                decoding="async"
+                class="h-12 w-12 shrink-0 rounded-xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-base font-semibold text-text-primary group-hover:text-brand-light">{app.name}</span>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Paid app</span>
+                  )}
+                  {app.price && (
+                    <span class="rounded-full border border-border-subtle bg-elevated/60 px-2 py-0.5 text-[10px] text-text-muted">
+                      {app.price}
+                    </span>
+                  )}
+                </div>
+                <p class="mt-1 text-xs text-text-muted line-clamp-1">{app.supported}</p>
+              </div>
+              <span class="text-brand-light shrink-0"><Icon name="chevron-right" size={18} /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Per-app deep cards -->
+      <div class="mt-14 space-y-14">
+        {apps.map((app, idx) => (
+          <article id={app.slug} class="card p-6 md:p-8 scroll-mt-24">
+            <div class="flex items-start gap-4">
+              <img
+                src={app.logo}
+                alt={`${app.name} logo`}
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+                class="h-16 w-16 md:h-[72px] md:w-[72px] shrink-0 rounded-2xl border border-border-subtle bg-elevated"
+                onerror="this.src='/og-image.svg'"
+              />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">
+                    App {idx + 1} of {apps.length}
+                  </p>
+                  {app.tag === 'free' ? (
+                    <span class="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-300">Free</span>
+                  ) : (
+                    <span class="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-amber-300">Paid app</span>
+                  )}
+                </div>
+                <h2 class="mt-1 font-display text-2xl md:text-[28px] font-bold text-text-primary">
+                  {app.name}
+                </h2>
+                {app.price && (
+                  <p class="mt-1 text-sm text-text-muted">{app.price}</p>
+                )}
+              </div>
+            </div>
+
+            <p class="mt-6 text-text-muted leading-relaxed">{app.copy}</p>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Log in via</p>
+                <p class="mt-1 text-sm text-text-primary">{app.login}</p>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Supported TVs</p>
+                <p class="mt-1 text-sm text-text-primary">{app.supported}</p>
+              </div>
+            </div>
+
+            <h3 class="mt-8 font-display text-lg md:text-xl font-semibold text-text-primary">Step-by-step</h3>
+            <ol class="mt-4 space-y-4">
+              {app.steps.map((s, i) => (
+                <li class="flex gap-4">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold text-white shadow-glow">
+                    {i + 1}
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm md:text-base font-semibold text-text-primary">{s.title}</p>
+                    <p class="mt-1 text-sm text-text-muted leading-relaxed">{s.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            {app.tips && app.tips.length > 0 && (
+              <div class="mt-6 rounded-xl border border-brand/25 bg-brand/5 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">Tip</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {app.tips.map((t) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center text-brand-light">
+                        <Icon name="check" size={14} />
+                      </span>
+                      <span set:html={t}></span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href={waLink(`Hi, I'd like to set up ${app.name} on my Smart TV with your £${site.price} IPTV trial.`)}
+                class="btn-primary"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                Activate my {app.name}
+              </a>
+              {app.activateUrl && (
+                <a href={app.activateUrl} target="_blank" rel="nofollow noopener noreferrer" class="btn-secondary">
+                  Official site ↗
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Comparison -->
+      <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        Smart TV IPTV apps — side-by-side
+      </h2>
+      <p class="mt-3 text-text-muted">All seven apps at a glance.</p>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-elevated/70 text-text-primary">
+            <tr>
+              <th class="p-3 font-semibold">App</th>
+              <th class="p-3 font-semibold">Type</th>
+              <th class="p-3 font-semibold">Free trial</th>
+              <th class="p-3 font-semibold">Login</th>
+              <th class="p-3 font-semibold">Price</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-muted">
+            {apps.map((app) => (
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary font-medium">{app.name}</td>
+                <td class="p-3">{app.tag === 'free' ? 'Free' : 'Paid'}</td>
+                <td class="p-3">{app.tag === 'free' ? '—' : (app.price?.match(/\d+-day free trial|7-day free trial|30-day free trial/)?.[0] ?? '7 days')}</td>
+                <td class="p-3">{app.login.split('(')[0].trim()}</td>
+                <td class="p-3">{app.tag === 'free' ? 'Free' : (app.price?.split('·')[0]?.trim() ?? '—')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Buyer's guide -->
+      <article class="legal-prose mt-16">
+        <h2>Which Smart TV IPTV app should I actually use?</h2>
+        <p>
+          If you want the shortest possible answer: install <strong>XOTT</strong> first because it's
+          free. If the interface doesn't feel right, install <strong>IBO Player Pro</strong> next —
+          the 7-day trial covers the rest of your first week and, if you like it, one €8 lifetime
+          payment removes the paywall for good on that TV. If you're on a very short IPTV UK trial
+          and want the longest free window before committing, <strong>Hot Player</strong>'s 30-day
+          trial is unbeatable.
+        </p>
+
+        <h3>Samsung Tizen owners</h3>
+        <p>
+          All seven apps are available on Samsung Tizen 2018 or newer. On Tizen we recommend the pair
+          <strong>XOTT + Smarters Player Lite</strong> — one MAC-based, one Xtream Codes — so you
+          always have a working fallback if the Samsung store temporarily hides one of them.
+        </p>
+
+        <h3>LG WebOS owners</h3>
+        <p>
+          LG WebOS 4 and later supports XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV and
+          Set IPTV. Smarters Player Lite is not on the WebOS store — LG viewers should use IBO Player
+          Pro instead as the "polished" option.
+        </p>
+
+        <h3>Sony Android TV owners</h3>
+        <p>
+          Sony Smart TVs run Android TV, so you install the Google Play versions of IBO Player Pro,
+          Hot Player and IPTV Smarters Pro. XOTT is also on Google Play in most regions.
+        </p>
+
+        <h2>Try our IPTV UK trial on any of these apps</h2>
+        <p>
+          Every app on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a> —
+          same MAC upload, same Xtream Codes credentials, same UK support on WhatsApp. If you install
+          one of the paid apps, your free trial from the app developer runs <em>in parallel</em> with
+          our IPTV subscription trial, so you can genuinely test both before spending a penny more.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <!-- FAQ -->
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- Help card -->
+      <aside class="mt-14 card p-6 md:p-8">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-text-muted">Stuck?</p>
+        <h2 class="mt-2 font-display text-2xl font-semibold text-text-primary">We'll set it up for you</h2>
+        <p class="mt-3 text-text-muted">
+          Every {site.name} subscription includes free hands-on Smart TV setup support. Message us on
+          WhatsApp with your TV model and we'll walk you through it, or activate your playlist remotely.
+        </p>
+        <div class="mt-6">
+          <a href={waLink(`Hi, I need help setting up IPTV on my Smart TV.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            <Icon name="whatsapp" size={16} class="mr-2" />
+            Chat with UK support
+          </a>
+        </div>
+      </aside>
+
+      <!-- Related guides -->
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Other installation guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedGuides.map((g) => (
+            <li>
+              <a
+                href={`/installation-guides/${g.slug}/`}
+                class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"
+              >
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

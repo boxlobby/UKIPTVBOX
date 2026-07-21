@@ -1,0 +1,55 @@
+---
+import { countries } from '../data/countries';
+
+const mid = Math.ceil(countries.length / 2);
+const rowA = countries.slice(0, mid);
+const rowB = countries.slice(mid);
+const loopA = [...rowA, ...rowA];
+const loopB = [...rowB, ...rowB];
+---
+<section class="py-14 sm:py-20" aria-label="Countries included">
+  <div class="container-x">
+    <div class="text-center mb-8 sm:mb-10">
+      <p class="text-[11px] font-medium uppercase tracking-widest text-brand-light mb-3">
+        Global coverage
+      </p>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-text-primary">
+        Worldwide channels included
+      </h2>
+      <p class="mt-3 text-sm sm:text-base text-text-muted max-w-xl mx-auto leading-relaxed">
+        Live TV, sports and premium channels from {countries.length}+ countries, all in one IPTV subscription.
+        Every feed included in your IPTV UK trial from day one.
+      </p>
+    </div>
+
+    <div class="space-y-3 sm:space-y-4">
+      <div class="marquee" data-auto-scroll data-speed="0.35">
+        <ul class="marquee-track" role="list">
+          {loopA.map((c, i) => (
+            <li
+              class="card flex items-center gap-3 px-4 py-3 min-w-[180px] sm:min-w-[200px]"
+              aria-hidden={i >= rowA.length ? 'true' : undefined}
+            >
+              <span class="text-2xl leading-none" aria-hidden="true">{c.flag}</span>
+              <span class="text-sm font-medium text-text-primary whitespace-nowrap">{c.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="marquee" data-auto-scroll data-speed="0.35" data-direction="reverse">
+        <ul class="marquee-track" role="list">
+          {loopB.map((c, i) => (
+            <li
+              class="card flex items-center gap-3 px-4 py-3 min-w-[180px] sm:min-w-[200px]"
+              aria-hidden={i >= rowB.length ? 'true' : undefined}
+            >
+              <span class="text-2xl leading-none" aria-hidden="true">{c.flag}</span>
+              <span class="text-sm font-medium text-text-primary whitespace-nowrap">{c.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

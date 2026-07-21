@@ -1,0 +1,617 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('top-5-iptv-boxes-uk-2026')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+const ogImage = post.image.startsWith('http') ? post.image : site.url + post.image;
+
+const boxes = [
+  {
+    rank: 1,
+    name: 'Formuler Z11 Pro Max',
+    tagline: 'The flagship IPTV box UK power users buy',
+    priceBand: '£210 – £249',
+    verdict: 9.6,
+    bestFor: 'Xtream Codes / portal users who want the best MYTVOnline experience',
+    resolution: '4K HDR10+',
+    cpu: 'Quad-core Amlogic S905X4',
+    ram: '4 GB DDR4',
+    storage: '32 GB eMMC',
+    os: 'Android 11 (Formuler skin)',
+    apps: 'MYTVOnline 3, IPTV Smarters, TiviMate, OTT Navigator',
+    pros: [
+      'Best-in-class portal and Xtream Codes support out of the box',
+      'Silky-smooth EPG, catch-up and multi-view (up to 4 streams)',
+      'Dual-band Wi-Fi 6 + Gigabit Ethernet — no buffering on 4K',
+      'Comes with a proper air-mouse remote — a big upgrade over Fire Stick',
+    ],
+    cons: [
+      'Higher upfront cost than a Fire Stick',
+      'Not sold on the UK high street — buy from a Formuler reseller',
+    ],
+    copy: `If you\'re shopping for a serious IPTV box UK households can lean on for years, the Formuler Z11 Pro Max is the one to beat. Formuler build their boxes around IPTV — MYTVOnline 3 is arguably the best portal app on any platform, and the Z11 handles Xtream Codes, M3U and Stalker portals natively. Sports, 4K HDR films, catch-up, series and a proper EPG all load without the sluggishness you get on cheaper Android boxes. If your subscription is portal-based (which the majority of UK IPTV subscriptions are), this is the formuler tv box we\'d put on a friend\'s stand.`,
+  },
+  {
+    rank: 2,
+    name: 'Amazon Fire TV Stick 4K Max (2nd gen)',
+    tagline: 'The best-value IPTV stick in the UK — most popular pick',
+    priceBand: '£59 – £69',
+    verdict: 9.2,
+    bestFor: 'Anyone starting an IPTV UK trial who wants plug-and-play + Alexa',
+    resolution: '4K UHD, HDR10+, Dolby Vision',
+    cpu: 'Quad-core 2.0 GHz',
+    ram: '2 GB',
+    storage: '16 GB',
+    os: 'Fire OS 8 (Android based)',
+    apps: 'IPTV Smarters Pro, TiviMate (sideload), Downloader, Kodi',
+    pros: [
+      'Cheap, tiny, ships next-day from Amazon UK',
+      'Wi-Fi 6E — genuinely stable 4K streaming on decent broadband',
+      'Alexa voice remote is faster than any old-school box remote',
+      'Sideloads IPTV Smarters and TiviMate in under 5 minutes',
+    ],
+    cons: [
+      'Only 2 GB RAM — TiviMate + heavy EPGs can stutter',
+      'Amazon injects ads on the home screen (workaround: pin apps)',
+    ],
+    copy: `The Fire TV Stick 4K Max is the reason most first-time IPTV UK buyers never bother with a dedicated set-top box. It\'s under £70, it plugs straight into the HDMI port, and IPTV Smarters Pro sideloads in a couple of minutes via the Downloader app. If you\'re starting with an IPTV trial to test a service before committing to a year, this is the safest, cheapest hardware pairing. It won\'t match a Formuler for portal polish, but for 90% of viewers it\'s the honest answer to "what\'s the best IPTV box UK 2026?".`,
+  },
+  {
+    rank: 3,
+    name: 'Nvidia Shield TV Pro',
+    tagline: 'The most powerful Android TV box you can buy',
+    priceBand: '£199 – £229',
+    verdict: 9.1,
+    bestFor: '4K sports fans and TiviMate power users who want zero compromises',
+    resolution: '4K HDR, Dolby Vision, AI upscaling to 4K',
+    cpu: 'Nvidia Tegra X1+ (256-core GPU)',
+    ram: '3 GB',
+    storage: '16 GB + microSD + USB expansion',
+    os: 'Android TV 11',
+    apps: 'TiviMate, IPTV Smarters, Kodi, Plex Server, Emby',
+    pros: [
+      'Fastest UI response on any streaming box — sports channel-hopping feels instant',
+      'AI upscaling turns HD channels into near-4K on big screens',
+      'Doubles as a Plex Media Server — brilliant for cord-cutters',
+      'Regular Nvidia security patches for 8+ years — a rare thing in streaming hardware',
+    ],
+    cons: [
+      'Expensive vs. a Fire Stick for what most people watch',
+      'Nvidia has hinted at a refresh — some buyers hold off',
+    ],
+    copy: `If you spend serious hours watching UK sports, the Shield TV Pro is worth every penny. TiviMate on a Shield is the gold-standard IPTV experience on Android TV — deep EPG, instant channel switching, multi-view, catch-up, DVR to an attached USB drive. AI upscaling is genuinely useful when your IPTV subscription serves an SD or 720p feed for a niche channel. It\'s overkill for most, essential for enthusiasts.`,
+  },
+  {
+    rank: 4,
+    name: 'BuzzTV XR4500 / XPL 3000',
+    tagline: 'Dedicated IPTV set-top box built for portal streaming',
+    priceBand: '£145 – £185',
+    verdict: 8.6,
+    bestFor: 'Buyers who want a Formuler alternative with UK-friendly stock',
+    resolution: '4K UHD, HDR',
+    cpu: 'Quad-core Amlogic S905X4',
+    ram: '4 GB',
+    storage: '32 GB',
+    os: 'Android 10 (BuzzTV skin)',
+    apps: 'BuzzTV Essentials, IPTV Smarters, TiviMate, OTT Navigator',
+    pros: [
+      'Purpose-built for IPTV — portal loader baked in, no sideloading',
+      'BuzzTV\'s own remote has proper number buttons — pensioners love it',
+      'Solid metal build, runs cooler than a Fire Stick under load',
+      'Widely stocked by UK IPTV resellers with next-day delivery',
+    ],
+    cons: [
+      'App store is thinner than stock Android TV',
+      'Doesn\'t have Wi-Fi 6 — Ethernet strongly recommended',
+    ],
+    copy: `BuzzTV has quietly become the go-to alternative to Formuler for UK buyers who can\'t find stock of the Z11. The XR4500 is a proper set-top box — number pad remote, portal-first UI, HDMI-CEC out of the box. If your household has anyone who struggles with the "swipe-scroll-scroll" Fire Stick interface, BuzzTV is the box that feels like normal telly.`,
+  },
+  {
+    rank: 5,
+    name: 'MAG 524w3',
+    tagline: 'The classic plug-and-play portal box for IPTV UK',
+    priceBand: '£109 – £139',
+    verdict: 8.3,
+    bestFor: 'Buyers whose IPTV provider gives them a MAG portal URL',
+    resolution: '4K HDR',
+    cpu: 'BCM75839 (Broadcom)',
+    ram: '1 GB',
+    storage: '4 GB',
+    os: 'Linux (Infomir)',
+    apps: 'Built-in Stalker portal (no third-party apps)',
+    pros: [
+      'Zero setup — send us your MAC address and channels appear',
+      'Runs pure Linux — no Android bloat, near-instant boot',
+      'Wi-Fi 5 dual-band + Ethernet, well-suited to living-room installs',
+      'MAG remote is dead simple for older viewers',
+    ],
+    cons: [
+      'Locked to portal streaming — no Netflix, YouTube etc.',
+      'Only useful if your provider issues a MAG portal (we do)',
+    ],
+    copy: `MAG boxes are the veterans of UK IPTV. If your IPTV subscription is portal-based and your provider hands you a URL, a MAG is the closest thing to a satellite receiver you can buy — plug in HDMI + Ethernet, register the MAC on the back sticker, and watch. It won\'t browse the web, and it won\'t stream Disney+, but for viewers who only want live UK TV, sports and movies through one clean interface, it\'s still one of the best IPTV box UK options in 2026.`,
+  },
+];
+
+const faqs = [
+  {
+    q: 'Which is the best IPTV box UK 2026?',
+    a: 'For most UK households, the Amazon Fire TV Stick 4K Max (2nd gen) is the best all-round pick — it is under £70, ships next day, and runs IPTV Smarters Pro perfectly. If you want the absolute best experience with an Xtream Codes or portal-based IPTV subscription, the Formuler Z11 Pro Max is the top rated IPTV box UK enthusiasts recommend.',
+  },
+  {
+    q: 'Is IPTV legal in the UK?',
+    a: 'Using an IPTV subscription that is fully licensed and pays rights-holders is legal in the UK. Using services that stream premium sports or Sky-exclusive content without the correct licences is not. Our IPTV UK trial is intended for lawful use of channels you are entitled to view; consumers should always check the legality of any IPTV service in their jurisdiction before subscribing.',
+  },
+  {
+    q: 'Can I test a service before I buy a box?',
+    a: `Yes — that is exactly what our 30-day iptv trial is for. For £${site.price} you can install IPTV Smarters on a device you already own (phone, Smart TV, laptop, existing Fire Stick) and check picture quality, EPG accuracy and channel line-up before you spend £200 on a Formuler. We recommend a trial first, hardware second.`,
+  },
+  {
+    q: 'Formuler TV box vs Fire Stick — which should I buy?',
+    a: 'Buy a Formuler if you watch IPTV every day, you use a portal / Xtream Codes subscription and you want the smoothest EPG, catch-up and multi-view on the market. Buy a Fire Stick 4K Max if you want the cheapest way to try IPTV, you already use Amazon Prime / Netflix on the same TV, or you want to travel with it. Both work great with our iptv uk trial.',
+  },
+  {
+    q: 'Do I need a VPN for IPTV in the UK?',
+    a: 'A VPN is not required to watch a legal IPTV subscription. Many UK viewers still use one for general privacy or because their ISP throttles video traffic in the evening. If you do use a VPN, choose one with UK servers and stable throughput — NordVPN, Surfshark and Proton VPN are the three most commonly used with IPTV in 2026.',
+  },
+  {
+    q: 'What internet speed do I need for 4K IPTV?',
+    a: 'Around 25 Mbps sustained per 4K stream, or 10–15 Mbps for HD. If your household streams two 4K channels at once, aim for 50 Mbps+. Wired Ethernet always beats Wi-Fi for IPTV — even the best Wi-Fi 6 boxes can drop frames during peak-time congestion.',
+  },
+  {
+    q: 'Will these boxes work with your IPTV UK trial?',
+    a: 'Yes — every box in this list works with our £14.99 30-day IPTV trial. Formuler, BuzzTV and MAG boxes use portal / Xtream Codes credentials which we send you on WhatsApp. Fire Stick and Nvidia Shield users install IPTV Smarters Pro or TiviMate and log in with the same details. Full step-by-step guides are linked at the bottom of this article.',
+  },
+  {
+    q: 'How often should I replace my IPTV box?',
+    a: 'A well-built box (Formuler, Shield, BuzzTV, MAG) lasts 4–6 years before it feels sluggish. Fire Sticks tend to feel dated after 2–3 years as Amazon pushes heavier UI updates. If your box takes more than 5 seconds to switch channels or its EPG lags behind the live stream, it is time to upgrade.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@type': 'Person', name: post.author, url: `${site.url}/about#team` },
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Buying Guides',
+      keywords: post.keywords.join(', '),
+    },
+    {
+      '@type': 'ItemList',
+      itemListOrder: 'https://schema.org/ItemListOrderDescending',
+      name: post.title,
+      numberOfItems: boxes.length,
+      itemListElement: boxes.map((b) => ({
+        '@type': 'ListItem',
+        position: b.rank,
+        name: b.name,
+        description: b.tagline,
+      })),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedGuides = [
+  { slug: 'enigma2-formuler', label: 'Set up IPTV on Formuler' },
+  { slug: 'firestick', label: 'Set up IPTV on Fire Stick' },
+  { slug: 'nvidia-shield', label: 'Set up IPTV on Nvidia Shield' },
+  { slug: 'mag-box', label: 'Set up IPTV on MAG box' },
+];
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">IPTV Box UK 2026</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          Top 5 IPTV Boxes UK 2026 — Ranked & Tested
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          The best IPTV box UK households can buy in 2026 — ranked on 4K picture, EPG polish, app
+          support and honest value. Every box below is paired with our <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>
+          so you can test the service before you spend on hardware.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink(`Hi, I read the Top 5 IPTV Boxes UK guide and would like to start my £${site.price} trial.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Start £{site.price} IPTV trial
+          </a>
+          <a href="#comparison" class="btn-secondary">Jump to comparison</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src={post.image}
+            alt={post.imageAlt}
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+
+        <!-- Intro -->
+        <p>
+          Looking for the best <strong>IPTV box UK</strong> viewers can actually buy in 2026?
+          You are in the right place. We tested every popular set-top box against a live
+          <strong>IPTV subscription</strong> for two months — 4K sports, HDR films, catch-up TV,
+          series and multi-view — and ranked the five that beat everything else on picture,
+          responsiveness and long-term reliability. This guide is device-first, but the same picks
+          apply whether you are shopping for a long-term box or just running an <a href="/#pricing">iptv trial</a>
+          to see if the service is right for your household.
+        </p>
+
+        <p>
+          Short on time? Here is the ranking:
+        </p>
+
+        <ol>
+          <li><a href="#formuler-z11-pro-max"><strong>Formuler Z11 Pro Max</strong></a> — best overall, and the top <em>formuler tv box</em> for portal / Xtream Codes users</li>
+          <li><a href="#fire-tv-stick-4k-max"><strong>Amazon Fire TV Stick 4K Max (2nd gen)</strong></a> — best value, most popular UK pick</li>
+          <li><a href="#nvidia-shield-tv-pro"><strong>Nvidia Shield TV Pro</strong></a> — most powerful, AI upscaling, ideal for 4K sports</li>
+          <li><a href="#buzztv-xr4500"><strong>BuzzTV XR4500 / XPL 3000</strong></a> — dedicated IPTV set-top box, great UK stock</li>
+          <li><a href="#mag-524w3"><strong>MAG 524w3</strong></a> — classic plug-and-play portal box</li>
+        </ol>
+
+        <h2>How we ranked the best IPTV box UK 2026</h2>
+        <p>
+          We evaluated each candidate against five criteria, weighted for what actually matters when
+          you are watching IPTV every night:
+        </p>
+        <ul>
+          <li><strong>4K playback stability (30%)</strong> — dropped frames, buffer time on channel switch, HDR handling.</li>
+          <li><strong>App & portal support (25%)</strong> — TiviMate, IPTV Smarters Pro, MYTVOnline 3, Xtream Codes and M3U handling.</li>
+          <li><strong>EPG quality and speed (15%)</strong> — how fast the TV guide loads and how deep the catch-up window goes.</li>
+          <li><strong>Build, remote & living-room fit (15%)</strong> — is it a box a normal household actually enjoys using?</li>
+          <li><strong>Value for money (15%)</strong> — measured against the average <strong>IPTV subscription</strong> cost in the UK.</li>
+        </ul>
+        <p>
+          Every box in this list has been used with a real IPTV UK trial line, not a promotional demo
+          feed — so what you see below is what you get on a normal UK connection between 6 and 11 pm.
+        </p>
+      </article>
+
+      <!-- Ranked cards -->
+      <div class="mt-14 space-y-14">
+        {boxes.map((b) => (
+          <article
+            id={
+              b.rank === 1 ? 'formuler-z11-pro-max' :
+              b.rank === 2 ? 'fire-tv-stick-4k-max' :
+              b.rank === 3 ? 'nvidia-shield-tv-pro' :
+              b.rank === 4 ? 'buzztv-xr4500' :
+                             'mag-524w3'
+            }
+            class="card p-6 md:p-8 scroll-mt-24"
+          >
+            <div class="flex items-start gap-4">
+              <span class="flex h-12 w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-full bg-grad-brand text-base md:text-lg font-bold text-white shadow-glow">
+                #{b.rank}
+              </span>
+              <div class="min-w-0">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">
+                  Rated {b.verdict} / 10
+                </p>
+                <h2 class="mt-1 font-display text-2xl md:text-[28px] font-bold text-text-primary">
+                  {b.name}
+                </h2>
+                <p class="mt-1 text-sm md:text-base text-text-muted">{b.tagline}</p>
+              </div>
+            </div>
+
+            <p class="mt-6 text-text-muted leading-relaxed">{b.copy}</p>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Best for</p>
+                <p class="mt-1 text-sm text-text-primary">{b.bestFor}</p>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">UK price band</p>
+                <p class="mt-1 text-sm text-text-primary">{b.priceBand}</p>
+              </div>
+            </div>
+
+            <dl class="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2 text-sm">
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2">
+                <dt class="text-text-muted">Resolution</dt><dd class="text-text-primary text-right">{b.resolution}</dd>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2">
+                <dt class="text-text-muted">CPU</dt><dd class="text-text-primary text-right">{b.cpu}</dd>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2">
+                <dt class="text-text-muted">RAM</dt><dd class="text-text-primary text-right">{b.ram}</dd>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2">
+                <dt class="text-text-muted">Storage</dt><dd class="text-text-primary text-right">{b.storage}</dd>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2">
+                <dt class="text-text-muted">OS</dt><dd class="text-text-primary text-right">{b.os}</dd>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-border-subtle/60 pb-2 sm:col-span-2">
+                <dt class="text-text-muted shrink-0">Best IPTV apps</dt><dd class="text-text-primary text-right">{b.apps}</dd>
+              </div>
+            </dl>
+
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+              <div class="rounded-xl border border-brand/25 bg-brand/5 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-light">Pros</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {b.pros.map((p) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center text-brand-light">
+                        <Icon name="check" size={14} />
+                      </span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="rounded-xl border border-border-subtle bg-elevated/50 p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Cons</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-text-muted">
+                  {b.cons.map((c) => (
+                    <li class="flex gap-2">
+                      <span class="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-text-muted"></span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <a
+                href={waLink(`Hi, I\'m interested in using the ${b.name} with your £${site.price} IPTV trial. Can you help me set it up?`)}
+                class="btn-primary"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
+                Get this box working with my trial
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Comparison table -->
+      <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
+        IPTV box UK 2026 — side-by-side comparison
+      </h2>
+      <p class="mt-3 text-text-muted">
+        All five boxes at a glance. Prices are typical UK retail as of {updatedFmt}.
+      </p>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+        <table class="w-full min-w-[720px] text-left text-sm">
+          <thead class="bg-elevated/70 text-text-primary">
+            <tr>
+              <th class="p-3 font-semibold">Box</th>
+              <th class="p-3 font-semibold">Resolution</th>
+              <th class="p-3 font-semibold">RAM</th>
+              <th class="p-3 font-semibold">Best app</th>
+              <th class="p-3 font-semibold">Price</th>
+              <th class="p-3 font-semibold">Score</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-muted">
+            {boxes.map((b) => (
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary font-medium">#{b.rank} {b.name}</td>
+                <td class="p-3">{b.resolution}</td>
+                <td class="p-3">{b.ram}</td>
+                <td class="p-3">{b.apps.split(',')[0]}</td>
+                <td class="p-3">{b.priceBand}</td>
+                <td class="p-3 text-brand-light font-semibold">{b.verdict}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Buyer's guide -->
+      <article class="legal-prose mt-16">
+        <h2>What to look for in an IPTV box UK 2026</h2>
+        <p>
+          If you are new to IPTV, the specs above can look like alphabet soup. Here are the five
+          things that actually matter when you shortlist a box for a UK household:
+        </p>
+
+        <h3>1. Portal / Xtream Codes support</h3>
+        <p>
+          Most UK IPTV subscriptions today are delivered via Xtream Codes API (username, password,
+          server URL) or a Stalker portal (MAC address). Boxes that ship with a proper portal loader —
+          <em>Formuler, BuzzTV, MAG</em> — save you sideloading apps. If you buy a Fire Stick or Shield,
+          you will install IPTV Smarters Pro or TiviMate manually. Neither is hard, but a portal box is
+          the "put it under the telly and forget it" option.
+        </p>
+
+        <h3>2. 4K HDR handling</h3>
+        <p>
+          Any box you buy in 2026 should support 4K HDR10 at 60 fps. Dolby Vision is nice-to-have but
+          rarely available on IPTV feeds today. Watch out for cheap Android boxes that <em>claim</em> 4K
+          but drop back to 1080p under real load.
+        </p>
+
+        <h3>3. Storage and RAM</h3>
+        <p>
+          2 GB RAM is the minimum for a smooth EPG. 4 GB is the sweet spot for TiviMate + multi-view.
+          Storage matters less because IPTV apps are small — but 8 GB minimum, otherwise updates fail.
+        </p>
+
+        <h3>4. Ethernet, not just Wi-Fi</h3>
+        <p>
+          The single biggest cause of "IPTV keeps buffering" complaints is Wi-Fi. Every box in our top
+          five has Gigabit or 100 Mbps Ethernet — use it. If you cannot run a cable, get a Wi-Fi 6 box
+          and put it in the same room as the router.
+        </p>
+
+        <h3>5. Long-term software support</h3>
+        <p>
+          IPTV apps evolve fast. A box that stops getting Android updates 12 months after you buy it
+          will eventually stop supporting the latest IPTV Smarters release. Formuler, Nvidia and Amazon
+          have the best track records; no-name Android boxes are a false economy.
+        </p>
+
+        <h2>Try an IPTV trial before you spend on a box</h2>
+        <p>
+          The single best piece of advice we give buyers is this: <strong>test the service first, buy
+          the box second</strong>. Any of the boxes above can cost £70 to £250, but you can prove that
+          our channel line-up, 4K picture and EPG are what you want for £{site.price} with a
+          <a href="/#pricing">30-day IPTV UK trial</a>. Install IPTV Smarters on a phone, a laptop or the
+          Fire Stick you already own — if you are happy after a few days, then invest in a dedicated
+          Formuler or BuzzTV. It is the cheapest way to protect yourself from buying the wrong hardware.
+        </p>
+
+        <h2>Best IPTV app for each box</h2>
+        <p>
+          Hardware is only half the story — the app you run on top defines the experience. Here is our
+          quick-fire recommendation per box:
+        </p>
+        <ul>
+          <li><strong>Formuler Z11 Pro Max:</strong> MYTVOnline 3 (built-in) — nothing beats it for portals.</li>
+          <li><strong>Fire TV Stick 4K Max:</strong> IPTV Smarters Pro — sideload via the Downloader app.</li>
+          <li><strong>Nvidia Shield TV Pro:</strong> TiviMate (premium unlock is worth it).</li>
+          <li><strong>BuzzTV XR4500:</strong> BuzzTV Essentials or IPTV Smarters Pro.</li>
+          <li><strong>MAG 524w3:</strong> the built-in Infomir portal — no app needed.</li>
+        </ul>
+        <p>
+          If you want a step-by-step walkthrough for any of these, our
+          <a href="/installation-guides/">installation guides</a> cover every popular device in the UK.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <!-- FAQ -->
+      <div class="mt-8 space-y-3">
+        {faqs.map((f, i) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- Final verdict -->
+      <article class="legal-prose mt-16">
+        <h2>The verdict — best IPTV box UK 2026</h2>
+        <p>
+          If we had to pick just one: <strong>Formuler Z11 Pro Max</strong> for a serious, permanent
+          IPTV setup, or the <strong>Fire TV Stick 4K Max (2nd gen)</strong> if you want the cheapest,
+          quickest way to start. Everything else on this list is a strong second-best for specific
+          use-cases — Shield for enthusiasts, BuzzTV for Formuler-alternatives, MAG for pure
+          portal simplicity. Whichever you pick, pair it with a <a href="/#pricing">30-day iptv uk trial</a>
+          from us and you will have live TV, sports, movies and series running in your living room in
+          under ten minutes.
+        </p>
+      </article>
+
+      <!-- Related guides -->
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Set-up guides for the boxes above</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedGuides.map((g) => (
+            <li>
+              <a
+                href={`/installation-guides/${g.slug}/`}
+                class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"
+              >
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
