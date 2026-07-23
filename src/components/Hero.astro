@@ -1,7 +1,8 @@
 ---
 import Icon from './Icon.astro';
 import Placeholder from './Placeholder.astro';
-import { site, waLink } from '../data/site';
+import { site, waLink, packages } from '../data/site';
+const startingPrice = packages[0].price;
 ---
 <section class="grid-bg relative overflow-hidden">
   <div class="pointer-events-none absolute inset-0 -z-10">
@@ -12,37 +13,37 @@ import { site, waLink } from '../data/site';
   <div class="container-x pt-14 sm:pt-20 md:pt-24 pb-10 sm:pb-16 text-center">
     <span class="eyebrow mb-5">
       <span class="h-1.5 w-1.5 rounded-full bg-brand animate-pulse"></span>
-      Made for UK viewers
+      UK IPTV Subscription
     </span>
 
     <h1 class="mx-auto max-w-4xl text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08]">
-      <span class="text-text-primary">IPTV Trial UK, </span>
-      <span class="bg-grad-brand bg-clip-text text-transparent">30 Days for {site.currencySymbol}{site.price}</span>
+      <span class="text-text-primary">Best UK IPTV </span>
+      <span class="bg-grad-brand bg-clip-text text-transparent">Subscription from {site.currencySymbol}{startingPrice}</span>
     </h1>
 
     <p class="mx-auto mt-5 max-w-2xl text-base sm:text-lg md:text-xl text-text-muted leading-relaxed px-2">
-      Try the UK’s fastest IPTV service risk-free with a full 30-day IPTV subscription. <strong class="text-text-primary">50,000+ live channels</strong>
-      plus thousands of movies and series in 4K, on any device, activated in minutes.
+      UK IPTV BOX gives you the best IPTV subscription in the UK: <strong class="text-text-primary">50,000+ live channels</strong>,
+      sports, movies and series in 4K. Choose from 1, 3, 6 or 12-month plans, activated in minutes on any device.
     </p>
 
     <div class="mt-7 flex justify-center max-w-md sm:max-w-none mx-auto">
-      <a href={waLink()} class="btn-primary text-base px-8 py-4" target="_blank" rel="nofollow noopener noreferrer">
-        Get My Trial, {site.currencySymbol}{site.price}
+      <a href="#pricing" class="btn-primary text-base px-8 py-4">
+        View UK IPTV Plans
         <Icon name="arrow" size={18} />
       </a>
     </div>
 
     <ul class="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-text-muted">
-      <li class="flex items-center gap-1.5"><Icon name="clock" class="text-accent" size={15} /> 30-day trial</li>
+      <li class="flex items-center gap-1.5"><Icon name="clock" class="text-accent" size={15} /> 7 days money back</li>
       <li class="flex items-center gap-1.5"><Icon name="zap" class="text-accent" size={15} /> Instant activation</li>
       <li class="flex items-center gap-1.5"><Icon name="shield" class="text-accent" size={15} /> VPN Protected</li>
     </ul>
 
     <div class="mt-10 sm:mt-14 mx-auto max-w-4xl">
-      <div class="rounded-2xl border border-border-subtle bg-elevated/60 p-2 shadow-glow-lg">
+      <div class="rounded-2xl p-2 shadow-glow-lg" style="border:1px solid #4A2F9E;background:rgba(46,23,112,.6);">
         <Placeholder
           src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp"
-          alt="Men watching a live football match with an IPTV TRIAL streaming service on TV"
+          alt="Men watching a live football match with UK IPTV BOX UK IPTV subscription service on TV"
           aspect="aspect-video"
           eager
           width={1280}
@@ -53,9 +54,9 @@ import { site, waLink } from '../data/site';
     </div>
   </div>
 
-  <div class="mt-10 sm:mt-14 border-y border-border-subtle bg-elevated/30">
+  <div class="mt-10 sm:mt-14" style="background:#5B2EBE;border-top:1px solid rgba(198,181,238,.25);border-bottom:1px solid rgba(198,181,238,.25);">
     <div class="container-x">
-      <div class="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border-subtle">
+      <div class="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x" style="--tw-divide-opacity:1;divide-color:rgba(198,181,238,.25)">
         <div class="py-8 sm:py-10 px-4 text-center">
           <div class="text-3xl sm:text-4xl md:text-5xl font-bold bg-grad-brand bg-clip-text text-transparent whitespace-nowrap" data-count-up data-target="50000" data-suffix="+">0+</div>
           <div class="mt-2 text-[0.7rem] sm:text-xs tracking-widest uppercase text-text-muted">Live Channels</div>

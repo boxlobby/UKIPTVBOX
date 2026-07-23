@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /404
+Disallow: /404/
 
-Sitemap: https://iptvtrial.org/sitemap.xml
+Sitemap: https://ukiptvbox.com/sitemap.xml

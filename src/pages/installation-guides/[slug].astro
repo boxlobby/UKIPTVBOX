@@ -92,7 +92,7 @@ const related = guides.filter((g) => g.slug !== guide.slug).slice(0, 3);
         {guide.steps.map((s, i) => (
           <li class="card p-6 md:p-7">
             <div class="flex items-start gap-4">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold text-white shadow-glow">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold !text-[#241056] shadow-glow">
                 {i + 1}
               </span>
               <div class="min-w-0">
@@ -111,7 +111,7 @@ const related = guides.filter((g) => g.slug !== guide.slug).slice(0, 3);
           <ul class="mt-6 space-y-3">
             {guide.tips.map((t) => (
               <li class="flex gap-3 rounded-xl border border-border-subtle bg-elevated/60 p-4">
-                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-light">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand !text-[#241056]">
                   <Icon name="sparkles" size={14} />
                 </span>
                 <span class="text-sm text-text-muted leading-relaxed">{t}</span>

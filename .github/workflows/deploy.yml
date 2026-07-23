@@ -24,4 +24,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: a25d99f65b9f7f88846dd6a4d792f6cb
-          command: pages deploy dist --project-name iptvtrial --branch main
+          command: pages deploy dist --project-name ukiptvbox --branch main

@@ -5,7 +5,7 @@ import { categories } from '../data/categories';
 // Duplicate the list so scrollLeft can wrap seamlessly.
 const track = [...categories, ...categories];
 ---
-<section class="py-12 sm:py-16 bg-subtle/50 overflow-hidden" aria-label="Content categories">
+<section class="py-12 sm:py-16 overflow-hidden" style="background:rgba(30,13,72,.55);" aria-label="Content categories">
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center mb-8">
       <span class="eyebrow">Content categories</span>
@@ -29,7 +29,8 @@ const track = [...categories, ...categories];
     <ul class="category-track flex gap-4 sm:gap-5 px-4 sm:px-6" role="list">
       {track.map((c, i) => (
         <li
-          class="category-card group/card relative shrink-0 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60 w-[260px] sm:w-[300px] md:w-[320px] lg:w-[340px]"
+          class="category-card group/card relative shrink-0 overflow-hidden rounded-2xl border w-[260px] sm:w-[300px] md:w-[320px] lg:w-[340px]"
+          style="background:rgba(46,23,112,.6);border-color:#4A2F9E;"
           aria-hidden={i >= categories.length ? 'true' : 'false'}
         >
           <div class="relative aspect-[4/5] w-full overflow-hidden">
@@ -44,18 +45,18 @@ const track = [...categories, ...categories];
                   decoding="async"
                   class="absolute inset-0 w-full h-full object-cover"
                 />
-                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-elevated/95 to-transparent"></div>
+                <div class="absolute inset-x-0 bottom-0 h-24" style="background:linear-gradient(to top, rgba(46,23,112,.95), transparent)"></div>
               </>
             ) : (
               <>
                 <div class="absolute inset-0 bg-grad-brand-soft"></div>
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.35),transparent_55%)]"></div>
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_90%,rgba(34,211,238,0.18),transparent_55%)]"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_90%,rgba(207,186,255,0.15),transparent_55%)]"></div>
                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
                   <Icon name={c.icon} size={28} class="text-brand-light/80" />
                   <span class="text-[11px] font-medium uppercase tracking-widest">{c.label}</span>
                 </div>
-                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-elevated/95 to-transparent"></div>
+                <div class="absolute inset-x-0 bottom-0 h-24" style="background:linear-gradient(to top, rgba(46,23,112,.95), transparent)"></div>
               </>
             )}
           </div>
@@ -86,6 +87,6 @@ const track = [...categories, ...categories];
 
   .category-track {
     width: max-content;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
   }
 </style>

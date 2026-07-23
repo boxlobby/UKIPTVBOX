@@ -16,28 +16,28 @@ const buckets = [
     label: 'Fully legal',
     tone: 'brand',
     items: [
-      'IPTV apps such as IPTV Smarters Pro, TiviMate, OTT Navigator and Kodi — the software itself is neutral and lawful',
-      'Watching content you have the right to view (your own recordings, free-to-air catch-up, licensed on-demand libraries)',
-      'Using a licensed IPTV service that pays the rights-holders for every channel it broadcasts',
-      'Owning IPTV hardware — Fire Sticks, Formuler boxes, MAG boxes, Nvidia Shields, Smart TVs',
+      'Player apps (IPTV Smarters Pro, TiviMate, OTT Navigator, Kodi): the software itself is content-neutral and lawful',
+      'Watching content you\'re entitled to view: free-to-air catch-up, your own recordings, licensed on-demand libraries',
+      'Subscribing to an IPTV service that holds the correct licences and pays rights-holders for every channel it distributes',
+      'Owning IPTV hardware: Fire Sticks, Formuler boxes, MAG boxes, Smart TVs, Android boxes',
     ],
   },
   {
     label: 'Grey area',
     tone: 'muted',
     items: [
-      'Consuming a "too good to be true" reseller line without checking whether the operator holds licences',
-      'Sharing a single subscription across multiple households (breaches most providers\' terms of service)',
-      'Using a VPN to bypass regional restrictions on a service you are otherwise entitled to',
+      'Using a budget reseller whose licensing status is unclear or unverifiable',
+      'Sharing one subscription line across multiple households (this breaches most providers\' terms of service)',
+      'Using a VPN to access geo-restricted content on a service you\'re otherwise entitled to use',
     ],
   },
   {
     label: 'Not legal in the UK',
     tone: 'danger',
     items: [
-      'Streaming premium pay-TV channels through an unlicensed reseller who never paid the rights-holders',
-      'Selling or advertising unlicensed IPTV subscriptions (this is what most enforcement actions target)',
-      'Distributing modified apps or "fully-loaded" boxes pre-configured to access unlicensed streams',
+      'Streaming premium pay-TV channels through an unlicensed provider that hasn\'t paid the rights-holders',
+      'Selling or promoting unlicensed IPTV lines (this is where UK enforcement action is concentrated)',
+      'Distributing pre-configured boxes or modified apps that point to unlicensed streams',
     ],
   },
 ];
@@ -45,27 +45,27 @@ const buckets = [
 const faqs = [
   {
     q: 'Is watching IPTV illegal in the UK?',
-    a: 'Watching IPTV is not automatically illegal. Using a fully licensed IPTV service to watch channels you are entitled to is legal in the UK. What is unlawful is knowingly streaming premium content through a provider that has not paid the correct rights-holders. The distinction is about the licensing behind the service — not the IPTV technology itself.',
+    a: 'Watching IPTV isn\'t automatically illegal. What matters is whether the provider has paid for the rights to broadcast what you\'re watching. A fully licensed UK IPTV service is legal to subscribe to and watch. The question to ask before you pay is always about the licensing behind the service, not the technology used to deliver it.',
   },
   {
     q: 'What does Ofcom say about IPTV?',
-    a: 'Ofcom licenses linear TV services broadcast in the UK. Their public guidance and enforcement notices make clear that IPTV distribution is lawful when the operator holds the correct licences and pays the rights-holders. Ofcom regularly publishes updates about unlicensed streaming crackdowns — worth a read before you subscribe to any budget service.',
+    a: 'Ofcom licenses linear TV services broadcast in the UK. Their published guidance makes clear that distributing IPTV is lawful when the operator holds the correct broadcast licences and pays rights-holders appropriately. Ofcom regularly issues enforcement notices against unlicensed streaming operations. Checking their site before subscribing to any budget service is sensible.',
   },
   {
     q: 'Can I get in trouble for using an IPTV subscription?',
-    a: 'UK enforcement action against end-consumers is rare — the focus is almost always on the sellers of unlicensed services. That said, subscribing to an obviously-illegal service (£3 a month for "everything") funds unlawful distribution and comes with real risks: server takedowns, sudden loss of access, card fraud and no consumer protection. Choosing a properly-run trial service is the safest way to stay on the right side of the line.',
+    a: 'UK enforcement against end consumers is rare. Action focuses almost entirely on the sellers of unlicensed services. That said, subscribing to an obviously illegal service carries real practical risks: servers get taken down without warning, quality is unreliable at peak time, and there\'s no consumer protection if you lose access. Choosing a provider that can demonstrate legitimate operation removes those risks entirely.',
   },
   {
     q: 'Do I need a VPN for IPTV in the UK?',
-    a: 'A VPN is not required for a legal IPTV subscription. Some viewers still use one for general privacy, or because their ISP throttles video traffic in the evening. If you use a VPN, choose a reputable provider with UK servers and no logs — see the Wikipedia entry on VPNs for a neutral overview of how the technology works.',
+    a: 'No. A legal UK IPTV subscription doesn\'t require a VPN. Some viewers use one for general privacy purposes, or because their ISP throttles video traffic during evening peak hours. If you do choose to use one, pick a reputable provider with UK servers and a clear no-logs policy. The Wikipedia entry on VPNs covers the technology neutrally if you want technical background.',
   },
   {
     q: 'Is a UK TV Licence required to watch IPTV?',
-    a: 'A TV Licence is required in the UK if you watch or record live TV on any channel — including through IPTV — or use BBC iPlayer. It is a separate obligation from your IPTV subscription. The TV Licensing website has the full, up-to-date rules.',
+    a: 'Yes, if you watch or record any live TV programme on any platform (including IPTV) or use BBC iPlayer, you need a TV Licence. This is a separate legal obligation from your IPTV subscription. The TV Licensing website at tvlicensing.co.uk has the current rules and any recent updates.',
   },
   {
     q: 'How can I tell if an IPTV service is legal?',
-    a: 'Ask three questions before you pay: (1) Is there a UK business address and support channel? (2) Is there a proper refund policy and terms of service? (3) Are the prices realistic — a genuine multi-thousand-channel service cannot be run legally for £3 a month. Our £14.99 30-day trial exists precisely so you can verify all three without committing to a year.',
+    a: 'Three questions tell you most of what you need to know before paying: Does the provider have a UK-reachable contact method with real response times? Is there a published refund policy and terms of service? Are the prices realistic? Can a multi-thousand-channel service with all sports and 4K actually be run legally for £3 a month? Our UK IPTV BOX plans are designed so you can verify all three before committing to anything longer than a month.',
   },
 ];
 
@@ -110,8 +110,8 @@ const jsonLd = {
 };
 
 const relatedLinks = [
-  { href: '/blog/iptv-free-trial-uk/', label: 'IPTV Free Trial UK — What a Legit Test Looks Like' },
-  { href: '/blog/iptv-subscription-uk-buyers-guide/', label: 'IPTV Subscription UK — 2026 Buyer\'s Guide' },
+  { href: '/blog/iptv-free-trial-uk/', label: 'IPTV Free Trial UK: What a Legit Test Looks Like' },
+  { href: '/blog/iptv-subscription-uk-buyers-guide/', label: 'IPTV Subscription UK: 2026 Buyer\'s Guide' },
   { href: '/blog/cheap-iptv-uk-scam-or-legit/', label: 'Cheap IPTV UK: Scam or Legit? Red Flags to Know' },
   { href: '/installation-guides/', label: 'All Device Installation Guides' },
 ];
@@ -157,7 +157,7 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
         <p class="mt-5 text-lg text-text-muted leading-relaxed">
           A clear, up-to-date answer to the most common IPTV question in the UK: <strong>is IPTV legal?</strong>
           Below, in plain English: what the law actually says, what Ofcom cares about, what changes when
-          you cross the line, and how our <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} 30-day IPTV trial</a>
+          you cross the line, and how our <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">UK IPTV BOX UK IPTV subscription from £{site.price}</a>
           is structured to keep you firmly on the right side of it.
         </p>
 
@@ -167,8 +167,8 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href={waLink(`Hi, I read the "Is IPTV legal UK" guide and would like to start my £${site.price} trial.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
-            Start £{site.price} legal trial
+          <a href={waLink(`Hi, I read the "Is IPTV legal UK" guide and would like to get the UK IPTV BOX subscription.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Get UK IPTV BOX Subscription
           </a>
           <a href="#quick-answer" class="btn-secondary">The 30-second answer</a>
         </div>
@@ -182,34 +182,32 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
     <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
       <article class="legal-prose">
         <p class="text-sm text-text-muted italic">
-          Disclaimer: this article is general consumer information, not legal advice. For specific legal
-          questions consult a qualified solicitor. Rules can change — always verify current guidance on
+          This article is general consumer information, not legal advice. For specific legal questions, speak with a qualified solicitor. Rules can and do change, so always verify current guidance on
           <a href="https://www.ofcom.org.uk/" target="_blank" rel="noopener noreferrer nofollow">Ofcom</a>
           and <a href="https://www.gov.uk/" target="_blank" rel="noopener noreferrer nofollow">gov.uk</a>.
         </p>
 
         <h2 id="quick-answer">The 30-second answer</h2>
         <p>
-          <strong>IPTV itself is legal in the UK.</strong> It is a delivery method — like Freeview,
-          satellite, or on-demand streaming. What can be illegal is <em>what</em> a specific IPTV
-          provider is broadcasting and <em>whether they have paid</em> the rights-holders for it. In
-          short: legal technology, sometimes-illegal use. The <a href="https://en.wikipedia.org/wiki/IPTV" target="_blank" rel="noopener noreferrer nofollow">IPTV entry on Wikipedia</a>
-          gives a solid neutral overview of the technology if you want the technical background.
+          <strong>IPTV is legal in the UK.</strong> It's a delivery technology, the same category as
+          Freeview, satellite or streaming. What determines legality is whether the specific provider
+          delivering your channels has paid the rights-holders for what they're broadcasting. Legal
+          technology, sometimes-illegal application. The <a href="https://en.wikipedia.org/wiki/IPTV" target="_blank" rel="noopener noreferrer nofollow">IPTV Wikipedia entry</a>
+          gives a solid technical overview if you want the background on how the delivery mechanism works.
         </p>
 
-        <h2>What "IPTV" actually is</h2>
+        <h2>What IPTV actually is</h2>
         <p>
-          IPTV — Internet Protocol Television — is the practice of delivering live TV channels and
-          on-demand video through the public internet, using the same underlying protocols as any other
-          streaming service you already use. Traditional broadcasters and BT, Sky, Virgin and Now all
-          use IPTV-adjacent technology behind the scenes; so does BBC iPlayer, so does Netflix. The
-          technology is content-neutral and lawful worldwide.
+          IPTV (Internet Protocol Television) delivers live TV channels and on-demand video over a standard
+          broadband connection, using the same underlying protocols as any other streaming service. Sky, BT,
+          Virgin and Now all use IPTV-adjacent technology in their own delivery systems. So does BBC iPlayer.
+          So does Netflix. The technology itself is content-neutral and legal everywhere.
         </p>
 
-        <h2>The three legal buckets — and where your provider sits</h2>
+        <h2>The three categories: and which one your provider sits in</h2>
         <p>
-          Every IPTV service in the UK falls into one of three buckets. Knowing which one your provider
-          sits in is the whole game.
+          Every UK IPTV service fits into one of three categories. Knowing which one applies to your
+          provider is what this whole question really comes down to.
         </p>
       </article>
 
@@ -244,79 +242,76 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
       </div>
 
       <article class="legal-prose mt-14">
-        <h2>What the law actually says (UK)</h2>
+        <h2>What UK law actually says</h2>
         <p>
-          Two pieces of UK legislation do the heavy lifting for IPTV cases:
+          Two statutes do most of the work in UK IPTV enforcement cases:
         </p>
         <ul>
           <li>
-            <strong>Copyright, Designs and Patents Act 1988</strong> — see the official text on
+            <strong>Copyright, Designs and Patents Act 1988:</strong> full text on
             <a href="https://www.legislation.gov.uk/ukpga/1988/48/contents" target="_blank" rel="noopener noreferrer nofollow">legislation.gov.uk</a>.
-            This is the primary law that governs unauthorised broadcasting and communication of copyrighted works to the public.
+            This is the primary legislation governing unauthorised broadcasting and communication of copyrighted works to the public.
           </li>
           <li>
-            <strong>Fraud Act 2006</strong> — read the summary on
+            <strong>Fraud Act 2006:</strong> overview on
             <a href="https://en.wikipedia.org/wiki/Fraud_Act_2006" target="_blank" rel="noopener noreferrer nofollow">Wikipedia</a>.
-            This is the law usually cited when unlicensed IPTV sellers are prosecuted (misrepresenting a service they have no right to sell).
+            This statute is typically cited when unlicensed IPTV sellers are prosecuted for misrepresenting services they have no right to distribute.
           </li>
         </ul>
         <p>
-          Both of these statutes are principally aimed at <em>the sellers</em> of unlicensed services,
-          not the ordinary viewer. That is why almost every high-profile UK IPTV case in the last ten
-          years has ended with a shop-owner, reseller or streamer being convicted — not a household
-          customer. But that does not make consumer risk zero, which brings us to…
+          Both target the sellers and distributors of unlicensed services, not household viewers. That
+          explains why every high-profile UK IPTV case over the past decade has ended with a seller or
+          reseller being convicted rather than a subscriber. But consumer risk isn't zero.
         </p>
 
-        <h2>What actually happens to consumers who pick the wrong service</h2>
+        <h2>What actually happens to subscribers who pick the wrong provider</h2>
         <p>
-          Even if enforcement rarely reaches end-viewers, choosing an unlicensed service exposes you to
-          a set of very real day-to-day headaches:
+          Even without direct legal exposure, choosing an unlicensed service comes with real day-to-day
+          costs:
         </p>
         <ul>
-          <li><strong>Sudden loss of channels.</strong> Rights-holders take unlicensed servers down without warning — usually at the worst possible moment (a major sporting fixture, a season premiere).</li>
-          <li><strong>Buffering and quality dips.</strong> Unlicensed operators can't scale — they oversell servers and quality collapses at peak time.</li>
-          <li><strong>No refunds, no recourse.</strong> If the service disappears three days in, your money is gone. Regulated UK payment protections (see <a href="https://www.gov.uk/consumer-protection-rights" target="_blank" rel="noopener noreferrer nofollow">consumer protection rights on gov.uk</a>) rarely apply to grey-market transactions.</li>
-          <li><strong>Card fraud risk.</strong> Handing card details to an anonymous Telegram seller is one of the fastest ways to get your details resold.</li>
-          <li><strong>ISP letters.</strong> Some UK ISPs issue warning notices to accounts identified as accessing unlicensed streams. Not criminal, but not fun.</li>
+          <li><strong>Servers get taken down without notice.</strong> Rights-holders act against unlicensed operators regularly, usually at the worst possible time: a major match, a season finale.</li>
+          <li><strong>Quality degrades at peak time.</strong> Unlicensed operators oversell server capacity. When demand spikes, picture quality drops and buffering starts.</li>
+          <li><strong>No refund, no recourse.</strong> If the service disappears after three days, the money is gone. Standard <a href="https://www.gov.uk/consumer-protection-rights" target="_blank" rel="noopener noreferrer nofollow">UK consumer protection rights</a> rarely apply to grey-market transactions.</li>
+          <li><strong>Card fraud risk.</strong> Handing payment details to an anonymous Telegram seller is a straightforward way to get them resold.</li>
+          <li><strong>ISP warning notices.</strong> Some UK ISPs issue notices to accounts linked to unlicensed stream access. Not criminal, but worth avoiding.</li>
         </ul>
 
-        <h2>How to pick an IPTV service that stays on the right side</h2>
+        <h2>How to find an IPTV provider that stays on the right side</h2>
         <p>
-          A properly-run UK IPTV provider will meet all of the following. Use it as a checklist before
-          you pay any provider — including us:
+          A properly operated UK IPTV provider should meet all of these. Use the list as a checklist
+          before paying anyone, including us:
         </p>
         <ol>
-          <li>A public trial or refund window (30 days is the current gold standard).</li>
-          <li>A UK-reachable support channel — WhatsApp, email or ticket system with real reply times.</li>
-          <li>Realistic pricing. If a "12,000 channel + all sports + all films + 4K" service costs less than a Freeview aerial, something does not add up.</li>
-          <li>Clear terms of service, privacy policy and refund policy.</li>
-          <li>Payment via mainstream rails (card, PayPal, bank transfer) — never crypto-only.</li>
+          <li>A public trial period or documented refund window. Thirty days is the current standard among credible providers.</li>
+          <li>A UK-reachable support channel: WhatsApp, email or a ticketing system with genuine response times.</li>
+          <li>Realistic pricing. A "12,000 channels including all sports and all films in 4K" service cannot be run legally for £3 a month.</li>
+          <li>Published terms of service, privacy policy and refund policy.</li>
+          <li>Payment via card, PayPal or bank transfer, not crypto-only.</li>
         </ol>
 
-        <h2>Where our £{site.price} IPTV trial fits</h2>
+        <h2>Where UK IPTV BOX fits</h2>
         <p>
-          We built our <a href="/#pricing">£{site.price} 30-day IPTV UK trial</a> to give you the safest
-          possible entry point: real credentials, real servers, real support, and a documented refund
-          policy — so you can test the service properly, verify it works on your device, and only
-          upgrade to a longer plan once you are confident. That is the definition of a "safe first
-          purchase" in this space in 2026.
+          Our <a href="/#pricing">UK IPTV BOX plans</a> are built around the principle that the safest
+          first purchase in any category is one you can verify before committing. Real credentials, real
+          servers, real support and a documented refund policy, so you test the service properly, confirm
+          it works on your device, and only move to a longer plan once you're satisfied. That's what
+          a responsible entry point looks like in this space.
         </p>
 
-        <h2>Ofcom, TV Licensing and BBC iPlayer — the other legal bits</h2>
+        <h2>TV Licensing and Ofcom: the two other legal obligations</h2>
         <p>
-          Two separate legal obligations exist alongside your IPTV subscription in the UK:
+          Two further legal requirements exist alongside your UK IPTV subscription:
         </p>
         <ul>
           <li>
-            <strong>TV Licence.</strong> Required if you watch <em>any</em> live TV or use BBC iPlayer,
-            regardless of platform. Full rules on
+            <strong>TV Licence.</strong> Required if you watch any live TV on any platform (IPTV included) or use BBC iPlayer. Full current rules at
             <a href="https://www.tvlicensing.co.uk/" target="_blank" rel="noopener noreferrer nofollow">tvlicensing.co.uk</a>.
           </li>
           <li>
-            <strong>Ofcom broadcast licensing.</strong> Ofcom is the UK regulator that authorises
-            broadcasters. Their consumer guidance on
-            <a href="https://www.ofcom.org.uk/tv-radio-and-on-demand" target="_blank" rel="noopener noreferrer nofollow">TV, radio and on-demand</a>
-            is the best single place to check current rules.
+            <strong>Ofcom broadcast licensing.</strong> Ofcom is the UK communications regulator. Their
+            <a href="https://www.ofcom.org.uk/tv-radio-and-on-demand" target="_blank" rel="noopener noreferrer nofollow">TV, radio and on-demand guidance</a>
+            is the most reliable single source for current rules on what broadcasters are and aren't permitted to do.
           </li>
         </ul>
 
@@ -340,14 +335,14 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
       <article class="legal-prose mt-14">
         <h2>The bottom line</h2>
         <p>
-          Is IPTV legal in the UK? <strong>Yes — provided the service is licensed and the content is
-          content you are entitled to view.</strong> The technology is legal. Ofcom regulates it. UK
-          consumers do not get prosecuted for owning a Fire Stick. What matters is picking a provider
-          who does the compliance work for you and can prove it — which is precisely what our
-          <a href="/#pricing">£{site.price} 30-day trial</a> is designed to let you verify.
+          Is IPTV legal in the UK? <strong>Yes, when the service holds the correct licences and the content
+          is something you\'re entitled to watch.</strong> The technology is lawful. Ofcom regulates it.
+          UK households don\'t get prosecuted for owning a Fire Stick. What matters is choosing a provider
+          that does the compliance work and can demonstrate it, which is exactly what our
+          <a href="/#pricing">UK IPTV BOX plans</a> are designed to let you verify before you commit.
         </p>
         <p>
-          Ready to try it the safe way? <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp</a> — we'll get you set up in under 15 minutes.
+          Want to try it the straightforward way? <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp</a> and we'll get you set up in under 15 minutes.
         </p>
       </article>
     </section>

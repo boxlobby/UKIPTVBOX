@@ -11,8 +11,8 @@ const fmt = (d: string) =>
   new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <BaseLayout
-  title="IPTV Trial Blog — UK Guides, Reviews & Buying Advice"
-  description="Honest IPTV buying guides, box reviews and setup walkthroughs for UK viewers. Ranked lists, comparisons and tips to get the most from your IPTV subscription."
+  title="UKIPTVBOX Blog: UK IPTV Guides, Reviews & Buying Advice"
+  description="Honest UK IPTV buying guides, app reviews and setup walkthroughs from UKIPTVBOX. Ranked lists, comparisons and tips to get the most from your IPTV subscription."
   includeSchema={false}
 >
   <Header />
@@ -25,15 +25,15 @@ const fmt = (d: string) =>
       <div class="container-x pt-16 pb-12 md:pt-24 md:pb-16 max-w-3xl text-center mx-auto">
         <span class="eyebrow">Blog</span>
         <h1 class="mt-5 font-display text-4xl md:text-5xl font-bold tracking-tight text-text-primary">
-          IPTV UK — <span class="text-brand-light">guides, reviews & buying advice</span>
+          IPTV UK: <span class="text-brand-light">guides, reviews & buying advice</span>
         </h1>
         <p class="mt-5 text-lg text-text-muted leading-relaxed">
           Honest, UK-focused writing on the best IPTV boxes, apps and set-ups. Every article is
-          tested against a real IPTV subscription — no affiliate fluff.
+          tested against a real IPTV subscription. No affiliate fluff.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
           <a href={waLink()} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
-            Start my £{site.price} IPTV trial
+            Get my UKIPTVBOX subscription
           </a>
           <a href="/installation-guides/" class="btn-secondary">Installation guides</a>
         </div>

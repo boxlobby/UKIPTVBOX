@@ -16,15 +16,15 @@
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
-    background-color: #0A0F1E;
-    color: #F5F7FA;
+    background-color: #241056;
+    color: #F1EEFA;
   }
 
   body {
     @apply bg-base text-text-primary font-sans antialiased;
     background-image:
-      radial-gradient(900px 500px at 50% -10%, rgba(27, 198, 255, 0.18), transparent 60%),
-      radial-gradient(700px 400px at 100% 20%, rgba(34, 211, 238, 0.08), transparent 60%);
+      radial-gradient(900px 500px at 50% -10%, rgba(91,46,190,.5), transparent 60%),
+      radial-gradient(700px 400px at 100% 20%, rgba(198,181,238,.10), transparent 60%);
     position: relative;
   }
 
@@ -38,24 +38,24 @@
     color: inherit;
   }
 
-  /* Force muted text (section descriptions, eyebrows, etc.) to a readable value. */
-  .text-text-muted { color: #FFFFFF !important; }
-  .text-text-primary { color: #FFFFFF !important; }
+  /* Force muted text to readable near-white on dark backgrounds. */
+  .text-text-muted { color: #EEF2F3 !important; }
+  .text-text-primary { color: #F1EEFA !important; }
 
   h1, h2, h3, h4 {
     @apply font-display tracking-tight text-text-primary;
   }
 
   summary, details {
-    color: #F5F7FA;
+    color: #F1EEFA;
   }
   summary > span, details > p {
     color: inherit;
   }
 
   ::selection {
-    background: rgba(27, 198, 255, 0.45);
-    color: #fff;
+    background: rgba(211,249,79,.35);
+    color: #241056;
   }
 
   button, a {
@@ -73,7 +73,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-brand !text-white shadow-glow hover:bg-brand-hover hover:-translate-y-0.5 active:translate-y-0;
+    @apply btn bg-brand !text-[#241056] font-bold shadow-glow hover:bg-brand-hover hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-secondary {
@@ -101,8 +101,8 @@
     z-index: -1;
     pointer-events: none;
     background-image:
-      linear-gradient(to right, rgba(148, 179, 255, 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(148, 179, 255, 0.06) 1px, transparent 1px);
+      linear-gradient(to right, rgba(198,181,238,.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(198,181,238,.07) 1px, transparent 1px);
     background-size: 56px 56px;
     -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
             mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
@@ -114,7 +114,7 @@
   }
 
   .h-divider {
-    background: linear-gradient(90deg, transparent, #1E2740 20%, #1bc6ff 50%, #1E2740 80%, transparent);
+    background: linear-gradient(90deg, transparent, #4A2F9E 20%, #C6B5EE 50%, #4A2F9E 80%, transparent);
     height: 1px;
     opacity: 0.7;
   }
@@ -142,7 +142,7 @@
   .marquee::-webkit-scrollbar { display: none; }
   .marquee-track {
     @apply flex gap-3 sm:gap-4 w-max;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
   }
 
   /* Legal / long-form prose (Privacy, Refund, Terms). */
@@ -157,7 +157,7 @@
   .legal-prose h3 {
     @apply mt-8 mb-3 text-lg md:text-xl font-semibold text-text-primary tracking-tight;
   }
-  .legal-prose p { @apply text-text-muted; }
+  .legal-prose p { @apply text-text-primary; }
   .legal-prose strong { @apply text-text-primary font-semibold; }
   .legal-prose a { @apply text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light; }
   .legal-prose ul, .legal-prose ol { @apply pl-5 space-y-2; }
@@ -168,6 +168,13 @@
   .legal-prose hr { @apply my-10 border-border-subtle; }
   .legal-prose blockquote {
     @apply border-l-2 border-brand/60 pl-4 italic text-text-primary/90;
+  }
+
+  .eyebrow-light {
+    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-widest;
+    border-color: rgba(75, 34, 172, 0.25);
+    background: rgba(91, 46, 190, 0.08);
+    color: #4B22AC;
   }
 }
 

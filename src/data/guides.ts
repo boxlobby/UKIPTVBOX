@@ -23,7 +23,7 @@ export const guides: Guide[] = [
     title: 'How to install IPTV on a Smart TV (Samsung, LG, Sony)',
     device: 'Smart TV',
     summary:
-      'Install IPTV on Samsung Tizen, LG WebOS, Sony and Android TVs using XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV, Set IPTV or Smarters Player Lite — free trials included.',
+      'Install IPTV on Samsung Tizen, LG WebOS, Sony and Android TVs using XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV, Set IPTV or Smarters Player Lite, free trials included.',
     readMinutes: 8,
     recommendedApp: 'XOTT (free), IBO Player Pro, Hot Player or Bob Player',
     requirements: [

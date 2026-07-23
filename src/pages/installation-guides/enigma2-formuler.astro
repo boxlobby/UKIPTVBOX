@@ -35,15 +35,15 @@ const apps: App[] = [
     login: 'Xtream Codes API or M3U URL',
     supported: 'Formuler Z8 · Z10 · Z11 Pro · Z11 Pro Max · CC · CC-One',
     activateUrl: 'https://formuler.tv',
-    copy: `MYTVOnline 3 is the native IPTV app on every Formuler box — pre-installed, tuned for the Formuler hardware, and by far the easiest way to run our iptv service on a Formuler Z10, Z11 Pro or CC-One. It handles Xtream Codes login out of the box, downloads a full EPG in seconds and supports 4K HEVC HDR playback with Dolby audio passthrough.`,
+    copy: `MYTVOnline 3 is the native IPTV app on every Formuler box: pre-installed, tuned for the Formuler hardware, and by far the easiest way to run our iptv service on a Formuler Z10, Z11 Pro or CC-One. It handles Xtream Codes login out of the box, downloads a full EPG in seconds and supports 4K HEVC HDR playback with Dolby audio passthrough.`,
     steps: [
-      { title: 'Boot your Formuler', body: 'Plug the Formuler into your TV via HDMI, connect Ethernet (strongly recommended for stable HD/4K playback), and power on. The Formuler home screen appears — MYTVOnline 3 is the big tile at the top.' },
+      { title: 'Boot your Formuler', body: 'Plug the Formuler into your TV via HDMI, connect Ethernet (strongly recommended for stable HD/4K playback), and power on. The Formuler home screen appears. MYTVOnline 3 is the big tile at the top.' },
       { title: 'Open MYTVOnline → Add Portal', body: 'Launch MYTVOnline 3 → hit the "+" tile → choose "Portal Type: Xtream Codes API" (recommended over M3U).' },
       { title: 'Enter your credentials', body: 'Nickname (e.g. IPTV UK Trial) → server URL → username → password from your welcome message. Save.' },
       { title: 'Wait for the EPG', body: 'MYTVOnline downloads your full channel list and 7-day EPG within about 30 seconds. Poster art and film covers fill in over the next minute.' },
       { title: 'Enable 4K + Dolby passthrough', body: 'Menu → Settings → Audio → set to "Passthrough" for Dolby Atmos/DTS on films. Menu → Video → set output to Auto so HDR / Dolby Vision engages on 4K UK channels included in your iptv subscription.' },
     ],
-    tips: ['If MYTVOnline says "Server unreachable", WhatsApp us to confirm your account is active — every new iptv trial with us is provisioned within 10 minutes of ordering.'],
+    tips: ['If MYTVOnline says "Server unreachable", WhatsApp us to confirm your account is active: every new iptv trial with us is provisioned within 10 minutes of ordering.'],
   },
   {
     slug: 'ott-navigator',
@@ -54,7 +54,7 @@ const apps: App[] = [
     login: 'M3U URL · Xtream Codes API · Stalker Portal emulation',
     supported: 'Formuler Z8/Z10/Z11/CC · every Android TV box',
     activateUrl: 'https://play.google.com/store/search?q=ott+navigator&c=apps',
-    copy: `OTT Navigator is the perfect companion to MYTVOnline on any Formuler box — a completely independent second player that runs Xtream Codes, M3U and even Stalker Portal emulation side by side. Every Formuler owner should install it as a backup so a single-app crash never takes down your evening viewing. Also the go-to on non-Formuler Android boxes.`,
+    copy: `OTT Navigator is the perfect companion to MYTVOnline on any Formuler box: a completely independent second player that runs Xtream Codes, M3U and even Stalker Portal emulation side by side. Every Formuler owner should install it as a backup so a single-app crash never takes down your evening viewing. Also the go-to on non-Formuler Android boxes.`,
     steps: [
       { title: 'Install from Google Play', body: 'Formuler → Google Play Store → search "OTT Navigator". Install (free tier is fully usable).' },
       { title: 'Add a playlist', body: 'Open the app → Settings → Playlists → Add → choose Xtream Codes. Nickname it "IPTV UK".' },
@@ -77,10 +77,10 @@ const apps: App[] = [
       { title: 'Enable Telnet / SSH on your box', body: 'Menu → Setup → System → Network → confirm Telnet or SSH is enabled. Note the box\'s IP address (typically 192.168.x.x). Default login for most images: root / no password.' },
       { title: 'WhatsApp us for the auto-script command', body: 'Send us your order details. We reply with a one-line wget command that pulls your personalised bouquet installer from our server.' },
       { title: 'Open Telnet from your PC or phone', body: 'On PC: use PuTTY (Windows) or Terminal (Mac) → telnet 192.168.x.x → root. On phone: use JuiceSSH (Android) or Termius (iOS).' },
-      { title: 'Paste the command and press Enter', body: 'Paste the one-liner. The script downloads your bouquet, drops it into /etc/enigma2/, appends the include line to bouquets.tv and reloads settings — all in about 10 seconds.' },
-      { title: 'Restart GUI and enjoy', body: 'On the box: Menu → Standby/Restart → Restart GUI. When it comes back up, hit the TV button on the remote — the new "IPTV UK" bouquet is at the top of the list, grouped by category (UK, sports, films, series, kids, international).' },
+      { title: 'Paste the command and press Enter', body: 'Paste the one-liner. The script downloads your bouquet, drops it into /etc/enigma2/, appends the include line to bouquets.tv and reloads settings, all in about 10 seconds.' },
+      { title: 'Restart GUI and enjoy', body: 'On the box: Menu → Standby/Restart → Restart GUI. When it comes back up, hit the TV button on the remote. The new "IPTV UK" bouquet is at the top of the list, grouped by category (UK, sports, films, series, kids, international).' },
     ],
-    tips: ['If your box doesn\'t have wget, ask us for the curl version of the same script — works identically. Every current Enigma2 image ships with at least one.'],
+    tips: ['If your box doesn\'t have wget, ask us for the curl version of the same script. It works identically. Every current Enigma2 image ships with at least one.'],
   },
   {
     slug: 'e2-ftp',
@@ -90,15 +90,15 @@ const apps: App[] = [
     logo: '/installation-guides/apps/filezilla.svg',
     login: 'FTP client (FileZilla / WinSCP) → /etc/enigma2/',
     supported: 'Vu+ · Zgemma · Octagon · every Enigma2 box',
-    copy: `The traditional Enigma2 setup that has worked since the very first Vu+ Duo. We generate a userbouquet file for your iptv subscription and email it over; you drop it into /etc/enigma2/ on the box using FileZilla and add one include line to bouquets.tv. Slower than the auto-script method but doesn't need Telnet access — useful if your box has FTP but not SSH.`,
+    copy: `The traditional Enigma2 setup that has worked since the very first Vu+ Duo. We generate a userbouquet file for your iptv subscription and email it over; you drop it into /etc/enigma2/ on the box using FileZilla and add one include line to bouquets.tv. Slower than the auto-script method but doesn't need Telnet access, so it's useful if your box has FTP but not SSH.`,
     steps: [
       { title: 'Enable FTP on your Enigma2 box', body: 'Menu → Setup → System → Network → confirm FTP is enabled. Note the box IP (typically 192.168.x.x). Default login on most images: root / (blank password).' },
-      { title: 'Get your bouquet file from us', body: 'WhatsApp us with your order details. We email a file named userbouquet.iptv-uk.tv and a single line of text to append to bouquets.tv — both tied to your iptv trial credentials.' },
+      { title: 'Get your bouquet file from us', body: 'WhatsApp us with your order details. We email a file named userbouquet.iptv-uk.tv and a single line of text to append to bouquets.tv, both tied to your iptv trial credentials.' },
       { title: 'Connect with FileZilla', body: 'Open FileZilla on your PC → Host: box IP, Username: root, Port: 21, blank password → Connect. On the right pane navigate to /etc/enigma2/.' },
       { title: 'Upload and edit', body: 'Drop userbouquet.iptv-uk.tv into /etc/enigma2/. Open bouquets.tv in FileZilla\'s built-in editor and append the include line we sent (usually one line starting "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET..."). Save.' },
-      { title: 'Reload settings on the box', body: 'On the Enigma2 box: Menu → Standby/Restart → Restart GUI. Hit the TV button on the remote — the new "IPTV UK" bouquet appears at the top of the bouquet list.' },
+      { title: 'Reload settings on the box', body: 'On the Enigma2 box: Menu → Standby/Restart → Restart GUI. Hit the TV button on the remote. The new "IPTV UK" bouquet appears at the top of the bouquet list.' },
     ],
-    tips: ['Keep only one active IPTV bouquet at a time — running two overlapping bouquets from different iptv subscriptions causes channel-number clashes with your existing FTA / satellite channels.'],
+    tips: ['Keep only one active IPTV bouquet at a time: running two overlapping bouquets from different iptv subscriptions causes channel-number clashes with your existing FTA / satellite channels.'],
   },
   {
     slug: 'xtreamity',
@@ -108,42 +108,42 @@ const apps: App[] = [
     logo: '/installation-guides/apps/xtreamity.svg',
     login: 'Xtream Codes API (entered on the box)',
     supported: 'Vu+ · Zgemma · Octagon · every OpenATV/OpenPLi image',
-    copy: `Xtreamity is the Enigma2 plugin equivalent of IPTV Smarters Pro — you install it once, enter your Xtream Codes credentials on the box, and it presents your entire iptv subscription (Live TV, Movies, Series) as a Kodi-style interface inside Enigma2. Great for viewers who want VOD and series on their satellite receiver without messing with bouquets.`,
+    copy: `Xtreamity is the Enigma2 plugin equivalent of IPTV Smarters Pro: you install it once, enter your Xtream Codes credentials on the box, and it presents your entire iptv subscription (Live TV, Movies, Series) as a Kodi-style interface inside Enigma2. Great for viewers who want VOD and series on their satellite receiver without messing with bouquets.`,
     steps: [
       { title: 'Install the Xtreamity plugin', body: 'On the Enigma2 box: Menu → Plugins → Green button (Download) → Extensions → Xtreamity → Install. Reboot when prompted.' },
       { title: 'Open Xtreamity', body: 'Menu → Plugins → Xtreamity. On first launch it asks for a portal.' },
       { title: 'Enter your Xtream Codes login', body: 'Portal name (e.g. IPTV UK) → server URL → username → password from your welcome message. Save.' },
-      { title: 'Browse Live TV, Movies, Series', body: 'Xtreamity home screen shows three tiles — Live TV, Movies, Series — populated from your iptv service. Use the remote arrows and OK to navigate.' },
+      { title: 'Browse Live TV, Movies, Series', body: 'Xtreamity home screen shows three tiles (Live TV, Movies, Series) populated from your iptv service. Use the remote arrows and OK to navigate.' },
       { title: 'Pin to the home menu', body: 'Xtreamity → Settings → "Add to Main Menu" so it launches from the Enigma2 home screen with one press, alongside your satellite bouquets.' },
     ],
-    tips: ['Xtreamity works alongside a traditional bouquet — you can run both, so live TV zaps via bouquet keeps its channel numbers while VOD/Series lives in Xtreamity.'],
+    tips: ['Xtreamity works alongside a traditional bouquet: you can run both, so live TV zaps via bouquet keeps its channel numbers while VOD/Series lives in Xtreamity.'],
   },
 ];
 
 const faqs = [
   {
-    q: 'Formuler or Enigma2 — which is easier to set up in 2026?',
-    a: `Formuler by a mile. MYTVOnline 3 is pre-installed on every current Formuler box (Z10, Z11 Pro, CC-One) — you just enter your Xtream Codes login and you're watching UK channels in under 2 minutes. Enigma2 (Vu+, Zgemma, Octagon) needs either the auto-script (fast, needs Telnet) or the FTP bouquet upload (slower, more manual). Both work with the same ${site.name} iptv subscription on our side.`,
+    q: 'Formuler or Enigma2: which is easier to set up in 2026?',
+    a: `Formuler by a mile. MYTVOnline 3 is pre-installed on every current Formuler box (Z10, Z11 Pro, CC-One). You just enter your Xtream Codes login and you're watching UK channels in under 2 minutes. Enigma2 (Vu+, Zgemma, Octagon) needs either the auto-script (fast, needs Telnet) or the FTP bouquet upload (slower, more manual). Both work with the same ${site.name} iptv subscription on our side.`,
   },
   {
     q: 'Do I need to know Linux to set up IPTV on Enigma2?',
-    a: `No — with the auto-script method we walk you through the two Telnet commands via WhatsApp. If you can copy and paste, you can set up an Enigma2 box on our iptv service. Every ${site.name} iptv trial customer with a Vu+ or Zgemma follows the same auto-script and it works first time on 95%+ of boxes.`,
+    a: `No. With the auto-script method we walk you through the two Telnet commands via WhatsApp. If you can copy and paste, you can set up an Enigma2 box on our iptv service. Every ${site.name} iptv trial customer with a Vu+ or Zgemma follows the same auto-script and it works first time on 95%+ of boxes.`,
   },
   {
     q: 'Will these methods work on my older Vu+ Duo or Zgemma H9?',
-    a: 'Yes — every method in this guide works on any Enigma2 box running OpenATV, OpenPLi or VIX images from 2019 onward. The auto-script and manual FTP paths are firmware-agnostic. Xtreamity requires the plugin repositories that ship with any modern Enigma2 image. Even a Vu+ Duo2 from 2013 handles our iptv uk trial without a hiccup.',
+    a: 'Yes. Every method in this guide works on any Enigma2 box running OpenATV, OpenPLi or VIX images from 2019 onward. The auto-script and manual FTP paths are firmware-agnostic. Xtreamity requires the plugin repositories that ship with any modern Enigma2 image. Even a Vu+ Duo2 from 2013 handles our iptv uk trial without a hiccup.',
   },
   {
     q: 'Can I use the same iptv subscription on my Formuler and other devices?',
-    a: `Yes. One ${site.name} iptv subscription covers every device you own — Formuler, Enigma2, Fire Stick, Apple TV, Smart TV, phone, tablet. Just enter the same Xtream Codes credentials (or paste the same M3U URL) in each app. See our Fire Stick, Apple TV and Mobile & Tablet installation guides for those devices.`,
+    a: `Yes. One ${site.name} iptv subscription covers every device you own: Formuler, Enigma2, Fire Stick, Apple TV, Smart TV, phone, tablet. Just enter the same Xtream Codes credentials (or paste the same M3U URL) in each app. See our Fire Stick, Apple TV and Mobile & Tablet installation guides for those devices.`,
   },
   {
     q: 'Does the Enigma2 bouquet break my satellite / FTA channels?',
-    a: 'No — the auto-script and FTP upload methods add your IPTV bouquet as an additional bouquet, not a replacement. Your existing satellite, FTA and terrestrial bouquets stay exactly where they are. If you ever want to remove IPTV, delete the userbouquet file from /etc/enigma2/ and restart GUI — clean removal, no side effects on your iptv subscriptions.',
+    a: 'No. The auto-script and FTP upload methods add your IPTV bouquet as an additional bouquet, not a replacement. Your existing satellite, FTA and terrestrial bouquets stay exactly where they are. If you ever want to remove IPTV, delete the userbouquet file from /etc/enigma2/ and restart GUI. Clean removal, no side effects on your iptv subscriptions.',
   },
   {
     q: 'Is IPTV on Formuler and Enigma2 safe and legal in the UK?',
-    a: `Installing MYTVOnline, OTT Navigator, Xtreamity and running Enigma2 bouquets is 100% legal — MYTVOnline is Formuler's own app, OTT Navigator is on the official Google Play Store, and Enigma2 is a mainstream open-source TV OS. What you watch through them depends on your iptv subscription. Every ${site.name} iptv trial ships from licensed servers with a full UK support team on WhatsApp.`,
+    a: `Installing MYTVOnline, OTT Navigator, Xtreamity and running Enigma2 bouquets is 100% legal: MYTVOnline is Formuler's own app, OTT Navigator is on the official Google Play Store, and Enigma2 is a mainstream open-source TV OS. What you watch through them depends on your iptv subscription. Every ${site.name} iptv trial ships from licensed servers with a full UK support team on WhatsApp.`,
   },
   {
     q: 'How long does Formuler / Enigma2 setup actually take?',
@@ -164,8 +164,8 @@ const jsonLd = {
     },
     {
       '@type': 'Article',
-      headline: 'How to install IPTV on Enigma2 & Formuler — 5 methods ranked (2026)',
-      description: 'Complete Enigma2 and Formuler IPTV setup guide. Step-by-step for MYTVOnline 3, OTT Navigator, Enigma2 auto-script, manual FTP bouquet upload and the Xtreamity plugin — all working with your iptv uk trial on Formuler Z10/Z11, Vu+, Zgemma and Octagon.',
+      headline: 'How to install IPTV on Enigma2 & Formuler: 5 methods ranked (2026)',
+      description: 'Complete Enigma2 and Formuler IPTV setup guide. Step-by-step for MYTVOnline 3, OTT Navigator, Enigma2 auto-script, manual FTP bouquet upload and the Xtreamity plugin, all working with your iptv uk trial on Formuler Z10/Z11, Vu+, Zgemma and Octagon.',
       image: ogImage,
       author: { '@type': 'Organization', name: `${site.name} Editorial`, url: site.url },
       publisher: {
@@ -186,7 +186,7 @@ const jsonLd = {
       totalTime: 'PT5M',
       step: apps.flatMap((app) => app.steps.map((s, i) => ({
         '@type': 'HowToStep',
-        name: `${app.name} — ${s.title}`,
+        name: `${app.name}: ${s.title}`,
         text: s.body,
         position: i + 1,
       }))),
@@ -210,8 +210,8 @@ const relatedGuides = [
 ];
 ---
 <BaseLayout
-  title={`Enigma2 & Formuler IPTV setup — 5 methods for Vu+, Zgemma & Formuler Z11 (2026) | ${site.name}`}
-  description="Complete Enigma2 and Formuler IPTV setup guide. Step-by-step MYTVOnline 3, OTT Navigator, Enigma2 auto-script, FTP bouquet and Xtreamity — all working with your iptv uk trial on Formuler Z10/Z11 Pro, Vu+, Zgemma, Octagon."
+  title={`Enigma2 & Formuler IPTV setup: 5 methods for Vu+, Zgemma & Formuler Z11 (2026) | ${site.name}`}
+  description="Complete Enigma2 and Formuler IPTV setup guide. Step-by-step MYTVOnline 3, OTT Navigator, Enigma2 auto-script, FTP bouquet and Xtreamity, all working with your iptv uk trial on Formuler Z10/Z11 Pro, Vu+, Zgemma, Octagon."
   canonical={canonical}
   ogImage={ogImage}
   includeSchema={false}
@@ -245,11 +245,11 @@ const relatedGuides = [
         </div>
 
         <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
-          Enigma2 &amp; Formuler IPTV — 5 methods for Vu+, Zgemma &amp; Formuler Z11 (2026)
+          Enigma2 &amp; Formuler IPTV: 5 methods for Vu+, Zgemma &amp; Formuler Z11 (2026)
         </h1>
         <p class="mt-5 text-lg text-text-muted leading-relaxed">
           Formuler and Enigma2 boxes are the enthusiasts' choice for
-          <strong>IPTV</strong> in the UK — dedicated tuners, hybrid satellite + IPTV bouquets,
+          <strong>IPTV</strong> in the UK: dedicated tuners, hybrid satellite + IPTV bouquets,
           and total control of the channel line-up. This guide covers the five setup methods we
           support on every current Formuler (Z10, Z11 Pro, Z11 Pro Max, CC-One) and every
           Enigma2 box (Vu+, Zgemma, Octagon, older Formuler F-series). From the 2-minute
@@ -273,7 +273,7 @@ const relatedGuides = [
         <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
           <img
             src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Enigma2_Formuler_guide_2026_202607210431.jpeg"
-            alt="Enigma2 and Formuler IPTV setup — MYTVOnline 3, OTT Navigator, Enigma2 auto-script and Xtreamity"
+            alt="Enigma2 and Formuler IPTV setup: MYTVOnline 3, OTT Navigator, Enigma2 auto-script and Xtreamity"
             width="1200"
             height="630"
             loading="eager"
@@ -292,35 +292,35 @@ const relatedGuides = [
         <p>
           Every <strong>Formuler</strong> box and every <strong>Enigma2</strong> receiver
           (Vu+, Zgemma, Octagon and older Formuler F-series) can run <strong>IPTV</strong> in
-          under 10 minutes — you just pick the right method for your box. Formuler owners have
+          under 10 minutes. Just pick the right method for your box. Formuler owners have
           MYTVOnline 3 pre-installed and are online in under 2 minutes; Enigma2 owners choose
           between a modern Telnet auto-script or the traditional FTP bouquet upload. Every
           method below works with the same Xtream Codes credentials or personal bouquet file
-          from your <strong>iptv subscription</strong> — no re-buying, no per-device fee.
+          from your <strong>iptv subscription</strong>, with no re-buying and no per-device fee.
         </p>
 
         <p>Short on time? The three methods that cover 95% of setups:</p>
         <ul>
-          <li><a href="#mytvonline"><strong>MYTVOnline 3</strong></a> — Formuler owners, 2 minutes, Xtream Codes login</li>
-          <li><a href="#e2-autoscript"><strong>Enigma2 auto-script</strong></a> — Vu+/Zgemma/Octagon, 5 minutes via Telnet</li>
-          <li><a href="#ott-navigator"><strong>OTT Navigator</strong></a> — the free backup player for Formuler and Android-based Enigma2 hybrids</li>
+          <li><a href="#mytvonline"><strong>MYTVOnline 3</strong></a>: Formuler owners, 2 minutes, Xtream Codes login</li>
+          <li><a href="#e2-autoscript"><strong>Enigma2 auto-script</strong></a>: Vu+/Zgemma/Octagon, 5 minutes via Telnet</li>
+          <li><a href="#ott-navigator"><strong>OTT Navigator</strong></a>: the free backup player for Formuler and Android-based Enigma2 hybrids</li>
         </ul>
       </article>
 
       <!-- Callout -->
       <div class="mt-10 rounded-2xl border border-brand/25 bg-brand/5 p-5 md:p-6">
         <div class="flex items-start gap-3">
-          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-light">
+          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand !text-[#241056]">
             <Icon name="sparkles" size={16} />
           </span>
           <div class="min-w-0">
             <p class="font-semibold text-text-primary">Two audiences, one guide</p>
             <p class="mt-2 text-sm text-text-muted leading-relaxed">
-              <span class="text-brand-light font-medium">Formuler owners</span> — start with
+              <span class="text-brand-light font-medium">Formuler owners</span>: start with
               method 1 (MYTVOnline 3) and add method 2 (OTT Navigator) as backup. Skip 3–5.
               <br />
               <span class="text-brand-light font-medium">Enigma2 owners</span> (Vu+, Zgemma,
-              Octagon) — start with method 3 (auto-script). Method 4 is the manual fallback;
+              Octagon): start with method 3 (auto-script). Method 4 is the manual fallback;
               method 5 (Xtreamity) adds VOD to your existing satellite bouquets.
             </p>
           </div>
@@ -425,7 +425,7 @@ const relatedGuides = [
             <ol class="mt-4 space-y-4">
               {app.steps.map((s, i) => (
                 <li class="flex gap-4">
-                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold text-white shadow-glow">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold !text-[#241056] shadow-glow">
                     {i + 1}
                   </span>
                   <div class="min-w-0">
@@ -473,7 +473,7 @@ const relatedGuides = [
 
       <!-- Comparison -->
       <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
-        Enigma2 &amp; Formuler methods — side-by-side
+        Enigma2 &amp; Formuler methods: side-by-side
       </h2>
       <p class="mt-3 text-text-muted">All five methods at a glance.</p>
       <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
@@ -547,16 +547,16 @@ const relatedGuides = [
         <h3>Formuler Z10 / Z11 Pro / CC-One owners</h3>
         <p>
           Modern Formulers are Android TV boxes with a native IPTV app on top. MYTVOnline 3
-          delivers a proper 4K HDR experience with Dolby Vision passthrough — the best possible
+          delivers a proper 4K HDR experience with Dolby Vision passthrough: the best possible
           front-end for our <strong>iptv service</strong>. Add TiviMate from the Play Store if
           you want an Android TV player alongside MYTVOnline (see our
           <a href="/installation-guides/nvidia-shield/">Nvidia Shield guide</a> for TiviMate
-          setup — the same instructions apply).
+          setup; the same instructions apply).
         </p>
 
         <h3>Vu+ Duo, Zgemma H9/H10 &amp; Octagon SF owners</h3>
         <p>
-          Classic Enigma2. The auto-script is the modern way — one Telnet paste and your
+          Classic Enigma2. The auto-script is the modern way: one Telnet paste and your
           bouquet is live. Enigma2's bouquet system integrates IPTV channels directly into
           your zapping list, so a Sky Sports Main Event IPTV channel can sit right next to
           your FTA Freesat channels. No other setup handles hybrid <strong>iptv
@@ -567,16 +567,16 @@ const relatedGuides = [
         <p>
           Enigma2 bouquets are brilliant for live TV but not designed for VOD. Xtreamity
           bolts on a Kodi-style VOD/Series interface using the same Xtream Codes credentials as
-          your bouquet — install it on any Enigma2 box to get the best of both worlds from
+          your bouquet. Install it on any Enigma2 box to get the best of both worlds from
           one <strong>iptv subscription</strong>.
         </p>
 
         <h2>Try our IPTV UK trial on any Formuler or Enigma2 box</h2>
         <p>
-          Every method on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a> —
+          Every method on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a>:
           same Xtream Codes credentials, same personalised bouquet file, same UK support on
           WhatsApp. One set of <strong>iptv subscriptions</strong> credentials works across
-          Formuler, Enigma2, Fire Stick, Apple TV, Smart TV, phone and tablet — no per-device
+          Formuler, Enigma2, Fire Stick, Apple TV, Smart TV, phone and tablet, with no per-device
           fee.
         </p>
 

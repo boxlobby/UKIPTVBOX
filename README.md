@@ -1,6 +1,6 @@
-# iptvtrial.org
+# ukiptvbox.com
 
-Landing page for **IPTV Trial** — 30-day UK IPTV trial for £12.99.
+Landing page for **UKIPTVBOX** — UK IPTV subscription with 4 plans (1, 3, 6 and 12 months) from £14.99.
 
 Static site built with **Astro 4 + Tailwind CSS**, hosted on **Cloudflare Pages**.
 
@@ -36,8 +36,9 @@ public/
 
 1. In `src/data/site.ts`, replace:
    - `whatsapp` — real WhatsApp Business number (digits only, no `+`).
-   - `supportEmail` — real support email.
+   - `supportEmail` — already set to `support@ukiptvbox.com`, confirm it's live.
    - `reviews.count` / `reviews.rating` — keep honest.
+   - `packages` — update prices if needed.
 2. Rasterise `public/og-image.svg` → `public/og-image.png` (1200×630) for Twitter/X compatibility, then update `BaseLayout.astro` to point at `.png`.
 3. Generate `public/apple-touch-icon.png` (180×180) from the favicon.
 4. Review all copy in `src/data/*.ts`.

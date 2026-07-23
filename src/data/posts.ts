@@ -20,9 +20,9 @@ export const posts: BlogPost[] = [
       'The honest guide to an IPTV free trial UK: what to test, red flags to avoid, and why a genuine 30-day IPTV trial beats a "free" 24-hour link every time.',
     category: 'Trial Guide',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/IPTV_Free_Trial_UK_stopwatch_202607201536.webp',
-    imageAlt: 'IPTV Free Trial UK stopwatch showing what a legit 24 to 72 hour IPTV TRIAL test looks like',
+    imageAlt: 'IPTV Free Trial UK stopwatch showing what a legitimate 30-day UKIPTVBOX test looks like',
     published: '2026-07-14',
-    updated: '2026-07-21',
+    updated: '2026-07-22',
     readMinutes: 10,
     author: 'James Whitfield',
     keywords: [
@@ -39,14 +39,14 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'is-iptv-legal-uk',
-    title: 'Is IPTV Legal in the UK? A 2026 Plain-English Explainer',
+    title: 'Is IPTV Legal in the UK? 2026 Plain-English Guide',
     excerpt:
       'A clear, up-to-date guide to IPTV legality in the UK: what is legal, what isn\'t, what Ofcom actually says, and how to pick a provider that keeps you on the right side of the law.',
     category: 'Legal',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/IPTV_legal_UK_explainer_202607201513.webp',
-    imageAlt: 'Is IPTV legal in the UK 2026 plain-English explainer for IPTV TRIAL viewers',
+    imageAlt: 'Is IPTV legal in the UK 2026 plain-English guide for UKIPTVBOX subscribers',
     published: '2026-07-07',
-    updated: '2026-07-14',
+    updated: '2026-07-22',
     readMinutes: 9,
     author: 'James Whitfield',
     keywords: [
@@ -66,9 +66,9 @@ export const posts: BlogPost[] = [
       'UK buyer\'s guide to choosing an IPTV subscription in 2026: server uptime, EPG quality, catch-up, trial length, payment safety and what to ask before you pay.',
     category: 'Buying Guide',
     image: "https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/IPTV_Subscription_UK_Buyer's_Guide_202607201538.webp",
-    imageAlt: 'IPTV Subscription UK 2026 buyer guide for checking an IPTV TRIAL before you pay',
+    imageAlt: 'IPTV Subscription UK 2026 buyer guide: choosing the best UK IPTV subscription with UKIPTVBOX',
     published: '2026-06-30',
-    updated: '2026-07-14',
+    updated: '2026-07-22',
     readMinutes: 12,
     author: 'James Whitfield',
     keywords: [
@@ -84,14 +84,14 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'cheap-iptv-uk-scam-or-legit',
-    title: 'Cheap IPTV UK: How to Spot Genuine Value vs a Scam (2026)',
+    title: 'Cheap IPTV UK: Scam or Legit? 2026 Red Flag Guide',
     excerpt:
       'Cheap IPTV UK is littered with £5 lifetime scams. Spot the red flags, find genuine value, and see why a monitored 30-day IPTV trial is the safer choice.',
     category: 'Buying Guide',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Shield_icon_vs_warning_sign_202607201558.webp',
-    imageAlt: 'Cheap IPTV UK shield and warning sign showing genuine IPTV TRIAL value versus scams in 2026',
+    imageAlt: 'Cheap IPTV UK shield vs warning sign: how to spot genuine value vs scams with UKIPTVBOX',
     published: '2026-06-23',
-    updated: '2026-07-14',
+    updated: '2026-07-22',
     readMinutes: 10,
     author: 'James Whitfield',
     keywords: [
@@ -112,9 +112,9 @@ export const posts: BlogPost[] = [
       'UK guide to installing IPTV Smarters Pro on Firestick: sideload with Downloader, Xtream Codes / M3U login, EPG setup and fixes for the most common errors.',
     category: 'Setup Guide',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Firestick_IPTV_Smarters_Pro_setu%E2%80%A6_202607201949%20(1).webp',
-    imageAlt: 'IPTV Smarters Pro on Firestick full UK install and setup guide for IPTV TRIAL viewers in 2026',
+    imageAlt: 'IPTV Smarters Pro on Firestick full UK install guide for UKIPTVBOX subscribers in 2026',
     published: '2026-06-16',
-    updated: '2026-07-14',
+    updated: '2026-07-22',
     readMinutes: 11,
     author: 'James Whitfield',
     keywords: [
@@ -135,9 +135,9 @@ export const posts: BlogPost[] = [
       'Best IPTV player apps for UK viewers in 2026, ranked by EPG quality, catch-up and multi-view. Compare Smarters Pro, TiviMate and OTT Navigator side by side.',
     category: 'App Reviews',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/IPTV_player_apps_comparison_202607201951%20(1).webp',
-    imageAlt: 'Best IPTV player apps 2026 comparison for IPTV TRIAL viewers including Smarters TiviMate and OTT Navigator',
+    imageAlt: 'Best IPTV player apps UK 2026 comparison: Smarters, TiviMate and OTT Navigator for UKIPTVBOX',
     published: '2026-06-09',
-    updated: '2026-07-14',
+    updated: '2026-07-22',
     readMinutes: 12,
     author: 'James Whitfield',
     keywords: [
@@ -153,14 +153,14 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'top-5-iptv-boxes-uk-2026',
-    title: 'Top 5 IPTV Boxes UK 2026 — Ranked & Tested',
+    title: 'Top 5 IPTV Boxes UK 2026: Ranked & Tested',
     excerpt:
       'The five best IPTV boxes to buy in the UK for 2026, ranked on 4K playback, app support, EPG quality and value. Covers the Formuler Z11 Pro Max, Nvidia Shield, Fire TV Stick 4K Max and more.',
     category: 'Buying Guide',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/IPTV_boxes_ranked_and_tested_202607201510.webp',
-    imageAlt: 'Top 5 IPTV boxes UK 2026 ranked and tested for an IPTV TRIAL setup',
+    imageAlt: 'Top 5 IPTV boxes UK 2026 ranked and tested: best UK IPTV hardware for UKIPTVBOX',
     published: '2026-07-19',
-    updated: '2026-07-21',
+    updated: '2026-07-22',
     readMinutes: 12,
     author: 'James Whitfield',
     keywords: [

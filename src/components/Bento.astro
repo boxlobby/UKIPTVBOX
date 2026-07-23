@@ -9,7 +9,7 @@ const cards = [
     badge: '4K QUALITY',
     label: 'Live Action',
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp',
-    alt: 'Men watching a live football match on an IPTV trial UK service in stunning 4K quality',
+    alt: 'Men watching a live football match on UK IPTV BOX UK IPTV subscription in stunning 4K quality',
     area: 'live',
   },
   {
@@ -26,7 +26,7 @@ const cards = [
     badge: 'PRIVATE & SECURE',
     label: 'VPN Protection',
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Woman_using_tablet_in_bed_202607200436.webp',
-    alt: 'Woman streaming IPTV service UK privately on a tablet with VPN-friendly secure access',
+    alt: 'Woman streaming UK IPTV BOX UK IPTV subscription privately on a tablet with VPN-friendly secure access',
     area: 'multi',
   },
   {
@@ -64,7 +64,7 @@ const cards = [
           <div class="bento-overlay"></div>
           <div class="relative z-10 flex h-full flex-col justify-end p-6 sm:p-7 md:p-8">
             {c.badge && (
-              <span class="mb-3 inline-flex w-fit items-center rounded-md bg-brand px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest text-white shadow-glow">
+              <span class="mb-3 inline-flex w-fit items-center rounded-md bg-brand px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest shadow-glow" style="color:#241056;">
                 {c.badge}
               </span>
             )}
@@ -87,21 +87,19 @@ const cards = [
     position: relative;
     overflow: hidden;
     border-radius: 1.25rem;
-    border: 1px solid rgba(30, 39, 64, 0.9);
-    background: #0F1730;
+    border: 1px solid rgba(74, 47, 158, 0.8);
+    background: #2E1770;
     min-height: 260px;
-    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 300ms ease;
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), border-color 300ms ease;
   }
   .bento-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(27, 198, 255, 0.6);
+    border-color: rgba(211, 249, 79, 0.5);
   }
   .bento-overlay {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(to top, rgba(10, 15, 30, 0.92) 0%, rgba(10, 15, 30, 0.55) 45%, rgba(10, 15, 30, 0.15) 100%);
+    background: linear-gradient(to top, rgba(36,16,86,.92) 0%, rgba(36,16,86,.55) 45%, rgba(36,16,86,.12) 100%);
     z-index: 1;
     pointer-events: none;
   }

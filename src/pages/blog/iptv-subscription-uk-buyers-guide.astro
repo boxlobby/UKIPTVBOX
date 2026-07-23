@@ -14,78 +14,78 @@ const ogImage = post.image.startsWith('http') ? post.image : site.url + post.ima
 const criteria = [
   {
     n: 1,
-    title: 'Server uptime and peak-hour stability',
+    title: 'Peak-hour server stability',
     detail:
-      'The single most important spec of any IPTV subscription — and the one nobody advertises. A serious UK provider will hold above 99% uptime and keep servers stable between 7 pm and 11 pm when everyone sits down to watch. Ask directly. If the provider dodges the question, walk away.',
+      'This is the one spec no provider advertises but every subscriber discovers within the first week. A well-run UK IPTV subscription holds above 99% uptime and stays stable between 7 pm and 11 pm, when every household on the same server is watching. Ask any prospective provider directly about this. Vague answers or deflection are your answer.',
   },
   {
     n: 2,
-    title: 'EPG (electronic programme guide) quality',
+    title: 'EPG depth and accuracy',
     detail:
-      'A proper EPG shows now/next data, next-7-days scheduling, catch-up markers and series metadata. Cheap resellers copy an unreliable public EPG that is 15 minutes off the live signal. The EPG is what turns "a list of streams" into an actual TV experience — see the Wikipedia page on the electronic programme guide for the underlying tech.',
+      'The electronic programme guide is what separates a real TV experience from a list of streams. A proper EPG shows now and next, 7-day forward scheduling, catch-up indicators and series metadata. Resellers running on borrowed infrastructure often use a public EPG feed that runs 10 to 20 minutes behind the live signal. You\'ll notice within the first evening. See the <a href="https://en.wikipedia.org/wiki/Electronic_programme_guide" target="_blank" rel="noopener noreferrer nofollow">Wikipedia article on EPGs</a> for the technical background.',
   },
   {
     n: 3,
-    title: 'Catch-up window (3–7 days minimum)',
+    title: 'Catch-up window length',
     detail:
-      'Any modern IPTV subscription worth paying for gives you the ability to rewind to programmes from the last 3–7 days. Providers that offer zero catch-up are usually running raw scraped streams — the sign of a rushed, unmaintained service.',
+      'Any IPTV subscription worth paying for in 2026 includes at least 3 to 7 days of catch-up on the major channels: the ability to scroll back to last night\'s programme and watch it on demand. Providers offering zero catch-up are almost always running raw scraped streams with no archive infrastructure behind them.',
   },
   {
     n: 4,
-    title: 'Resolution — real 4K, not just badged',
+    title: 'Real 4K: verified, not just advertised',
     detail:
-      'Most IPTV panels advertise "4K channels" but only deliver 4K on a handful of premium entertainment feeds. During a trial, load a channel labelled 4K and check the stream in your player: real 4K is 3840×2160 with ~25 Mbps bitrate. Anything less is upscaled Full HD.',
+      'Nearly every UK IPTV sales page claims 4K. During your trial, open a channel labelled 4K in your player, then check the stream information. A genuine 4K feed runs at 3840x2160 with around 25 Mbps bitrate. Anything significantly below that resolution or bitrate has been upscaled from Full HD and relabelled.',
   },
   {
     n: 5,
-    title: 'Trial length and refund policy',
+    title: 'A trial period with a documented refund window',
     detail:
-      'The industry gold-standard in the UK is a 30-day paid trial with a documented refund window. A provider without a trial is asking you to pay a year up-front with zero visibility. Our £14.99 30-day trial exists specifically to remove that risk.',
+      'The UK market standard for a credible provider is a paid 30-day trial with a clear refund policy on-site. A provider with no trial at all is asking you to hand over 12 months\' money without any means of verification. Our UK IPTV BOX 1-month plan exists precisely to remove that gamble.',
   },
   {
     n: 6,
-    title: 'Support channel — WhatsApp beats email',
+    title: 'Responsive support via WhatsApp',
     detail:
-      'Live TV problems are time-sensitive: a stream dying five minutes before kick-off cannot wait 48 hours for a support-desk reply. UK-friendly IPTV providers use WhatsApp because it is instant, familiar, and enables screenshot troubleshooting.',
+      'Live TV problems are time-sensitive. A buffering stream five minutes before kick-off cannot wait 48 hours for a support ticket reply. The best UK IPTV providers use WhatsApp because it\'s immediate, it lets you send screenshots, and it works on the same phone you\'re already messaging from during a technical problem.',
   },
   {
     n: 7,
-    title: 'Payment security',
+    title: 'Payment via mainstream rails',
     detail:
-      'Legitimate providers accept card, PayPal and bank transfer. Crypto-only, gift-card-only, or Bitcoin-preferred pricing is one of the strongest red flags in the entire market. See the National Cyber Security Centre\'s guidance on online payment safety.',
+      'Legitimate providers accept card, PayPal and bank transfer. A UK IPTV subscription that can only be paid by crypto, Bitcoin or gift cards is one of the clearest red flags in the category. Card and PayPal payments come with chargeback protection under UK consumer law. The National Cyber Security Centre publishes guidance on safe online payment if you want a reference point.',
   },
   {
     n: 8,
-    title: 'Device compatibility',
+    title: 'Broad device compatibility out of the box',
     detail:
-      'A serious provider works on every mainstream device out of the box: Fire Stick, Smart TV, Formuler, MAG, Nvidia Shield, Apple TV, Android box, phone, laptop. If you have to buy special hardware to use it, that is a provider limitation, not yours.',
+      'A properly-run UK IPTV subscription works on every mainstream device without special configuration: Fire Stick, Samsung or LG Smart TV, Formuler, MAG box, Nvidia Shield, Apple TV, Android box, iPhone and Windows laptop. If a provider requires specific hardware you don\'t own before they\'ll sell to you, that\'s a limitation of their service, not a sensible requirement.',
   },
 ];
 
 const faqs = [
   {
     q: 'What is the best IPTV subscription in the UK for 2026?',
-    a: `"Best" depends on how you watch. For most UK households the winning combination is a mid-price IPTV subscription (~£10–£15 a month equivalent) tested on a Fire Stick 4K Max or Formuler Z11. Our own £${site.price} 30-day trial lets you validate all eight criteria above before you commit to a year.`,
+    a: `The best UK IPTV subscription depends on how and where you watch. For most households the right pairing is a mid-range provider priced at £10 to £15 a month equivalent, tested on a Fire Stick 4K Max or Formuler Z11. Our UK IPTV BOX 1-month plan at £${site.price} lets you run all eight criteria above against a real service before committing to a year.`,
   },
   {
     q: 'How much should an IPTV subscription cost in the UK?',
-    a: 'A properly-licensed IPTV subscription with a full channel list, 4K support and a working EPG typically costs £8–£15 per month when paid annually. Anything under £5 per month is almost certainly running on unlicensed infrastructure. Anything over £25 per month is usually a reseller marking up the same servers others sell for half.',
+    a: 'A licensed UK IPTV subscription with a full channel list, genuine 4K support and a working EPG typically costs £8 to £15 per month at annual pricing. Under £5 a month almost always means the provider is operating without paying content licences. Over £25 a month is almost always a reseller adding margin without adding quality.',
   },
   {
     q: 'Can I pay monthly for an IPTV subscription?',
-    a: 'Yes — but monthly billing is normally 30–50% more expensive per month than an annual plan. The middle ground most UK viewers pick is a low-cost 30-day trial (like our £14.99 offer) to prove the service, followed by a 6- or 12-month plan for the discount.',
+    a: `Yes, but monthly billing typically costs 30 to 50% more per month than an annual plan. The sensible path most UK viewers take is a low-cost 1-month plan like our UK IPTV BOX £${site.price} option to verify the service, then switching to a 6 or 12-month plan for the better per-month rate.`,
   },
   {
     q: 'What devices work with a UK IPTV subscription?',
-    a: 'Everything mainstream: Amazon Fire TV Stick, Formuler Z11 / CC / Zx, MAG boxes, Nvidia Shield, Apple TV, Android boxes, Samsung / LG Smart TVs, iPhone, Android phone, iPad, Windows PC, MacBook. Full step-by-step guides live on our installation guides hub.',
+    a: 'Everything mainstream: Amazon Fire TV Stick, Formuler Z11 and CC, MAG boxes, Nvidia Shield, Apple TV, Android boxes, Samsung and LG Smart TVs, iPhone, Android phones and tablets, Windows PC and MacBook. Full step-by-step guides are on our installation guides hub.',
   },
   {
-    q: 'How do I switch from an existing IPTV subscription without losing days?',
-    a: 'Take our £14.99 30-day trial in parallel with your current provider. Run both for the first two weeks, compare EPG accuracy, peak-time buffering and channel line-up, and only then decide whether to renew with your existing provider or move over. Overlap is a smart £14.99 insurance policy.',
+    q: 'How do I switch from an existing IPTV subscription without losing viewing days?',
+    a: `Start our UK IPTV BOX 1-month plan while your current subscription is still active. Run both side by side for a fortnight. Compare peak-time buffering, EPG accuracy and channel selection. Then decide whether to renew with your existing provider or move across fully. The overlap costs £${site.price} and could save you from renewing a poor service for another year.`,
   },
   {
     q: 'Is a VPN required for a UK IPTV subscription?',
-    a: 'No. A legal, licensed IPTV subscription does not require a VPN. Some viewers still use one for general privacy or to bypass ISP throttling during peak-hour congestion. If you use a VPN, pick one with proven UK server capacity so 4K streams do not suffer.',
+    a: 'No. A legal UK IPTV subscription requires no VPN. Some viewers use one for general privacy or because their ISP throttles video traffic during evening peak hours. If you do use a VPN, choose one with solid UK server capacity so 4K streams don\'t degrade.',
   },
 ];
 
@@ -130,10 +130,10 @@ const jsonLd = {
 };
 
 const relatedLinks = [
-  { href: '/blog/iptv-free-trial-uk/', label: 'IPTV Free Trial UK — What a Legit Test Looks Like' },
+  { href: '/blog/iptv-free-trial-uk/', label: 'IPTV Free Trial UK: What a Legit Test Looks Like' },
   { href: '/blog/cheap-iptv-uk-scam-or-legit/', label: 'Cheap IPTV UK: Scam or Legit?' },
   { href: '/blog/is-iptv-legal-uk/', label: 'Is IPTV Legal in the UK? 2026 Explainer' },
-  { href: '/installation-guides/', label: 'Set Up IPTV on Your Device — All Guides' },
+  { href: '/installation-guides/', label: 'Set Up IPTV on Your Device: All Guides' },
 ];
 
 const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
@@ -175,8 +175,8 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
           {post.title}
         </h1>
         <p class="mt-5 text-lg text-text-muted leading-relaxed">
-          Picking an <strong>IPTV subscription in the UK</strong> in 2026 is harder than it should be —
-          hundreds of resellers, wildly different quality, and almost no honest reviews. This is a
+          Picking an <strong>IPTV subscription in the UK</strong> in 2026 is harder than it should be.
+          Hundreds of resellers, wildly different quality, and almost no honest reviews. This is a
           no-fluff buyer's guide built from two years of testing real UK <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">IPTV trials</a>
           against evening peak-hour reality. Read the eight criteria, use the checklist, and you will
           not waste money.
@@ -188,8 +188,8 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href={waLink(`Hi, I read the IPTV subscription UK buyer's guide and would like to start my £${site.price} trial.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
-            Start £{site.price} trial
+          <a href={waLink(`Hi, I read the IPTV subscription UK buyer's guide and would like to get the UK IPTV BOX subscription.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Get UK IPTV BOX Subscription
           </a>
           <a href="#criteria" class="btn-secondary">The 8 criteria</a>
         </div>
@@ -203,37 +203,37 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
     <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
       <article class="legal-prose">
         <p>
-          There are probably five hundred IPTV subscriptions marketed to UK viewers this month alone.
-          Nine out of ten are resellers of the same handful of upstream servers — which is why they all
-          look the same on paper. The differences that matter (uptime, EPG polish, catch-up depth,
-          support quality) never appear on the sales page. This guide gives you the eight things to
-          actually check <em>before</em> you pay.
+          Hundreds of IPTV subscriptions get marketed to UK viewers every month. Most of them are resellers
+          pulling from the same small pool of upstream servers, which is why their sales pages look
+          identical. The differences that actually matter to you as a viewer (stability at 9 pm, EPG
+          accuracy, how quickly someone answers when something breaks) never appear in the marketing.
+          This guide gives you the eight things to test before you part with any money.
         </p>
 
-        <h2>Why the IPTV subscription market is so noisy</h2>
+        <h2>Why the UK IPTV subscription market looks like it does</h2>
         <p>
           <a href="https://en.wikipedia.org/wiki/IPTV" target="_blank" rel="noopener noreferrer nofollow">IPTV</a>
-          is a low-barrier-to-entry business: rent a slice of an upstream panel, spin up a domain, take
-          card payments. This is why the market is flooded with unreliable operators. The winners in
-          this space are a small number of providers that invest in owned server capacity, proper
-          EPG feeds, real support, and — critically — a trial mechanism so buyers can verify quality
-          before spending a year's worth of money. Everyone else is churn.
+          is a relatively low barrier business to enter: rent server capacity from an upstream panel, register
+          a domain, take payments. That's why the market is saturated with providers of wildly uneven quality.
+          The ones that actually hold up long-term invest in owned server infrastructure, properly licensed
+          EPG feeds, real customer support and a trial mechanism so buyers can verify what they're getting.
+          Everyone else is betting on subscribers not asking questions before they've paid for the year.
         </p>
 
         <h2 id="criteria">The 8 criteria of a real UK IPTV subscription</h2>
-        <p>Every point below is testable in a 30-day trial. Do not skip any.</p>
+        <p>All of these are testable during a 30-day trial. Don't skip any.</p>
       </article>
 
       <ol class="mt-8 space-y-4">
         {criteria.map((c) => (
           <li class="card p-5 md:p-6">
             <div class="flex items-start gap-4">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold text-white shadow-glow">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold !text-[#241056] shadow-glow">
                 {c.n}
               </span>
               <div>
                 <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{c.title}</h3>
-                <p class="mt-2 text-text-muted leading-relaxed">{c.detail}</p>
+                <p class="mt-2 text-text-muted leading-relaxed" set:html={c.detail} />
               </div>
             </div>
           </li>
@@ -241,10 +241,10 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
       </ol>
 
       <article class="legal-prose mt-14">
-        <h2>Realistic UK IPTV subscription pricing in 2026</h2>
+        <h2>What a UK IPTV subscription actually costs in 2026</h2>
         <p>
-          Prices have stabilised over the past two years. Here is the honest range across the UK
-          market for a full-featured IPTV subscription (4K + EPG + catch-up + multi-device):
+          Pricing has settled over the past two years. Here's the honest market range for a full-featured
+          IPTV subscription (4K, EPG, catch-up, multi-device):
         </p>
         <div class="not-prose mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
           <table class="w-full min-w-[560px] text-left text-sm">
@@ -285,56 +285,55 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
           </table>
         </div>
         <p class="mt-4 text-sm text-text-muted italic">
-          Prices well outside these bands are worth questioning. Under £5/month usually means the
-          provider is not paying licensing costs; over £25/month is almost always a reseller markup.
+          Prices outside these bands warrant scrutiny. Under £5/month means the provider isn't paying licensing costs. Over £25/month is almost always a reseller margin with no quality difference.
         </p>
 
-        <h2>The single smartest way to buy an IPTV subscription in the UK</h2>
+        <h2>The lowest-risk way to buy a UK IPTV subscription</h2>
         <p>
-          Do not commit to 12 months on day one. The lowest-risk path — the one we recommend to
-          every friend, family member and customer who asks — is:
+          Don't commit to 12 months on day one. Here's the path we recommend to everyone:
         </p>
         <ol>
-          <li>Start with a <a href="/#pricing">£{site.price} 30-day trial</a> on a device you already own (Fire Stick, phone, Smart TV).</li>
-          <li>Test all eight criteria above in the first two weeks. Focus on evening peak time.</li>
-          <li>Only then, if the service passed the test, upgrade to a longer plan at the annual price.</li>
+          <li>Start with the <a href="/#pricing">UK IPTV BOX 1-month plan</a> on a device you already own: phone, Fire Stick, Smart TV or laptop.</li>
+          <li>Test all eight criteria above during the first two weeks. Focus specifically on evening peak hours.</li>
+          <li>If the service passes, upgrade to a longer plan at the better per-month rate.</li>
         </ol>
         <p>
-          Total downside: £{site.price}. Upside: a year of properly-tested, working IPTV that you know
-          will hold up when it matters.
+          Maximum downside: £{site.price}. What you get in return: a year of IPTV you've verified works
+          before you paid for it.
         </p>
 
-        <h2>How to compare IPTV subscription providers side-by-side</h2>
+        <h2>How to compare two IPTV providers properly</h2>
         <p>
-          The trap most buyers fall into is comparing marketing pages. Marketing pages are identical.
-          What you should compare is what happens in the app once you log in. Run our checklist on any
-          two providers during a trial and the honest one will pull ahead within an hour.
+          The common mistake is comparing marketing pages. They're designed to look identical. What you
+          should compare is what happens inside the app once you're actually logged in. Run the same eight
+          criteria checks on any two providers during overlapping trials and the better service will be
+          obvious within an hour of testing at peak time.
         </p>
         <p>
-          Not sure what a "portal" or "Xtream Codes login" means? Our
+          If terms like "portal" or "Xtream Codes" are unfamiliar, our
           <a href="/blog/top-5-iptv-boxes-uk-2026/">IPTV boxes UK guide</a>
-          walks through how each of the popular apps handle login, EPG and playback.
+          covers how each popular app handles login, EPG and playback in plain English.
         </p>
 
-        <h2>Devices worth pairing with a good IPTV subscription</h2>
+        <h2>Devices worth using with a UK IPTV subscription</h2>
         <ul>
-          <li><strong>Amazon Fire TV Stick 4K Max</strong> — the entry-level winner for most UK households.</li>
-          <li><strong>Formuler Z11 Pro Max</strong> — best portal experience if you want the very best EPG polish.</li>
-          <li><strong>Nvidia Shield TV Pro</strong> — the enthusiast choice, unbeatable UI speed.</li>
-          <li><strong>Samsung or LG Smart TV</strong> — install a native IPTV app directly, no extra hardware.</li>
-          <li><strong>Your existing phone or laptop</strong> — perfect for running a trial before you spend on hardware.</li>
+          <li><strong>Amazon Fire TV Stick 4K Max:</strong> the most popular starting point for UK households, under £70.</li>
+          <li><strong>Formuler Z11 Pro Max:</strong> best portal experience if you want the most refined EPG on the market.</li>
+          <li><strong>Nvidia Shield TV Pro:</strong> fastest Android TV box available; the choice for sport enthusiasts.</li>
+          <li><strong>Samsung or LG Smart TV:</strong> install a native IPTV app from the manufacturer's store, no extra hardware required.</li>
+          <li><strong>Your existing phone or laptop:</strong> the best way to run a trial before investing in dedicated hardware.</li>
         </ul>
         <p>
-          Every one of these has a full step-by-step walkthrough on our
+          Every device above has a detailed step-by-step walkthrough on our
           <a href="/installation-guides/">installation guides page</a>.
         </p>
 
         <h2>Consumer protection when buying an IPTV subscription</h2>
         <p>
-          Any UK purchase should be backed by <a href="https://www.gov.uk/consumer-protection-rights" target="_blank" rel="noopener noreferrer nofollow">standard UK consumer protection rights</a>,
-          a documented refund policy, and mainstream payment methods (which trigger card-issuer
-          chargeback protection if something goes wrong). If a provider does not offer any of these,
-          treat it as a hard "no" — no matter how attractive the channel list looks.
+          Any purchase in the UK should be covered by <a href="https://www.gov.uk/consumer-protection-rights" target="_blank" rel="noopener noreferrer nofollow">standard UK consumer protection rights</a>,
+          a documented refund policy and mainstream payment methods (which unlock card chargeback rights if
+          something goes wrong). If a provider offers none of these, that's reason enough to move on,
+          regardless of how attractive their channel list looks.
         </p>
 
         <h2>Frequently asked questions</h2>
@@ -357,14 +356,15 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
       <article class="legal-prose mt-14">
         <h2>The verdict</h2>
         <p>
-          A great IPTV subscription in the UK is not the one with the biggest channel list on its
-          homepage — it is the one that stays fast, accurate and supported at 9 pm on a Saturday night.
-          The only way to find out which is which is to test. A £{site.price} 30-day trial is the
-          cheapest form of insurance you will ever buy against wasting £100+ on a bad annual plan.
+          The best UK IPTV subscription isn't the one with the longest channel list on its homepage. It's
+          the one that stays fast, accurate and supported at 9 pm on a Saturday when you actually want to
+          watch something. The only reliable way to find that out is to test. The UK IPTV BOX 1-month plan
+          is the cheapest protection you can buy against spending £100 or more on a full year of something
+          that disappoints you in week two.
         </p>
         <p>
-          Ready to try? <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Start the trial on WhatsApp</a>
-          and we will have you live in under 15 minutes.
+          Ready to try it? <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Get UK IPTV BOX on WhatsApp</a>
+          and we'll have you live in under 15 minutes.
         </p>
       </article>
 

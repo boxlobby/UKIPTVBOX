@@ -2,31 +2,31 @@ export const features = [
   {
     icon: 'tv',
     title: '50,000+ Live Channels',
-    body: 'The biggest IPTV UK channel lineup at this price. Every major UK entertainment, sports, news, kids and international feed, plus premium and pay-per-view, all in one guide, sorted the way you actually watch.',
+    body: "One of the largest UK IPTV channel lineups available. Every major feed sits inside a single guide, sorted by how people actually browse rather than dumped in one long alphabetical list.",
   },
   {
     icon: 'sparkles',
-    title: 'Full 4K UHD & FHD',
-    body: 'Premium channels stream in true 4K UHD, with FHD and HD fallbacks that keep playing when your connection dips. Cheap UK IPTV without the compressed, blurry picture you get elsewhere.',
+    title: 'True 4K UHD & FHD',
+    body: 'Premium UK IPTV channels stream in native 4K UHD. If your connection dips, the stream drops to FHD or HD automatically and climbs back up without you having to touch a setting.',
   },
   {
     icon: 'zap',
     title: 'Anti-Buffer UK Servers',
-    body: 'Load-balanced servers in the UK and EU with a 99.9% uptime guarantee. Match nights and prime-time playback stay smooth, with zero freezing and no black-screen surprises.',
+    body: 'UK and EU servers load-balanced for 99.9% uptime. We increase capacity before Premier League kickoffs and peak viewing times, not after the first complaints arrive, so the stream holds when everyone logs on at once.',
   },
   {
     icon: 'shield',
-    title: 'Built-In VPN Protection',
-    body: 'Stream securely with integrated VPN protection. Your privacy is protected by default. You do not need to install anything extra or change any settings.',
+    title: 'VPN-Friendly Streaming',
+    body: 'UKIPTVBOX works with all major VPNs. Stream on any network without ISP throttling or blocked ports getting in the way. We do not restrict VPN connections.',
   },
   {
     icon: 'rocket',
     title: 'Instant Activation',
-    body: 'From payment to first stream in under five minutes. Your IPTV UK trial login lands on WhatsApp the moment we confirm your order. No hardware to install and no long contract to sign.',
+    body: 'Message us on WhatsApp, pay, and your login lands within minutes. There is no hardware to ship and no lengthy activation process before you can watch.',
   },
   {
     icon: 'headset',
     title: 'Real UK Support',
-    body: 'Genuine human support, not a bot. Message us on WhatsApp and get a reply in under two minutes during UK hours, for setup help, device changes or anything else.',
+    body: 'Every support message goes to a real person, not a ticket queue. WhatsApp replies land in under two minutes during UK hours, whether you need help with first-time setup or something has stopped working mid-match.',
   },
 ] as const;

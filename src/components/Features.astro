@@ -5,14 +5,14 @@ import { features } from '../data/features';
 // Duplicate for the seamless mobile auto-scroll loop.
 const track = [...features, ...features];
 ---
-<section id="features" class="section">
+<section id="features" class="section" style="background:#EDEAF5;">
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center">
-      <span class="eyebrow">Why choose IPTV TRIAL</span>
-      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">An IPTV Service Built for the UK</h2>
-      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
-        The cheapest UK IPTV trial that doesn’t cut corners, same 50,000+ channels and 4K quality as our long-term IPTV subscriptions.
-        Every feature below is included from day one, risk-free.
+      <span class="eyebrow-light">Why choose UK IPTV BOX</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold" style="color:#2A1458">A UK IPTV Subscription Built Around Real Viewers</h2>
+      <p class="mt-4 text-sm sm:text-base leading-relaxed" style="color:#5A4699">
+        50,000+ channels, true 4K quality, and anti-buffer servers, every feature included in full from day one on every plan.
+        No stripped-down starter tier, no locked features, no compromises.
       </p>
     </div>
   </div>
@@ -21,21 +21,22 @@ const track = [...features, ...features];
   <div
     class="features-marquee group relative mt-10 md:hidden"
     role="region"
-    aria-label="Why choose IPTV Trial, swipe or wait for auto-scroll"
+    aria-label="Why choose UK IPTV BOX, swipe or wait for auto-scroll"
     data-auto-scroll
     data-speed="0.6"
   >
     <ul class="features-track flex gap-4 px-4" role="list">
       {track.map((f, i) => (
         <li
-          class="card p-5 sm:p-6 shrink-0 w-[260px]"
+          class="p-5 sm:p-6 shrink-0 w-[260px]"
+          style="border-radius:20px;background:#5B2EBE;border:1px solid rgba(91,46,190,.5);"
           aria-hidden={i >= features.length ? 'true' : 'false'}
         >
-          <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand-light transition">
+          <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl transition" style="background:rgba(211,249,79,.16);color:#D3F94F;">
             <Icon name={f.icon} size={22} />
           </div>
-          <h3 class="text-base sm:text-lg font-semibold text-text-primary">{f.title}</h3>
-          <p class="mt-2 text-sm text-text-muted leading-relaxed">{f.body}</p>
+          <h3 class="text-base sm:text-lg font-semibold" style="color:#D3F94F;">{f.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed" style="color:#DDD3F5;">{f.body}</p>
         </li>
       ))}
     </ul>
@@ -45,12 +46,12 @@ const track = [...features, ...features];
   <div class="container-x hidden md:block">
     <ul class="mt-10 md:mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
       {features.map((f) => (
-        <li class="card p-5 sm:p-6 hover:border-brand/40 transition group">
-          <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand-light group-hover:bg-brand group-hover:text-white transition">
+        <li class="p-5 sm:p-6 transition group" style="border-radius:20px;background:#5B2EBE;border:none;">
+          <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl transition" style="background:rgba(211,249,79,.16);color:#D3F94F;">
             <Icon name={f.icon} size={22} />
           </div>
-          <h3 class="text-base sm:text-lg font-semibold text-text-primary">{f.title}</h3>
-          <p class="mt-2 text-sm text-text-muted leading-relaxed">{f.body}</p>
+          <h3 class="text-base sm:text-lg font-semibold" style="color:#D3F94F;">{f.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed" style="color:#DDD3F5;">{f.body}</p>
         </li>
       ))}
     </ul>
@@ -71,6 +72,6 @@ const track = [...features, ...features];
   .features-marquee::-webkit-scrollbar { display: none; }
   .features-track {
     width: max-content;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
   }
 </style>

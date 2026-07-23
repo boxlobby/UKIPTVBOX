@@ -2,7 +2,7 @@
 import Icon from './Icon.astro';
 import { devices } from '../data/devices';
 ---
-<section id="devices" class="section bg-subtle/50">
+<section id="devices" class="section" style="background:rgba(30,13,72,.55);">
   <div class="container-x">
     <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">Device compatibility</span>
@@ -13,15 +13,16 @@ import { devices } from '../data/devices';
       </p>
     </div>
 
-    <ul class="mt-10 md:mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+    <ul class="mt-10 md:mt-14 mb-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
       {devices.map((d) => (
         <li>
           <a
             href={d.href}
-            class="device-card group card block h-full p-5 sm:p-6 text-center cursor-pointer transition duration-200 hover:border-brand/50 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(27,198,255,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand/60"
+            class="device-card group block h-full p-5 sm:p-6 text-center cursor-pointer transition duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand/60"
+            style="border-radius:1rem;background:rgba(46,23,112,.7);border:1px solid #4A2F9E;box-shadow:none;"
             aria-label={`${d.title} setup guide`}
           >
-            <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand-light transition group-hover:bg-brand/15 group-hover:border-brand/40">
+            <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl transition" style="background:rgba(211,249,79,.1);color:#D3F94F;border:1px solid rgba(211,249,79,.2);">
               <Icon name={d.icon} size={24} />
             </span>
             <h3 class="mt-4 text-base sm:text-lg font-semibold text-text-primary">{d.title}</h3>
@@ -34,5 +35,11 @@ import { devices } from '../data/devices';
         </li>
       ))}
     </ul>
+    <div class="text-center">
+      <a href="/installation-guides/" class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-light hover:underline">
+        View all installation guides
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 </section>

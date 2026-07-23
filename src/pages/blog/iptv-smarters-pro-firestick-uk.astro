@@ -14,105 +14,105 @@ const ogImage = post.image.startsWith('http') ? post.image : site.url + post.ima
 const steps = [
   {
     n: 1,
-    title: 'Enable "Apps from Unknown Sources" on your Fire Stick',
+    title: 'Turn on "Apps from Unknown Sources" in Fire Stick settings',
     detail:
-      'From the Fire Stick home screen: Settings → My Fire TV → Developer Options → Install unknown apps → toggle "Downloader" to ON. On older Fire OS versions the toggle is called "Apps from Unknown Sources" — either way, you are giving the Downloader app permission to install the IPTV Smarters Pro APK. This is a normal Amazon setting; the Downloader app itself is a fully-listed app in the Amazon Appstore.',
+      'From the Fire Stick home screen, go to Settings, then My Fire TV, then Developer Options. Find the Downloader app in the list and toggle it to ON. On older Fire OS versions this setting is labelled "Apps from Unknown Sources" at the top of the same menu. You\'re giving the Downloader app permission to install APKs from outside the Amazon Appstore, a normal Amazon feature used by millions of Fire Stick owners.',
   },
   {
     n: 2,
     title: 'Install the Downloader app from the Amazon Appstore',
     detail:
-      'Long-press the Fire Stick home button → Search icon → type "Downloader" → install the official orange Downloader app by AFTVnews. This is the standard sideloading tool used by millions of Fire Stick owners.',
+      'Hold the home button on your remote and select Search. Type "Downloader" and install the orange icon published by AFTVnews. This is the standard sideloading tool for Fire Sticks. It costs nothing and doesn\'t require any account other than your Amazon one.',
   },
   {
     n: 3,
-    title: 'Open Downloader and enter the IPTV Smarters Pro URL',
+    title: 'Download the IPTV Smarters Pro APK through Downloader',
     detail:
-      'Launch Downloader and enter the URL of the official IPTV Smarters Pro APK. Download the file, click Install, then Delete to keep your Fire Stick storage clean. The app now appears under "Your Apps & Channels".',
+      'Open the Downloader app, tap the URL bar, and type the APK address. We send the current official URL to every new subscriber on WhatsApp so you get the freshest, cleanest build rather than a random mirror. Once downloaded, tap Install, wait 20 seconds, then Delete the APK file to free up storage. IPTV Smarters Pro now appears in Your Apps and Channels.',
   },
   {
     n: 4,
-    title: 'Launch IPTV Smarters Pro and pick your login type',
+    title: 'Launch IPTV Smarters Pro and choose your login method',
     detail:
-      'On first launch you get three login options: Xtream Codes API, M3U URL, or Load your Playlist. If we sent you a username + password + server URL, pick Xtream Codes API. If we sent you a single long M3U link, pick M3U URL. If unsure, WhatsApp us — we\'ll tell you in ten seconds.',
+      'On first launch the app asks how you want to connect: Xtream Codes API, M3U URL, or playlist file. If we sent you a username, password and server address, choose Xtream Codes API. If we sent a single long M3U link, choose M3U URL. Not sure which you have? WhatsApp us and we\'ll tell you in seconds.',
   },
   {
     n: 5,
-    title: 'Enter your IPTV credentials',
+    title: 'Enter your IPTV subscription credentials',
     detail:
-      'Xtream Codes login is three fields: any name (e.g. "IPTV Trial UK"), your username, your password, and the server URL exactly as we sent it (including http:// and the port number). Tap "Add User" and Smarters will pull down your full channel list and EPG in under a minute.',
+      'For Xtream Codes: enter any name you like (e.g. "UK IPTV BOX"), your username, your password, and the server URL exactly as we sent it, including the http:// prefix and the port number at the end. Tap Add User and Smarters will load your complete channel list and EPG within about a minute.',
   },
   {
     n: 6,
-    title: 'Set up your EPG for a proper TV guide experience',
+    title: 'Load the EPG for a proper TV guide',
     detail:
-      'By default Smarters uses the EPG data included with your subscription. If it does not load automatically, go to Settings → EPG → Update EPG. A properly-populated EPG shows now/next, 7-day scheduling and catch-up markers. If yours is blank, the fix is nearly always a stale cache — force close the app and reopen.',
+      'Smarters uses the EPG data built into your UK IPTV subscription automatically. If the guide doesn\'t populate on its own, go to Settings, then EPG Settings, and tap Update EPG. A correctly configured EPG shows current and next programmes, 7-day scheduling and catch-up availability. Blank EPG after 5 minutes is almost always a stale app cache. Force-close and reopen.',
   },
   {
     n: 7,
-    title: 'Enable Auto-Boot (optional, recommended)',
+    title: 'Set IPTV Smarters to launch on Fire Stick boot (optional)',
     detail:
-      'Settings → General → Auto Start on Boot. This makes IPTV Smarters launch automatically when you power on the Fire Stick — closer to the "turn on and watch" feel of a satellite box.',
+      'Inside Smarters: Settings, then General Settings, then enable Auto Start on Boot. From this point on, turning on the Fire Stick goes straight to your channel list. Much closer to the feel of a regular TV box than having to navigate Amazon\'s home screen first.',
   },
   {
     n: 8,
-    title: 'Pin IPTV Smarters to the Fire Stick home screen',
+    title: 'Pin IPTV Smarters to the top of the Fire Stick home screen',
     detail:
-      'Home → scroll down to "Your Apps & Channels" → hover on IPTV Smarters Pro → press the menu button (three lines) on your remote → "Move to Front". Now the app is the first thing your household sees when they pick up the remote.',
+      'Scroll down to Your Apps and Channels on the Fire Stick home screen. Hover over IPTV Smarters Pro, press the menu button (three horizontal lines) on your remote, and select Move to Front. Everyone in the household can now find the app instantly without scrolling through Amazon content.',
   },
 ];
 
 const troubleshoot = [
   {
-    q: 'Nothing plays / black screen',
-    a: 'Almost always a decoder mismatch. Settings → Player Settings → change from Native to IJK Player, or vice versa. This fixes 80% of "no video, no error" Fire Stick problems.',
+    q: 'Black screen: nothing plays at all',
+    a: 'Almost always a decoder setting. Go to Settings inside Smarters, then Player Settings, and switch the player type. If it\'s set to Native, change to IJK Player. If IJK Player is already selected, try Native. This resolves about 80% of "no video" problems on Fire Sticks with no error message.',
   },
   {
-    q: '"No stream found" or "Cannot load stream"',
-    a: 'Server URL is wrong or missing the port number. Copy-paste it from the WhatsApp message we sent — do not retype. Also check that Wi-Fi is connected; a dropped connection produces the same error.',
+    q: '"Cannot load stream" or "No stream found"',
+    a: 'The server URL is incorrect, usually a missing port number or a typo. Open the WhatsApp message where we sent your credentials and copy-paste the URL directly rather than retyping it. Also check the Fire Stick is connected to Wi-Fi. A dropped connection produces the exact same error.',
   },
   {
-    q: 'Buffering every few seconds',
-    a: 'Nine times out of ten this is Wi-Fi. Run a Speedtest in the Amazon Appstore — if you are under 20 Mbps at the Fire Stick location, either wire it with an Ethernet adapter or move the router closer. Ofcom publishes reference streaming speed guidance if you want the numbers.',
+    q: 'Constant buffering every few seconds',
+    a: 'Nine times out of ten this is a Wi-Fi problem, not a server problem. Run a Speedtest from the Amazon Appstore. If the Fire Stick is getting below 20 Mbps, either connect a Fire Stick Ethernet adapter or move the router closer. Ofcom\'s broadband guidance lists reference speeds for streaming if you want a comparison point.',
   },
   {
-    q: 'EPG is blank or wrong',
-    a: 'Settings → EPG → Update EPG. If still blank after 5 minutes, the EPG XML is temporarily unreachable — WhatsApp us and we will refresh it server-side.',
+    q: 'EPG is empty or showing the wrong time',
+    a: 'Go to Settings, then EPG Settings, and tap Update EPG. If it\'s still blank after 5 minutes, the EPG source is temporarily unavailable on the server side. Message us on WhatsApp and we\'ll refresh it. A guide that\'s off by an hour or two is a timezone offset. Fix it in Settings under EPG Time Shift: set to 0 for UK.',
   },
   {
-    q: 'App crashes on launch',
-    a: 'Uninstall, reboot the Fire Stick (Settings → My Fire TV → Restart), reinstall via Downloader. Do not update Smarters through the "Update" button inside the app — always redownload the latest APK.',
+    q: 'IPTV Smarters Pro keeps crashing on launch',
+    a: 'Uninstall the app, restart the Fire Stick (Settings, My Fire TV, Restart), then reinstall using the Downloader URL we sent you. Don\'t use the Update button inside the app; it doesn\'t always pull the cleanest build. Always reinstall from the official APK source.',
   },
   {
-    q: 'Fire Stick 2nd gen runs slow',
-    a: 'Older Fire Sticks (pre-4K Max) struggle with heavy EPGs. Turn off the parental control PIN screen, disable auto-preview on the Fire Stick home, and consider upgrading to the 4K Max — see our IPTV boxes UK 2026 ranking for options.',
+    q: 'Fire Stick 2nd gen is very slow with Smarters',
+    a: 'Older Fire Sticks (any model before the 4K Max) have limited RAM and struggle with a fully-loaded EPG. Disable the parental PIN screen inside Smarters, turn off Fire Stick home screen auto-previews in Settings, and consider upgrading to the 4K Max. Our IPTV boxes UK 2026 guide has a full comparison.',
   },
 ];
 
 const faqs = [
   {
     q: 'Is IPTV Smarters Pro on Firestick legal in the UK?',
-    a: 'Yes — IPTV Smarters Pro is a player app, like VLC or Kodi. The app itself is neutral and lawful. Legality depends entirely on the IPTV subscription you log in with. Our £14.99 30-day trial gives you a legitimate provider to pair with the app — see our "Is IPTV legal UK" explainer for the full detail.',
+    a: 'Yes. IPTV Smarters Pro is a player application, neutral software, the same as VLC or any media player. Legality depends entirely on the IPTV subscription you log in with. UK IPTV BOX is intended for lawful use. See our "Is IPTV legal UK" explainer for the full picture on how UK law applies to the technology.',
   },
   {
     q: 'How much does IPTV Smarters Pro cost?',
-    a: 'The IPTV Smarters Pro app is free to install on Fire Stick, Android and iOS. You need a separate IPTV subscription to actually play any channels. Our £14.99 30-day trial provides those credentials.',
+    a: 'The app is completely free to install on Fire Stick, Android and iOS. You need a separate UK IPTV subscription to load any channels. The app is just a player. UK IPTV BOX provides the Xtream Codes credentials that give Smarters something to connect to.',
   },
   {
     q: 'Does IPTV Smarters Pro support 4K on Fire Stick?',
-    a: 'Yes — on the Fire TV Stick 4K and Fire TV Stick 4K Max (2nd gen). Older Fire Sticks max out at 1080p. Change Player Settings to IJK Player for the smoothest 4K playback with hardware decoding.',
+    a: 'Yes, on the Fire TV Stick 4K and the Fire TV Stick 4K Max. Older Fire Sticks output a maximum of 1080p. For the smoothest 4K playback on a 4K Max, set the Player Settings inside Smarters to IJK Player. It uses hardware decoding rather than software, which is significantly lighter on the processor.',
   },
   {
     q: 'Can I use IPTV Smarters Pro on multiple Fire Sticks?',
-    a: 'Yes — the app is free, and one Xtream Codes login can typically be used on two devices simultaneously (subject to your provider\'s concurrency limit). We provide a single-connection line by default and two-connection on request.',
+    a: 'The app itself is free and can be installed on as many devices as you like. How many can stream at once depends on your provider\'s concurrency limit. Our default UK IPTV BOX line supports one active stream. Two-connection lines are available on request via WhatsApp.',
   },
   {
-    q: 'What is the Downloader code for IPTV Smarters Pro?',
-    a: 'We send the current official Downloader URL directly on WhatsApp when your trial starts, because the safest source changes over time and we want you on the freshest, cleanest build. Message us on WhatsApp and we will send the exact URL to type into Downloader.',
+    q: 'What is the Downloader URL for IPTV Smarters Pro?',
+    a: 'We send the current official URL on WhatsApp when your subscription starts. The safest source shifts over time, so we keep the link updated and send it fresh with every new activation rather than publishing a static URL that might go stale.',
   },
   {
     q: 'Do I need a VPN to use IPTV Smarters on Fire Stick?',
-    a: 'Not required for a legal, licensed IPTV subscription. Some viewers still use one for privacy or to avoid ISP video throttling in the evening. If you do, pick a reputable provider with UK server capacity — see the Wikipedia VPN article for a neutral technical overview.',
+    a: 'Not required for a licensed IPTV subscription. Some viewers use one for privacy or to avoid ISP video throttling during evening peak hours. If you do, choose a provider with strong UK server capacity. The Wikipedia article on VPNs gives a good neutral technical overview of how they work.',
   },
 ];
 
@@ -206,10 +206,10 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
           {post.title}
         </h1>
         <p class="mt-5 text-lg text-text-muted leading-relaxed">
-          The complete UK walkthrough for installing <strong>IPTV Smarters Pro on a Fire TV Stick</strong> in 2026 —
+          The complete UK walkthrough for installing <strong>IPTV Smarters Pro on a Fire TV Stick</strong> in 2026:
           the Downloader sideload, Xtream Codes vs M3U login, EPG setup, and every fix for the most
           common "black screen" and "no stream" errors. Everything you need to pair with your
-          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
+          <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">UK IPTV BOX UK IPTV subscription</a>.
         </p>
 
         <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
@@ -218,8 +218,8 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href={waLink(`Hi, I'd like the Downloader URL and IPTV Smarters login for the £${site.price} trial.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
-            Get my Downloader URL + trial login
+          <a href={waLink(`Hi, I'd like the Downloader URL and IPTV Smarters login for UK IPTV BOX.`)} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Get UK IPTV BOX Subscription
           </a>
           <a href="#steps" class="btn-secondary">Jump to the 8 steps</a>
         </div>
@@ -233,28 +233,28 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
     <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
       <article class="legal-prose">
         <p>
-          The Fire TV Stick and IPTV Smarters Pro are the most popular IPTV combination in the UK for
-          one very simple reason: it is under £70 of hardware, the app is free, and the whole thing
-          takes about ten minutes to install. This guide walks you through every screen with no
-          skipped steps and no assumed knowledge.
+          The Fire TV Stick and IPTV Smarters Pro are the most popular UK IPTV combination for a
+          straightforward reason: the hardware costs under £70, the app is free, and you're watching
+          live TV within 10 minutes of starting. This guide covers every screen, no assumed knowledge,
+          no skipped steps.
         </p>
 
-        <h2>Before you start — what you need</h2>
+        <h2>Before you start: what you need</h2>
         <ul>
-          <li>An <a href="https://en.wikipedia.org/wiki/Amazon_Fire_TV" target="_blank" rel="noopener noreferrer nofollow">Amazon Fire TV Stick</a> (any generation, but 4K Max recommended).</li>
-          <li>Home Wi-Fi or, ideally, a Fire Stick Ethernet adapter for wired connection.</li>
-          <li>An IPTV subscription that provides Xtream Codes or M3U credentials — for example our <a href="/#pricing">£{site.price} 30-day trial</a>.</li>
+          <li>An <a href="https://en.wikipedia.org/wiki/Amazon_Fire_TV" target="_blank" rel="noopener noreferrer nofollow">Amazon Fire TV Stick</a> (any generation works, though the 4K Max is recommended for future-proofing).</li>
+          <li>Home Wi-Fi, or a Fire Stick Ethernet adapter for a wired connection.</li>
+          <li>An IPTV subscription with Xtream Codes or M3U credentials, for example our <a href="/#pricing">UK IPTV BOX subscription</a>.</li>
           <li>About 10 minutes.</li>
         </ul>
 
-        <h2 id="steps">The 8-step install (Fire Stick + IPTV Smarters Pro)</h2>
+        <h2 id="steps">The 8-step install</h2>
       </article>
 
       <ol class="mt-8 space-y-4">
         {steps.map((s) => (
           <li class="card p-5 md:p-6">
             <div class="flex items-start gap-4">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold text-white shadow-glow">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold !text-[#241056] shadow-glow">
                 {s.n}
               </span>
               <div>
@@ -267,32 +267,33 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
       </ol>
 
       <article class="legal-prose mt-14">
-        <h2>Xtream Codes vs M3U — which login should you use?</h2>
+        <h2>Xtream Codes vs M3U: which login do you use?</h2>
         <p>
-          Both work with IPTV Smarters Pro, but they behave differently once installed:
+          Both work inside IPTV Smarters Pro, but they behave differently once you're set up:
         </p>
         <ul>
           <li>
-            <strong>Xtream Codes API</strong> — username, password and server URL. Recommended for
-            almost everyone. Gives you a categorised channel list, a proper EPG, VOD sections and
-            series metadata. This is what we send you by default on the £{site.price} trial.
+            <strong>Xtream Codes API:</strong> username, password and server URL. This is the standard format
+            for most UK IPTV subscriptions. It gives you categorised channels, a proper EPG, VOD sections
+            and series metadata. UK IPTV BOX sends Xtream Codes credentials by default.
           </li>
           <li>
-            <strong>M3U URL</strong> — one long HTTP link that contains every channel as a raw playlist.
-            Faster to set up, but no VOD categories and often no EPG. Use only if requested.
+            <strong>M3U URL:</strong> a single HTTP link containing a raw channel playlist. Quicker to
+            set up, but no VOD categories and often limited EPG. Use this only if you specifically need it
+            for a secondary device.
           </li>
         </ul>
 
-        <h2>Player settings that fix most Fire Stick IPTV problems</h2>
+        <h2>Player settings that fix most Fire Stick IPTV issues</h2>
         <ol>
-          <li><strong>Player type:</strong> IJK Player is smoothest on modern Fire Sticks; Native is safer on older ones.</li>
-          <li><strong>Time format:</strong> switch to 24-hour if you prefer the UK convention.</li>
-          <li><strong>EPG time shift:</strong> set to 0 hours for UK viewers. Some resellers ship EPGs in +2 or +3 — the "guide is wrong" issue almost always comes from this setting.</li>
-          <li><strong>Stream format:</strong> HLS by default; MPEG-TS for specific troublesome channels.</li>
-          <li><strong>Auto restart on stream failure:</strong> ON. Fire Sticks occasionally drop Wi-Fi packets; this recovers automatically.</li>
+          <li><strong>Player type:</strong> IJK Player gives smoother performance on Fire Stick 4K Max. Native player is more stable on older 2nd gen hardware.</li>
+          <li><strong>Time format:</strong> Switch to 24-hour if you prefer the standard UK format in the EPG.</li>
+          <li><strong>EPG time shift:</strong> Set to 0 for UK viewers. Some resellers pre-configure this at +2 or +3, which causes the guide to show the wrong programme time.</li>
+          <li><strong>Stream format:</strong> HLS is the default and works for most channels. Switch to MPEG-TS for specific channels that won't play.</li>
+          <li><strong>Auto restart on stream failure:</strong> Enable this. Fire Sticks occasionally drop Wi-Fi packets and this setting recovers the stream automatically without you having to restart the channel manually.</li>
         </ol>
 
-        <h2>Troubleshooting the common Fire Stick errors</h2>
+        <h2>Troubleshooting common Fire Stick errors</h2>
       </article>
 
       <div class="mt-8 space-y-3">
@@ -312,8 +313,8 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
       <article class="legal-prose mt-14">
         <h2>What internet speed do you need for IPTV Smarters on Fire Stick?</h2>
         <p>
-          Ofcom's <a href="https://www.ofcom.org.uk/phones-and-broadband/broadband-and-landlines/what-broadband-speeds-do-i-need" target="_blank" rel="noopener noreferrer nofollow">reference speeds</a>
-          for streaming apply the same way to IPTV:
+          Ofcom's <a href="https://www.ofcom.org.uk/phones-and-broadband/broadband-and-landlines/what-broadband-speeds-do-i-need" target="_blank" rel="noopener noreferrer nofollow">reference speeds for streaming</a>
+          apply directly to IPTV:
         </p>
         <ul>
           <li>SD channel: ~3 Mbps</li>
@@ -322,9 +323,9 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
           <li>4K UHD: ~25 Mbps sustained per stream</li>
         </ul>
         <p>
-          Anything above 30 Mbps at the Fire Stick location is comfortable. Anything under 15 Mbps
-          means you should stick to HD channels and either move the router or wire in an
-          Ethernet adapter.
+          30 Mbps or above at the Fire Stick location is comfortable for 4K. Under 15 Mbps, stay on
+          HD channels and wire in an Ethernet adapter if possible. Wi-Fi is the most common cause of
+          IPTV buffering on Fire Sticks, even in the same room as the router.
         </p>
 
         <h2>Frequently asked questions</h2>
@@ -347,10 +348,10 @@ const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
       <article class="legal-prose mt-14">
         <h2>Ready to go live?</h2>
         <p>
-          Take our <a href="/#pricing">£{site.price} 30-day IPTV UK trial</a> and we will WhatsApp you
-          the current Downloader URL, your Xtream Codes credentials and a two-line reminder of the
-          steps above — all within 15 minutes of your payment. If anything on your Fire Stick doesn't
-          behave, we screenshot the fix back to you the same day.
+          Get the <a href="/#pricing">UK IPTV BOX UK IPTV subscription</a> and we'll send you the
+          current Downloader URL, your Xtream Codes credentials and a quick reference for the steps
+          above, all within 15 minutes of payment. If anything on your Fire Stick misbehaves, send
+          us a screenshot and we'll send the fix back the same day.
         </p>
         <p>
           <a href={waLink()} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp to start.</a>

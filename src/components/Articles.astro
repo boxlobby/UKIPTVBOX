@@ -36,12 +36,12 @@ const articles = SLUGS.map((slug) => {
         Guides, tips & updates
       </h2>
       <p class="mt-3 text-sm sm:text-base text-text-muted max-w-xl mx-auto leading-relaxed">
-        Setup walkthroughs and honest buying advice for any IPTV trial or long-term IPTV subscription.
+        Setup walkthroughs and honest buying advice for your UK IPTV subscription.
         Fresh guides on Fire Stick, Smart TV, Android, iOS and MAG, landing regularly.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-8">
       {articles.map((a, i) => (
         <a
           href={a.href}
@@ -84,6 +84,12 @@ const articles = SLUGS.map((slug) => {
           </div>
         </a>
       ))}
+    </div>
+    <div class="text-center">
+      <a href="/blog/" class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-light hover:underline">
+        View all guides
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
   </div>
 </section>

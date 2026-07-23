@@ -5,35 +5,35 @@ import { site } from '../data/site';
 const reviewImages = [
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_1.webp',
-    alt: 'WhatsApp chat screenshot from a UK viewer reviewing their IPTV trial setup',
+    alt: 'WhatsApp chat screenshot from a UK viewer after setting up their UKIPTVBOX subscription',
   },
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_2.webp',
-    alt: 'WhatsApp conversation screenshot showing IPTV trial support for a UK customer',
+    alt: 'WhatsApp conversation screenshot showing UKIPTVBOX support helping a UK customer',
   },
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_3.webp',
-    alt: 'Customer WhatsApp feedback screenshot about starting an IPTV trial in the UK',
+    alt: 'Customer WhatsApp feedback screenshot about their UK IPTV subscription with UKIPTVBOX',
   },
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_4.webp',
-    alt: 'WhatsApp proof screenshot from a satisfied IPTV trial customer in the UK',
+    alt: 'WhatsApp proof screenshot from a satisfied UKIPTVBOX subscriber in the UK',
   },
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/CHAT_5.webp',
-    alt: 'IPTV trial WhatsApp support chat screenshot from a UK viewer',
+    alt: 'UKIPTVBOX WhatsApp support chat screenshot from a UK viewer reviewing the service',
   },
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF1.webp',
-    alt: 'Customer proof screenshot showing a successful IPTV trial experience in the UK',
+    alt: 'Customer proof screenshot showing a positive UK IPTV subscription experience with UKIPTVBOX',
   },
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF2.webp',
-    alt: 'IPTV trial customer proof screenshot from a UK viewer after setup',
+    alt: 'UKIPTVBOX subscriber proof screenshot from a UK viewer after completing device setup',
   },
   {
     src: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/PROOF3.webp',
-    alt: 'UK IPTV trial proof screenshot showing customer feedback and service results',
+    alt: 'UK IPTV subscription proof screenshot showing real customer feedback about UKIPTVBOX',
   },
 ];
 ---
@@ -43,8 +43,8 @@ const reviewImages = [
       <span class="eyebrow">Loved by UK viewers</span>
       <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">34,000+ satisfied customers</h2>
       <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
-        Real UK customers who started with the IPTV trial and stayed on a longer IPTV subscription.
-        Setup in minutes, WhatsApp support in under two.
+        Real UK subscribers sharing their UKIPTVBOX experience: setup in minutes, WhatsApp support in under two.
+
       </p>
     </div>
 
@@ -72,12 +72,14 @@ const reviewImages = [
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
     padding-bottom: 1rem;
     margin-left: -1rem;
     margin-right: -1rem;
     padding-left: 1rem;
     padding-right: 1rem;
     scrollbar-width: none;
+    position: relative;
   }
   .reviews-carousel::-webkit-scrollbar { display: none; }
 
@@ -119,7 +121,9 @@ const reviewImages = [
       const maxIdx = Math.max(0, slides.length - perView());
       idx = idx >= maxIdx ? 0 : idx + 1;
       const target = slides[idx];
-      el.scrollTo({ left: target.offsetLeft - el.offsetLeft, behavior: 'smooth' });
+      const tRect = target.getBoundingClientRect();
+      const eRect = el.getBoundingClientRect();
+      el.scrollTo({ left: el.scrollLeft + tRect.left - eRect.left, behavior: 'smooth' });
     };
 
     const start = () => {

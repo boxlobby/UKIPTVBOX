@@ -1,60 +1,33 @@
 ---
 import { steps } from '../data/steps';
 ---
-<section id="how" class="section">
+<section id="how" class="section" style="background:#EDEAF5;">
   <div class="container-x">
     <div class="mx-auto max-w-3xl text-center">
-      <span class="eyebrow">Get Started</span>
-      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
-        Start Your IPTV Trial in <span class="bg-grad-brand bg-clip-text text-transparent">3 Simple Steps</span>
+      <span class="eyebrow-light">Get Started</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight" style="color:#2A1458">
+        Start Your UK IPTV Subscription in <span style="color:#5B2EBE">3 Simple Steps</span>
       </h2>
-      <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
-        Activate your IPTV UK trial in under five minutes, no contracts, no auto-renewal.
-        Order, get your login on WhatsApp, and start streaming the full IPTV service on any device.
+      <p class="mt-4 text-sm sm:text-base leading-relaxed" style="color:#5A4699">
+        Your UKIPTVBOX subscription activates in under five minutes, no contracts, no auto-renewal.
+        Choose your plan, receive your login on WhatsApp, and start streaming on any device.
       </p>
     </div>
 
-    <ol class="hiw-steps mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-8 relative">
+    <ol class="hiw-steps mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 relative">
       {steps.map((s, i) => (
-        <li class="hiw-step flex flex-col items-center text-center md:items-center md:text-center gap-5 relative z-10">
-          <div class="hiw-num flex h-16 w-16 items-center justify-center rounded-full text-xl font-bold">
-            {i + 1}
-          </div>
-          <div>
-            <h3 class="text-lg sm:text-xl font-semibold text-text-primary">{s.title}</h3>
-            <p class="mt-3 text-sm text-text-muted leading-relaxed max-w-[280px] mx-auto">{s.body}</p>
-          </div>
+        <li class="hiw-step relative overflow-hidden" style="border-radius:20px;background:#FBE4E0;padding:32px 28px;">
+          <span style="position:absolute;top:8px;right:20px;font-size:88px;font-weight:700;line-height:1;color:#C6B5EE;user-select:none;pointer-events:none">{i + 1}</span>
+          <span style="display:inline-flex;border-radius:999px;background:#D3F94F;border:1px solid rgba(36,16,86,.2);padding:6px 16px;font-size:13px;font-weight:600;color:#241056;">{s.title}</span>
+          <h3 style="margin-top:18px;font-size:19px;font-weight:600;color:#2A1458;position:relative">{s.title}</h3>
+          <p style="margin-top:10px;font-size:14px;line-height:1.65;color:#7A5A50;position:relative">{s.body}</p>
         </li>
       ))}
     </ol>
 
-    <p class="mt-12 md:mt-16 text-center text-sm text-text-muted">
-      Ready to test the cheapest UK IPTV trial? <a href="#pricing" class="text-brand-light font-semibold hover:underline">Jump to pricing →</a>
+    <p class="mt-12 md:mt-16 text-center text-sm" style="color:#5A4699">
+      Ready to get the best UK IPTV subscription? <a href="/#pricing" style="color:#4B22AC;font-weight:600;text-decoration:underline">See all plans →</a>
     </p>
   </div>
 </section>
 
-<style>
-  .hiw-num{
-    color:#22D3EE;
-    background:#0A0F1E;
-    border:1.5px solid rgba(34, 211, 238, 0.45);
-    box-shadow:
-      0 0 0 6px rgba(34, 211, 238, 0.06),
-      0 0 24px rgba(34, 211, 238, 0.25),
-      inset 0 0 12px rgba(34, 211, 238, 0.12);
-  }
-
-  /* Dashed connector line between the three circles (desktop only) */
-  @media (min-width: 768px){
-    .hiw-steps::before{
-      content:"";
-      position:absolute;
-      top:32px; /* half of the 64px circle */
-      left:calc(16.6666% + 44px);
-      right:calc(16.6666% + 44px);
-      border-top:1.5px dashed rgba(255, 255, 255, 0.14);
-      z-index:0;
-    }
-  }
-</style>

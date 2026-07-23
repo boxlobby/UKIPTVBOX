@@ -33,10 +33,10 @@ const apps: App[] = [
     logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/XOTT.webp',
     login: 'MAC address (auto-detected)',
     supported: 'Samsung Tizen · LG WebOS · some Android TVs',
-    copy: `XOTT is the best free starting point for a Smart TV IPTV trial in the UK. It installs straight from the Samsung / LG app store, shows you a MAC address on first launch, and once we upload your playlist against that MAC the channels appear the next time you open the app — no typing URLs into a TV remote.`,
+    copy: `XOTT is the best free starting point for a Smart TV IPTV trial in the UK. It installs straight from the Samsung / LG app store, shows you a MAC address on first launch, and once we upload your playlist against that MAC the channels appear the next time you open the app, with no typing of URLs into a TV remote.`,
     steps: [
       { title: 'Install XOTT from your TV store', body: 'On Samsung open the Smart Hub, on LG open the Content Store. Search "XOTT" and install the free app.' },
-      { title: 'Open XOTT and note your MAC', body: 'Launch the app. The welcome screen shows a MAC address in the format 00:1A:79:XX:XX:XX. Take a photo of it — that\'s your device identifier.' },
+      { title: 'Open XOTT and note your MAC', body: 'Launch the app. The welcome screen shows a MAC address in the format 00:1A:79:XX:XX:XX. Take a photo of it, as that\'s your device identifier.' },
       { title: 'Send us your MAC on WhatsApp', body: 'Message us the MAC together with your order name. We upload your personal M3U playlist to the XOTT server within a few minutes.' },
       { title: 'Reload the app and start streaming', body: 'Close XOTT completely, re-open it. Your UK channels, sports, films and series load automatically with a full EPG.' },
     ],
@@ -50,14 +50,14 @@ const apps: App[] = [
     login: 'Device Key + MAC (activated on iboproapp.com)',
     supported: 'Samsung Tizen · LG WebOS · Android TV · Fire TV · Apple TV · Windows',
     activateUrl: 'https://iboproapp.com',
-    copy: `IBO Player Pro is the most polished paid Smart TV IPTV player. It comes with a 7-day free trial baked in — long enough to test our full IPTV UK trial line-up — and if you like it, one payment of about €8 unlocks the app for life on that specific TV. The interface is close to Netflix, with per-category posters, a fast EPG and catch-up support.`,
+    copy: `IBO Player Pro is the most polished paid Smart TV IPTV player. It comes with a 7-day free trial baked in (long enough to test our full IPTV UK trial line-up) and if you like it, one payment of about €8 unlocks the app for life on that specific TV. The interface is close to Netflix, with per-category posters, a fast EPG and catch-up support.`,
     steps: [
       { title: 'Install IBO Player Pro', body: 'From the Samsung or LG app store search "IBO Player Pro" and install it. On some older TVs it appears as "IBO Player".' },
       { title: 'Read your Device Key and MAC', body: 'Open the app. The first screen shows a Device Key AND a MAC address. You\'ll need both. Take a photo.' },
-      { title: 'Send us both codes', body: 'WhatsApp us the Device Key and MAC. We upload your playlist against them and confirm when it\'s live — usually within 10 minutes.' },
+      { title: 'Send us both codes', body: 'WhatsApp us the Device Key and MAC. We upload your playlist against them and confirm when it\'s live, usually within 10 minutes.' },
       { title: 'Enjoy the free trial, then activate', body: 'You get 7 days free. To keep it after that, visit iboproapp.com, enter the same Device Key + MAC, and pay the one-off lifetime fee. Your playlist stays exactly as it is.' },
     ],
-    tips: ['Payment is handled by IBO directly on their site — separate from your IPTV subscription with us.'],
+    tips: ['Payment is handled by IBO directly on their site, separate from your IPTV subscription with us.'],
   },
   {
     slug: 'hot',
@@ -68,12 +68,12 @@ const apps: App[] = [
     login: 'M3U playlist URL (uploaded at hotplayer.app/upload)',
     supported: 'Samsung Tizen · LG WebOS · Android TV · Fire TV · Apple TV · iOS · Windows',
     activateUrl: 'https://hotplayer.app/activation',
-    copy: `Hot Player has the longest free trial on this list — a full 30 days — which makes it a strong pairing with a monthly IPTV trial. It uses an M3U URL rather than a MAC, so you upload your playlist link on the Hot Player website against your TV's MAC and the app pulls it down automatically.`,
+    copy: `Hot Player has the longest free trial on this list, a full 30 days, which makes it a strong pairing with a monthly IPTV trial. It uses an M3U URL rather than a MAC, so you upload your playlist link on the Hot Player website against your TV's MAC and the app pulls it down automatically.`,
     steps: [
       { title: 'Install Hot Player on your TV', body: 'Search "Hot Player" or "Hot IPTV" in the Samsung / LG store. Install it and open it once to reveal your MAC.' },
-      { title: 'Send us your MAC', body: 'WhatsApp us the MAC — we generate a personal M3U playlist URL for your account.' },
+      { title: 'Send us your MAC', body: 'WhatsApp us the MAC and we will generate a personal M3U playlist URL for your account.' },
       { title: 'Upload the playlist on hotplayer.app/upload', body: 'Open hotplayer.app/upload in a browser, enter your MAC and paste the M3U URL we sent you. Save.' },
-      { title: 'Reload the app', body: 'Restart Hot Player on the TV. Your channels appear. You have 30 days free — after that activate on hotplayer.app/activation for €5.99/yr or €14.99 lifetime.' },
+      { title: 'Reload the app', body: 'Restart Hot Player on the TV. Your channels appear. You have 30 days free. After that activate on hotplayer.app/activation for €5.99/yr or €14.99 lifetime.' },
     ],
     tips: ['Don\'t confuse the two Hot Player pages: /upload is where you paste your playlist (free during the trial), /activation is where you pay when the trial ends.'],
   },
@@ -89,7 +89,7 @@ const apps: App[] = [
     copy: `Bob Player is a cleaner, no-frills alternative to IBO. Cheaper on a lifetime plan (~€13 one-off), MAC-based, and includes a short free trial to test your Smart TV IPTV feed before you activate. Preferred by users who want the simplest possible interface.`,
     steps: [
       { title: 'Install Bob Player', body: 'Search "Bob Player" in the Samsung or LG store and install.' },
-      { title: 'Note your MAC', body: 'Open the app — the MAC appears on the welcome screen.' },
+      { title: 'Note your MAC', body: 'Open the app. The MAC appears on the welcome screen.' },
       { title: 'Send it to us', body: 'WhatsApp us your MAC. We attach your IPTV playlist to it within minutes.' },
       { title: 'Reload and activate', body: 'Restart Bob Player. Your channels appear. When the trial expires, activate on bobplayer.com/login.' },
     ],
@@ -103,9 +103,9 @@ const apps: App[] = [
     login: 'M3U URL (uploaded at siptv.eu)',
     supported: 'Samsung Tizen · LG WebOS · Android TV',
     activateUrl: 'https://siptv.eu/mylist/',
-    copy: `Smart IPTV — usually shortened to SIPTV — is the veteran Smart TV IPTV player. It's the app most UK IPTV providers reference in their setup docs, including ours. Cheapest lifetime price in this list and by far the most reliable long-term choice on older Samsung / LG TVs.`,
+    copy: `Smart IPTV (usually shortened to SIPTV) is the veteran Smart TV IPTV player. It's the app most UK IPTV providers reference in their setup docs, including ours. Cheapest lifetime price in this list and by far the most reliable long-term choice on older Samsung / LG TVs.`,
     steps: [
-      { title: 'Install "Smart IPTV" from the store', body: 'On Samsung and LG the app is called "Smart IPTV". Install it — some markets have removed it, in which case use one of the other apps in this guide.' },
+      { title: 'Install "Smart IPTV" from the store', body: 'On Samsung and LG the app is called "Smart IPTV". Install it. If some markets have removed it, use one of the other apps in this guide.' },
       { title: 'Open it and read your MAC', body: 'Launch the app. Your MAC address is printed on the welcome screen.' },
       { title: 'Send us the MAC', body: 'WhatsApp it to us. We upload your M3U playlist directly to siptv.eu attached to your MAC.' },
       { title: 'Restart to load channels', body: 'Close and re-open Smart IPTV. Your channels stream immediately. Activate on siptv.eu when the 7-day trial ends.' },
@@ -120,7 +120,7 @@ const apps: App[] = [
     login: 'M3U URL (uploaded at setiptv.com)',
     supported: 'Samsung Tizen · LG WebOS · Android TV',
     activateUrl: 'https://setiptv.com',
-    copy: `Set IPTV works exactly like Smart IPTV — MAC-based upload of an M3U link through a web portal — but has better support for the newest Samsung Tizen and LG WebOS 6/7 TVs where SIPTV has become unreliable.`,
+    copy: `Set IPTV works exactly like Smart IPTV (MAC-based upload of an M3U link through a web portal) but has better support for the newest Samsung Tizen and LG WebOS 6/7 TVs where SIPTV has become unreliable.`,
     steps: [
       { title: 'Install Set IPTV', body: 'Search "Set IPTV" in the Samsung / LG store. Install and open.' },
       { title: 'Grab your MAC address', body: 'The MAC is shown on the welcome screen.' },
@@ -135,33 +135,33 @@ const apps: App[] = [
     logo: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/iptv-smarters.webp',
     login: 'Xtream Codes (username + password + server URL)',
     supported: 'Samsung Tizen 2018+ · Apple TV · Android TV (via IPTV Smarters Pro)',
-    copy: `Smarters Player Lite is the free official Samsung Tizen version of the popular IPTV Smarters app. Instead of a MAC upload it logs in directly with Xtream Codes credentials — the same username / password / server URL we send to Fire Stick and Apple TV users — which makes it the fastest of all Smart TV apps to activate.`,
+    copy: `Smarters Player Lite is the free official Samsung Tizen version of the popular IPTV Smarters app. Instead of a MAC upload it logs in directly with Xtream Codes credentials (the same username / password / server URL we send to Fire Stick and Apple TV users), which makes it the fastest of all Smart TV apps to activate.`,
     steps: [
       { title: 'Install Smarters Player Lite', body: 'From the Samsung app store search "Smarters Player Lite" (Tizen 2018 or newer required). Install it.' },
-      { title: 'Choose Login with Xtream Codes API', body: 'Open the app, tap Add User, then pick "Login with Xtream Codes API" — the fastest, most reliable login method.' },
+      { title: 'Choose Login with Xtream Codes API', body: 'Open the app, tap Add User, then pick "Login with Xtream Codes API", the fastest, most reliable login method.' },
       { title: 'Enter the details we sent you', body: 'Type any nickname (e.g. "Living Room"), then enter the username, password and server URL from your welcome message. Save.' },
       { title: 'Start streaming', body: 'The app connects and loads your full channel list, EPG, VOD and series. No MAC upload, no waiting.' },
     ],
-    tips: ['If Smarters Player Lite is missing from your regional Samsung store, use XOTT (free) or IBO Player Pro (paid) instead — the trial credentials we send you work on both.'],
+    tips: ['If Smarters Player Lite is missing from your regional Samsung store, use XOTT (free) or IBO Player Pro (paid) instead. The trial credentials we send you work on both.'],
   },
 ];
 
 const faqs = [
   {
     q: 'Which Smart TV IPTV app is the best in 2026?',
-    a: 'For a completely free Smart TV IPTV app in the UK, XOTT is the best starting point — it uses a MAC upload, has a clean interface and works on both Samsung Tizen and LG WebOS. If you don\'t mind paying once, IBO Player Pro (≈€8 lifetime) is the smoothest Netflix-style paid app; Hot Player has the longest free trial at 30 days. All three are compatible with our iptv uk trial.',
+    a: 'For a completely free Smart TV IPTV app in the UK, XOTT is the best starting point: it uses a MAC upload, has a clean interface and works on both Samsung Tizen and LG WebOS. If you don\'t mind paying once, IBO Player Pro (approximately €8 lifetime) is the smoothest Netflix-style paid app; Hot Player has the longest free trial at 30 days. All three are compatible with our iptv uk trial.',
   },
   {
     q: 'Do I need a paid app to use my IPTV subscription on Smart TV?',
-    a: 'No. XOTT and Smarters Player Lite are completely free. IBO Player Pro, Hot Player / Hot IPTV and Bob Player each come with a free trial (7 to 30 days) — install one, paste your playlist and test it properly. When the trial ends you activate (pay for) the app on its own official site: iboproapp.com, hotplayer.app/activation or bobplayer.com/login. Payment for those apps is completely separate from your IPTV subscription with us.',
+    a: 'No. XOTT and Smarters Player Lite are completely free. IBO Player Pro, Hot Player / Hot IPTV and Bob Player each come with a free trial (7 to 30 days). Install one, paste your playlist and test it properly. When the trial ends you activate (pay for) the app on its own official site: iboproapp.com, hotplayer.app/activation or bobplayer.com/login. Payment for those apps is completely separate from your IPTV subscription with us.',
   },
   {
     q: 'Will these apps work on my Samsung / LG / Sony?',
-    a: 'Yes for the vast majority of TVs. Samsung Tizen 2018+ supports all the apps listed above. LG WebOS 4+ supports XOTT, IBO, Hot Player, Bob Player, Smart IPTV and Set IPTV. Sony Android TVs use the Google Play versions of the same apps. Very old Smart TVs (pre-2016) may need a Fire TV Stick 4K Max as a workaround — see our Fire Stick installation guide.',
+    a: 'Yes for the vast majority of TVs. Samsung Tizen 2018+ supports all the apps listed above. LG WebOS 4+ supports XOTT, IBO, Hot Player, Bob Player, Smart IPTV and Set IPTV. Sony Android TVs use the Google Play versions of the same apps. Very old Smart TVs (pre-2016) may need a Fire TV Stick 4K Max as a workaround. See our Fire Stick installation guide.',
   },
   {
     q: 'What is a MAC address and where do I find it?',
-    a: 'A MAC address is a unique 12-character code (e.g. 00:1A:79:AB:CD:EF) that identifies your TV to the IPTV app\'s server. Every Smart TV IPTV app shows it on the welcome screen the first time you open it. Take a photo of it and WhatsApp it to us — that\'s how we attach your personal IPTV playlist to your TV without you having to type long URLs on the remote.',
+    a: 'A MAC address is a unique 12-character code (e.g. 00:1A:79:AB:CD:EF) that identifies your TV to the IPTV app\'s server. Every Smart TV IPTV app shows it on the welcome screen the first time you open it. Take a photo of it and WhatsApp it to us. That\'s how we attach your personal IPTV playlist to your TV without you having to type long URLs on the remote.',
   },
   {
     q: 'Do these Smart TV apps support 4K IPTV?',
@@ -173,7 +173,7 @@ const faqs = [
   },
   {
     q: 'What if my TV can\'t find any of these IPTV apps?',
-    a: 'Some Samsung / LG regions have removed Smart IPTV and Set IPTV from their app stores. If that\'s you, try XOTT and IBO Player Pro first — they\'re available in every UK region. If none of them install, the cheapest fix is a £59 Fire TV Stick 4K Max plugged into your TV\'s HDMI port — full walkthrough in our Fire Stick installation guide.',
+    a: 'Some Samsung / LG regions have removed Smart IPTV and Set IPTV from their app stores. If that\'s you, try XOTT and IBO Player Pro first, as they\'re available in every UK region. If none of them install, the cheapest fix is a £59 Fire TV Stick 4K Max plugged into your TV\'s HDMI port. Full walkthrough in our Fire Stick installation guide.',
   },
 ];
 
@@ -190,7 +190,7 @@ const jsonLd = {
     },
     {
       '@type': 'Article',
-      headline: 'How to install IPTV on a Smart TV (Samsung, LG, Sony) — 7 apps ranked',
+      headline: 'How to install IPTV on a Smart TV (Samsung, LG, Sony): 7 apps ranked',
       description: 'The complete Smart TV IPTV setup guide for Samsung Tizen, LG WebOS, Sony and Android TVs. Compares XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV, Set IPTV and Smarters Player Lite.',
       image: ogImage,
       author: { '@type': 'Organization', name: `${site.name} Editorial`, url: site.url },
@@ -212,7 +212,7 @@ const jsonLd = {
       totalTime: 'PT10M',
       step: apps.flatMap((app) => app.steps.map((s, i) => ({
         '@type': 'HowToStep',
-        name: `${app.name} — ${s.title}`,
+        name: `${app.name}: ${s.title}`,
         text: s.body,
         position: i + 1,
       }))),
@@ -236,7 +236,7 @@ const relatedGuides = [
 ];
 ---
 <BaseLayout
-  title={`Smart TV IPTV setup — 7 best apps for Samsung, LG & Sony | ${site.name}`}
+  title={`Smart TV IPTV setup: 7 best apps for Samsung, LG & Sony | ${site.name}`}
   description="Install IPTV on any Smart TV in under 10 minutes. Step-by-step Samsung Tizen and LG WebOS guides for XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV, Set IPTV and Smarters Player Lite. Free trials included."
   canonical={canonical}
   ogImage={ogImage}
@@ -271,13 +271,13 @@ const relatedGuides = [
         </div>
 
         <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
-          Smart TV IPTV — 7 best apps for Samsung, LG & Sony (2026)
+          Smart TV IPTV: 7 best apps for Samsung, LG & Sony (2026)
         </h1>
         <p class="mt-5 text-lg text-text-muted leading-relaxed">
           Install IPTV on any modern Samsung Tizen, LG WebOS, Sony or Android-based Smart TV in under
-          10 minutes. This guide covers every reliable player on the market — one free option (<strong>XOTT</strong>)
+          10 minutes. This guide covers every reliable player on the market: one free option (<strong>XOTT</strong>)
           plus the paid apps every serious viewer uses (<strong>IBO Player Pro</strong>, <strong>Hot Player</strong>,
-          <strong>Bob Player</strong>) — all compatible with our <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
+          <strong>Bob Player</strong>), all compatible with our <a href="/#pricing" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">£{site.price} IPTV UK trial</a>.
         </p>
 
         <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
@@ -295,7 +295,7 @@ const relatedGuides = [
         <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
           <img
             src="/installation-guides/smart-tv-hero.svg"
-            alt="Smart TV IPTV setup — XOTT, IBO Player Pro, Hot Player and Bob Player on Samsung and LG"
+            alt="Smart TV IPTV setup: XOTT, IBO Player Pro, Hot Player and Bob Player on Samsung and LG"
             width="1200"
             height="630"
             loading="eager"
@@ -311,7 +311,7 @@ const relatedGuides = [
     <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
       <article class="legal-prose">
         <p>
-          Every modern Smart TV in the UK can run <strong>IPTV</strong> without extra hardware —
+          Every modern Smart TV in the UK can run <strong>IPTV</strong> without extra hardware.
           you just need to pick the right player app. This guide walks through the seven apps we
           actively support on Samsung Tizen and LG WebOS, ranked by how quickly you can go from
           "just bought a TV" to watching UK channels, sports and films. Whichever app you pick,
@@ -321,22 +321,22 @@ const relatedGuides = [
 
         <p>Short on time? The three options that cover 95% of Smart TV setups:</p>
         <ul>
-          <li><a href="#xott"><strong>XOTT</strong></a> — 100% free, MAC upload, the best free Smart TV IPTV app</li>
-          <li><a href="#ibo"><strong>IBO Player Pro</strong></a> — ≈€8 lifetime, 7-day free trial, the most polished paid app</li>
-          <li><a href="#hot"><strong>Hot Player / Hot IPTV</strong></a> — 30-day free trial, best if you're only running a monthly IPTV UK trial</li>
+          <li><a href="#xott"><strong>XOTT</strong></a>: 100% free, MAC upload, the best free Smart TV IPTV app</li>
+          <li><a href="#ibo"><strong>IBO Player Pro</strong></a>: approximately €8 lifetime, 7-day free trial, the most polished paid app</li>
+          <li><a href="#hot"><strong>Hot Player / Hot IPTV</strong></a>: 30-day free trial, best if you're only running a monthly IPTV UK trial</li>
         </ul>
       </article>
 
       <!-- Paid apps callout -->
       <div class="mt-10 rounded-2xl border border-brand/25 bg-brand/5 p-5 md:p-6">
         <div class="flex items-start gap-3">
-          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-light">
+          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand !text-[#241056]">
             <Icon name="sparkles" size={16} />
           </span>
           <div class="min-w-0">
             <p class="font-semibold text-text-primary">About the paid apps</p>
             <p class="mt-2 text-sm text-text-muted leading-relaxed">
-              IBO Player Pro, Hot Player / Hot IPTV and Bob Player each come with a <span class="text-brand-light font-medium">free trial</span> — install one, paste your playlist and test it properly.
+              IBO Player Pro, Hot Player / Hot IPTV and Bob Player each come with a <span class="text-brand-light font-medium">free trial</span>. Install one, paste your playlist and test it properly.
               When the trial ends, you activate (pay for) the app on its <strong>own official site</strong> below. Tap any app card for its exact steps.
             </p>
             <div class="mt-4 flex flex-wrap gap-2">
@@ -446,7 +446,7 @@ const relatedGuides = [
             <ol class="mt-4 space-y-4">
               {app.steps.map((s, i) => (
                 <li class="flex gap-4">
-                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold text-white shadow-glow">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-grad-brand text-xs font-bold !text-[#241056] shadow-glow">
                     {i + 1}
                   </span>
                   <div class="min-w-0">
@@ -494,7 +494,7 @@ const relatedGuides = [
 
       <!-- Comparison -->
       <h2 id="comparison" class="mt-16 font-display text-2xl md:text-3xl font-bold text-text-primary scroll-mt-24">
-        Smart TV IPTV apps — side-by-side
+        Smart TV IPTV apps: side-by-side
       </h2>
       <p class="mt-3 text-text-muted">All seven apps at a glance.</p>
       <div class="mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
@@ -527,8 +527,8 @@ const relatedGuides = [
         <h2>Which Smart TV IPTV app should I actually use?</h2>
         <p>
           If you want the shortest possible answer: install <strong>XOTT</strong> first because it's
-          free. If the interface doesn't feel right, install <strong>IBO Player Pro</strong> next —
-          the 7-day trial covers the rest of your first week and, if you like it, one €8 lifetime
+          free. If the interface doesn't feel right, install <strong>IBO Player Pro</strong> next.
+          The 7-day trial covers the rest of your first week and, if you like it, one €8 lifetime
           payment removes the paywall for good on that TV. If you're on a very short IPTV UK trial
           and want the longest free window before committing, <strong>Hot Player</strong>'s 30-day
           trial is unbeatable.
@@ -537,14 +537,14 @@ const relatedGuides = [
         <h3>Samsung Tizen owners</h3>
         <p>
           All seven apps are available on Samsung Tizen 2018 or newer. On Tizen we recommend the pair
-          <strong>XOTT + Smarters Player Lite</strong> — one MAC-based, one Xtream Codes — so you
+          <strong>XOTT + Smarters Player Lite</strong> (one MAC-based, one Xtream Codes) so you
           always have a working fallback if the Samsung store temporarily hides one of them.
         </p>
 
         <h3>LG WebOS owners</h3>
         <p>
           LG WebOS 4 and later supports XOTT, IBO Player Pro, Hot Player, Bob Player, Smart IPTV and
-          Set IPTV. Smarters Player Lite is not on the WebOS store — LG viewers should use IBO Player
+          Set IPTV. Smarters Player Lite is not on the WebOS store. LG viewers should use IBO Player
           Pro instead as the "polished" option.
         </p>
 
@@ -556,7 +556,7 @@ const relatedGuides = [
 
         <h2>Try our IPTV UK trial on any of these apps</h2>
         <p>
-          Every app on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a> —
+          Every app on this page works with our <a href="/#pricing">30-day £{site.price} IPTV trial</a>,
           same MAC upload, same Xtream Codes credentials, same UK support on WhatsApp. If you install
           one of the paid apps, your free trial from the app developer runs <em>in parallel</em> with
           our IPTV subscription trial, so you can genuinely test both before spending a penny more.

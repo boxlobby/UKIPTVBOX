@@ -1,12 +1,12 @@
 ---
 export interface Props { class?: string; height?: number }
-const { class: className = '', height = 56 } = Astro.props;
-const width = Math.round(height * 2);
+const { class: className = '', height = 36 } = Astro.props;
+const width = Math.round(height * 4.17);
 ---
-<a href="/" class={`inline-flex items-center ${className}`} aria-label="IPTV Trial, home">
+<a href="/" class={`inline-flex items-center ${className}`} aria-label="UK IPTV BOX, home">
   <img
     src="/logo.png"
-    alt="IPTV Trial logo"
+    alt="UK IPTV BOX logo"
     width={width}
     height={height}
     style={`height:${height}px;width:auto`}
