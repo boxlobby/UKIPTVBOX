@@ -28,7 +28,6 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
-    <meta name="google-site-verification" content="9WzUj_v8e8AKCEGlEzRIw1ET19zUygD9X4u8K353T4E" />
     <meta name="theme-color" content="#241056" />
 
     <title>{title}</title>
@@ -59,7 +58,6 @@ const {
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="preconnect" href="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev" crossorigin />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- Preload LCP hero image so the browser fetches it before parsing body -->
     <link
@@ -191,19 +189,5 @@ const {
       }, { once: true });
     </script>
 
-    <!-- Google Analytics — deferred to avoid blocking FCP/LCP -->
-    <script is:inline>
-      window.addEventListener('load', () => {
-        const s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1VFPDLRZRJ';
-        s.async = true;
-        document.head.appendChild(s);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        window.gtag = gtag;
-        gtag('js', new Date());
-        gtag('config', 'G-1VFPDLRZRJ');
-      }, { once: true });
-    </script>
   </body>
 </html>
