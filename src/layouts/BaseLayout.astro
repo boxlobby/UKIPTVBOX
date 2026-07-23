@@ -58,15 +58,17 @@ const {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <link rel="dns-prefetch" href="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev" />
     <link rel="preconnect" href="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev" crossorigin />
 
-    <!-- Preload LCP hero image so the browser fetches it before parsing body -->
+    <!-- Preload LCP hero image — imagesizes matches the sizes attr on the <img> -->
     <link
       rel="preload"
       as="image"
       href="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp"
       type="image/webp"
       fetchpriority="high"
+      imagesizes="(min-width: 1024px) 896px, (min-width: 640px) calc(100vw - 3rem), calc(100vw - 2rem)"
     />
 
     {includeSchema && <SchemaOrg />}

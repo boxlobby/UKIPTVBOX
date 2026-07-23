@@ -21,8 +21,8 @@ export default {
         success: '#22C55E',
       },
       fontFamily: {
-        display: ['Poppins', 'system-ui', 'sans-serif'],
-        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'Poppins Fallback', 'system-ui', 'sans-serif'],
+        sans: ['Poppins', 'Poppins Fallback', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         container: '1200px',

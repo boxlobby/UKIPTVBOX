@@ -3,6 +3,17 @@
 @import '@fontsource/poppins/600.css';
 @import '@fontsource/poppins/700.css';
 
+/* Metric-adjusted fallback to minimise CLS when Poppins loads and swaps in.
+   Values derived from Poppins/Arial metric comparison (UPM 1000 vs 2048). */
+@font-face {
+  font-family: 'Poppins Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica'), local('sans-serif');
+  ascent-override: 93%;
+  descent-override: 29%;
+  line-gap-override: 0%;
+  size-adjust: 111%;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

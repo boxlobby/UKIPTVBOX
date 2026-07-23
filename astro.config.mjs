@@ -6,7 +6,7 @@ export default defineConfig({
   output: 'static',
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   integrations: [tailwind({ applyBaseStyles: false })],
 });
