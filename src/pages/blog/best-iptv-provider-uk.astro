@@ -1,0 +1,594 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('best-iptv-provider-uk')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+// Hosted on R2. 1376x768 (16:9) — also serves as the OG/Twitter card image.
+// The %E2%80%A6 in two of these keys is a literal ellipsis in the R2 object name.
+// Leave it percent-encoded — decoding it breaks the URL.
+const R2 = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev';
+const heroSrc = `${R2}/Streaming_providers_assessment_p%E2%80%A6_202607270127.jpeg`;
+const ogImage = heroSrc;
+
+// In-body images. Same 1376x768 dimensions as the hero.
+const inlineImages = {
+  scorecard: `${R2}/Scorecard_with_progress_bars_202607270128.jpeg`,
+  support: `${R2}/Mobile_messaging_conversation_mo%E2%80%A6_202607270129.jpeg`,
+};
+
+// The eight standards, each with our own number against it.
+const criteria = [
+  {
+    n: 1,
+    title: 'Peak-hour stability, not an uptime badge',
+    detail:
+      'Anyone can hold a stream up at four in the morning. The number that matters is between 7pm and 11pm when every household on the same servers is watching the same thing. We advertise <strong>99.9% uptime</strong> and we will not round that up to 100%, because nobody runs at 100% and a provider claiming it has either not measured or is hoping you will not.',
+  },
+  {
+    n: 2,
+    title: 'A support reply measured in minutes',
+    detail:
+      'Live TV problems are time-sensitive. A stream stalling four minutes before kick-off cannot wait for a ticket queue. Ours runs <strong>24/7 on WhatsApp with replies under two minutes during UK hours</strong>. Test that before you pay rather than after — message any provider at half nine on a Saturday and time it.',
+  },
+  {
+    n: 3,
+    title: 'A refund window written down before you pay',
+    detail:
+      'Ours is <strong>7 days</strong>. Not "a week", not "case by case", not "at our discretion". A provider confident in its own servers can afford to write the number down, and one that will not is telling you something about the servers. Ask in writing and keep the reply — <a href="https://www.gov.uk/consumer-protection-rights" target="_blank" rel="noopener noreferrer nofollow">UK consumer protection rights</a> apply to this purchase like any other.',
+  },
+  {
+    n: 4,
+    title: 'An honest concurrent-connection number',
+    detail:
+      'Our default is <strong>one connection</strong>. That is genuinely fewer than several competitors advertise, and it is the honest number rather than the flattering one. Bandwidth is finite and somebody pays for it. If you need a second screen running at the same time, that is a multi-connection add-on arranged over WhatsApp, not a promise on a homepage.',
+  },
+  {
+    n: 5,
+    title: 'One-off payment, no card kept on file',
+    detail:
+      'There is no auto-renewal here. You pay once, it runs, it stops. Nothing rebills you in month 13 because nothing has your card. This is the single biggest structural difference between us and a traditional pay-TV bundle, and it is the reason the pricing table further down has no asterisks in it.',
+  },
+  {
+    n: 6,
+    title: 'A catalogue you can actually check',
+    detail:
+      '<strong>50,000+ live channels across 50+ countries, 200,000+ on-demand films and series</strong>, in 4K, FHD and HD where the source supports it. Inflated channel counts are the oldest trick in this market, so open the list during your first week and count the ones you would genuinely watch. It will be about eight. That is normal.',
+  },
+  {
+    n: 7,
+    title: 'Device coverage for hardware you already own',
+    detail:
+      'Smart TV, Fire Stick, Android phones, tablets and boxes, iOS, MAG, Apple TV, Windows, Mac, Nvidia Shield, Enigma2 and Formuler. If a provider needs you to buy their specific box first, you are buying hardware, not a service. Our <a href="/blog/top-5-iptv-boxes-uk-2026/">boxes guide</a> covers what is worth owning.',
+  },
+  {
+    n: 8,
+    title: 'A trading history longer than the marketing',
+    detail:
+      'We started in <strong>2022</strong> and have served <strong>34,000+ users</strong> since. That matters less as a boast than as a filter: the reseller model collapses inside a year, so anything still standing after three has infrastructure behind it rather than a rented panel and a social media account.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Which is the best IPTV provider in the UK?',
+    a: 'There is no single answer that survives contact with your house. The right provider depends on your peak-time broadband speed, how many people watch at once, and whether you need support at kick-off. Judge any candidate on peak-hour stability, support reply time, a written refund window and an honest connection limit, then test it yourself inside the refund period.',
+  },
+  {
+    q: 'How much should a UK IPTV subscription cost?',
+    a: 'Between roughly £4 and £15 a month depending on how long you commit for. Ours is £14.99 for one month or £49.99 for twelve, which works out at £4.17 a month. Be wary of anything under about £3 a month — that is usually a reseller who will not be there in six months.',
+  },
+  {
+    q: 'Do the best IPTV providers offer a free trial?',
+    a: 'We do not, and we would rather say so plainly. Our one-month plan is £14.99 with a 7-day money-back window, which is a paid trial with a refund rather than a free one. A genuinely free trial should need no card at all; if a provider wants card details to prove the stream works, the stream is the part they are not confident about.',
+  },
+  {
+    q: 'What uptime should a good IPTV provider have?',
+    a: 'Above 99% measured during evening peak hours, not as a yearly average. We advertise 99.9%. Any provider claiming 100% is either not measuring or not telling you, because no streaming infrastructure runs without interruption.',
+  },
+  {
+    q: 'How fast should IPTV support reply?',
+    a: 'Under five minutes is the sensible bar for a live TV problem, and 24/7 availability matters more than the channel it runs on. Ours replies in under two minutes during UK hours on WhatsApp. Test it with a genuine pre-sales question before you pay.',
+  },
+  {
+    q: 'Will IPTV work with my broadband?',
+    a: 'If your connection holds above 15 Mbps during evening peak, yes. For 4K, or for more than one stream at a time, aim for 25 Mbps or more. Speed measured at 11am on a Tuesday is not the number that matters; measure it at 8pm on a Saturday.',
+  },
+  {
+    q: 'How many devices can I watch on at once?',
+    a: 'One, on the default plan. Multi-connection packages are available on request through WhatsApp. Treat any provider advertising unlimited simultaneous connections with suspicion, because bandwidth is finite and that promise gets tested at 3pm on a Saturday.',
+  },
+  {
+    q: 'What refund should a good IPTV provider offer?',
+    a: 'A documented window of at least seven days, stated on the site rather than negotiated afterwards. Ours is 7 days. In practice it is claimed by a low single-digit percentage of new customers, and nearly always because their broadband is below 15 Mbps and no service could have fixed that.',
+  },
+];
+
+// Table of contents — every id here must exist as an H2 in the markup below.
+const toc = [
+  { id: 'short-answer', label: 'The short answer' },
+  { id: 'standards', label: 'The eight standards' },
+  { id: 'test-it-yourself', label: 'Test any provider in one evening' },
+  { id: 'where-we-lose', label: 'Where we lose' },
+  { id: 'pricing', label: 'What it costs' },
+  { id: 'from-a-month', label: 'The "from £X a month" trap' },
+  { id: 'support', label: 'What support actually looks like' },
+  { id: 'not-for-you', label: 'Who should not buy from us' },
+  { id: 'faqs', label: 'Straight answers' },
+  { id: 'verdict', label: 'The verdict' },
+];
+
+const relatedLinks = [
+  { href: '/blog/iptv-subscription-uk-buyers-guide/', label: 'IPTV Subscription UK: 2026 Buyer\'s Guide' },
+  { href: '/blog/cheap-iptv-uk-scam-or-legit/', label: 'Cheap IPTV UK: Scam or Legit?' },
+  { href: '/blog/iptv-uk/', label: 'IPTV UK 2026: Costs, Legality and Setup' },
+  { href: '/blog/iptv-free-trial-uk/', label: 'IPTV Free Trial UK: What to Test First' },
+];
+
+const plans = [
+  { plan: '1 month', price: `£${site.price}`, per: '£14.99', saving: '—' },
+  { plan: '3 months', price: '£26.99', per: '£9.00', saving: '£17.98' },
+  { plan: '6 months', price: '£36.99', per: '£6.17', saving: '£52.95' },
+  { plan: '12 months', price: '£49.99', per: '£4.17', saving: '£129.89' },
+];
+
+const orgId = `${site.url}/#organization`;
+const authorId = `${site.url}/about#team`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: site.name,
+      url: site.url,
+      logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      sameAs: [`${site.url}/about/`],
+      foundingDate: '2022',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        availableLanguage: 'en-GB',
+        url: waLink(),
+      },
+    },
+    {
+      '@type': 'Person',
+      '@id': authorId,
+      name: post.author,
+      url: authorId,
+      jobTitle: 'Independent streaming and broadband consultant',
+      description:
+        'UK-based streaming and broadband consultant with six-plus years evaluating IPTV infrastructure, server stability and home network performance.',
+      knowsAbout: ['IPTV', 'UK broadband', 'Home network troubleshooting', 'Streaming hardware'],
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@id': authorId },
+      publisher: { '@id': orgId },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: post.category,
+      keywords: post.keywords.join(', '),
+      inLanguage: 'en-GB',
+      wordCount: 2800,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  ogType="article"
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">Best IPTV Provider UK</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          <strong>The best IPTV provider in the UK is the one that holds a stream steady between 7pm
+          and 11pm, answers you in minutes when it does not, and writes its refund window down before
+          you pay.</strong> Everything else — channel counts, 4K badges, the number of countries on the
+          list — is decoration. This page sets out the eight standards that matter, puts our own numbers
+          against every one of them, and includes a section on where we lose.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink('Hi, I read the best IPTV provider UK scorecard. Can you tell me if my broadband is up to it?')} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Message us on WhatsApp
+          </a>
+          <a href="#where-we-lose" class="btn-secondary">Where we lose</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src={heroSrc}
+            sizes="(max-width: 768px) 100vw, 720px"
+            alt={post.imageAlt}
+            width="1376"
+            height="768"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Search this question and you will get roughly nine ranked lists, each with a different winner,
+          each written by someone earning a commission on the winner. I am not going to pretend to be
+          above that. We sell an IPTV service. You are on our website. (If you were hoping for a neutral
+          referee, the internet has been lying to you for about fifteen years.)
+        </p>
+        <p>
+          What I can do instead is set out the standards honestly, put our own figures against every
+          one, and tell you the four things we are worse at than the competition. Then give you a test
+          you can run yourself in one evening, on us or on anybody else. If we come out well, that is
+          worth more than a badge saying number one.
+        </p>
+
+        <nav class="not-prose my-10 rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6" aria-labelledby="toc-heading">
+          <h2 id="toc-heading" class="font-display text-lg font-semibold text-text-primary">
+            Jump to the bit you need
+          </h2>
+          <ol class="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+            {toc.map((t, i) => (
+              <li class="flex items-baseline gap-2 text-sm">
+                <span class="text-brand-light/70 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <a href={`#${t.id}`} class="text-text-muted underline-offset-4 hover:text-brand-light hover:underline">
+                  {t.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <h2 id="short-answer">The short answer, before the long one</h2>
+        <p>
+          There is no single best IPTV provider in the UK, and any page confidently naming one has
+          skipped the only variable that decides it: your house. A service that is flawless on a cabled
+          connection in a new-build is a nightmare on 2.4 GHz Wi-Fi through Victorian brick, and the
+          provider is identical in both cases.
+          <a href="https://www.ofcom.org.uk/" target="_blank" rel="noopener noreferrer nofollow">Ofcom</a>
+          publishes UK home broadband performance data showing how far real speeds drift from advertised
+          ones, and that drift decides more of this than any provider's server does.
+        </p>
+        <p>
+          So the useful question is not "who is best" but "what should I refuse to accept". Four
+          non-negotiables: <strong>stability during evening peak, support that replies in minutes, a
+          refund window in writing, and an honest number for simultaneous streams.</strong> A provider
+          failing any one of those is not a bargain, whatever the monthly figure says.
+        </p>
+
+        <h2 id="standards">The eight standards, with our numbers against them</h2>
+        <p>
+          Each of these is checkable during a first week. Where we have a number, it is in the card.
+          Where the number is unflattering, it is still in the card.
+        </p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {criteria.map((c) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold !text-[#241056] shadow-glow">
+                {c.n}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{c.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed" set:html={c.detail} />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <figure class="mt-10">
+        {inlineImages.scorecard ? (
+          <img src={inlineImages.scorecard} alt="Scorecard comparing UK IPTV provider standards including uptime, support response time and refund window" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="Scorecard comparing UK IPTV provider standards including uptime, support response time and refund window">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Image: provider scorecard</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <h2 id="test-it-yourself">How to test any provider yourself in one evening</h2>
+        <p>
+          Nobody writing a ranked list will hand you this, because it makes the ranking unnecessary. It
+          takes about three hours and it works on us or on anyone else.
+        </p>
+        <ol>
+          <li><strong>Before 6pm.</strong> Open five channels you genuinely intend to watch and time how long each takes to start. Under two seconds is good. Over four is a routing problem at their end, and you have just established a baseline before the network gets busy</li>
+          <li><strong>Between 8pm and 10pm.</strong> Sit on one stream for ninety unbroken minutes without touching the remote. This is the entire test. Stalling that appears only now, and not in the earlier run, is peak-time contention — either on your street or on their servers</li>
+          <li><strong>Around 9.30pm.</strong> Send support a real question and start a timer. Not "are you there" — an actual question about a channel or a device. What comes back, and how fast, tells you what happens at kick-off in November</li>
+          <li><strong>Before day seven.</strong> Decide. If any of the above went badly, claim the refund. That is what the window is for, and using it is not rude</li>
+        </ol>
+        <p>
+          Run that against us and you have spent £{site.price} to find out something no review page can
+          tell you, because no review page has your router.
+        </p>
+
+        <h2 id="where-we-lose">Where we lose</h2>
+        <p>
+          Four places a competitor will beat us. If any of these matter more to you than the eight
+          standards above, buy from them instead — I would rather that than a refund request in week two.
+        </p>
+        <ul>
+          <li><strong>Simultaneous streams.</strong> One connection as standard. Plenty of services advertise five, or unlimited. Ours is a paid add-on. If your household genuinely needs three screens running at once out of the box, we are not the cheapest way to get there</li>
+          <li><strong>There is no free trial.</strong> Others hand out 24-hour links. We charge £{site.price} and refund within 7 days if you want out. That is a worse offer on the surface and I am not going to dress it up as a feature</li>
+          <li><strong>Setup takes a few steps.</strong> On a Fire Stick you enable unknown sources, sideload a player and paste a line in. It takes under 15 minutes with someone on WhatsApp, but it is not a one-tap install from an app store, and a service with its own store-listed app is genuinely easier</li>
+          <li><strong>Support is WhatsApp, not a phone line.</strong> Fast, written, screenshot-friendly, awake at 2am. But if you want to ring a number and speak to a person, we do not have one</li>
+        </ul>
+
+        <h2 id="pricing">What it costs, with no asterisks</h2>
+        <p>
+          Every plan is a one-off payment, VAT included. Nothing renews, because nothing is stored.
+        </p>
+        <div class="not-prose my-8 overflow-x-auto rounded-2xl border border-border-subtle">
+          <table class="w-full min-w-[560px] text-left text-sm">
+            <thead class="bg-elevated/70 text-text-primary">
+              <tr>
+                <th class="p-3 font-semibold">Plan</th>
+                <th class="p-3 font-semibold">One-off price</th>
+                <th class="p-3 font-semibold">Effective per month</th>
+                <th class="p-3 font-semibold">Saving vs monthly</th>
+              </tr>
+            </thead>
+            <tbody class="text-text-muted">
+              {plans.map((p) => (
+                <tr class="border-t border-border-subtle/60">
+                  <td class="p-3 text-text-primary">{p.plan}</td>
+                  <td class="p-3 font-medium text-brand-light">{p.price}</td>
+                  <td class="p-3">{p.per}</td>
+                  <td class="p-3">{p.saving}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The 12-month plan includes a premium player app worth £9.99. Payment by bank transfer, debit
+          or credit card, Apple Pay, Google Pay or crypto — all of which leave you a receipt, which
+          matters more than it sounds. The
+          <a href="https://www.ncsc.gov.uk/collection/small-business-guidance--response-and-recovery" target="_blank" rel="noopener noreferrer nofollow">National Cyber Security Centre</a>
+          is worth a read if you want the general rule on paying strangers online: if the only accepted
+          method is one you cannot reverse, that is the finding, not a detail.
+        </p>
+
+        <h2 id="from-a-month">The "from £X a month" trap</h2>
+        <p>
+          <strong>"From" is the most expensive word in this industry.</strong> The number on the poster
+          is an intro rate for one product with no add-ons, and the question nobody asks is what it
+          costs in month 19. That is where the traditional bundles do their real damage: you sign for 18
+          months, the rise lands in month four, and the sport package quietly detaches when the deal
+          ends.
+        </p>
+        <p>
+          Our number has no "from" in front of it. £{site.price} is £{site.price}. £49.99 for a year is
+          £4.17 a month and there is no month 13 to worry about, because in month 13 you simply are not
+          a customer unless you choose to be again. If you want the full comparison against a
+          traditional bundle, that is in the
+          <a href="/blog/iptv-uk/">IPTV UK guide</a>, and the
+          <a href="/blog/iptv-subscription-uk-buyers-guide/">buyer's guide</a> covers evaluating any
+          provider on the same terms.
+        </p>
+      </article>
+
+      <figure class="mt-10">
+        {inlineImages.support ? (
+          <img src={inlineImages.support} alt="WhatsApp support conversation showing an IPTV issue resolved in minutes overnight" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="WhatsApp support conversation showing an IPTV issue resolved in minutes overnight">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Image: overnight support thread</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <h2 id="support">What "24/7 support" looks like when it is real</h2>
+        <p>
+          Most providers claim it. The claim costs nothing to make, which is why it is worth exactly
+          nothing until tested.
+        </p>
+        <p>
+          A customer on a night shift messaged at 02:14 on a Tuesday because his stream had frozen
+          mid-match. First reply landed at 02:15. His ISP had rotated his IP and his VPN was still
+          holding the old one, which looks identical to a service outage from the sofa and is fixed in
+          seven minutes once someone tells you where to look. He is on the 12-month plan now, which is
+          the entire argument for staffing 2am.
+        </p>
+        <p>
+          The reason to care is not that 2am is common. It is that a provider willing to answer at 2am
+          on a Tuesday is definitely answering at 3pm on a Saturday, and Saturday is when you will
+          actually need them.
+        </p>
+
+        <h2 id="not-for-you">Who should not buy from us</h2>
+        <p>
+          The most useful section on the page, and the one an affiliate ranking will never write.
+        </p>
+        <ul>
+          <li><strong>Your peak-time speed is under 15 Mbps.</strong> Fix the line first. This is the single reason our refunds get claimed, and we would rather tell you on WhatsApp than take £{site.price} and hand it back</li>
+          <li><strong>You watch one match a month.</strong> Go to the pub. Cheaper, better pint, and the argument afterwards is included</li>
+          <li><strong>You only want the terrestrial highlights.</strong> Already free, already in the telly. Keep your money</li>
+          <li><strong>You need three screens at once and a one-tap install.</strong> See the losses section. Somebody else fits you better and that is fine</li>
+        </ul>
+
+        <h2 id="faqs">Straight answers about picking a UK IPTV provider</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2 id="verdict">The verdict</h2>
+        <p>
+          I am not going to tell you we are the best IPTV provider in the UK, because that sentence
+          means nothing coming from us and you would be right to ignore it. What I will say is that
+          every claim on this page has a number attached, including the four that count against us, and
+          that you can check all of them inside seven days for £{site.price}.
+        </p>
+        <p>
+          Start on the month. Run the evening test. If the stream holds through ninety minutes at peak
+          and support answers while you are still annoyed, the annual plan is £49.99 and works out at
+          £4.17 a month. If it does not, take the refund and tell us why — that feedback is worth more
+          to us than the £{site.price}.
+          <a href={waLink('Hi, I read the best IPTV provider UK scorecard and would like to start on the one-month plan.')} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp</a>
+          whenever you are ready.
+        </p>
+        <p>
+          And if a page ever tells you it has found the one true best IPTV provider without asking a
+          single question about your router, close the tab. It has not been to your house.
+        </p>
+      </article>
+
+      <aside class="mt-14 rounded-2xl border border-border-subtle bg-elevated/60 p-6" aria-labelledby="author-heading">
+        <p class="text-xs uppercase tracking-widest text-text-muted">About the author</p>
+        <h2 id="author-heading" class="mt-2 font-display text-xl font-semibold text-text-primary">
+          {post.author}
+        </h2>
+        <p class="mt-3 text-text-muted leading-relaxed">
+          Independent streaming and broadband consultant, UK-based, six-plus years spent pulling apart
+          IPTV infrastructure, server routing and the home networks it runs on. Not a salesperson. He is
+          the bloke your neighbour rings when the stick is buffering and they have already lost an
+          argument with their ISP. Every number in this guide comes off the UK IPTV BOX support desk or
+          a speed test he ran himself.
+        </p>
+        <p class="mt-4">
+          <a href="/about#team" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">
+            More about {post.author} and the team
+          </a>
+        </p>
+      </aside>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Related guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedLinks.map((g) => (
+            <li>
+              <a href={g.href} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50">
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light shrink-0"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+
+  <a
+    href="#main"
+    id="back-to-top"
+    class="fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 translate-y-3 items-center justify-center rounded-full border border-border-subtle bg-elevated text-brand-light opacity-0 shadow-glow transition duration-300 pointer-events-none focus-visible:opacity-100"
+  >
+    <span class="sr-only">Back to top</span>
+    <span class="rotate-180"><Icon name="chevron-down" size={18} /></span>
+  </a>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <script is:inline>
+    (() => {
+      const btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      const show = () => {
+        const on = window.scrollY > 900;
+        btn.classList.toggle('opacity-0', !on);
+        btn.classList.toggle('translate-y-3', !on);
+        btn.classList.toggle('pointer-events-none', !on);
+      };
+      show();
+      window.addEventListener('scroll', show, { passive: true });
+    })();
+  </script>
+</BaseLayout>

@@ -1,0 +1,613 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('internet-protocol-television')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+// Hosted on R2. 1376x768 (16:9) — also serves as the OG/Twitter card image.
+const R2 = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev';
+const heroSrc = `${R2}/Television_travels_over_internet_202607270121.jpeg`;
+const ogImage = heroSrc;
+
+// In-body images. Same 1376x768 dimensions as the hero.
+const inlineImages = {
+  packets: `${R2}/Diagram_three_stages_left_right_202607270122.jpeg`,
+  speed: `${R2}/Broadband_speed_test_result_UI_202607270122.jpeg`,
+};
+
+// The five stages a channel passes through on its way to your telly.
+const criteria = [
+  {
+    n: 1,
+    title: 'The headend takes the feed',
+    detail:
+      'Every channel starts as a signal arriving at an operator\'s central facility, which the industry calls a headend. Satellite feeds, fibre feeds, on-demand libraries sat on disk. Nothing has been turned into internet traffic yet. This is the boring end of the process and it is the part nobody markets, because "we have a building with racks in it" does not sell.',
+  },
+  {
+    n: 2,
+    title: 'Encoders chop it into packets',
+    detail:
+      'The feed gets compressed with a codec — H.264 or H.265 for most things now — and cut into small numbered pieces called packets. Each packet carries a bit of picture, a bit of sound, and an address. That numbering is the whole trick. It means the pieces can travel separately and still be put back in the right order at the other end.',
+  },
+  {
+    n: 3,
+    title: 'Servers hold it, ready to send',
+    detail:
+      'The packets sit on servers waiting for someone to ask. A live channel is being written and sent continuously. An on-demand title just sits there until you press play. This is where capacity gets decided, and it is why a service can look perfect at four in the morning and fall apart at ten past three on a Saturday.',
+  },
+  {
+    n: 4,
+    title: 'Your line carries it, badly or well',
+    detail:
+      'The packets cross the public internet to your house, through your ISP, into your router, and across whatever the last few metres look like. This is the stage that breaks. Not the headend, not the codec, not the servers. The last twenty feet between your router and your telly is where most of the trouble in this entire chain lives.',
+  },
+  {
+    n: 5,
+    title: 'The player app puts it back together',
+    detail:
+      'A player app on your telly, stick or box collects the packets, reorders them, decodes them, and holds a few seconds in a buffer so that a late arrival does not freeze the picture. When people say a stream is "buffering", they mean that safety margin ran out. The app is not broken. It ran out of runway.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What does IPTV stand for?',
+    a: 'Internet Protocol Television. Internet Protocol is the addressing system that moves data around any network, and IPTV simply means television delivered using it rather than through an aerial, a satellite dish or a cable.',
+  },
+  {
+    q: 'How does Internet Protocol Television work?',
+    a: 'A channel arrives at an operator\'s central facility, gets compressed and cut into numbered packets, and is stored on servers. When you press a channel, those packets travel across your broadband connection to a player app, which reorders and decodes them into a picture. A few seconds are held in a buffer to absorb late arrivals.',
+  },
+  {
+    q: 'What is the difference between IPTV and streaming?',
+    a: 'They use the same underlying technology, so the line is blurrier than most articles admit. The usual distinction is the network: classic IPTV runs over a managed network the operator controls end to end, while over-the-top streaming crosses the public internet like any other traffic. In practice most consumer IPTV in the UK today is delivered over the public internet.',
+  },
+  {
+    q: 'What are the three types of IPTV?',
+    a: 'Live IPTV, which is a channel broadcasting in real time. Time-shifted IPTV, which is catch-up — a programme that already aired, held for a few days. And video on demand, which is a library you can start at any point. Most services carry all three at once.',
+  },
+  {
+    q: 'Do I need a set-top box for IPTV?',
+    a: 'No, not any more. A dedicated box handles decoding and channel guides well, but a smart TV app, a streaming stick, a phone, a tablet or a laptop all do the same job. What matters is that the device can decode the codec in use and hold a stable network connection.',
+  },
+  {
+    q: 'What internet speed do I need for IPTV?',
+    a: '15 Mbps is the minimum for reliable playback of a single HD stream. Budget around 25 Mbps for 4K, and add more for every extra stream running at the same time. Measure the speed during the evening rather than mid-morning, because your street shares capacity and the evening number is the one that matters.',
+  },
+  {
+    q: 'Is IPTV the same as a smart TV?',
+    a: 'No. A smart TV is hardware with apps on it. IPTV is a delivery method. A smart TV is one of many devices that can receive IPTV, in the same way a kettle is not the same thing as electricity.',
+  },
+  {
+    q: 'Is Internet Protocol Television legal?',
+    a: 'The technology is legal and in everyday use, including by broadcasters themselves. Legality depends on licensing: a service is legal when the content it carries is licensed from the rights holder, and it is not when that content is redistributed without permission.',
+  },
+];
+
+// Table of contents — every id here must exist as an H2 in the markup below.
+const toc = [
+  { id: 'what-the-ip-means', label: 'What the "IP" actually means' },
+  { id: 'how-it-works', label: 'How a channel reaches your telly' },
+  { id: 'unicast-multicast', label: 'Unicast vs multicast' },
+  { id: 'iptv-vs-streaming', label: 'IPTV vs streaming vs cable' },
+  { id: 'three-types', label: 'The three types of IPTV' },
+  { id: 'speed', label: 'The speed you need' },
+  { id: 'devices', label: 'What you watch it on' },
+  { id: 'uk-household', label: 'What it means for a UK home' },
+  { id: 'when-its-wrong', label: 'When IPTV is the wrong answer' },
+  { id: 'faqs', label: 'Straight answers' },
+  { id: 'verdict', label: 'The verdict' },
+];
+
+const relatedLinks = [
+  { href: '/blog/iptv-uk/', label: 'IPTV UK 2026: Costs, Legality and Setup' },
+  { href: '/blog/is-iptv-legal-uk/', label: 'Is IPTV Legal in the UK? 2026 Explainer' },
+  { href: '/blog/top-5-iptv-boxes-uk-2026/', label: 'Top 5 IPTV Boxes UK 2026' },
+  { href: '/installation-guides/', label: 'Set Up IPTV on Your Device: All Guides' },
+];
+
+const orgId = `${site.url}/#organization`;
+const authorId = `${site.url}/about#team`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: site.name,
+      url: site.url,
+      logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      sameAs: [`${site.url}/about/`],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        availableLanguage: 'en-GB',
+        url: waLink(),
+      },
+    },
+    {
+      '@type': 'Person',
+      '@id': authorId,
+      name: post.author,
+      url: authorId,
+      jobTitle: 'Independent streaming and broadband consultant',
+      description:
+        'UK-based streaming and broadband consultant with six-plus years evaluating IPTV infrastructure, server stability and home network performance.',
+      knowsAbout: ['IPTV', 'UK broadband', 'Home network troubleshooting', 'Streaming hardware'],
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@id': authorId },
+      publisher: { '@id': orgId },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: post.category,
+      keywords: post.keywords.join(', '),
+      inLanguage: 'en-GB',
+      wordCount: 2400,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  ogType="article"
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">Internet Protocol Television</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          <strong>Internet Protocol Television, or IPTV, is television delivered as data over an
+          internet connection instead of a broadcast signal from an aerial, a dish or a cable.</strong>
+          The programme is compressed, cut into numbered packets, sent down your broadband line, and
+          reassembled by a player app on your telly, phone or box. That is the whole idea. Everything
+          else is plumbing, and this guide walks through the plumbing.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink('Hi, I read the Internet Protocol Television guide. Can you check whether my broadband is up to it?')} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Message us on WhatsApp
+          </a>
+          <a href="#how-it-works" class="btn-secondary">How it works</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src={heroSrc}
+            sizes="(max-width: 768px) 100vw, 720px"
+            alt={post.imageAlt}
+            width="1376"
+            height="768"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Internet Protocol Television is a fourteen-syllable name for something you have been doing
+          for years without being told. If you have ever opened a catch-up app on the telly, you have
+          used IPTV. Nobody called it that, because "catch-up" sounds like something you can do on a
+          Tuesday and "Internet Protocol Television" sounds like something that needs a man in a van.
+        </p>
+        <p>
+          The acronym only started following people around when services began selling channel bundles
+          this way. So it now arrives attached to a sales pitch, which is a shame, because underneath
+          it is one of the more sensible ideas in broadcasting. Here is what is actually happening.
+        </p>
+
+        <nav class="not-prose my-10 rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6" aria-labelledby="toc-heading">
+          <h2 id="toc-heading" class="font-display text-lg font-semibold text-text-primary">
+            Jump to the bit you need
+          </h2>
+          <ol class="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+            {toc.map((t, i) => (
+              <li class="flex items-baseline gap-2 text-sm">
+                <span class="text-brand-light/70 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <a href={`#${t.id}`} class="text-text-muted underline-offset-4 hover:text-brand-light hover:underline">
+                  {t.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <h2 id="what-the-ip-means">What the "Internet Protocol" bit actually means</h2>
+        <p>
+          Internet Protocol is the addressing system that moves data around any network. It is not
+          specific to television and it is not new — it is the same mechanism carrying this page to
+          you right now.
+        </p>
+        <p>
+          Its one relevant feature is <strong>packet switching</strong>. Data gets broken into small
+          numbered pieces, each stamped with a destination, and each free to take whatever route
+          across the network is available at that moment. The pieces can arrive out of order, by
+          different paths, at slightly different times. The receiving end puts them back in sequence
+          using the numbers.
+        </p>
+        <p>
+          Broadcast television could never do that. An aerial signal is one continuous stream going
+          out to everybody at once, and if you were not tuned in when it went past, it was gone.
+          Chopping television into addressed packets is what made pausing, rewinding and starting a
+          programme three days late possible. See
+          <a href="https://en.wikipedia.org/wiki/Internet_Protocol_television" target="_blank" rel="noopener noreferrer nofollow">the technical overview of IPTV</a>
+          if you want the full standards history.
+        </p>
+
+        <h2 id="how-it-works">How a channel gets from a broadcaster to your telly</h2>
+        <p>Five stages. The interesting one is the fourth.</p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {criteria.map((c) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold !text-[#241056] shadow-glow">
+                {c.n}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{c.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed" set:html={c.detail} />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <figure class="mt-10">
+        {inlineImages.packets ? (
+          <img src={inlineImages.packets} alt="Diagram showing a television feed being encoded into numbered IP packets and reassembled by a player app" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="Diagram showing a television feed being encoded into numbered IP packets and reassembled by a player app">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Diagram: feed to packets to player</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <h2 id="unicast-multicast">Unicast, multicast, and why one channel can cost more than another</h2>
+        <p>
+          There are two ways to send those packets, and the difference explains a lot of otherwise
+          baffling behaviour.
+        </p>
+        <p>
+          <strong>Unicast</strong> sends a private copy to each viewer. Ten thousand people watching
+          means ten thousand separate streams leaving the servers. It is simple, it works across the
+          public internet, and it is how nearly all on-demand viewing happens — you started that film
+          at 9.04pm and nobody else did.
+        </p>
+        <p>
+          <strong><a href="https://en.wikipedia.org/wiki/IP_multicast" target="_blank" rel="noopener noreferrer nofollow">Multicast</a></strong>
+          sends one copy into the network and lets the network duplicate it only where paths diverge.
+          Ten thousand viewers can share a single stream for most of its journey. It is dramatically
+          more efficient for live television, and it is why traditional telecoms operators built their
+          IPTV on managed networks they controlled end to end.
+        </p>
+        <p>
+          The catch is that multicast does not survive the open internet well. So most consumer
+          services deliver live channels by unicast, which means every viewer is a real cost, which is
+          why <strong>"unlimited connections" is a warning rather than a feature</strong>. Bandwidth is
+          finite and somebody is paying for it. Our default is one concurrent connection, and extra
+          ones are arranged over WhatsApp rather than promised on a homepage.
+        </p>
+
+        <h2 id="iptv-vs-streaming">IPTV, streaming and cable: where the lines actually fall</h2>
+        <p>
+          This is the most-asked question on the topic and most answers are tidier than the truth.
+          IPTV and what the industry calls over-the-top streaming use the same underlying technology.
+          The distinction is the network, not the picture.
+        </p>
+        <div class="not-prose my-8 overflow-x-auto rounded-2xl border border-border-subtle">
+          <table class="w-full min-w-[560px] text-left text-sm">
+            <thead class="bg-elevated/70 text-text-primary">
+              <tr>
+                <th class="p-3 font-semibold">Delivery</th>
+                <th class="p-3 font-semibold">Travels over</th>
+                <th class="p-3 font-semibold">Who controls quality</th>
+                <th class="p-3 font-semibold">Needs a dish or aerial</th>
+              </tr>
+            </thead>
+            <tbody class="text-text-muted">
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">Classic IPTV</td>
+                <td class="p-3">A managed network the operator runs</td>
+                <td class="p-3">The operator, end to end</td>
+                <td class="p-3">No</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">Over-the-top streaming</td>
+                <td class="p-3">The public internet</td>
+                <td class="p-3">Shared — nobody owns the whole path</td>
+                <td class="p-3">No</td>
+              </tr>
+              <tr class="border-t border-border-subtle/60">
+                <td class="p-3 text-text-primary">Satellite or cable</td>
+                <td class="p-3">A broadcast signal or coax</td>
+                <td class="p-3">The broadcaster</td>
+                <td class="p-3">Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          In practice almost all consumer IPTV in Britain now crosses the public internet, so the
+          textbook distinction has largely collapsed. Treat "IPTV" as a description of how the picture
+          arrives, not a guarantee about the quality of the road it took.
+        </p>
+
+        <h2 id="three-types">The three types, and why every decent service has all three</h2>
+        <ul>
+          <li><strong>Live.</strong> A channel broadcasting in real time. The packets are being created as you watch, so there is no rewinding past the point you joined unless the operator is recording it for you</li>
+          <li><strong>Time-shifted.</strong> Catch-up. A programme that already aired, held on a server for a few days so you can watch it late. This is the category most people have used without knowing the name</li>
+          <li><strong>On demand.</strong> A library sat waiting. Films, box sets, anything with no broadcast time attached to it at all</li>
+        </ul>
+        <p>
+          A service carrying only live channels and calling itself complete is missing two thirds of
+          what the technology makes possible. Ours runs 50,000+ live channels alongside 200,000+
+          on-demand films and series, which is more than any household will get through and roughly
+          49,000 channels more than anyone opens.
+        </p>
+
+        <h2 id="speed">The speed you need, and the number that actually matters</h2>
+        <p>
+          <strong>15 Mbps is the floor for one reliable HD stream.</strong> Around 25 Mbps for 4K. Add
+          more for every extra stream running at the same time. Those are the only numbers in this
+          section that matter, and nearly every British line clears them on paper.
+        </p>
+        <p>
+          On paper is carrying weight there. Test at 8pm on a Saturday rather than 11am on a Tuesday.
+          Your street shares capacity with everyone else's street, and the figure that decides whether
+          your evening works is the peak-time one, not the one on your bill.
+          <a href="https://www.ofcom.org.uk/" target="_blank" rel="noopener noreferrer nofollow">Ofcom</a>
+          publishes UK home broadband performance data if you want to see how far actual speeds drift
+          from advertised ones.
+        </p>
+      </article>
+
+      <figure class="mt-10">
+        {inlineImages.speed ? (
+          <img src={inlineImages.speed} alt="Broadband speed test result taken at peak time on a Saturday evening" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="Broadband speed test result taken at peak time on a Saturday evening">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Image: peak-time speed test</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <p>
+          A customer messaged at 9pm on a Saturday to say the stream had completely died. The line
+          tested at 6 Mbps, on the 2.4 GHz band, three rooms from the router. Minimum is 15. Moving the
+          stick to 5 GHz and restarting the router fixed it in under five minutes. The service had
+          never dropped. That is stage four from the list above, and it is where this goes wrong far
+          more often than anywhere else in the chain.
+        </p>
+
+        <h2 id="devices">What you watch it on, and the thing quietly ruining it</h2>
+        <p>
+          You do not need a set-top box any more. Smart TVs, streaming sticks, Android boxes, phones,
+          tablets, laptops, MAG boxes, Apple TV, Nvidia Shield, Enigma2 receivers and Formuler boxes
+          all decode the same packets. A dedicated box handles channel guides more gracefully; a stick
+          is cheaper and already in most houses. Either is fine. Our
+          <a href="/blog/top-5-iptv-boxes-uk-2026/">guide to IPTV boxes</a> covers what is worth buying.
+        </p>
+        <p>
+          The device is rarely the problem. <strong>The router your ISP posted you is the weak link in
+          most British homes.</strong> It was built down to a price, it is usually sat in the hallway
+          behind a mirror, and it has been powered on continuously for about three years. Replacing it
+          does more for playback than any other single change, and it beats upgrading your package,
+          because a faster line into a bad router is still a bad router.
+        </p>
+        <p>
+          After that, in order of how much difference they make: run an ethernet cable, move to the 5
+          GHz band, restart the router rather than the box, and use the little HDMI extender that came
+          in the stick's packaging if the telly is wall-mounted. (Everyone throws that extender away.
+          I have thrown away three.)
+        </p>
+
+        <h2 id="uk-household">What all this means if you just want the telly on</h2>
+        <p>
+          Every other explainer of this technology is written for a network engineer or a hotel
+          procurement manager. Here is the version for someone standing in a living room in Britain
+          holding a remote.
+        </p>
+        <ul>
+          <li><strong>You already use it.</strong> Catch-up apps are IPTV. The technology is not exotic and it is not a workaround</li>
+          <li><strong>The picture quality is decided by your line, not the label.</strong> Two services with identical channel lists will look different in your house purely because of stages four and five</li>
+          <li><strong>Buffering is a bandwidth symptom, not a fault code.</strong> Before blaming a provider, check what your connection is doing at the moment it happens</li>
+          <li><strong>No dish, no aerial, no engineer visit.</strong> That is the genuine practical difference, and it is why a service can be switched on the same afternoon you buy it</li>
+          <li><strong>One connection is one stream.</strong> If two people want different things at once, that is a second connection, and any provider pretending otherwise is hoping you do not test it</li>
+        </ul>
+        <p>
+          If you want the money side rather than the mechanics, that is in the
+          <a href="/blog/iptv-uk/">IPTV UK guide</a>, and the licensing question has its own
+          <a href="/blog/is-iptv-legal-uk/">plain-English explainer</a>.
+        </p>
+
+        <h2 id="when-its-wrong">When Internet Protocol Television is the wrong answer</h2>
+        <p>Nobody writing a glossary entry will tell you this, so here it is.</p>
+        <ul>
+          <li><strong>Your peak-time speed is under 15 Mbps.</strong> Fix the line first. No service, box or app compensates for a connection that cannot carry the packets, and we would rather say so on WhatsApp than take the money</li>
+          <li><strong>You only watch terrestrial highlights.</strong> That is already free and already built into the telly</li>
+          <li><strong>You want a guarantee at kick-off and have no way to cable the telly.</strong> Wi-Fi through two brick walls at peak time is a gamble, and a big match is the worst moment to discover it</li>
+          <li><strong>You watch one thing a month.</strong> The maths does not work. Go to the pub</li>
+        </ul>
+
+        <h2 id="faqs">Straight answers about Internet Protocol Television</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2 id="verdict">The verdict</h2>
+        <p>
+          Internet Protocol Television is a delivery method, not a product. Once you know it is just
+          addressed packets crossing your broadband and being reassembled at the other end, most of the
+          marketing around it stops being mysterious and starts being checkable. Ask what the concurrent
+          connection limit is. Ask what happens at renewal. Test the thing at peak time.
+        </p>
+        <p>
+          If you want to try ours, it is £{site.price} for a month as a one-off payment, with a 7-day
+          money-back window and no card kept on file.
+          <a href={waLink('Hi, I read the Internet Protocol Television guide and would like to try the one-month plan.')} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp</a>
+          and we reply in under two minutes during UK hours.
+        </p>
+        <p>
+          And if the picture still stalls after all that, it is not the protocol. Internet Protocol has
+          been quietly working since 1974. It is the router in your hallway, behind the mirror, that
+          nobody has turned off since the last general election.
+        </p>
+      </article>
+
+      <aside class="mt-14 rounded-2xl border border-border-subtle bg-elevated/60 p-6" aria-labelledby="author-heading">
+        <p class="text-xs uppercase tracking-widest text-text-muted">About the author</p>
+        <h2 id="author-heading" class="mt-2 font-display text-xl font-semibold text-text-primary">
+          {post.author}
+        </h2>
+        <p class="mt-3 text-text-muted leading-relaxed">
+          Independent streaming and broadband consultant, UK-based, six-plus years spent pulling apart
+          IPTV infrastructure, server routing and the home networks it runs on. Not a salesperson. He is
+          the bloke your neighbour rings when the stick is buffering and they have already lost an
+          argument with their ISP. Every number in this guide comes off the UK IPTV BOX support desk or
+          a speed test he ran himself.
+        </p>
+        <p class="mt-4">
+          <a href="/about#team" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">
+            More about {post.author} and the team
+          </a>
+        </p>
+      </aside>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Related guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedLinks.map((g) => (
+            <li>
+              <a href={g.href} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50">
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light shrink-0"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+
+  <a
+    href="#main"
+    id="back-to-top"
+    class="fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 translate-y-3 items-center justify-center rounded-full border border-border-subtle bg-elevated text-brand-light opacity-0 shadow-glow transition duration-300 pointer-events-none focus-visible:opacity-100"
+  >
+    <span class="sr-only">Back to top</span>
+    <span class="rotate-180"><Icon name="chevron-down" size={18} /></span>
+  </a>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <script is:inline>
+    (() => {
+      const btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      const show = () => {
+        const on = window.scrollY > 900;
+        btn.classList.toggle('opacity-0', !on);
+        btn.classList.toggle('translate-y-3', !on);
+        btn.classList.toggle('pointer-events-none', !on);
+      };
+      show();
+      window.addEventListener('scroll', show, { passive: true });
+    })();
+  </script>
+</BaseLayout>

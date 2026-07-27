@@ -1,0 +1,640 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('iptv-uk')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+
+// Hosted on R2. 1376x768 (16:9) — also serves as the OG/Twitter card image.
+const R2 = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev';
+const heroSrc = `${R2}/Television_over_broadband_guide_202607270102.jpeg`;
+const ogImage = heroSrc;
+
+// In-body images. Same 1376x768 dimensions as the hero.
+const inlineImages = {
+  speed: `${R2}/Broadband_speed_test_result_card_202607270103.jpeg`,
+  firestick: `${R2}/TV_settings_screen_mockup_202607270103.jpeg`,
+};
+
+const criteria = [
+  {
+    n: 1,
+    title: 'A price you can see all of, including month 13',
+    detail:
+      'The number on the homepage should be the number that leaves your account, and there should be a second number telling you what renewal costs. If renewal is not written down anywhere, someone made that decision on purpose. Ours is a one-off payment: £14.99 for a month, £49.99 for twelve. No card is kept on file, so nothing renews itself while you are asleep.',
+  },
+  {
+    n: 2,
+    title: 'A way out in the first week',
+    detail:
+      'A 7-day money-back window is the cheapest honesty test there is. It costs a provider nothing if the service works, and quite a lot if it does not. Ask for it in writing before you pay. If the answer is a paragraph about refunds being handled case by case, you already have your answer.',
+  },
+  {
+    n: 3,
+    title: 'An honest number for simultaneous streams',
+    detail:
+      '"Unlimited connections" is a warning, not a feature. Bandwidth is finite and somebody is paying for it. A provider selling unlimited is either overselling capacity or has not thought about it, and you find out which at 3pm on a Saturday. Our default is one concurrent connection. If you need the telly downstairs and the bedroom running at once, that is a multi-connection add-on, sorted over WhatsApp.',
+  },
+  {
+    n: 4,
+    title: 'Support that is awake during the ninety minutes',
+    detail:
+      'The whole job is the match. Support that closes at 5pm on a Friday is support that does not exist. Test it before you pay: message them at half nine on a Saturday night and time the reply. Ours runs 24/7 on WhatsApp and comes back in under two minutes during UK hours.',
+  },
+  {
+    n: 5,
+    title: 'Capacity pointed at Britain, not a flag on a list',
+    detail:
+      'Plenty of services advertise a UK section that turns out to be a handful of channels routed from three time zones away. You can spot it in ten minutes. Open a UK channel at peak time, then open the same one at four in the morning. If four in the morning is flawless and peak time stutters, that is contention on their route, not your router.',
+  },
+  {
+    n: 6,
+    title: 'Apps for the hardware already in your house',
+    detail:
+      'Check the list before you buy, not after. Smart TV, Fire Stick, Android phones, tablets and boxes, iOS, MAG, Apple TV, Windows, Mac, Nvidia Shield, Enigma2 and Formuler are the ones that matter here. If a provider supports exactly one obscure player app, you are buying their app, not their service. Our <a href="/blog/best-iptv-player-apps-2026-uk/">player app comparison</a> goes through the main ones.',
+  },
+  {
+    n: 7,
+    title: 'A payment method that leaves a paper trail',
+    detail:
+      'Bank transfer, debit or credit card, Apple Pay, Google Pay and crypto all leave a record you can point at later. A seller who takes exactly one untraceable method is telling you what happens when it stops working. That is not a moral judgement, it is a practical one. You want a receipt.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is IPTV?',
+    a: 'IPTV stands for Internet Protocol Television. It is television delivered over a broadband connection using the same internet protocols as everything else on your line, instead of over a satellite dish, an aerial or a cable. Live channels, catch-up and on-demand libraries all count.',
+  },
+  {
+    q: 'How does IPTV work?',
+    a: 'A provider runs servers carrying the channel streams. You get login details or a playlist line. You put those into a player app on a Fire Stick, smart TV, phone or box, and the app pulls the stream over your broadband when you press a channel. No hardware install, no engineer visit, no dish.',
+  },
+  {
+    q: 'Is IPTV legal in the UK?',
+    a: 'The technology is legal. The catch-up apps already on your telly are IPTV, and so are the big subscription streaming services. What decides legality is licensing: a service is legal when the content it carries is licensed from the rights holder, and it is not when that content is redistributed without permission. Ofcom covers broadcasting standards and the Intellectual Property Office covers copyright.',
+  },
+  {
+    q: 'What internet speed do I need for IPTV in the UK?',
+    a: '15 Mbps is the minimum for reliable playback on a single HD stream. For 4K, or for more than one stream running at once, budget 25 Mbps or more. Measure it at 8pm on a Saturday rather than 11am on a Tuesday, because your street shares capacity and the number that matters is the one during the match.',
+  },
+  {
+    q: 'Do I need a VPN for IPTV?',
+    a: 'No. The service runs without one. A VPN is worth having for privacy on shared or public broadband and it is fully compatible, but the streams do not need it to work. Roughly half of UK customers run one and half do not, and both halves get the same picture.',
+  },
+  {
+    q: 'How do I set up IPTV on a Fire Stick?',
+    a: 'Turn on installs from unknown sources in Settings, install the Downloader app, use it to sideload the player app your provider recommends, then paste in the playlist line or login details from your activation message. It usually takes under 15 minutes, and support can stay on WhatsApp with you while you do it.',
+  },
+  {
+    q: 'Is IPTV worth it in the UK?',
+    a: 'It depends what you watch. If you are paying £70 to £95 a month for a premium sat or cable bundle and using about six channels of it, the maths is straightforward. If you watch one match a month, or you only want the terrestrial highlights, it is not worth it and you should not buy.',
+  },
+  {
+    q: 'Can I use IPTV outside the UK?',
+    a: 'Yes. The service works anywhere with a stable connection above 15 Mbps, which is why it is popular with expats. A VPN set to a UK exit is occasionally useful abroad depending on the local network, but it is not a requirement.',
+  },
+];
+
+// Table of contents — every id here must exist as an H2 in the markup below.
+const toc = [
+  { id: 'why-the-market-looks-like-this', label: 'Why the UK market looks like this' },
+  { id: 'how-to-choose', label: 'Seven checks before you pay' },
+  { id: 'what-it-costs', label: 'What IPTV in the UK costs' },
+  { id: 'is-it-legal', label: 'Where the legal line sits' },
+  { id: 'broadband', label: 'The broadband speed you need' },
+  { id: 'devices-and-setup', label: 'Devices and Fire Stick setup' },
+  { id: 'vpn', label: 'Do you need a VPN' },
+  { id: 'the-weekend-test', label: 'The one-weekend test' },
+  { id: 'when-not-to-buy', label: 'When not to buy' },
+  { id: 'faqs', label: 'Straight answers' },
+  { id: 'verdict', label: 'The verdict' },
+];
+
+const relatedLinks = [
+  { href: '/blog/iptv-subscription-uk-buyers-guide/', label: 'IPTV Subscription UK: 2026 Buyer\'s Guide' },
+  { href: '/blog/is-iptv-legal-uk/', label: 'Is IPTV Legal in the UK? 2026 Explainer' },
+  { href: '/blog/cheap-iptv-uk-scam-or-legit/', label: 'Cheap IPTV UK: Scam or Legit?' },
+  { href: '/installation-guides/', label: 'Set Up IPTV on Your Device: All Guides' },
+];
+
+const plans = [
+  { plan: '1 month', price: `£${site.price}`, per: '£14.99', saving: '—' },
+  { plan: '3 months', price: '£26.99', per: '£9.00', saving: '£17.98' },
+  { plan: '6 months', price: '£36.99', per: '£6.17', saving: '£52.95' },
+  { plan: '12 months', price: '£49.99', per: '£4.17', saving: '£129.89' },
+];
+
+const orgId = `${site.url}/#organization`;
+const authorId = `${site.url}/about#team`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: site.name,
+      url: site.url,
+      logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      sameAs: [`${site.url}/about/`],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        availableLanguage: 'en-GB',
+        url: waLink(),
+      },
+    },
+    {
+      '@type': 'Person',
+      '@id': authorId,
+      name: post.author,
+      url: authorId,
+      jobTitle: 'Independent streaming and broadband consultant',
+      description:
+        'UK-based streaming and broadband consultant with six-plus years evaluating IPTV infrastructure, server stability and home network performance.',
+      knowsAbout: ['IPTV', 'UK broadband', 'Home network troubleshooting', 'Streaming hardware'],
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@id': authorId },
+      publisher: { '@id': orgId },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: post.category,
+      keywords: post.keywords.join(', '),
+      inLanguage: 'en-GB',
+      wordCount: 2900,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  ogType="article"
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">IPTV UK Guide</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          <strong>IPTV in the UK is television delivered over your broadband line instead of a dish,
+          an aerial or a cable.</strong> You pay a provider, you get a login or a playlist line, you put
+          it into an app on a Fire Stick or a smart TV, and the channels turn up. A UK IPTV subscription
+          runs roughly £4 to £15 a month depending on how long you commit for. The technology itself is
+          legal; what decides whether a specific service is legal is whether the content on it is
+          licensed. Everything below is the detail.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink('Hi, I read the IPTV UK guide. Can you tell me if my broadband is up to it?')} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Message us on WhatsApp
+          </a>
+          <a href="#how-to-choose" class="btn-secondary">The seven checks</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src={heroSrc}
+            sizes="(max-width: 768px) 100vw, 720px"
+            alt={post.imageAlt}
+            width="1376"
+            height="768"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Every few years British television invents a new way to charge you £80 a month, and every few
+          years somebody works out you can just use the internet. That is IPTV. Internet Protocol
+          Television, the telly arriving down the same line as everything else in the house, with no dish
+          on the wall and no engineer in a van giving you a four-hour window on a Thursday.
+        </p>
+        <p>
+          The mechanics are dull, which is a good sign. A provider runs servers carrying live channel
+          streams and an on-demand library. You get credentials or a playlist line. You put those into a
+          player app on hardware you already own. Press a channel, the app pulls the stream, the picture
+          arrives. That is the whole technology. Everything genuinely interesting about IPTV in the UK is
+          about price, licensing, and whether your router is up to it.
+        </p>
+
+        <nav class="not-prose my-10 rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6" aria-labelledby="toc-heading">
+          <h2 id="toc-heading" class="font-display text-lg font-semibold text-text-primary">
+            Jump to the bit you need
+          </h2>
+          <ol class="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+            {toc.map((t, i) => (
+              <li class="flex items-baseline gap-2 text-sm">
+                <span class="text-brand-light/70 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <a href={`#${t.id}`} class="text-text-muted underline-offset-4 hover:text-brand-light hover:underline">
+                  {t.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <h2 id="why-the-market-looks-like-this">Why the UK IPTV market looks the way it does</h2>
+        <p>
+          The problem was never the price of one subscription. It is that there are four. Top-flight
+          domestic football sits with one broadcaster, European club football with another, the cup
+          competitions move around depending on the year, and the premium film tier is a separate line on
+          a separate bill. Nobody designed that. It is what happens when rights get sold in packages and
+          viewers get sold nothing.
+        </p>
+        <p>
+          So the average household ends up on a premium sat or cable bundle somewhere between £70 and £95
+          a month, watching about six channels of it, and losing the sport package the moment the intro
+          deal ends in month 13. Then a mid-contract rise lands in month four of an 18-month deal. That is
+          not inflation. That is a business model.
+        </p>
+        <p>
+          <a href="https://en.wikipedia.org/wiki/Internet_Protocol_television" target="_blank" rel="noopener noreferrer nofollow">IPTV</a>
+          grew in that gap. One line item instead of four, no dish, and the decent providers do not keep
+          your card. The bad ones are a bloke on a social media group who takes £30 for a year and blocks
+          you in week three. Most of this guide is about telling those two apart.
+        </p>
+
+        <h2 id="how-to-choose">Seven checks before you pay any UK IPTV provider</h2>
+        <p>
+          Run a candidate through these in order. Most services fail on one of the first three, which
+          saves you reading the rest.
+        </p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {criteria.map((c) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold !text-[#241056] shadow-glow">
+                {c.n}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{c.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed" set:html={c.detail} />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <article class="legal-prose mt-14">
+        <h2 id="what-it-costs">What IPTV actually costs in the UK</h2>
+        <p>
+          Honest numbers. <strong>Every plan below is a one-off payment, VAT included.</strong> No card is kept on file and
+          nothing auto-renews, which means the only way you pay us twice is if you decide to.
+        </p>
+
+        <div class="not-prose mt-6 overflow-x-auto rounded-2xl border border-border-subtle">
+          <table class="w-full min-w-[560px] text-left text-sm">
+            <thead class="bg-elevated/70 text-text-primary">
+              <tr>
+                <th class="p-3 font-semibold">Plan</th>
+                <th class="p-3 font-semibold">One-off price</th>
+                <th class="p-3 font-semibold">Effective per month</th>
+                <th class="p-3 font-semibold">Saving vs monthly</th>
+              </tr>
+            </thead>
+            <tbody class="text-text-muted">
+              {plans.map((p) => (
+                <tr class="border-t border-border-subtle/60">
+                  <td class="p-3 text-text-primary">{p.plan}</td>
+                  <td class="p-3 font-medium text-brand-light">{p.price}</td>
+                  <td class="p-3">{p.per}</td>
+                  <td class="p-3">{p.saving}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-6">
+          The 12-month plan includes a premium IPTV player app, which is £9.99 bought on its own. All four
+          plans carry the same catalogue: 50,000+ live channels across 50+ countries, 200,000+ on-demand
+          films and series, in 4K, FHD and HD where the source supports it.
+        </p>
+        <p>
+          The most common message the support desk gets from a new customer is a screenshot of the pay-TV
+          bill they have just cancelled. It is nearly always between £70 and £95. They kept it for three
+          things: top-flight football, the premium film tier, and the kids' channels. They are now on
+          £4.17 a month with all three, plus another 49,000 channels they will never open. (I have yet to
+          meet anyone who has voluntarily opened the international news bouquet. It is there. It is
+          lovely. Nobody goes.)
+        </p>
+
+        <h2 id="is-it-legal">Is IPTV legal in the UK? Where the line actually sits</h2>
+        <p>
+          IPTV is a delivery method, and delivery methods are not illegal. The free-to-air catch-up apps
+          on your telly are IPTV. So are the big subscription streaming services. So is most of what a
+          modern smart TV does when you press any button at all.
+        </p>
+        <p>
+          <strong>Licensing is what decides it.</strong> A service is legal when the content it carries is licensed from
+          whoever owns it, and it is not when that content is being redistributed without permission.
+          <a href="https://www.ofcom.org.uk/" target="_blank" rel="noopener noreferrer nofollow">Ofcom</a>
+          handles broadcasting standards in the UK and the
+          <a href="https://www.gov.uk/government/organisations/intellectual-property-office" target="_blank" rel="noopener noreferrer nofollow">Intellectual Property Office</a>
+          covers copyright. Neither has a problem with the protocol.
+        </p>
+        <p>
+          The practical version for a buyer: a provider who will not tell you what they are licensed to
+          carry has told you something. We do not sell what is not ours to sell. No wink, no grey area, no
+          "don't worry about it." If a channel is not on the list, it is not on the list. There is a
+          fuller breakdown in our <a href="/blog/is-iptv-legal-uk/">guide to IPTV legality in the UK</a>.
+        </p>
+
+        <h2 id="broadband">What speed you need, and why your broadband breaks first</h2>
+        <p>
+          <strong>15 Mbps is the floor for reliable playback on a single HD stream.</strong> 4K wants around 25 Mbps, and
+          every additional simultaneous stream stacks on top of that. That is the entire requirement, and
+          almost every UK line clears it on paper.
+        </p>
+        <p>
+          On paper is doing a lot of work in that sentence. Test your speed at 8pm on a Saturday, not 11am
+          on a Tuesday. Your street shares capacity with everyone else's street, and the number that
+          matters is the one during the ninety minutes, not the one printed on your bill.
+        </p>
+      </article>
+
+      <figure class="mt-10">
+        {inlineImages.speed ? (
+          <img src={inlineImages.speed} alt="Broadband speed test result taken at peak time on a Saturday evening" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="Broadband speed test result taken at peak time on a Saturday evening">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Image: peak-time speed test</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <p>
+          Nine out of ten "the IPTV is buffering" messages the support desk gets are not the IPTV. They
+          are a Fire Stick sat three rooms from the router, sipping 6 Mbps of Wi-Fi through a wall a
+          builder from 1974 warned everyone about. In rough order of how much difference they make:
+        </p>
+        <ul>
+          <li>Run an ethernet cable. A £6 cable beats a £60 router upgrade and it is not close</li>
+          <li>If you cannot cable it, get on the 5 GHz band rather than 2.4 GHz. Most routers broadcast both and most people are on the wrong one</li>
+          <li>Restart the router, not the box. Everyone restarts the box. The router has been up for 340 days and is the actual problem</li>
+          <li>Use the little HDMI extender that came in the Fire Stick box, especially behind a wall-mounted telly. Most people bin it</li>
+          <li>For a Victorian terrace with plaster over brick, powerline adapters are the honest answer today. Mesh is better if you are buying new</li>
+        </ul>
+
+        <h2 id="devices-and-setup">Devices, apps and the fifteen-minute Fire Stick setup</h2>
+        <p>
+          The service runs on smart TVs, Fire Sticks, Android phones, tablets and boxes, iOS devices, MAG
+          boxes, Apple TV, Windows, Mac, Nvidia Shield, Enigma2 receivers and Formuler boxes. If it has a
+          screen and a network stack, it is probably on the list. Our
+          <a href="/blog/top-5-iptv-boxes-uk-2026/">IPTV boxes guide</a> ranks the hardware worth buying.
+        </p>
+        <p>
+          One warning. Do not buy the cheapest box on the marketplace. An £18 device ships with 1 GB of
+          RAM and a chipset from 2016. It works for a fortnight, then stutters on anything at 60fps, which
+          on a football stream is every single second of it. Buy once.
+        </p>
+      </article>
+
+      <figure class="mt-10">
+        {inlineImages.firestick ? (
+          <img src={inlineImages.firestick} alt="Fire Stick settings screen showing apps from unknown sources being enabled" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="Fire Stick settings screen showing apps from unknown sources being enabled">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Image: Fire Stick setup screen</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <p>Fire Stick setup, which is the one most people need:</p>
+        <ol>
+          <li>Settings, then My Fire TV, then Developer Options, then turn on apps from unknown sources. If Developer Options is missing, open About and click the device name seven times</li>
+          <li>Search the Fire TV store for Downloader and install it</li>
+          <li>Open Downloader and enter the address for the player app we send you</li>
+          <li>Install the player, open it, and paste in the playlist line or login details from your activation message</li>
+          <li>Let the channel list and guide load once, fully, before you start pressing things</li>
+        </ol>
+        <p>
+          Under 15 minutes, and support will sit on WhatsApp with you while you do it. A fair number of
+          the people we talk through this are retired, have never sideloaded anything in their lives, and
+          finish with the same sentence: that was easier than I thought. Full walkthroughs for every
+          device are on our <a href="/installation-guides/">installation guides page</a>.
+        </p>
+
+        <h2 id="vpn">Do you need a VPN for IPTV in the UK</h2>
+        <p>
+          No. This comes up weekly and the honest answer has not changed. The service runs without one. A
+          VPN is worth having for privacy on shared or public broadband, and it is fully compatible, but
+          the streams do not need it to work. Roughly half of UK customers run one and half do not, and
+          both halves get the same picture.
+        </p>
+        <p>
+          Where a VPN does cause trouble is when it is stuck on a stale connection after your ISP has
+          rotated your IP. That looks exactly like the service being down, and it is fixed by toggling the
+          VPN off and on again. It has cost more than one person the opening fifteen minutes of a match.
+        </p>
+
+        <h2 id="the-weekend-test">The one-weekend test nobody tells you to run</h2>
+        <p>
+          Every comparison article on this subject will help you pick. Almost none of them tell you how to
+          check you picked right, which is odd, because it takes one weekend and it is the only evidence
+          that counts.
+        </p>
+        <ol>
+          <li><strong>Friday night, off-peak.</strong> Open five channels you actually intend to watch and note how long each takes to start. Anything over four seconds is a routing problem, not a your-house problem</li>
+          <li><strong>Saturday, 3pm to 5pm.</strong> The real test. Sit on one stream for a full ninety minutes without touching anything. Buffering that only shows up here is contention, either on your street or on their servers, and the Friday result tells you which</li>
+          <li><strong>Saturday, 9.30pm.</strong> Message their support with a genuine question and time the reply. That number decides whether you are still a customer in a year</li>
+        </ol>
+        <p>
+          Do all of that inside the 7-day window and you have bought a month, not a year, to find out.
+          Which is the right way round.
+        </p>
+
+        <h2 id="when-not-to-buy">When you should not buy IPTV at all</h2>
+        <p>This section costs us money and it stays in.</p>
+        <ul>
+          <li><strong>You watch one match a month.</strong> Go to the pub. It is cheaper, the pint is better, and the argument afterwards is free</li>
+          <li><strong>Your broadband is under 15 Mbps at peak.</strong> Fix that first. No box has ever fixed a bad line, and the handful of 7-day refunds we do pay out are almost entirely this. We would rather tell you on WhatsApp than take the money and post it back a week later</li>
+          <li><strong>You only want the terrestrial highlights.</strong> That is already free and already inside your telly. You do not need us</li>
+          <li><strong>Nobody in the house will follow six setup steps.</strong> We will talk you through it, genuinely. But be honest with yourself about what your Saturday looks like</li>
+        </ul>
+
+        <h2 id="faqs">Straight answers: IPTV UK questions people actually ask</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2 id="verdict">The verdict</h2>
+        <p>
+          IPTV in the UK is a straightforward trade. You give up the dish and the engineer visit, and you
+          get one bill instead of four with nothing renewing behind your back. It works if your line
+          clears 15 Mbps at peak and you are willing to spend fifteen minutes with a Fire Stick and a
+          player app. It does not work if your broadband is the problem, and any provider telling you
+          otherwise is not worth £{site.price}.
+        </p>
+        <p>
+          Start on the month. Run the weekend test. If it holds up, the annual plan is £49.99 and works
+          out at £4.17 a month, and if it does not, you have seven days to say so.
+          <a href={waLink('Hi, I read the IPTV UK guide. I would like to start on the one-month plan.')} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp</a>
+          and we answer in under two minutes during UK hours, which I mention because that is the bit you
+          will actually use.
+        </p>
+        <p>
+          And if it is still stuttering after the cable, the 5 GHz switch and the router reboot, it is not
+          the box. It is the router your ISP posted you in 2016, sat behind a mirror in the hallway, doing
+          its best.
+        </p>
+      </article>
+
+      <aside class="mt-14 rounded-2xl border border-border-subtle bg-elevated/60 p-6" aria-labelledby="author-heading">
+        <p class="text-xs uppercase tracking-widest text-text-muted">About the author</p>
+        <h2 id="author-heading" class="mt-2 font-display text-xl font-semibold text-text-primary">
+          {post.author}
+        </h2>
+        <p class="mt-3 text-text-muted leading-relaxed">
+          Independent streaming and broadband consultant, UK-based, six-plus years spent pulling apart
+          IPTV infrastructure, server routing and the home networks it runs on. Not a salesperson. He is
+          the bloke your neighbour rings when the stick is buffering and they have already lost an
+          argument with their ISP. Every number in this guide comes off the UK IPTV BOX support desk or a
+          speed test he ran himself.
+        </p>
+        <p class="mt-4">
+          <a href="/about#team" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">
+            More about {post.author} and the team
+          </a>
+        </p>
+      </aside>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Related guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedLinks.map((g) => (
+            <li>
+              <a href={g.href} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50">
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light shrink-0"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+
+  <a
+    href="#main"
+    id="back-to-top"
+    class="fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 translate-y-3 items-center justify-center rounded-full border border-border-subtle bg-elevated text-brand-light opacity-0 shadow-glow transition duration-300 pointer-events-none focus-visible:opacity-100"
+  >
+    <span class="sr-only">Back to top</span>
+    <span class="rotate-180"><Icon name="chevron-down" size={18} /></span>
+  </a>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <script is:inline>
+    (() => {
+      const btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      const show = () => {
+        const on = window.scrollY > 900;
+        btn.classList.toggle('opacity-0', !on);
+        btn.classList.toggle('translate-y-3', !on);
+        btn.classList.toggle('pointer-events-none', !on);
+      };
+      show();
+      window.addEventListener('scroll', show, { passive: true });
+    })();
+  </script>
+</BaseLayout>

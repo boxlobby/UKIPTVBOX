@@ -11,6 +11,8 @@ export interface Props {
   ogImage?: string;
   noIndex?: boolean;
   includeSchema?: boolean;
+  /** og:type — 'website' for landing/service pages, 'article' for blog posts. */
+  ogType?: string;
 }
 
 const {
@@ -20,6 +22,7 @@ const {
   ogImage = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp',
   noIndex = false,
   includeSchema = true,
+  ogType = 'website',
 } = Astro.props;
 ---
 <!doctype html>
@@ -41,7 +44,7 @@ const {
     <link rel="sitemap" href="/sitemap.xml" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

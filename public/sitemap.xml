@@ -94,6 +94,30 @@
 
   <!-- Blog posts — lastmod matches updated date in posts.ts -->
   <url>
+    <loc>https://ukiptvbox.com/blog/iptv-firestick-uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://ukiptvbox.com/blog/best-iptv-provider-uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-07-22</lastmod>
+  </url>
+  <url>
+    <loc>https://ukiptvbox.com/blog/internet-protocol-television/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://ukiptvbox.com/blog/iptv-uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-07-24</lastmod>
+  </url>
+  <url>
     <loc>https://ukiptvbox.com/blog/top-5-iptv-boxes-uk-2026/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

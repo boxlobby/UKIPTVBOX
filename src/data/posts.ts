@@ -14,6 +14,99 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: 'iptv-firestick-uk',
+    // Title tag renders as "<title> | UK IPTV BOX" = 55 chars (target 50–60).
+    title: 'IPTV Firestick UK: Setup, Speed and Fixes',
+    // Meta description: 154 chars (target 150–160).
+    excerpt:
+      'IPTV Firestick setup in under 15 minutes. Which Fire Stick to buy, the broadband speed you actually need, buffering fixes and where UK law draws the line.',
+    category: 'Setup Guide',
+    image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Streaming_stick_plugged_into_TV_202607270132.jpeg',
+    imageAlt: 'IPTV Firestick UK setup with a Fire TV Stick plugged into a living room television playing live channels',
+    published: '2026-07-26',
+    updated: '2026-07-26',
+    readMinutes: 12,
+    author: 'James Whitfield',
+    keywords: [
+      'iptv firestick',
+      'fire stick iptv',
+      'best iptv firestick',
+      'best iptv for firestick',
+      'iptv on firestick',
+      'best iptv app firestick',
+    ],
+  },
+  {
+    slug: 'best-iptv-provider-uk',
+    // Title tag renders as "<title> | UK IPTV BOX" = 56 chars (target 50–60).
+    title: 'Best IPTV Provider UK: An Honest Scorecard',
+    // Meta description: 157 chars (target 150–160).
+    excerpt:
+      'The best IPTV provider UK checklist: uptime, support speed, refund windows and connection limits, measured honestly against our own service, losses included.',
+    category: 'Buying Guide',
+    // The %E2%80%A6 is a literal ellipsis in the R2 object name. Leave it encoded.
+    image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Streaming_providers_assessment_p%E2%80%A6_202607270127.jpeg',
+    imageAlt: 'Best IPTV provider UK scorecard showing uptime, support response time and refund window compared',
+    published: '2026-07-22',
+    updated: '2026-07-22',
+    readMinutes: 12,
+    author: 'James Whitfield',
+    keywords: [
+      'best iptv provider uk',
+      'best uk iptv',
+      'best iptv in uk',
+      'best iptv providers uk',
+      'best iptv service uk',
+      'iptv uk best',
+    ],
+  },
+  {
+    slug: 'internet-protocol-television',
+    // Title tag renders as "<title> | UK IPTV BOX" = 58 chars (target 50–60).
+    title: 'Internet Protocol Television: How IPTV Works',
+    // Meta description: 154 chars (target 150–160).
+    excerpt:
+      'Internet Protocol Television explained. How IPTV works, how packets carry a channel to your telly, unicast vs multicast, and the broadband speed you need.',
+    category: 'Explainer',
+    image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Television_travels_over_internet_202607270121.jpeg',
+    imageAlt: 'Internet Protocol Television diagram showing a TV feed sent as IP packets to a living room television',
+    published: '2026-07-20',
+    updated: '2026-07-20',
+    readMinutes: 10,
+    author: 'James Whitfield',
+    keywords: [
+      'internet protocol television',
+      'what is iptv',
+      'how does iptv work',
+      'iptv meaning',
+      'ip television playlist',
+      'iptv server',
+    ],
+  },
+  {
+    slug: 'iptv-uk',
+    // Title tag renders as "<title> | UK IPTV BOX" = 53 chars (target 50–60).
+    title: 'IPTV UK 2026: Costs, Legality and Setup',
+    // Meta description: 153 chars (target 150–160).
+    excerpt:
+      'IPTV UK explained. What a UK IPTV subscription really costs, where the legal line sits, the broadband speed you need, and Fire Stick setup in 15 minutes.',
+    category: 'Buying Guide',
+    image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Television_over_broadband_guide_202607270102.jpeg',
+    imageAlt: 'IPTV UK setup on a living room television streaming live channels over home broadband',
+    published: '2026-07-24',
+    updated: '2026-07-24',
+    readMinutes: 13,
+    author: 'James Whitfield',
+    keywords: [
+      'iptv uk',
+      'uk iptv',
+      'iptv in uk',
+      'iptv united kingdom',
+      'iptv uk providers',
+      'british iptv',
+    ],
+  },
+  {
     slug: 'iptv-free-trial-uk',
     title: 'IPTV Free Trial UK: What to Test Before Paying',
     excerpt:

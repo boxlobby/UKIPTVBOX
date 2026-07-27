@@ -1,0 +1,619 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { site, waLink } from '../../data/site';
+
+const post = postBySlug('iptv-firestick-uk')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+// Hosted on R2. 1376x768 (16:9) — also serves as the OG/Twitter card image.
+// The %E2%80%A6 in the extender key is a literal ellipsis in the R2 object name.
+// Leave it percent-encoded — decoding it breaks the URL.
+const R2 = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev';
+const heroSrc = `${R2}/Streaming_stick_plugged_into_TV_202607270132.jpeg`;
+const ogImage = heroSrc;
+
+// In-body images. Same 1376x768 dimensions as the hero.
+// unknownSources is shared with the iptv-uk post — same settings screen, same point.
+const inlineImages = {
+  unknownSources: `${R2}/TV_settings_screen_mockup_202607270103.jpeg`,
+  extender: `${R2}/HDMI_extender_cable_connecting_s%E2%80%A6_202607270134.jpeg`,
+};
+
+// The six setup steps. No jokes in here — someone reading this is holding a remote.
+const criteria = [
+  {
+    n: 1,
+    title: 'Update the stick and check the storage',
+    detail:
+      'Settings, then My Fire TV, then About, then Check for Updates. An out-of-date Fire OS build is the reason a lot of players crash on first launch. While you are in there, look at storage. A player app plus its guide data wants about <strong>250 MB free</strong>, and an 8 GB stick that has been collecting apps since 2021 often has less than that.',
+  },
+  {
+    n: 2,
+    title: 'Turn on installs from unknown sources',
+    detail:
+      'This moved, and most guides still describe the old menu. On current Fire OS: Settings, My Fire TV, About, then click the stick\'s own name <strong>seven times</strong> until it says developer options are on. Go back, open Developer Options, choose Install Unknown Apps, and toggle it on for the app you are about to install from. Toggling it per-app rather than globally is the safer version.',
+  },
+  {
+    n: 3,
+    title: 'Install Downloader from the Amazon app store',
+    detail:
+      'Search the store for Downloader and install it. It is a free, store-listed app that fetches a file from a web address and hands it to the installer. Nothing about this step is unofficial — Amazon ships the toggle in step 2 precisely because sideloading is a supported thing to do on a Fire TV device.',
+  },
+  {
+    n: 4,
+    title: 'Sideload the player your provider supports',
+    detail:
+      'Open Downloader, type the address your provider gave you, and install what comes back. Use the address from the provider rather than one off a forum — same app name, different file, and you will not know which one you got. Our <a href="/blog/best-iptv-player-apps-2026-uk/">player app comparison</a> covers what each one is actually good at.',
+  },
+  {
+    n: 5,
+    title: 'Log in with Xtream Codes or an M3U line',
+    detail:
+      'Two formats, both a copy-and-paste job. <strong>Xtream Codes</strong> is a username, a password and a server address, and it is the one to pick if offered. <strong>M3U</strong> is a single long URL. Type it on the stick once, carefully, then never again. The step-by-step with the exact fields is in the <a href="/blog/iptv-smarters-pro-firestick-uk/">Smarters Pro Firestick guide</a>.',
+  },
+  {
+    n: 6,
+    title: 'Load the guide data and set favourites',
+    detail:
+      'The channel list arrives first, the programme guide a minute or two behind it. Give it that minute before deciding something is broken. Then build a favourites list of the eight to ten channels you will genuinely open, because scrolling 50,000 of them with a directional pad is nobody\'s idea of an evening.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Which Fire Stick is best for IPTV?',
+    a: 'The Fire TV Stick 4K Max, if you are buying new. It has the most memory and the newest Wi-Fi radio, which is what a player app with a full programme guide actually strains. The standard 4K stick is fine, and any second-generation or later HD stick will play HD streams, though the guide interface will feel slow.',
+  },
+  {
+    q: 'Is IPTV on a Firestick legal in the UK?',
+    a: 'The device and the apps are legal. What decides it is whether the service you log into holds the rights to what it streams. Sideloading a player from a web address is a supported Amazon feature, not a workaround. Buying a stick sold pre-loaded with unlicensed streams is where UK enforcement is aimed.',
+  },
+  {
+    q: 'Do I need a VPN for IPTV on a Firestick?',
+    a: 'No. The service works without one and roughly half of our UK customers do not use one. A VPN is worth it for privacy on shared or public broadband. Be aware it costs you throughput, so if you are already near the 15 Mbps floor it can push you under it.',
+  },
+  {
+    q: 'What internet speed do I need for IPTV on a Firestick?',
+    a: 'At least 15 Mbps held during evening peak for reliable HD playback, and 25 Mbps or more for 4K or a second stream. Measure it on the stick itself rather than on your phone, because the stick has a smaller aerial and will usually report a lower number.',
+  },
+  {
+    q: 'Why does my IPTV keep buffering on a Firestick?',
+    a: 'Nine times out of ten it is the signal reaching the stick, not the stream leaving the server. Check in this order: use the HDMI extender so the stick is not pressed against the back of the television, connect to the 5 GHz band rather than 2.4 GHz, restart the router, then clear the app cache. Only after all four is it worth blaming the service.',
+  },
+  {
+    q: 'Do I have to jailbreak a Fire Stick to use IPTV?',
+    a: 'No. Nothing in the setup modifies Fire OS or removes a restriction. You are enabling a built-in setting and installing an app, both of which Amazon supports. A stick advertised as jailbroken is being sold on what is already loaded on it, which is a different question entirely.',
+  },
+  {
+    q: 'Can I use IPTV on an older Fire Stick?',
+    a: 'Usually yes. A second-generation HD stick from 2019 will play HD streams without trouble. What suffers is the interface — loading a full guide on 1 GB of memory is slow, and heavier player apps may close themselves. Reduce the number of channel categories the guide loads and it improves noticeably.',
+  },
+  {
+    q: 'How long does IPTV Firestick setup take?',
+    a: 'Under 15 minutes for most people, including the app download. The longest part is typing the login line on an on-screen keyboard. If you get stuck, message us on WhatsApp and someone will walk you through it — replies land in under two minutes during UK hours.',
+  },
+];
+
+// Table of contents — every id here must exist as an H2 in the markup below.
+const toc = [
+  { id: 'short-answer', label: 'The short answer' },
+  { id: 'which-stick', label: 'Which Fire Stick you need' },
+  { id: 'setup', label: 'The setup, in six steps' },
+  { id: 'speed', label: 'The speed number guides get wrong' },
+  { id: 'buffering', label: 'Why it buffers, in order' },
+  { id: 'jailbroken', label: 'What "jailbroken" actually means' },
+  { id: 'vpn', label: 'Do you need a VPN' },
+  { id: 'pricing', label: 'What it costs' },
+  { id: 'not-for-you', label: 'When not to bother' },
+  { id: 'faqs', label: 'Straight answers' },
+  { id: 'verdict', label: 'The verdict' },
+];
+
+const relatedLinks = [
+  { href: '/blog/iptv-smarters-pro-firestick-uk/', label: 'IPTV Smarters Pro Firestick UK Setup Guide' },
+  { href: '/blog/best-iptv-player-apps-2026-uk/', label: 'Best IPTV Player Apps UK 2026' },
+  { href: '/blog/top-5-iptv-boxes-uk-2026/', label: 'Top 5 IPTV Boxes UK 2026' },
+  { href: '/blog/is-iptv-legal-uk/', label: 'Is IPTV Legal in the UK?' },
+];
+
+const plans = [
+  { plan: '1 month', price: `£${site.price}`, per: '£14.99', saving: '—' },
+  { plan: '3 months', price: '£26.99', per: '£9.00', saving: '£17.98' },
+  { plan: '6 months', price: '£36.99', per: '£6.17', saving: '£52.95' },
+  { plan: '12 months', price: '£49.99', per: '£4.17', saving: '£129.89' },
+];
+
+const orgId = `${site.url}/#organization`;
+const authorId = `${site.url}/about#team`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: site.name,
+      url: site.url,
+      logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      sameAs: [`${site.url}/about/`],
+      foundingDate: '2022',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        availableLanguage: 'en-GB',
+        url: waLink(),
+      },
+    },
+    {
+      '@type': 'Person',
+      '@id': authorId,
+      name: post.author,
+      url: authorId,
+      jobTitle: 'Independent streaming and broadband consultant',
+      description:
+        'UK-based streaming and broadband consultant with six-plus years evaluating IPTV infrastructure, streaming hardware and home network performance.',
+      knowsAbout: ['IPTV', 'Amazon Fire TV', 'UK broadband', 'Home network troubleshooting', 'Streaming hardware'],
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: { '@id': authorId },
+      publisher: { '@id': orgId },
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: post.category,
+      keywords: post.keywords.join(', '),
+      inLanguage: 'en-GB',
+      wordCount: 3000,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  ogType="article"
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">IPTV Firestick UK</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          <strong>Getting IPTV on a Firestick takes about fifteen minutes. You turn on installs from
+          unknown sources, install Downloader from the Amazon store, sideload a player app, paste in one
+          login line from your provider, and the channel list loads.</strong> Nothing gets jailbroken,
+          nothing gets modified, and you do not need to buy a special stick from anyone. What decides
+          whether it then runs cleanly is not the app — it is where the stick is sitting and which Wi-Fi
+          band it is on.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink('Hi, I want to set up IPTV on my Fire Stick. Can you walk me through it?')} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Message us on WhatsApp
+          </a>
+          <a href="#setup" class="btn-secondary">Skip to the six steps</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img
+            src={heroSrc}
+            sizes="(max-width: 768px) 100vw, 720px"
+            alt={post.imageAlt}
+            width="1376"
+            height="768"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <p>
+          Search this and you get lists. Forty-one services in one, thirty-five in another, each with a
+          logo, a star rating and a link that pays whoever wrote it. Somewhere around item nineteen you
+          notice the descriptions have started repeating, which is roughly when everyone gives up and
+          buys the first one. (I have done it. Everyone has done it.)
+        </p>
+        <p>
+          This page is not that. It is the setup, the hardware you need, the speed figure that actually
+          matters, and the six things to check when it stutters — in the order they are usually the
+          cause. There is also a section at the bottom telling you when not to do any of this, which is
+          the bit the forty-one-item lists tend to leave out.
+        </p>
+
+        <nav class="not-prose my-10 rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6" aria-labelledby="toc-heading">
+          <h2 id="toc-heading" class="font-display text-lg font-semibold text-text-primary">
+            Jump to the bit you need
+          </h2>
+          <ol class="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+            {toc.map((t, i) => (
+              <li class="flex items-baseline gap-2 text-sm">
+                <span class="text-brand-light/70 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <a href={`#${t.id}`} class="text-text-muted underline-offset-4 hover:text-brand-light hover:underline">
+                  {t.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <h2 id="short-answer">The short answer, before the long one</h2>
+        <p>
+          A Fire Stick is a small Android computer with an HDMI plug on the end. An IPTV player is an app
+          that runs on it and plays a video stream the same way any other video app does. There is no
+          special version of the hardware required and no hidden mode to switch on.
+        </p>
+        <p>
+          Which means the interesting question is never "does it work on a Firestick" — it does — but
+          <strong>"will it hold steady at nine o'clock on a Saturday in my house"</strong>. That is
+          decided by three things: the model of stick, which Wi-Fi band it is talking to, and what your
+          line is actually doing at peak rather than what the bill says.
+          <a href="https://www.ofcom.org.uk/" target="_blank" rel="noopener noreferrer nofollow">Ofcom</a>
+          publishes UK home broadband performance data every year showing how far real evening speeds
+          drift from advertised ones, and that drift decides more of this than any app ever will.
+        </p>
+
+        <h2 id="which-stick">Which Fire Stick you actually need</h2>
+        <p>
+          Any Fire TV Stick from the second generation onwards will run an IPTV player. The differences
+          show up in the interface, not the picture.
+        </p>
+        <ul>
+          <li><strong>Fire TV Stick 4K Max.</strong> The one to buy if you are buying. Most memory, newest Wi-Fi radio, and the guide scrolls without thinking about it. If your household is on a busy street and your router supports the newer bands, this is the model that benefits</li>
+          <li><strong>Fire TV Stick 4K.</strong> Perfectly good. Handles 4K streams and a full programme guide without complaint. If you already own one, there is no reason to replace it</li>
+          <li><strong>Fire TV Stick HD or Lite.</strong> Plays HD fine. The guide loading is where you feel the missing memory, and heavier players occasionally close themselves. Load fewer channel categories and it settles down</li>
+          <li><strong>The 2019 stick in the drawer.</strong> Try it before you spend anything. Worst case you have lost ten minutes and you know what you are buying instead</li>
+        </ul>
+        <p>
+          A stick is not the only option — an Android box or an Nvidia Shield will do the same job with
+          more headroom, and if you already own one there is no reason to buy Amazon hardware to run
+          this. There is a fuller breakdown of what is worth owning in the
+          <a href="/blog/top-5-iptv-boxes-uk-2026/">IPTV boxes guide</a>.
+        </p>
+
+        <h2 id="setup">The setup, in six steps</h2>
+        <p>
+          Roughly fifteen minutes, most of which is typing a login on an on-screen keyboard with a
+          directional pad. Do them in order.
+        </p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {criteria.map((c) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grad-brand text-sm font-bold !text-[#241056] shadow-glow">
+                {c.n}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{c.title}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed" set:html={c.detail} />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <figure class="mt-10">
+        {inlineImages.unknownSources ? (
+          <img src={inlineImages.unknownSources} alt="Fire TV Stick developer options screen with install unknown apps turned on for the Downloader app" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="Fire TV Stick developer options screen with install unknown apps turned on for the Downloader app">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Image: unknown apps toggle</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <p>
+          The most common message the support desk gets on a weekday morning is some version of "the app
+          won't install", nearly always from someone who has never sideloaded anything and did not
+          expect to start now. Nine times out of ten it is step 2 — the toggle moved menus and the guide
+          they were reading was written before it did. Turn it on, install, paste the login, done. Total
+          time on WhatsApp, usually under fifteen minutes, and the reply at the end is almost always the
+          same four words: that was easier than I thought.
+        </p>
+
+        <h2 id="speed">The speed number the guides get wrong</h2>
+        <p>
+          You need <strong>15 Mbps held during evening peak</strong> for reliable HD playback, and 25
+          Mbps or more if you want 4K or a second screen running at the same time. Those are the numbers
+          we use on the desk and they have not changed in three years.
+        </p>
+        <p>
+          Two things almost nobody does, both of which change the answer:
+        </p>
+        <ol>
+          <li><strong>Test at 8pm on a Saturday, not 11am on a Tuesday.</strong> Your street shares capacity. The 11am figure is a lovely number that has nothing to do with the ninety minutes you care about</li>
+          <li><strong>Test on the stick, not on your phone.</strong> Install a speed test app on the Fire Stick and run it there. The stick has a smaller aerial than the phone in your pocket and will usually report a lower figure — sometimes half. That lower figure is the one the stream has to live on</li>
+        </ol>
+        <p>
+          If the stick reports under 15 Mbps at peak, stop here. No provider fixes that, and anybody who
+          tells you theirs will is selling you a refund request.
+        </p>
+
+        <h2 id="buffering">Why it buffers, in the order it is usually true</h2>
+        <p>
+          Work down this list rather than picking the one that sounds most likely. It is ordered by how
+          often each turns out to be the cause.
+        </p>
+        <ol>
+          <li><strong>The stick is jammed into the back of the television.</strong> A Fire Stick is fine. A Fire Stick pressed flat against a wall-mounted screen is not — the mount is metal, the television body is metal, and the aerial is a centimetre from both. Use the little HDMI extender that came in the box, the one everybody throws away. This single fix accounts for more resolved buffering tickets than every other fix on this list combined</li>
+          <li><strong>It is on the 2.4 GHz band.</strong> Most routers broadcast both bands and most people are connected to the wrong one without knowing there was a choice. Settings, Network, and pick the 5 GHz entry. Two minutes</li>
+          <li><strong>The router has been up for 340 days.</strong> Everybody restarts the stick. The router is the thing that has not been power-cycled since the engineer left. Restart that instead</li>
+          <li><strong>The app cache is full.</strong> Settings, Applications, Manage Installed Applications, pick the player, Clear Cache. Not Clear Data — that deletes your login</li>
+          <li><strong>The stick is overheating.</strong> Related to point one. If it is hot to the touch after an hour, it is throttling itself, and the extender fixes that too</li>
+          <li><strong>It is genuinely the line.</strong> Only worth concluding after the five above. If a cable will reach, an ethernet adapter for the stick costs a few pounds and ends the argument permanently</li>
+        </ol>
+      </article>
+
+      <figure class="mt-10">
+        {inlineImages.extender ? (
+          <img src={inlineImages.extender} alt="Fire TV Stick connected through the supplied HDMI extender cable to improve Wi-Fi signal behind a wall-mounted television" width="1376" height="768" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-border-subtle" />
+        ) : (
+          <div class="relative overflow-hidden rounded-2xl border border-border-subtle bg-grad-brand-soft aspect-video" role="img" aria-label="Fire TV Stick connected through the supplied HDMI extender cable to improve Wi-Fi signal behind a wall-mounted television">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-text-muted">
+              <Icon name="image" size={28} class="text-brand-light/70" />
+              <span class="text-[11px] font-medium uppercase tracking-widest">Image: the HDMI extender</span>
+            </div>
+          </div>
+        )}
+      </figure>
+
+      <article class="legal-prose mt-10">
+        <h2 id="jailbroken">What a "jailbroken" Fire Stick actually is</h2>
+        <p>
+          Worth being plain about, because the word gets used to mean four different things and one of
+          them will get someone in trouble.
+        </p>
+        <p>
+          Nothing in the six steps above modifies Fire OS. You are switching on a setting Amazon built
+          into the menu and installing an app through a tool Amazon sells in its own store. That is
+          sideloading, and it is the same mechanism a business uses to put an internal app on a fleet of
+          devices. It is not a jailbreak and there is nothing to undo afterwards.
+        </p>
+        <p>
+          A stick advertised as "fully loaded" or "jailbroken" is a different product. What is being sold
+          there is not the hardware or the setting — it is the streams already configured on it, and
+          whether those are licensed is the entire question. UK enforcement has been aimed squarely at
+          that market, at both ends of it, and the
+          <a href="https://www.gov.uk/topic/intellectual-property/copyright" target="_blank" rel="noopener noreferrer nofollow">government's copyright guidance</a>
+          sets out where the line sits. The longer version is in our
+          <a href="/blog/is-iptv-legal-uk/">guide to IPTV legality in the UK</a>.
+        </p>
+        <p>
+          Our position is boring and deliberate: if a channel is not ours to sell, we do not sell it.
+          There is no wink attached to that sentence.
+        </p>
+
+        <h2 id="vpn">Do you need a VPN on a Fire Stick</h2>
+        <p>
+          No. This comes up weekly and the honest answer is that the service runs perfectly well without
+          one. Roughly half our UK customers use a VPN and half do not, and it works for both.
+        </p>
+        <p>
+          A VPN is worth having for privacy on shared or public broadband, which is a general point about
+          your connection rather than anything specific to IPTV — the
+          <a href="https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online" target="_blank" rel="noopener noreferrer nofollow">National Cyber Security Centre</a>
+          covers the sensible version of that argument. What nobody mentions is the trade: encryption and
+          a longer route cost you throughput. If your stick is reporting 16 Mbps at peak, a VPN can push
+          you under the 15 Mbps floor and cause the exact buffering you installed it to avoid.
+        </p>
+
+        <h2 id="pricing">What it costs, with no asterisks</h2>
+        <p>
+          Every plan below is a one-off payment, VAT included. Nothing renews, because nothing has your
+          card. The Fire Stick itself is a separate purchase from Amazon and we do not sell hardware.
+        </p>
+        <div class="not-prose my-8 overflow-x-auto rounded-2xl border border-border-subtle">
+          <table class="w-full min-w-[560px] text-left text-sm">
+            <thead class="bg-elevated/70 text-text-primary">
+              <tr>
+                <th class="p-3 font-semibold">Plan</th>
+                <th class="p-3 font-semibold">One-off price</th>
+                <th class="p-3 font-semibold">Effective per month</th>
+                <th class="p-3 font-semibold">Saving vs monthly</th>
+              </tr>
+            </thead>
+            <tbody class="text-text-muted">
+              {plans.map((p) => (
+                <tr class="border-t border-border-subtle/60">
+                  <td class="p-3 text-text-primary">{p.plan}</td>
+                  <td class="p-3 font-medium text-brand-light">{p.price}</td>
+                  <td class="p-3">{p.per}</td>
+                  <td class="p-3">{p.saving}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The 12-month plan includes a premium player app worth £9.99, which removes the sideloading step
+          entirely for anyone who would rather not do it. There is a <strong>7-day money-back window</strong>
+          on every plan, which exists mostly for one scenario: the customer's line turns out to be under
+          15 Mbps and no amount of tinkering will change that. Start on the month at £{site.price} and see
+          what your house does with it. The wider cost comparison is in the
+          <a href="/blog/iptv-uk/">IPTV UK guide</a>.
+        </p>
+
+        <h2 id="not-for-you">When not to bother with any of this</h2>
+        <p>
+          The section the forty-one-item lists will never write, because there is no commission in it.
+        </p>
+        <ul>
+          <li><strong>Your peak-time speed on the stick is under 15 Mbps.</strong> Fix the line first. This is the single most common reason our refund window gets used, and we would rather tell you now than take £{site.price} and hand it back in six days</li>
+          <li><strong>You watch one match a month.</strong> Go to the pub. It is cheaper over a year, the pint is better, and the argument afterwards is free</li>
+          <li><strong>You only want the terrestrial highlights.</strong> Those are already built into the television and already paid for. Keep your money</li>
+          <li><strong>You are not comfortable following six steps with a remote.</strong> Be honest with yourself about that. We will do it with you over WhatsApp and it genuinely does take fifteen minutes — but if there is someone in the family who does the tech, this is their job</li>
+        </ul>
+
+        <h2 id="faqs">Straight answers about IPTV on a Firestick</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2 id="verdict">The verdict</h2>
+        <p>
+          IPTV on a Firestick is a fifteen-minute job and the stick you already own is probably fine. The
+          part worth spending your attention on is not which app you install — it is the thirty seconds
+          it takes to plug in the HDMI extender and the two minutes it takes to move onto the 5 GHz band.
+          Those two do more for picture stability than any decision you will make about software.
+        </p>
+        <p>
+          If you want to test it on us, start on the month at £{site.price}, run it through a full ninety
+          minutes at peak, and take the refund inside 7 days if your line cannot hold it. If it holds,
+          the year is £49.99, which is £4.17 a month with no month 13 to worry about.
+          <a href={waLink('Hi, I read the IPTV Firestick guide. Can you help me get set up on my Fire Stick?')} target="_blank" rel="nofollow noopener noreferrer">Message us on WhatsApp</a>
+          and someone will do the setup with you.
+        </p>
+        <p>
+          And if it is still stuttering after all six checks, it is not the stick and it is not the
+          service. It is the router your broadband provider posted you in 2016, sitting in the hallway,
+          behind a mirror, doing its best.
+        </p>
+      </article>
+
+      <aside class="mt-14 rounded-2xl border border-border-subtle bg-elevated/60 p-6" aria-labelledby="author-heading">
+        <p class="text-xs uppercase tracking-widest text-text-muted">About the author</p>
+        <h2 id="author-heading" class="mt-2 font-display text-xl font-semibold text-text-primary">
+          {post.author}
+        </h2>
+        <p class="mt-3 text-text-muted leading-relaxed">
+          Independent streaming and broadband consultant, UK-based, six-plus years spent pulling apart
+          IPTV infrastructure, streaming hardware and the home networks it runs on. Not a salesperson. He
+          is the bloke your neighbour rings when the stick is buffering and they have already lost an
+          argument with their ISP. Every number in this guide comes off the UK IPTV BOX support desk or a
+          speed test he ran himself, on a stick, at nine on a Saturday.
+        </p>
+        <p class="mt-4">
+          <a href="/about#team" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">
+            More about {post.author} and the team
+          </a>
+        </p>
+      </aside>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Related guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedLinks.map((g) => (
+            <li>
+              <a href={g.href} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50">
+                <span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span>
+                <span class="text-brand-light shrink-0"><Icon name="arrow" size={16} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+
+  <a
+    href="#main"
+    id="back-to-top"
+    class="fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 translate-y-3 items-center justify-center rounded-full border border-border-subtle bg-elevated text-brand-light opacity-0 shadow-glow transition duration-300 pointer-events-none focus-visible:opacity-100"
+  >
+    <span class="sr-only">Back to top</span>
+    <span class="rotate-180"><Icon name="chevron-down" size={18} /></span>
+  </a>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <script is:inline>
+    (() => {
+      const btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      const show = () => {
+        const on = window.scrollY > 900;
+        btn.classList.toggle('opacity-0', !on);
+        btn.classList.toggle('translate-y-3', !on);
+        btn.classList.toggle('pointer-events-none', !on);
+      };
+      show();
+      window.addEventListener('scroll', show, { passive: true });
+    })();
+  </script>
+</BaseLayout>
