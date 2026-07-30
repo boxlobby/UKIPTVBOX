@@ -8,6 +8,20 @@
     <lastmod>2026-07-23</lastmod>
   </url>
 
+  <!-- Service pages -->
+  <url>
+    <loc>https://ukiptvbox.com/iptv-service-uk/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-07-30</lastmod>
+  </url>
+  <url>
+    <loc>https://ukiptvbox.com/pricing</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-07-30</lastmod>
+  </url>
+
   <!-- Core pages -->
   <url>
     <loc>https://ukiptvbox.com/about/</loc>

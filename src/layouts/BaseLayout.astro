@@ -13,6 +13,10 @@ export interface Props {
   includeSchema?: boolean;
   /** og:type — 'website' for landing/service pages, 'article' for blog posts. */
   ogType?: string;
+  /** LCP image to preload. Defaults to the homepage hero. */
+  preloadImage?: string;
+  /** Must match the `sizes` attr on the LCP <img>, or the browser fetches twice. */
+  preloadSizes?: string;
 }
 
 const {
@@ -23,6 +27,8 @@ const {
   noIndex = false,
   includeSchema = true,
   ogType = 'website',
+  preloadImage = 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp',
+  preloadSizes = '(min-width: 1024px) 896px, (min-width: 640px) calc(100vw - 3rem), calc(100vw - 2rem)',
 } = Astro.props;
 ---
 <!doctype html>
@@ -68,10 +74,10 @@ const {
     <link
       rel="preload"
       as="image"
-      href="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Men_watching_football_match_202607200445.webp"
+      href={preloadImage}
       type="image/webp"
       fetchpriority="high"
-      imagesizes="(min-width: 1024px) 896px, (min-width: 640px) calc(100vw - 3rem), calc(100vw - 2rem)"
+      imagesizes={preloadSizes}
     />
 
     {includeSchema && <SchemaOrg />}

@@ -1,0 +1,638 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import PricingCard from '../components/PricingCard.astro';
+import { site, packages, waLink } from '../data/site';
+
+const title = 'IPTV Service UK | 99.9% Uptime, 50,000+ Channels';
+const description =
+  'A UK IPTV service with 50,000+ live channels, 99.9% uptime and instant activation. One-off plans from £14.99, no auto-renewal, and a 7-day money-back window.';
+const canonical = `${site.url}/iptv-service-uk/`;
+
+const heroImage =
+  'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Family_sitting_on_sofa_watching_202607190047.webp';
+
+/* ── Service level rows ─────────────────────────────────────────── */
+const serviceLevels = [
+  {
+    metric: 'Uptime',
+    commit: '99.9%',
+    means: 'Servers are load-balanced across UK and EU locations. Capacity goes up before a big fixture kicks off, not after the complaints arrive.',
+  },
+  {
+    metric: 'Activation',
+    commit: 'Instant',
+    means: 'Your line details land on WhatsApp as soon as payment clears. There is no queue and no overnight batch, whatever time you buy.',
+  },
+  {
+    metric: 'Support reply',
+    commit: 'Under 2 minutes',
+    means: 'That is the WhatsApp reply time during UK hours, from a person who can actually change something on your account.',
+  },
+  {
+    metric: 'Support hours',
+    commit: '24/7 on WhatsApp',
+    means: 'Late kick-offs and 6am film finishes included. Replies outside UK hours are slower, but the line is never closed.',
+  },
+  {
+    metric: 'Concurrent streams',
+    commit: '1 per plan',
+    means: 'Install the app on every device you own. One screen streams live at a time. Extra connections are available on request.',
+  },
+  {
+    metric: 'Broadband floor',
+    commit: '15 Mbps',
+    means: 'The speed we quote for reliable playback. Most UK lines clear it easily, and the ones that struggle usually only struggle in the evening.',
+  },
+  {
+    metric: 'Billing model',
+    commit: 'One-off payment',
+    means: 'We do not store a card and there is no subscription sitting on file. When the plan runs out the line stops until you buy another one.',
+  },
+  {
+    metric: 'Money back',
+    commit: '7 days',
+    means: 'If the service will not run properly on your setup and support cannot fix it, you get the money back inside the first 7 days.',
+  },
+];
+
+/* ── The three failure modes ────────────────────────────────────── */
+const failures = [
+  {
+    n: '01',
+    title: 'It dies at 3pm on a Saturday',
+    body:
+      'Plenty of IPTV services look flawless on a Tuesday afternoon and fall over the moment 40,000 people load the same channel. Capacity, not catalogue size, is what separates a service that works from one that only demos well.',
+    fix: 'Load-balanced UK and EU servers, 99.9% uptime, scaled ahead of peak windows.',
+  },
+  {
+    n: '02',
+    title: 'Nobody answers when it breaks',
+    body:
+      'This one is a people problem rather than a server problem. A stream glitches, you message the seller, and the reply lands three days later, if it lands at all. Support speed is the part nobody can check before paying, which is why so few sellers ever publish a number for it.',
+    fix: 'Under 2 minutes on WhatsApp during UK hours, on a line that runs 24/7.',
+  },
+  {
+    n: '03',
+    title: 'The charge you forgot about',
+    body:
+      'The third one costs the most over a year. A card gets stored, a rolling subscription renews quietly, and cancelling means a form and an email chain. It is a billing model that makes its money from people not reading their statements.',
+    fix: 'One-off payment, and we keep no card on file, so there is nothing to cancel.',
+  },
+];
+
+/* ── Broadband checks ───────────────────────────────────────────── */
+const broadbandChecks = [
+  {
+    title: 'Test the line, not the router light',
+    body:
+      'Run a speed test on the device you actually watch on, at the time you actually watch. A 15 Mbps result at 11am and a 6 Mbps result at 8pm are two different broadband connections wearing the same name.',
+  },
+  {
+    title: 'Put the TV on the 5GHz band',
+    body:
+      'Most homes leave the telly on the crowded 2.4GHz band because that is what it joined first. Moving it to 5GHz, or dropping an ethernet cable in, fixes more buffering than any app setting ever will.',
+  },
+  {
+    title: 'Count what else is running',
+    body:
+      'A console downloading a patch will eat a 15 Mbps line whole. If the picture only breaks up in the evening, the bottleneck is usually the household, not the server.',
+  },
+  {
+    title: 'Let the stream drop a tier',
+    body:
+      '4K, FHD and HD feeds all sit behind the same login. On a line that dips, stepping down to FHD gives you a picture that holds rather than one that stalls every ninety seconds.',
+  },
+];
+
+/* ── Onboarding steps ───────────────────────────────────────────── */
+const steps = [
+  {
+    label: 'Message',
+    body: 'Send a WhatsApp saying which plan you want. You get a reply with the payment options, plus an answer to whatever you were unsure about.',
+  },
+  {
+    label: 'Pay once',
+    body: 'Bank transfer, debit or credit card, Apple Pay, Google Pay or crypto. One payment for the plan length you picked, and that is the last of it.',
+  },
+  {
+    label: 'Get your line',
+    body: 'Credentials arrive on WhatsApp straight after payment clears, alongside the setup guide for the exact device you told us about.',
+  },
+  {
+    label: 'Load the app',
+    body: 'Enter the details once. The channel list and guide populate themselves, and the same login then works on any other device you own.',
+  },
+];
+
+/* ── Devices ────────────────────────────────────────────────────── */
+const devices = [
+  'Smart TV', 'Fire Stick', 'Android TV box', 'Android phone', 'Android tablet',
+  'iPhone', 'iPad', 'Apple TV', 'MAG box', 'Formuler', 'Nvidia Shield',
+  'Enigma2 receiver', 'Windows', 'Mac',
+];
+
+/* ── FAQs (page-specific) ───────────────────────────────────────── */
+const serviceFaqs = [
+  {
+    q: 'What does the IPTV service actually include?',
+    a: 'One login that opens 50,000+ live channels from 50+ countries plus a 200,000+ title on-demand library, in 4K, FHD and HD. There are no tiers: every plan opens the same catalogue, and the only difference between them is how long the plan runs for.',
+  },
+  {
+    q: 'What happens if a channel drops mid-match?',
+    a: 'Message the WhatsApp line and say which channel. During UK hours you will normally have a reply inside 2 minutes, and most drops are fixed by switching you to a backup feed on the same channel while the original comes back.',
+  },
+  {
+    q: 'How is this different from a cheap IPTV service on a forum?',
+    a: 'Mostly in what happens after the payment. A £5 lifetime line comes with no support desk and no refund window, and the seller has little reason to keep servers scaled through peak hours. UK IPTV BOX publishes a 99.9% uptime figure, a 7-day money-back window and a reply time you can hold us to.',
+  },
+  {
+    q: 'Can the service run on more than one screen at once?',
+    a: 'Each plan carries one concurrent connection, so one live stream at a time. The app itself can sit on every device you own. If two rooms need to watch different things, ask on WhatsApp and we will price a multi-connection package.',
+  },
+  {
+    q: 'Do I need a VPN to use the service?',
+    a: 'It is not required and the service runs fine without one. A VPN is compatible if you prefer the extra privacy, and it occasionally helps if your ISP is throttling video traffic in the evening.',
+  },
+  {
+    q: 'What broadband speed does the service need?',
+    a: '15 Mbps is the figure we quote for reliable playback. Most UK lines clear that comfortably on paper; the ones that struggle usually do so because of evening congestion or wifi, not the headline speed on the bill.',
+  },
+  {
+    q: 'Will I be charged again when the plan ends?',
+    a: 'No. Every plan is a one-off payment, and we do not keep a card on file to charge. When the plan runs out the line stops until you decide to buy another one, so there is nothing to cancel and no renewal date to diarise.',
+  },
+  {
+    q: 'Which payment methods do you take?',
+    a: 'Bank transfer, debit and credit card, Apple Pay, Google Pay and crypto. Activation happens once the payment clears, whichever route you use.',
+  },
+];
+
+/* ── Structured data ────────────────────────────────────────────── */
+const schemaJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: 'en-GB',
+      isPartOf: { '@id': `${site.url}/#website` },
+      primaryImageOfPage: { '@id': `${canonical}#primaryimage` },
+    },
+    {
+      '@type': 'ImageObject',
+      '@id': `${canonical}#primaryimage`,
+      url: heroImage,
+      contentUrl: heroImage,
+      caption: 'Family watching live TV at home through a UK IPTV service',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'IPTV Service UK', item: canonical },
+      ],
+    },
+    {
+      '@type': 'Service',
+      '@id': `${canonical}#service`,
+      name: 'UK IPTV Service',
+      serviceType: 'IPTV subscription service',
+      description:
+        'UK IPTV service delivering 50,000+ live channels and 200,000+ on-demand titles in 4K, FHD and HD, with 99.9% uptime, instant activation and 24/7 WhatsApp support.',
+      provider: { '@id': `${site.url}/#organization` },
+      areaServed: { '@type': 'Country', name: 'United Kingdom' },
+      image: heroImage,
+      offers: packages.map((pkg) => ({
+        '@type': 'Offer',
+        name: `${pkg.label} IPTV service plan`,
+        price: pkg.price,
+        priceCurrency: site.currency,
+        availability: 'https://schema.org/InStock',
+        url: canonical,
+      })),
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: site.reviews.rating,
+        reviewCount: site.reviews.count,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${canonical}#faq`,
+      mainEntity: serviceFaqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={heroImage}
+  preloadImage={heroImage}
+  preloadSizes="(min-width: 1024px) 560px, calc(100vw - 2rem)"
+  includeSchema={false}
+>
+  <script is:inline type="application/ld+json" set:html={schemaJson} />
+
+  <Header />
+
+  <main id="main">
+
+    <!-- ═══ HERO (split layout; the landing page hero is centred) ═══ -->
+    <section style="background:#241056;border-bottom:1px solid rgba(198,181,238,.18);">
+      <div class="container-x py-10 sm:py-16 md:py-20">
+        <nav aria-label="Breadcrumb" class="mb-8 text-xs" style="color:#B9A9E4;">
+          <ol class="flex items-center gap-2">
+            <li><a href="/" style="color:#B9A9E4;" class="hover:underline">Home</a></li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" style="color:#D3F94F;">IPTV Service UK</li>
+          </ol>
+        </nav>
+
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+          <div class="lg:col-span-6">
+            <span class="eyebrow">
+              <span class="h-1.5 w-1.5 rounded-full bg-brand animate-pulse"></span>
+              IPTV Service UK
+            </span>
+
+            <h1 class="mt-5 text-[1.8rem] sm:text-4xl md:text-5xl lg:text-[3.3rem] font-bold leading-[1.12] sm:leading-[1.08]" style="color:#F1EEFA;">
+              An IPTV service you<br class="hidden sm:block" />
+              <span class="bg-grad-brand bg-clip-text text-transparent">shouldn't have to babysit</span>
+            </h1>
+
+            <p class="mt-5 text-[0.95rem] sm:text-lg leading-relaxed" style="color:#DDD3F5;max-width:56ch;">
+              Nobody really wants to think about their IPTV service. They want the channel to load, the picture
+              to hold through the second half, and no surprise charge on the card six months later. It is not a
+              high bar, and UK IPTV BOX has been selling against it since 2022.
+            </p>
+
+            <div class="mt-7 flex flex-col sm:flex-row sm:flex-wrap gap-3">
+              <a href="#pricing" class="btn-primary px-7 py-4 text-base">
+                See what it costs
+                <Icon name="arrow" size={17} />
+              </a>
+              <a
+                href={waLink('Hello, I have a question about your UK IPTV service.')}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold transition-colors"
+                style="border:1px solid rgba(211,249,79,.35);color:#F1EEFA;"
+              >
+                <Icon name="whatsapp" size={17} />
+                Ask a question first
+              </a>
+            </div>
+
+            <p class="mt-6 text-xs" style="color:#B9A9E4;">
+              34,000+ active users · 7-day money back · no auto-renewal
+            </p>
+          </div>
+
+          <div class="lg:col-span-6">
+            <div style="border:1px solid #4A2F9E;border-radius:18px;overflow:hidden;background:rgba(46,23,112,.6);">
+              <img
+                src={heroImage}
+                alt="Family on a sofa watching live television through a UK IPTV service"
+                width={1280}
+                height={720}
+                loading="eager"
+                decoding="sync"
+                fetchpriority="high"
+                sizes="(min-width: 1024px) 560px, calc(100vw - 2rem)"
+                class="w-full h-auto object-cover aspect-video"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SERVICE LEVEL BAND (landing-page stat strip styling) ═══ -->
+    <div style="background:#5B2EBE;border-top:1px solid rgba(198,181,238,.25);border-bottom:1px solid rgba(198,181,238,.25);">
+      <div class="container-x">
+        <div class="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x" style="--tw-divide-opacity:1;divide-color:rgba(198,181,238,.25)">
+          {[
+            { value: '99.9%',   label: 'Advertised uptime' },
+            { value: '< 2 min', label: 'WhatsApp reply, UK hours' },
+            { value: 'Instant', label: 'Activation after payment' },
+            { value: '15 Mbps', label: 'Broadband floor we quote' },
+          ].map(({ value, label }) => (
+            <div class="py-8 sm:py-10 px-4 text-center">
+              <div class="text-2xl sm:text-3xl md:text-4xl font-bold bg-grad-brand bg-clip-text text-transparent whitespace-nowrap">{value}</div>
+              <div class="mt-2 text-[0.7rem] sm:text-xs tracking-widest uppercase text-text-muted">{label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SERVICE LEVEL TABLE (spec sheet; not on the landing page) ═══ -->
+    <section id="commitments" class="section" style="background:#241056;">
+      <div class="container-x">
+        <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <div class="lg:col-span-4">
+            <h2 class="text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+              What the service commits to
+            </h2>
+            <p class="mt-5 text-sm leading-relaxed" style="color:#DDD3F5;">
+              Anyone can list channel counts. The numbers below are the ones that decide whether an IPTV service
+              provider is worth keeping after week three, so they sit in one table rather than scattered across
+              a sales page.
+            </p>
+            <p class="mt-4 text-sm leading-relaxed" style="color:#DDD3F5;">
+              The best IPTV services publish figures like these before you pay. If one of them turns out to be
+              wrong for your setup, the 7-day window exists for exactly that reason.
+            </p>
+          </div>
+
+          <div class="lg:col-span-8">
+            <dl style="border-top:1px solid rgba(198,181,238,.2);">
+              {serviceLevels.map(({ metric, commit, means }) => (
+                <div class="grid sm:grid-cols-12 gap-2 sm:gap-6 py-5" style="border-bottom:1px solid rgba(198,181,238,.14);">
+                  <dt class="sm:col-span-4">
+                    <span class="block text-[11px] uppercase tracking-[0.16em]" style="color:#B9A9E4;">{metric}</span>
+                    <span class="block mt-1 text-base font-bold" style="color:#D3F94F;">{commit}</span>
+                  </dt>
+                  <dd class="sm:col-span-8 text-sm leading-relaxed" style="color:#DDD3F5;">{means}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ THREE FAILURE MODES (unique to this page) ═══ -->
+    <section class="section" style="background:#1C0B45;">
+      <div class="container-x">
+        <div class="max-w-3xl">
+          <span style="display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:#D3F94F;">The honest part</span>
+          <h2 class="mt-4 text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+            Three ways IPTV services go wrong
+          </h2>
+          <p class="mt-5 text-base leading-relaxed" style="color:#DDD3F5;">
+            Almost every complaint about IPTV in the UK comes down to one of three problems, and none of them
+            is about the size of the channel list.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          {failures.map(({ n, title: t, body, fix }) => (
+            <article style="background:#2E1770;border:1px solid rgba(198,181,238,.16);border-radius:16px;padding:28px;">
+              <span class="block text-4xl font-bold leading-none" style="color:rgba(211,249,79,.28);">{n}</span>
+              <h3 class="mt-5 text-xl font-semibold" style="color:#F1EEFA;">{t}</h3>
+              <p class="mt-4 text-sm leading-relaxed" style="color:#DDD3F5;">{body}</p>
+              <p class="mt-5 pt-5 text-sm leading-relaxed" style="border-top:1px solid rgba(198,181,238,.16);color:#F1EEFA;">
+                <span class="inline-flex mr-1.5 align-[-2px]" style="color:#D3F94F;"><Icon name="check" size={15} /></span>
+                {fix}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ BROADBAND (image plus numbered checks) ═══ -->
+    <section id="broadband" class="section" style="background:#241056;">
+      <div class="container-x">
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-14 lg:items-start">
+          <div class="lg:col-span-5">
+            <div style="border:1px solid #4A2F9E;border-radius:18px;overflow:hidden;background:rgba(46,23,112,.6);">
+              <img
+                src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Monitor_displaying_football_pitch_202607190038.webp"
+                alt="Live sport playing smoothly on a screen over a home broadband connection"
+                width={1280}
+                height={720}
+                loading="lazy"
+                decoding="async"
+                sizes="(min-width: 1024px) 460px, calc(100vw - 2rem)"
+                class="w-full h-auto object-cover aspect-video"
+              />
+            </div>
+            <p class="mt-5 text-sm leading-relaxed" style="color:#DDD3F5;">
+              A UK IPTV provider only controls one end of the pipe. The other end is your house, and that is
+              where most buffering actually starts.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7">
+            <h2 class="text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+              Your broadband is the other half of the service
+            </h2>
+            <p class="mt-5 text-base leading-relaxed" style="color:#DDD3F5;">
+              15 Mbps is the floor we quote for reliable playback. Almost every UK line clears that on paper,
+              yet people still get stuttering pictures, because the number on the bill is not the number
+              reaching the telly at half eight on a Sunday. Four things worth checking before you blame the stream:
+            </p>
+
+            <ol class="mt-8 space-y-6">
+              {broadbandChecks.map(({ title: t, body }, i) => (
+                <li class="flex gap-4">
+                  <span class="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold" style="background:rgba(211,249,79,.12);border:1px solid rgba(211,249,79,.3);color:#D3F94F;">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 class="text-base font-semibold" style="color:#F1EEFA;">{t}</h3>
+                    <p class="mt-2 text-sm leading-relaxed" style="color:#DDD3F5;">{body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PRICING (same component the landing page uses) ═══ -->
+    <PricingCard />
+
+    <!-- ═══ ONBOARDING TIMELINE (vertical rail) ═══ -->
+    <section class="section" style="background:#1C0B45;">
+      <div class="container-x">
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
+          <div class="lg:col-span-5">
+            <h2 class="text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+              From payment to picture
+            </h2>
+            <p class="mt-5 text-base leading-relaxed" style="color:#DDD3F5;">
+              You do not create an account with us, and there is no hardware waiting in the post. The whole
+              handover happens in a single WhatsApp thread, and most people are watching inside fifteen
+              minutes of paying.
+            </p>
+            <div class="mt-8 rounded-2xl p-5" style="border:1px solid rgba(198,181,238,.18);background:rgba(46,23,112,.55);">
+              <p class="text-sm leading-relaxed" style="color:#DDD3F5;">
+                Setting up on a Fire Stick, a MAG box or an Enigma2 receiver for the first time? The
+                <a href="/installation-guides/" style="color:#D3F94F;text-decoration:underline;text-underline-offset:3px;">installation guides</a>
+                cover every supported device step by step.
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <ol class="relative" style="border-left:1px solid rgba(198,181,238,.25);padding-left:32px;">
+              {steps.map(({ label, body }, i) => (
+                <li class={i === steps.length - 1 ? '' : 'pb-10'} style="position:relative;">
+                  <span
+                    aria-hidden="true"
+                    style="position:absolute;left:-40px;top:2px;width:17px;height:17px;border-radius:999px;background:#241056;border:2px solid #D3F94F;"
+                  ></span>
+                  <span class="block text-[11px] uppercase tracking-[0.18em] font-semibold" style="color:#D3F94F;">
+                    Step {i + 1}
+                  </span>
+                  <h3 class="mt-2 text-lg font-semibold" style="color:#F1EEFA;">{label}</h3>
+                  <p class="mt-2 text-sm leading-relaxed" style="color:#DDD3F5;">{body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ DEVICE PILLS (flat list, not device cards) ═══ -->
+    <section class="section" style="background:#241056;">
+      <div class="container-x">
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-14 lg:items-center">
+          <div class="lg:col-span-7">
+            <h2 class="text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+              Where the service runs
+            </h2>
+            <p class="mt-5 text-base leading-relaxed" style="color:#DDD3F5;">
+              The line is not tied to hardware. One set of credentials works across everything below, so
+              swapping the living room stick for a new one, or watching on a phone in a hotel, needs nothing
+              from us. Live streaming stays capped at one screen at a time.
+            </p>
+
+            <ul class="mt-8 flex flex-wrap gap-2.5">
+              {devices.map((d) => (
+                <li class="inline-flex items-center rounded-full px-4 py-2 text-sm" style="border:1px solid rgba(198,181,238,.22);background:rgba(46,23,112,.7);color:#F1EEFA;">
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div style="border:1px solid #4A2F9E;border-radius:18px;overflow:hidden;background:rgba(46,23,112,.6);">
+              <img
+                src="https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Woman_using_tablet_in_bed_202607200436.webp"
+                alt="Watching an IPTV service on a tablet away from the main television"
+                width={1280}
+                height={720}
+                loading="lazy"
+                decoding="async"
+                sizes="(min-width: 1024px) 460px, calc(100vw - 2rem)"
+                class="w-full h-auto object-cover aspect-video"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FAQ (plain disclosure rows) ═══ -->
+    <section id="faq" class="section" style="background:#1C0B45;">
+      <div class="container-x">
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
+          <div class="lg:col-span-4">
+            <h2 class="text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+              Questions people ask before paying
+            </h2>
+            <p class="mt-5 text-sm leading-relaxed" style="color:#DDD3F5;">
+              Anything not covered here goes to WhatsApp, where a person replies in under 2 minutes during
+              UK hours. Asking before you buy is fine and fairly common.
+            </p>
+            <a
+              href={waLink('Hello, I have a question about the UK IPTV service before I buy.')}
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              class="mt-6 inline-flex items-center gap-2 text-sm font-semibold"
+              style="color:#D3F94F;"
+            >
+              <Icon name="whatsapp" size={16} />
+              Message the support line
+            </a>
+          </div>
+
+          <div class="lg:col-span-8">
+            <div style="border-top:1px solid rgba(198,181,238,.2);">
+              {serviceFaqs.map(({ q, a }) => (
+                <details class="group" style="border-bottom:1px solid rgba(198,181,238,.14);">
+                  <summary class="flex cursor-pointer items-start justify-between gap-4 py-5 list-none">
+                    <span class="text-base font-semibold" style="color:#F1EEFA;">{q}</span>
+                    <span class="shrink-0 mt-1 transition-transform group-open:rotate-180" style="color:#D3F94F;">
+                      <Icon name="chevron-down" size={18} />
+                    </span>
+                  </summary>
+                  <p class="pb-5 pr-8 text-sm leading-relaxed" style="color:#DDD3F5;">{a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CLOSING BAND ═══ -->
+    <section style="background:#4B22AC;">
+      <div class="container-x py-16 sm:py-20">
+        <div class="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
+          <div class="lg:col-span-8">
+            <h2 class="text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+              34,000+ people already run this line
+            </h2>
+            <p class="mt-5 text-base leading-relaxed" style="color:#EDE7FB;max-width:62ch;">
+              UK IPTV BOX has been selling the same IPTV service since 2022, at one-off prices starting at
+              {' '}{site.currencySymbol}14.99, with 50,000+ channels behind a 99.9% uptime figure and 7 days to
+              change your mind. If you would rather test the support before spending anything, start with a
+              message instead of a payment.
+            </p>
+          </div>
+          <div class="lg:col-span-4 flex flex-col gap-3">
+            <a
+              href={waLink('Hello, I would like to start with your UK IPTV service.')}
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-bold"
+              style="background:#D3F94F;color:#241056;"
+            >
+              <Icon name="whatsapp" size={18} />
+              Start on WhatsApp
+            </a>
+            <a
+              href="/pricing"
+              class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold"
+              style="border:1px solid rgba(241,238,250,.35);color:#F1EEFA;"
+            >
+              Compare every plan
+              <Icon name="arrow" size={16} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  details > summary::-webkit-details-marker { display: none; }
+</style>
