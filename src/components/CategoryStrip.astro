@@ -38,7 +38,7 @@ const track = [...categories, ...categories];
               <>
                 <img
                   src={c.img}
-                  alt={'alt' in c ? c.alt : c.label}
+                  alt={i >= categories.length ? '' : ('alt' in c ? c.alt : c.label)}
                   width={680}
                   height={850}
                   loading="lazy"

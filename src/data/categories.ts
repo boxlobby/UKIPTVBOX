@@ -5,7 +5,7 @@ export const categories = [
     title: 'Full UK live TV',
     body: 'All the terrestrial and premium UK channels you already watch, in one clean guide.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Person_watching_TV_news_202607201935%20(1).webp',
-    alt: 'Person watching full UK live TV news channels with an IPTV TRIAL streaming service on TV',
+    alt: 'Person watching full UK live TV news channels on an IPTV UK subscription',
   },
   {
     icon: 'trophy',
@@ -13,7 +13,7 @@ export const categories = [
     title: 'Sports channels in 4K',
     body: 'Never miss a match. Multi-view friendly, low-latency streams on match day.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Friends_watching_TV_football_202607190048.webp',
-    alt: 'Friends watching live football in 4K with an IPTV TRIAL streaming service on TV',
+    alt: 'Friends watching live football in 4K through a premium IPTV service',
   },
   {
     icon: 'film',
@@ -21,7 +21,7 @@ export const categories = [
     title: 'Thousands of movies on demand',
     body: 'Fresh releases and a deep back-catalogue, sorted by genre and year.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Couple_watching_TV_on_couch_202607200432.webp',
-    alt: 'Couple watching movies on the couch with an IPTV TRIAL streaming service on TV',
+    alt: 'Couple watching movies on the couch using an IPTV subscription UK plan',
   },
   {
     icon: 'clapperboard',
@@ -29,7 +29,7 @@ export const categories = [
     title: 'Binge-worthy series library',
     body: 'Full seasons with next-episode auto-play and a watchlist that syncs across devices.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Woman_using_tablet_in_bed_202607200436.webp',
-    alt: 'Woman watching binge-worthy series on a tablet in bed with an IPTV TRIAL streaming service',
+    alt: 'Woman watching binge-worthy series on a tablet in bed with IPTV streaming',
   },
   {
     icon: 'baby',
@@ -45,7 +45,7 @@ export const categories = [
     title: '24/7 UK & world news',
     body: 'BBC, Sky, GB News, CNN and more, always live, always in HD.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Man_watching_football_match_202607190035.webp',
-    alt: 'Man watching live UK and world news channels with an IPTV TRIAL streaming service on TV',
+    alt: 'Man watching live UK and world news channels from a reliable IPTV provider',
   },
   {
     icon: 'globe',
@@ -53,7 +53,7 @@ export const categories = [
     title: 'Documentaries that hook you',
     body: 'History, nature, crime and science, a whole library curated for lazy Sundays.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Elderly_couple_watching_TV_202607200436.webp',
-    alt: 'Elderly couple watching documentaries at home with an IPTV TRIAL streaming service on TV',
+    alt: 'Elderly couple watching documentaries at home with IPTV in the UK',
   },
   {
     icon: 'languages',
@@ -61,7 +61,7 @@ export const categories = [
     title: 'International channels',
     body: 'Arabic, Turkish, Indian, French and more, perfect for the whole family.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Family_sitting_on_sofa_watching_202607190047.webp',
-    alt: 'Family watching international channels together with an IPTV TRIAL streaming service on TV',
+    alt: 'Family watching international channels together on an IPTV UK subscription',
   },
   {
     icon: 'ticket',
@@ -69,7 +69,7 @@ export const categories = [
     title: 'PPV boxing & UFC',
     body: 'Every major fight night included at no extra cost. Just tune in and watch.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/People_watching_fight_on_TV_202607201629%20(1).webp',
-    alt: 'People watching a PPV boxing and UFC fight night with an IPTV TRIAL streaming service on TV',
+    alt: 'People watching a PPV boxing and UFC fight night on 4K IPTV streams',
   },
   {
     icon: 'sparkles',
@@ -77,6 +77,6 @@ export const categories = [
     title: 'Genuine 4K & FHD',
     body: 'High bitrate streams that actually look like 4K on your big screen.',
     img: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/Monitor_displaying_football_pitch_202607190038.webp',
-    alt: 'Monitor displaying a 4K football pitch with an IPTV TRIAL streaming service in FHD and 4K quality',
+    alt: 'Monitor displaying a 4K football pitch with IPTV streaming in FHD and 4K quality',
   },
 ] as const;

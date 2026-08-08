@@ -6,9 +6,9 @@ import Icon from '../components/Icon.astro';
 import PricingCard from '../components/PricingCard.astro';
 import { site, packages, waLink } from '../data/site';
 
-const title = 'IPTV Service UK | 99.9% Uptime, 50,000+ Channels';
+const title = 'Best IPTV Service UK | 99.9% Uptime, 50,000+ Channels';
 const description =
-  'A UK IPTV service with 50,000+ live channels, 99.9% uptime and instant activation. One-off plans from £14.99, no auto-renewal, and a 7-day money-back window.';
+  'The best IPTV service UK viewers rely on: 50,000+ live channels, 99.9% uptime, instant activation. One-off plans from £14.99 with a 7-day refund window.';
 const canonical = `${site.url}/iptv-service-uk/`;
 
 const heroImage =
@@ -134,6 +134,35 @@ const devices = [
   'Enigma2 receiver', 'Windows', 'Mac',
 ];
 
+/* ── Buyer-intent prose ─────────────────────────────────────────── */
+const buyerSections = [
+  {
+    title: 'What Makes the Best IPTV Service UK Viewers Recommend?',
+    body:
+      'Ask ten people to name the best IPTV service and you will get ten answers, most of them based on channel count. Channel count is the least useful number on the page. What actually separates the best IPTV service UK households keep year after year is far more boring: does it hold up at peak time, does somebody answer when it does not, and can you leave without a fight. Judge IPTV service providers on those three questions and the shortlist gets very short very quickly.',
+  },
+  {
+    title: 'How to Compare IPTV Services UK Buyers Actually Shortlist',
+    body:
+      'Most comparisons of IPTV services UK buyers find online are affiliate tables ranked by commission rather than performance. A more honest method takes ten minutes. Ask each provider for their uptime figure. Message the support line before you pay and time the reply. Read the refund terms before you read the sales page. A recommended IPTV service answers all three plainly, in writing. The best IPTV services UK viewers stay with for years are simply the ones that did.',
+  },
+  {
+    title: 'Is This the Best IPTV Service for UK Households?',
+    body:
+      'That depends on what you watch, and we would rather say so than claim otherwise. If you want one dependable line for live sport, films and international channels on a single screen, this is built precisely for that, and it is a strong case for the best IPTV service in UK homes on those terms. If you need four rooms streaming different matches simultaneously, ask about multi-connection pricing before you buy. Being the best UK IPTV service for a specific household is worth more than being an average one for everybody.',
+  },
+  {
+    title: 'Choosing a UK IPTV Service Provider You Can Keep',
+    body:
+      'Switching costs time and money, so it pays to pick an IPTV service provider you can actually stay with. The best UK IPTV service for one household is rarely the best UK IPTV service for another. A sports-led home cares about peak-hour capacity, a film-led home cares about the on-demand catalogue, and an expat household cares about international channels. Work out which one you are before you shortlist anybody. A recommended IPTV service will tell you honestly when you are not its ideal customer, and the best IPTV service in UK homes is simply the one still working in month six.',
+  },
+  {
+    title: 'IPTV or IP TV? Same Service, Different Spelling',
+    body:
+      'You will see it written as IPTV, IP TV and IP-TV, and all three describe the same thing: television delivered over your broadband connection instead of an aerial or a satellite dish. Whichever spelling you searched for, an IP TV service works identically once it is running, a login, an app and a stream. The differences that matter sit in the infrastructure behind it, not the punctuation in front of it.',
+  },
+];
+
 /* ── FAQs (page-specific) ───────────────────────────────────────── */
 const serviceFaqs = [
   {
@@ -167,6 +196,22 @@ const serviceFaqs = [
   {
     q: 'Which payment methods do you take?',
     a: 'Bank transfer, debit and credit card, Apple Pay, Google Pay and crypto. Activation happens once the payment clears, whichever route you use.',
+  },
+  {
+    q: 'Which IPTV service providers should I avoid?',
+    a: 'Anything advertising a lifetime plan for a one-off £5, anything that will not name an uptime figure, and anything with no refund window in writing. Those three filters remove most of the IPTV service providers that quietly fail in week two. A recommended IPTV service publishes all three before you have to ask.',
+  },
+  {
+    q: 'Is this the best IPTV service for UK sports fans?',
+    a: 'That is what the infrastructure is tuned for. Capacity is scaled before a fixture kicks off rather than after the complaints arrive, which is the single thing that decides the best IPTV service in UK sports households. If you mainly watch box sets, the same line works, but the on-demand catalogue matters more to you than our uptime figure does.',
+  },
+  {
+    q: 'Do you claim to be the best UK IPTV service?',
+    a: 'We claim to publish the numbers other providers will not: 99.9% uptime, a sub-2-minute WhatsApp reply during UK hours and a 7-day refund window in writing. Whether that makes it the best UK IPTV service for you depends on what you watch and how many screens you need. Ask us before you pay and we will tell you straight.',
+  },
+  {
+    q: 'What makes the best IPTV service UK viewers stick with?',
+    a: 'Peak-hour stability, a support line that replies during the match rather than the following Tuesday, and no surprise renewal on the card. Channel count barely features once you are actually using it. The best IPTV services are the ones you stop having to think about.',
   },
 ];
 
@@ -272,7 +317,7 @@ const schemaJson = JSON.stringify({
             </span>
 
             <h1 class="mt-5 text-[1.8rem] sm:text-4xl md:text-5xl lg:text-[3.3rem] font-bold leading-[1.12] sm:leading-[1.08]" style="color:#F1EEFA;">
-              An IPTV service you<br class="hidden sm:block" />
+              An IPTV service UK viewers<br class="hidden sm:block" />
               <span class="bg-grad-brand bg-clip-text text-transparent">shouldn't have to babysit</span>
             </h1>
 
@@ -546,8 +591,33 @@ const schemaJson = JSON.stringify({
       </div>
     </section>
 
+    <!-- ═══ BUYER-INTENT PROSE ═══ -->
+    <section id="choosing" class="section" style="background:#1C0B45;">
+      <div class="container-x">
+        <div class="mx-auto max-w-3xl">
+          <h2 class="text-[1.6rem] sm:text-3xl md:text-4xl font-bold leading-tight" style="color:#F1EEFA;">
+            Choosing an IPTV service in the UK
+          </h2>
+          <p class="mt-5 text-base leading-relaxed" style="color:#DDD3F5;">
+            The questions below come up in almost every WhatsApp conversation before somebody buys. They are
+            worth asking of any provider, not just this one.
+          </p>
+
+          {buyerSections.map((s) => (
+            <div class="mt-10">
+              <h3 class="flex items-start gap-3 text-lg sm:text-xl font-bold" style="color:#F1EEFA;">
+                <span class="mt-1.5 inline-block h-5 w-[3px] rounded-sm shrink-0" style="background:#D3F94F;"></span>
+                <span>{s.title}</span>
+              </h3>
+              <p class="mt-3 pl-6 text-base leading-relaxed" style="color:#DDD3F5;">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ FAQ (plain disclosure rows) ═══ -->
-    <section id="faq" class="section" style="background:#1C0B45;">
+    <section id="faq" class="section" style="background:#241056;">
       <div class="container-x">
         <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div class="lg:col-span-4">

@@ -3,7 +3,7 @@ export const steps = [
     n: '01',
     icon: 'card',
     title: 'Choose your plan',
-    lead: 'Pick your UK IPTV subscription',
+    lead: 'Pick your IPTV UK subscription',
     body: 'Pick a 1, 3, 6 or 12-month plan and send us a WhatsApp message. Tell us your device, pay how you like, and that is the whole process. No registration form, no account to create.',
     imgLabel: 'Order screen, R2',
     r2: '',

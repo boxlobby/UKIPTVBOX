@@ -39,4 +39,24 @@ export const faqs = [
     q: 'Is 4K quality available on all channels?',
     a: 'Yes. Premium live channels and the majority of on-demand content are available in 4K UHD. FHD and HD bitrate streams are available automatically for slower broadband connections, keeping playback smooth regardless of your line speed.',
   },
+  {
+    q: 'What makes UKIPTVBOX the best IPTV UK provider?',
+    a: 'We would rather hand you the criteria than the claim. Judge any IPTV UK provider on four things: published uptime, real support reply times, whether the refund window is written down, and whether the full lineup is included on the cheapest plan. UKIPTVBOX runs at 99.9% uptime across UK and EU servers, replies on WhatsApp in under two minutes during UK hours, honours a 7-day refund, and holds nothing back on the £14.99 plan.',
+  },
+  {
+    q: 'How much should IPTV in the UK cost?',
+    a: 'Expect £10 to £20 a month from a credible IPTV provider, dropping to roughly £4 a month across an annual plan. Anything advertised far below that is usually reselling oversold capacity and will buffer when it matters. Our IPTV UK subscription starts at £14.99 for one month and £49.99 for twelve, which works out at £4.17 a month with the complete channel lineup included.',
+  },
+  {
+    q: 'Can I watch IPTV in the UK on more than one TV at a time?',
+    a: 'Each subscription includes one concurrent connection, so you can install the app on every device you own but stream on one screen at a time. Households needing two or three simultaneous IPTV streams can add extra connections at checkout or just ask on WhatsApp. There is no limit on how many devices hold your login details.',
+  },
+  {
+    q: 'Do I need a VPN for IPTV streaming in the UK?',
+    a: 'Not to use the service, though many customers prefer one. A VPN stops your ISP seeing or throttling IPTV streaming traffic, which helps on connections that slow video down during peak evening hours, and it adds a layer of privacy. If you already run a VPN, keep it on a UK or EU endpoint for the cleanest routing to our servers.',
+  },
+  {
+    q: 'What is included with a premium IPTV subscription from UKIPTVBOX?',
+    a: 'Every plan is the same premium IPTV package: 50,000+ live channels, 200,000+ movies and series on demand, full EPG, 4K where the source supports it, built-in VPN protection and multi-device compatibility. Unlike most IPTV services we do not operate tiers, so the one-month plan carries exactly the same content as the twelve-month plan.',
+  },
 ] as const;

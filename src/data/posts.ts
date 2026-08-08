@@ -63,7 +63,7 @@ export const posts: BlogPost[] = [
   {
     slug: 'internet-protocol-television',
     // Title tag renders as "<title> | UK IPTV BOX" = 58 chars (target 50–60).
-    title: 'Internet Protocol Television: How IPTV Works',
+    title: 'IPTV Explained: How Internet Protocol TV Works',
     // Meta description: 154 chars (target 150–160).
     excerpt:
       'Internet Protocol Television explained. How IPTV works, how packets carry a channel to your telly, unicast vs multicast, and the broadband speed you need.',
@@ -132,9 +132,9 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'is-iptv-legal-uk',
-    title: 'Is IPTV Legal in the UK? 2026 Plain-English Guide',
+    title: 'Is IPTV Legal in the UK? A 2026 Guide',
     excerpt:
-      'A clear, up-to-date guide to IPTV legality in the UK: what is legal, what isn\'t, what Ofcom actually says, and how to pick a provider that keeps you on the right side of the law.',
+      'A clear guide to IPTV legality in the UK: what is legal, what isn\'t, what Ofcom actually says, and how to pick an IPTV provider that keeps you safe.',
     category: 'Legal',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/IPTV_legal_UK_explainer_202607201513.webp',
     imageAlt: 'Is IPTV legal in the UK 2026 plain-English guide for UKIPTVBOX subscribers',
@@ -177,7 +177,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'cheap-iptv-uk-scam-or-legit',
-    title: 'Cheap IPTV UK: Scam or Legit? 2026 Red Flag Guide',
+    title: 'Cheap IPTV UK: Scam or Legit? Red Flags',
     excerpt:
       'Cheap IPTV UK is littered with £5 lifetime scams. Spot the red flags, find genuine value, and see why a monitored 30-day IPTV trial is the safer choice.',
     category: 'Buying Guide',
@@ -248,7 +248,7 @@ export const posts: BlogPost[] = [
     slug: 'top-5-iptv-boxes-uk-2026',
     title: 'Top 5 IPTV Boxes UK 2026: Ranked & Tested',
     excerpt:
-      'The five best IPTV boxes to buy in the UK for 2026, ranked on 4K playback, app support, EPG quality and value. Covers the Formuler Z11 Pro Max, Nvidia Shield, Fire TV Stick 4K Max and more.',
+      'The five best IPTV boxes to buy in the UK for 2026, ranked on 4K playback, app support, EPG quality and value. Formuler Z11 Pro Max, Nvidia Shield and more.',
     category: 'Buying Guide',
     image: 'https://pub-a911d0797db04b879a41ba8f0cdf2db6.r2.dev/IPTV_boxes_ranked_and_tested_202607201510.webp',
     imageAlt: 'Top 5 IPTV boxes UK 2026 ranked and tested: best UK IPTV hardware for UKIPTVBOX',

@@ -4,7 +4,7 @@ export const showcase = [
     title: 'Full UK live TV',
     body: 'All the terrestrial and premium UK channels you already watch, in one clean guide.',
     r2: '',
-    alt: 'Full UK live TV channels available on IPTV subscription',
+    alt: 'Full UK live TV channels available on an IPTV UK subscription',
   },
   {
     label: 'Sports',

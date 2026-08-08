@@ -2,12 +2,12 @@ export const features = [
   {
     icon: 'tv',
     title: '50,000+ Live Channels',
-    body: "One of the largest UK IPTV channel lineups available. Every major feed sits inside a single guide, sorted by how people actually browse rather than dumped in one long alphabetical list.",
+    body: "One of the largest IPTV UK channel lineups available. Every major feed sits inside a single guide, sorted by how people actually browse rather than dumped in one long alphabetical list.",
   },
   {
     icon: 'sparkles',
     title: 'True 4K UHD & FHD',
-    body: 'Premium UK IPTV channels stream in native 4K UHD. If your connection dips, the stream drops to FHD or HD automatically and climbs back up without you having to touch a setting.',
+    body: 'Premium IPTV UK channels stream in native 4K UHD. If your connection dips, the stream drops to FHD or HD automatically and climbs back up without you having to touch a setting.',
   },
   {
     icon: 'zap',
