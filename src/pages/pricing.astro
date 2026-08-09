@@ -5,10 +5,39 @@ import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import { site, packages, waLink, waLinkPackage } from '../data/site';
 
-const title = 'IPTV Subscription UK: Plans from £14.99 | UKIPTVBOX';
+const title = 'IPTV Subscription UK | Buy IPTV Plans from £14.99';
 const description =
-  'Compare every IPTV UK subscription plan from £14.99. 50,000+ live channels, 200,000+ movies & series, 4K quality, instant activation. No contract.';
-const canonical = `${site.url}/pricing`;
+  'Compare every IPTV subscription UK plan before you buy IPTV: from £14.99, 50,000+ live channels, 4K quality, instant activation. No contract, no auto-renewal.';
+const canonical = `${site.url}/pricing/`;
+
+/* ── Buyer-intent prose (transactional cluster) ─────────────────── */
+const buyingSections = [
+  {
+    title: 'How to Buy IPTV in the UK',
+    body:
+      'There is no checkout queue and no account to create first. Message us on WhatsApp saying which plan you want, pay by bank transfer, debit or credit card, Apple Pay, Google Pay or crypto, and your login lands back on the same thread as soon as the payment clears. Most people buy IPTV UK plans and are watching inside ten minutes. Nothing about the purchase stores a card, so an IPTV purchase here ends when the plan ends.',
+  },
+  {
+    title: 'What Should IPTV Subscriptions Cost in the UK?',
+    body:
+      'Roughly £10 to £20 a month bought monthly, falling to about £4 a month across a year. That is the honest range for IPTV subscriptions UK buyers should expect from anyone running their own servers. Ours is £14.99 for one month and £49.99 for twelve, which works out at £4.17 a month. Anything advertised dramatically below that is not a bargain, it is a reseller pricing for churn.',
+  },
+  {
+    title: 'Is Cheap IPTV Worth It?',
+    body:
+      'Usually not, and we would rather say so on our own pricing page. The cheapest IPTV UK listings tend to be £5 lifetime deals on forums, and the maths behind them does not work: servers, bandwidth and support all cost money every month, so a one-off fiver buys you a line that is oversold from day one. Cheap IPTV UK offers fail in the same predictable way, at peak time, with nobody answering. Cheap UK IPTV sellers rely on you not noticing until the refund window has shut. A cheap IPTV subscription that dies in week three costs more than a fair one that does not.',
+  },
+  {
+    title: 'Buying IPTV Without the Usual Traps',
+    body:
+      'Three things are worth checking before you purchase IPTV anywhere. Is the renewal price written down, or only the introductory one? Is there a refund window you can point at in writing? And will somebody reply on a Saturday night, when live TV actually matters? Any subscription IPTV UK seller worth paying answers all three without hedging. We publish the numbers on our IPTV service page rather than making you ask.',
+  },
+  {
+    title: 'Which IPTV Sub Length Makes Sense?',
+    body:
+      'If you have never used the service, start with one month. It is the most expensive way to buy per month and the cheapest way to find out whether it works on your telly, your broadband and your habits. If you already know it works, the 12-month plan is the best IPTV subscription value we sell at £4.17 a month. The 6-month plan sits in between for households that want a longer IPTV sub without committing to a full year.',
+  },
+];
 
 const pricingFaqs = [
   {
@@ -127,7 +156,7 @@ const guarantees = [
         </span>
 
         <h1 class="mt-5 text-4xl sm:text-5xl md:text-6xl font-bold leading-tight" style="color:#F1EEFA;max-width:820px;margin-left:auto;margin-right:auto;">
-          Best UK IPTV Subscription<br />
+          Best IPTV Subscription UK<br />
           <span style="background:linear-gradient(135deg,#E4FB8A,#D3F94F 55%,#B8E437 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Plans from £14.99</span>
         </h1>
 
@@ -515,6 +544,38 @@ const guarantees = [
               </div>
             </details>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ BUYING GUIDE (transactional prose) ═══ -->
+    <section id="buying" class="section" style="background:#EDEAF5;">
+      <div class="container-x">
+        <div class="mx-auto max-w-3xl">
+          <h2 class="text-3xl sm:text-4xl font-bold" style="color:#241056;">
+            Buying an IPTV Subscription in the UK
+          </h2>
+          <p class="mt-5 text-base leading-relaxed" style="color:#3B2A6B;">
+            What the plans above cost is only half the question. The rest is how you buy, what the market
+            actually charges, and which corners are worth cutting. These come up before almost every purchase.
+          </p>
+
+          {buyingSections.map((s) => (
+            <div class="mt-10">
+              <h3 class="flex items-start gap-3 text-lg sm:text-xl font-bold" style="color:#241056;">
+                <span class="mt-1.5 inline-block h-5 w-[3px] rounded-sm shrink-0" style="background:#5B2EBE;"></span>
+                <span>{s.title}</span>
+              </h3>
+              <p class="mt-3 pl-6 text-base leading-relaxed" style="color:#3B2A6B;">{s.body}</p>
+            </div>
+          ))}
+
+          <p class="mt-10 pl-6 text-base leading-relaxed" style="color:#3B2A6B;">
+            Still deciding? The <a href="/iptv-service-uk/" style="color:#5B2EBE;text-decoration:underline;">IPTV service page</a>
+            sets out the uptime, reply-time and refund figures behind every plan, and the
+            <a href="/blog/iptv-subscription-uk-buyers-guide/" style="color:#5B2EBE;text-decoration:underline;">IPTV subscription UK buyer's guide</a>
+            walks through what to check before paying anyone.
+          </p>
         </div>
       </div>
     </section>
