@@ -1,0 +1,217 @@
+---
+/*
+  Checkout step 2: confirmation.
+
+  The order is read from sessionStorage, written by /checkout/. A visitor with
+  no stored order gets a friendly generic version rather than a bounce: they
+  have almost certainly just ordered, and sending them back to /pricing/ would
+  read as "your order vanished".
+
+  Nothing has been charged at this point. The whole job of this page is to say
+  what happens next: we message them on WhatsApp or email within 10 to 30
+  minutes to confirm the order and take payment, then send the login details.
+*/
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import CheckoutSteps from '../../components/CheckoutSteps.astro';
+import { site, waLink } from '../../data/site';
+
+const title = 'Thank you for your order | UK IPTV BOX';
+const description =
+  'Your UK IPTV BOX order is received. We will contact you on WhatsApp or email within 10 to 30 minutes to confirm your order and complete payment.';
+
+const timeline = [
+  {
+    icon: 'check',
+    title: 'Order received',
+    body: 'Your details are with our team. Nothing has been charged, and there is nothing else for you to fill in.',
+  },
+  {
+    icon: 'whatsapp',
+    title: 'We contact you, 10 to 30 minutes',
+    body: 'A real person messages you on WhatsApp or emails you to confirm the plan and send secure payment details.',
+  },
+  {
+    icon: 'zap',
+    title: 'Login details, then setup help',
+    body: 'As soon as the payment clears, your username, password and playlist arrive on the same thread, and we walk you through the install on your device.',
+  },
+];
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={`${site.url}/checkout/confirmed/`}
+  noIndex={true}
+  includeSchema={false}
+>
+  <Header />
+
+  <main id="main">
+    <section class="section grid-bg">
+      <div class="container-x">
+        <CheckoutSteps current={2} />
+
+        <div class="mx-auto mt-10 max-w-2xl text-center md:mt-12">
+          <span class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-success text-white">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+
+          <h1 class="mt-6 text-3xl font-bold text-text-primary sm:text-4xl md:text-[2.75rem]">
+            Thank you<span data-thanks-name></span>, your order is
+            <span style="background:linear-gradient(135deg,#E4FB8A,#D3F94F 55%,#B8E437 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">in</span>
+          </h1>
+
+          <p class="mt-4 text-[15px] leading-relaxed text-text-muted sm:text-lg">
+            We will reach out to you by
+            <strong class="font-semibold text-text-primary">email or WhatsApp within 10 to 30 minutes</strong>
+            to confirm your order and take payment, and then send your login details. You do not need to do
+            anything else, and you do not need to keep this page open.
+          </p>
+
+          <!-- Order reference, when we have one to show. -->
+          <div class="mx-auto mt-7 hidden max-w-sm rounded-2xl border border-border-subtle bg-elevated px-5 py-4" data-order-box>
+            <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-text-muted">Your order number</p>
+            <p class="mt-1.5 font-display text-3xl font-bold tabular-nums text-brand" data-order-number>—</p>
+            <p class="mt-2 text-xs leading-snug text-text-muted" data-order-meta>
+              Quote this if you message us about your order.
+            </p>
+          </div>
+        </div>
+
+        <!-- What happens now -->
+        <div class="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-3">
+          {timeline.map((item, i) => (
+            <div class="card flex flex-col p-5 sm:p-6">
+              <div class="flex items-center gap-3">
+                <span
+                  class:list={[
+                    'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl',
+                    i === 0 ? 'bg-success text-white' : 'bg-brand text-[#241056]',
+                  ]}
+                >
+                  <Icon name={item.icon} size={18} />
+                </span>
+                <p class="text-sm font-bold leading-snug text-text-primary">{item.title}</p>
+              </div>
+              <p class="mt-3.5 text-[13px] leading-relaxed text-text-muted">{item.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Support -->
+        <div class="mx-auto mt-10 max-w-3xl rounded-3xl p-6 text-center sm:p-8" style="background:linear-gradient(135deg,#4B22AC,#5B2EBE);">
+          <h2 class="text-xl font-semibold text-text-primary sm:text-2xl">Would you rather message us now?</h2>
+          <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-text-muted">
+            Our team is on WhatsApp 24/7. Open a chat with your order number and we can confirm the order and
+            get you paid up and watching straight away, rather than waiting for us to reach you.
+          </p>
+          <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={waLink('Hello, I have just placed an order on ukiptvbox.com.')}
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              class="btn-primary w-full text-base sm:w-auto sm:px-7"
+              data-wa-link
+            >
+              <Icon name="whatsapp" size={18} />
+              Message us on WhatsApp
+            </a>
+            <a href="/installation-guides/" class="btn-secondary w-full text-base sm:w-auto sm:px-7">
+              Read the setup guides
+              <Icon name="arrow" size={16} />
+            </a>
+          </div>
+        </div>
+
+        <p class="mx-auto mt-8 max-w-2xl text-center text-[13px] leading-relaxed text-text-muted">
+          Nothing has been charged yet: payment is arranged with you directly once we have confirmed the
+          order. Every plan is a one-off charge with no auto-renewal, and it is covered by our
+          {' '}<a href="/refund/" class="font-semibold text-brand underline underline-offset-4">7-day money-back guarantee</a>.
+          Not heard from us after 30 minutes? Message us on
+          {' '}<a href={waLink()} target="_blank" rel="nofollow noopener noreferrer" class="font-semibold text-brand underline underline-offset-4">WhatsApp</a>
+          {' '}or email {site.supportEmail}.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    /*
+      Step 2: personalise where we can, degrade quietly where we cannot.
+
+      The stored record is untrusted input, so it goes through loadOrder, which
+      revalidates it and takes the plan label and price from the catalogue. A
+      record that fails simply leaves the generic wording in place, which reads
+      correctly on its own.
+
+      The order is cleared once rendered. Leaving it in place means a customer
+      who later starts a second order would briefly see the previous one.
+    */
+    import { clearOrder, loadOrder, orderSummaryMessage } from '../../data/checkout';
+
+    const order = loadOrder();
+
+    if (order) {
+      const first = order.fullName.split(' ')[0];
+      const nameEl = document.querySelector<HTMLElement>('[data-thanks-name]');
+      if (nameEl && first) nameEl.textContent = `, ${first}`;
+
+      const box = document.querySelector<HTMLElement>('[data-order-box]');
+      const num = document.querySelector<HTMLElement>('[data-order-number]');
+      const meta = document.querySelector<HTMLElement>('[data-order-meta]');
+      if (num) num.textContent = `#${order.number}`;
+      if (meta) {
+        meta.textContent = `${order.planLabel} plan · £${order.price.toFixed(2)} · ${order.deviceLabel} · quote this number if you message us.`;
+      }
+      box?.classList.remove('hidden');
+
+      /* Pre-fill the WhatsApp message so support has the order without asking. */
+      const wa = document.querySelector<HTMLAnchorElement>('[data-wa-link]');
+      if (wa) {
+        wa.href = `${wa.href.split('?')[0]}?text=${encodeURIComponent(orderSummaryMessage(order))}`;
+      }
+
+      /*
+        Lead event for GA4 / GTM.
+
+        Deliberately not `purchase`: no money has changed hands at this point,
+        and reporting a sale here would inflate every downstream conversion
+        number against orders that were never paid for.
+
+        transaction_id is the order number, which is what makes this safe to
+        push on render — a refresh, a back-button return or a second tab cannot
+        double-count an id that has already been seen.
+
+        `value` is re-derived from the plan catalogue by validateOrder, never
+        read from sessionStorage, so a customer editing their stored record
+        cannot report a £500 lead.
+      */
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'generate_lead',
+        ecommerce: {
+          transaction_id: order.number,
+          value: order.price,
+          currency: 'GBP',
+          items: [
+            {
+              item_id: order.planId,
+              item_name: order.planLabel,
+              price: order.price,
+              quantity: 1,
+            },
+          ],
+        },
+      });
+    }
+
+    /* Cleared whether or not it parsed: a record that failed validation is
+       exactly the one that should not survive into the next visit. */
+    clearOrder();
+  </script>
+</BaseLayout>

@@ -1,0 +1,16 @@
+# Local values for `wrangler pages dev dist`. Copy to .dev.vars, which is
+# gitignored. The real values live in the Cloudflare Pages dashboard under
+# Settings -> Environment variables, added as ENCRYPTED secrets, not here.
+#
+# These are the SAME two values bestiptvbox.ca uses: both sites post into one
+# Telegram chat, and each message names the site it came from.
+#
+# See functions/api/order.ts for what each one does.
+
+# From @BotFather: /newbot, then copy the token it gives you.
+TELEGRAM_BOT_TOKEN="123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# The chat to post into. Add the bot to the group, send it a message, then read
+# the id from https://api.telegram.org/bot<TOKEN>/getUpdates — group ids are
+# negative, e.g. -1001234567890.
+TELEGRAM_CHAT_ID="-1001234567890"

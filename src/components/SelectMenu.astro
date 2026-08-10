@@ -1,0 +1,534 @@
+---
+/*
+  A dropdown drawn entirely in site styles.
+
+  A native <select> is the better control in almost every way — free keyboard
+  handling, free mobile wheel picker — but its popup is painted by the OS and
+  takes no CSS, which on a dark page means a white system menu. So this replaces
+  it with the ARIA combobox/listbox pattern and reimplements the parts the
+  browser was giving us: roving focus, type-ahead, Home/End, Escape,
+  click-outside, and scrolling the active option into view.
+
+  The value lives in a hidden input so the surrounding form reads it the same
+  way it reads any other field, and every selection dispatches a `change` event
+  on that input, so validation wiring does not need to know this is custom.
+
+  With scripting off the trigger is inert. That is acceptable here and nowhere
+  else: the checkout submit handler is JS-driven too, and /checkout/ carries a
+  <noscript> pointing at WhatsApp.
+*/
+import Icon from './Icon.astro';
+
+export interface Option {
+  value: string;
+  label: string;
+  /** Emoji flag, shown before the label. No SVG. */
+  flag?: string;
+  /** Trailing detail, e.g. "+44". Also what `compact` shows in the closed state. */
+  meta?: string;
+  /** Options sharing a group get one heading above the first of them. */
+  group?: string;
+}
+
+export interface Props {
+  id: string;
+  name: string;
+  options: Option[];
+  /** Preselected value. Omit for a placeholder state. */
+  value?: string;
+  placeholder?: string;
+  /** Adds a filter box. Worth it past ~15 options. */
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  /** Narrow trigger showing only the flag and `meta`. For the phone code picker. */
+  compact?: boolean;
+  /** id of the visible <label>, so the trigger is named by it. */
+  labelledBy?: string;
+  ariaLabel?: string;
+  /** ids of hint/error text, so a screen reader hears the validation message. */
+  describedBy?: string;
+}
+
+const {
+  id,
+  name,
+  options,
+  value = '',
+  placeholder = 'Select an option',
+  searchable = false,
+  searchPlaceholder = 'Search',
+  compact = false,
+  labelledBy,
+  ariaLabel,
+  describedBy,
+} = Astro.props;
+
+const selected = options.find((o) => o.value === value);
+
+/* Group headings are emitted when the group changes, so the caller controls
+   ordering by ordering `options`, not by nesting them. */
+let lastGroup: string | undefined;
+const rows = options.map((o) => {
+  const heading = o.group && o.group !== lastGroup ? o.group : null;
+  lastGroup = o.group;
+  return { option: o, heading };
+});
+---
+<div
+  class:list={['menu', compact && 'menu-compact']}
+  data-menu
+  data-menu-searchable={searchable ? '' : undefined}
+>
+  <button
+    type="button"
+    id={`${id}-trigger`}
+    class="menu-trigger"
+    role="combobox"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-controls={`${id}-listbox`}
+    aria-label={ariaLabel}
+    aria-labelledby={labelledBy ? `${labelledBy} ${id}-trigger` : undefined}
+    aria-describedby={describedBy}
+    data-menu-trigger
+  >
+    {compact ? (
+      <>
+        <span class="menu-flag" data-menu-flag>{selected?.flag ?? ''}</span>
+        <span class="menu-face" data-menu-face>{selected?.meta ?? placeholder}</span>
+      </>
+    ) : (
+      <span
+        class:list={['menu-face', !selected && 'menu-face-empty']}
+        data-menu-face
+      >{selected?.label ?? placeholder}</span>
+    )}
+    <span class="menu-chevron" aria-hidden="true"><Icon name="chevron-down" size={17} /></span>
+  </button>
+
+  <div class="menu-panel" data-menu-panel hidden>
+    {searchable && (
+      <div class="menu-search">
+        <input
+          type="text"
+          class="menu-search-input"
+          placeholder={searchPlaceholder}
+          aria-label={searchPlaceholder}
+          autocomplete="off"
+          data-menu-search
+        />
+      </div>
+    )}
+
+    <ul
+      id={`${id}-listbox`}
+      class="menu-list"
+      role="listbox"
+      aria-label={ariaLabel ?? placeholder}
+      data-menu-list
+    >
+      {rows.map(({ option, heading }) => (
+        <>
+          {heading && <li class="menu-group" role="presentation" data-menu-group>{heading}</li>}
+          <li
+            id={`${id}-opt-${option.value}`}
+            class="menu-option"
+            role="option"
+            aria-selected={option.value === value ? 'true' : 'false'}
+            data-menu-option
+            data-value={option.value}
+            data-label={option.label}
+            data-flag={option.flag ?? ''}
+            data-meta={option.meta ?? ''}
+          >
+            {option.flag && <span class="menu-flag" aria-hidden="true">{option.flag}</span>}
+            <span class="menu-label">{option.label}</span>
+            {option.meta && <span class="menu-meta">{option.meta}</span>}
+            <span class="menu-tick" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+          </li>
+        </>
+      ))}
+    </ul>
+
+    <p class="menu-empty" data-menu-empty hidden>No match. Try another spelling.</p>
+  </div>
+
+  <input type="hidden" id={id} name={name} value={value} data-menu-input />
+</div>
+
+<script>
+  /*
+    One delegated controller for every [data-menu] on the page. Astro bundles a
+    component's <script> once no matter how many times the component renders,
+    so this must not assume a single instance.
+  */
+  type MenuRefs = {
+    root: HTMLElement;
+    trigger: HTMLButtonElement;
+    panel: HTMLElement;
+    list: HTMLElement;
+    input: HTMLInputElement;
+    face: HTMLElement;
+    flag: HTMLElement | null;
+    search: HTMLInputElement | null;
+    empty: HTMLElement | null;
+  };
+
+  const refs = (root: HTMLElement): MenuRefs | null => {
+    const trigger = root.querySelector<HTMLButtonElement>('[data-menu-trigger]');
+    const panel = root.querySelector<HTMLElement>('[data-menu-panel]');
+    const list = root.querySelector<HTMLElement>('[data-menu-list]');
+    const input = root.querySelector<HTMLInputElement>('[data-menu-input]');
+    const face = root.querySelector<HTMLElement>('[data-menu-face]');
+    if (!trigger || !panel || !list || !input || !face) return null;
+    return {
+      root,
+      trigger,
+      panel,
+      list,
+      input,
+      face,
+      flag: root.querySelector<HTMLElement>('[data-menu-flag]'),
+      search: root.querySelector<HTMLInputElement>('[data-menu-search]'),
+      empty: root.querySelector<HTMLElement>('[data-menu-empty]'),
+    };
+  };
+
+  /** Options not filtered out by the search box. */
+  const visibleOptions = (m: MenuRefs) =>
+    Array.from(m.list.querySelectorAll<HTMLElement>('[data-menu-option]')).filter((el) => !el.hidden);
+
+  const setActive = (m: MenuRefs, el: HTMLElement | null) => {
+    m.list.querySelectorAll('[data-menu-option]').forEach((o) => o.classList.remove('is-active'));
+    if (!el) {
+      m.trigger.removeAttribute('aria-activedescendant');
+      return;
+    }
+    el.classList.add('is-active');
+    m.trigger.setAttribute('aria-activedescendant', el.id);
+    /* `nearest` keeps the list still when the option is already on screen. */
+    el.scrollIntoView({ block: 'nearest' });
+  };
+
+  const activeOption = (m: MenuRefs) => m.list.querySelector<HTMLElement>('[data-menu-option].is-active');
+
+  const selectedOption = (m: MenuRefs) =>
+    m.list.querySelector<HTMLElement>('[data-menu-option][aria-selected="true"]');
+
+  const applyFilter = (m: MenuRefs, query: string) => {
+    const q = query.trim().toLowerCase();
+    let shown = 0;
+
+    m.list.querySelectorAll<HTMLElement>('[data-menu-option]').forEach((el) => {
+      /* Matching the meta too means "+44" finds the United Kingdom. */
+      const hay = `${el.dataset.label ?? ''} ${el.dataset.meta ?? ''}`.toLowerCase();
+      const hit = !q || hay.includes(q);
+      el.hidden = !hit;
+      if (hit) shown += 1;
+    });
+
+    /* A group heading with nothing under it is noise. */
+    m.list.querySelectorAll<HTMLElement>('[data-menu-group]').forEach((heading) => {
+      let next = heading.nextElementSibling as HTMLElement | null;
+      let any = false;
+      while (next && !next.hasAttribute('data-menu-group')) {
+        if (!next.hidden) { any = true; break; }
+        next = next.nextElementSibling as HTMLElement | null;
+      }
+      heading.hidden = !any;
+    });
+
+    if (m.empty) m.empty.hidden = shown > 0;
+    setActive(m, visibleOptions(m)[0] ?? null);
+  };
+
+  const close = (m: MenuRefs, focusTrigger = true) => {
+    if (m.panel.hidden) return;
+    m.panel.hidden = true;
+    m.trigger.setAttribute('aria-expanded', 'false');
+    m.trigger.removeAttribute('aria-activedescendant');
+    if (focusTrigger) m.trigger.focus();
+  };
+
+  const closeAll = (except?: MenuRefs) => {
+    document.querySelectorAll<HTMLElement>('[data-menu]').forEach((root) => {
+      if (except && root === except.root) return;
+      const m = refs(root);
+      if (m) close(m, false);
+    });
+  };
+
+  const open = (m: MenuRefs) => {
+    if (!m.panel.hidden) return;
+    closeAll(m);
+    m.panel.hidden = false;
+    m.trigger.setAttribute('aria-expanded', 'true');
+
+    if (m.search) {
+      m.search.value = '';
+      applyFilter(m, '');
+    }
+    setActive(m, selectedOption(m) ?? visibleOptions(m)[0] ?? null);
+
+    /* Focus stays on the trigger (or moves to the search box) and the active
+       option is tracked with aria-activedescendant, which is what lets one
+       keydown handler drive the whole list. */
+    if (m.search) m.search.focus();
+  };
+
+  const choose = (m: MenuRefs, el: HTMLElement) => {
+    const value = el.dataset.value ?? '';
+    if (m.input.value !== value) {
+      m.input.value = value;
+      /* Bubbles, so the page's validation wiring treats this like any field. */
+      m.input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    m.list.querySelectorAll('[data-menu-option]').forEach((o) => o.setAttribute('aria-selected', 'false'));
+    el.setAttribute('aria-selected', 'true');
+
+    const compact = m.root.classList.contains('menu-compact');
+    m.face.textContent = compact ? el.dataset.meta ?? '' : el.dataset.label ?? '';
+    m.face.classList.remove('menu-face-empty');
+    if (m.flag) m.flag.textContent = el.dataset.flag ?? '';
+
+    close(m);
+  };
+
+  const move = (m: MenuRefs, delta: number) => {
+    const opts = visibleOptions(m);
+    if (!opts.length) return;
+    const current = activeOption(m);
+    const i = current ? opts.indexOf(current) : -1;
+    const next = Math.min(opts.length - 1, Math.max(0, i + delta));
+    setActive(m, opts[next]);
+  };
+
+  /* --- Wiring ------------------------------------------------------------ */
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    const trigger = target.closest<HTMLElement>('[data-menu-trigger]');
+    if (trigger) {
+      const m = refs(trigger.closest<HTMLElement>('[data-menu]')!);
+      if (m) (m.panel.hidden ? open : close)(m);
+      return;
+    }
+
+    const option = target.closest<HTMLElement>('[data-menu-option]');
+    if (option) {
+      const m = refs(option.closest<HTMLElement>('[data-menu]')!);
+      if (m) choose(m, option);
+      return;
+    }
+
+    /* Anywhere else, including another menu's trigger handled above. */
+    if (!target.closest('[data-menu]')) closeAll();
+  });
+
+  document.addEventListener('input', (e) => {
+    const search = (e.target as HTMLElement | null)?.closest<HTMLElement>('[data-menu-search]');
+    if (!search) return;
+    const m = refs(search.closest<HTMLElement>('[data-menu]')!);
+    if (m) applyFilter(m, (search as HTMLInputElement).value);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const root = (e.target as HTMLElement | null)?.closest<HTMLElement>('[data-menu]');
+    if (!root) return;
+    const m = refs(root);
+    if (!m) return;
+
+    const isOpen = !m.panel.hidden;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        if (!isOpen) open(m);
+        else move(m, 1);
+        return;
+      case 'ArrowUp':
+        e.preventDefault();
+        if (!isOpen) open(m);
+        else move(m, -1);
+        return;
+      case 'Home':
+        if (!isOpen) return;
+        e.preventDefault();
+        setActive(m, visibleOptions(m)[0] ?? null);
+        return;
+      case 'End': {
+        if (!isOpen) return;
+        e.preventDefault();
+        const opts = visibleOptions(m);
+        setActive(m, opts[opts.length - 1] ?? null);
+        return;
+      }
+      case 'Enter':
+        if (!isOpen) {
+          e.preventDefault();
+          open(m);
+          return;
+        }
+        e.preventDefault();
+        {
+          const active = activeOption(m);
+          if (active) choose(m, active);
+        }
+        return;
+      case ' ':
+        /* Space types a space in the search box; only the trigger toggles. */
+        if (e.target === m.trigger) {
+          e.preventDefault();
+          isOpen ? close(m) : open(m);
+        }
+        return;
+      case 'Escape':
+        if (!isOpen) return;
+        e.preventDefault();
+        close(m);
+        return;
+      case 'Tab':
+        /* Let focus leave naturally, but never leave a panel hanging open. */
+        if (isOpen) close(m, false);
+        return;
+      default:
+        break;
+    }
+
+    /* Type-ahead on an unsearchable menu, matching native <select>. */
+    if (!m.search && e.key.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      if (!isOpen) open(m);
+      const char = e.key.toLowerCase();
+      const hit = visibleOptions(m).find((o) => (o.dataset.label ?? '').toLowerCase().startsWith(char));
+      if (hit) setActive(m, hit);
+    }
+  });
+
+  /*
+    Hovering tracks the keyboard's notion of "active", or the two fight over the
+    highlight.
+
+    This deliberately listens for `mousemove`, not `mouseover`. Arrowing through
+    the list scrolls it, and scrolling under a stationary cursor fires
+    `mouseover` on whatever slides beneath, which would drag the highlight back
+    to the pointer on every keypress. `mousemove` only fires when the pointer
+    genuinely moves.
+
+    The coordinate check is belt and braces: some browsers emit a mousemove with
+    an unchanged position immediately after a scroll.
+  */
+  let lastX = -1;
+  let lastY = -1;
+
+  document.addEventListener('mousemove', (e) => {
+    if (e.clientX === lastX && e.clientY === lastY) return;
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    const option = (e.target as HTMLElement | null)?.closest<HTMLElement>('[data-menu-option]');
+    if (!option) return;
+    const m = refs(option.closest<HTMLElement>('[data-menu]')!);
+    if (m) setActive(m, option);
+  });
+</script>
+
+<style>
+  .menu { @apply relative; }
+
+  /* --- Trigger ---------------------------------------------------------- */
+
+  .menu-trigger {
+    @apply flex w-full items-center gap-2 rounded-xl border border-border-subtle bg-subtle px-4 text-left text-[15px] font-medium text-text-primary transition-colors;
+    min-height: 50px;
+  }
+  .menu-trigger:hover { @apply border-accent/50; }
+  .menu-trigger[aria-expanded='true'],
+  .menu-trigger:focus-visible {
+    @apply border-brand outline-none;
+    box-shadow: 0 0 0 3px rgba(211, 249, 79, 0.18);
+  }
+
+  .menu-compact .menu-trigger { @apply px-2.5 sm:px-3; }
+
+  .menu-face { @apply min-w-0 flex-1 truncate; }
+  .menu-face-empty { color: #A395CC; @apply font-normal; }
+  .menu-compact .menu-face { @apply flex-none font-semibold; }
+
+  .menu-flag { @apply shrink-0 text-[17px] leading-none; }
+
+  .menu-chevron { @apply ml-auto shrink-0 transition-transform duration-200; color: #A395CC; }
+  .menu-trigger[aria-expanded='true'] .menu-chevron { @apply -rotate-180; }
+
+  /* --- Panel ------------------------------------------------------------- */
+
+  .menu-panel {
+    @apply absolute left-0 top-[calc(100%+6px)] z-40 w-full overflow-hidden rounded-2xl border border-border-subtle bg-elevated;
+    box-shadow: 0 18px 40px -12px rgba(9, 3, 26, 0.75);
+    animation: menu-in 140ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* The compact trigger is far narrower than its own options need. */
+  .menu-compact .menu-panel {
+    @apply w-[286px];
+    max-width: calc(100vw - 2.5rem);
+  }
+
+  @keyframes menu-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .menu-panel { animation: none; }
+    .menu-chevron { @apply transition-none; }
+  }
+
+  .menu-search { @apply border-b border-border-subtle p-2; }
+  .menu-search-input {
+    @apply w-full rounded-lg border border-border-subtle bg-subtle px-3 py-2 text-[15px] font-medium text-text-primary;
+  }
+  .menu-search-input::placeholder { @apply font-normal; color: #A395CC; }
+  .menu-search-input:focus { @apply border-brand outline-none; }
+
+  .menu-list {
+    @apply max-h-64 overflow-y-auto overscroll-contain py-1.5;
+    /* A slim scrollbar reads as part of the panel rather than the OS. */
+    scrollbar-width: thin;
+    scrollbar-color: #4A2F9E transparent;
+  }
+  .menu-list::-webkit-scrollbar { width: 8px; }
+  .menu-list::-webkit-scrollbar-thumb {
+    background-color: #4A2F9E;
+    border-radius: 999px;
+    border: 2px solid #2E1770;
+  }
+
+  .menu-group {
+    @apply px-3.5 pb-1 pt-2.5 text-[10px] font-bold uppercase tracking-[0.14em];
+    color: #A395CC;
+  }
+
+  .menu-option {
+    @apply flex cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-[15px] leading-snug text-text-primary;
+  }
+  .menu-option .menu-label { @apply min-w-0 flex-1 truncate; }
+  .menu-option .menu-meta { @apply shrink-0 text-[13px] font-semibold; color: #C9BCEA; }
+
+  .menu-option .menu-tick { @apply ml-1 shrink-0 text-brand opacity-0; }
+  .menu-option[aria-selected='true'] { @apply font-semibold; }
+  .menu-option[aria-selected='true'] .menu-tick { @apply opacity-100; }
+
+  .menu-option.is-active { background: rgba(211, 249, 79, 0.12); }
+  .menu-option.is-active .menu-meta { @apply text-brand-light; }
+
+  .menu-empty { @apply px-3.5 py-4 text-center text-[13px]; color: #C9BCEA; }
+
+  /* Set by the page when the field fails validation. */
+  .menu[data-invalid] .menu-trigger {
+    border-color: #F87171;
+    background: rgba(248, 113, 113, 0.08);
+  }
+</style>

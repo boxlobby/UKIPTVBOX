@@ -13,20 +13,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 22, not 20: wrangler 4 refuses to run on anything older. Astro is happy
+      # on both. Keep this in step with .nvmrc.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci
 
       - run: npm run build
 
-      - name: Install Wrangler
-        run: npm install -g wrangler
-
+      # Wrangler comes from devDependencies now, so CI deploys with the same
+      # pinned version used locally. `npm install -g wrangler` pulled whatever
+      # was latest that morning, which is a bad thing to discover mid-deploy.
       - name: Create Pages project (if not exists)
-        run: wrangler pages project create ukiptvbox --production-branch main || true
+        run: npx wrangler pages project create ukiptvbox --production-branch main || true
 
+      # Uploads dist/ as static assets and bundles ./functions alongside it,
+      # which is what serves /api/order. Run from the repo root or the
+      # functions directory is not picked up.
       - name: Deploy to Cloudflare Pages
-        run: wrangler pages deploy dist --project-name ukiptvbox --branch main
+        run: npx wrangler pages deploy dist --project-name ukiptvbox --branch main

@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
-import { site, packages, waLink, waLinkPackage } from '../data/site';
+import { site, packages, waLink } from '../data/site';
 
 const title = 'IPTV Subscription UK | Buy IPTV Plans from £14.99';
 const description =
@@ -266,13 +266,11 @@ const guarantees = [
 
               <div class="mt-7">
                 <a
-                  href={waLinkPackage(pkg)}
+                  href={`/checkout/?plan=${pkg.id}`}
                   class={`w-full py-3.5 text-sm font-semibold rounded-xl inline-flex items-center justify-center gap-2 transition-all ${pkg.popular ? 'annual-btn' : ''}`}
                   style="background:#D3F94F;color:#241056;box-shadow:0 0 40px -8px rgba(211,249,79,.35);"
-                  target="_blank"
-                  rel="nofollow noopener noreferrer"
                 >
-                  Subscribe · {site.currencySymbol}{pkg.price}
+                  Order Now · {site.currencySymbol}{pkg.price}
                   <Icon name="arrow" size={15} />
                 </a>
               </div>

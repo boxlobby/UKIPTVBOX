@@ -1,0 +1,709 @@
+---
+/*
+  Checkout step 1: who the customer is and what they are buying.
+
+  The site builds static, so the chosen plan arrives on ?plan= and is resolved
+  in the browser. The markup below is server-rendered with the `popular` plan so
+  there is something correct on screen before JS runs; the inline script swaps
+  in the real plan on load if the query string names a different one.
+
+  Nothing is charged here and nothing leaves the browser. Pressing "Confirm
+  order" writes the order to sessionStorage and hands off to
+  /checkout/confirmed/, where the customer is told we will be in touch on
+  WhatsApp or email within 10 to 30 minutes to take payment.
+*/
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import CheckoutSteps from '../../components/CheckoutSteps.astro';
+import SelectMenu from '../../components/SelectMenu.astro';
+import { site, waLink } from '../../data/site';
+import {
+  FIELD_LIMITS,
+  orderTypes,
+  deviceOptions,
+  contactPreferences,
+  planFor,
+} from '../../data/checkout';
+import { dialCodes, pinnedCount, DEFAULT_DIAL_ISO } from '../../data/dial-codes';
+
+const title = 'Checkout | UK IPTV BOX';
+const description =
+  'Confirm your UK IPTV BOX order. Enter your details and we will contact you on WhatsApp or email within 10 to 30 minutes to complete payment.';
+
+/* Pre-render the default so the summary is never blank; JS corrects it from ?plan=. */
+const fallbackPlan = planFor(null);
+
+/*
+  Calling codes as SelectMenu options. `meta` is what the compact trigger shows
+  once closed ("+44"), and it is searchable, so typing "353" finds Ireland. The
+  group headings replace the <optgroup>s the native select used to draw.
+*/
+const dialMenuOptions = dialCodes.map((c, i) => ({
+  value: c.iso,
+  label: c.name,
+  flag: c.flag,
+  meta: `+${c.dial}`,
+  group: i < pinnedCount ? 'Most common' : 'All countries',
+}));
+
+const nextSteps = [
+  {
+    icon: 'check',
+    title: 'Confirm your order',
+    body: 'Fill this in and press confirm. No card details are taken on this site and nothing is charged now.',
+  },
+  {
+    icon: 'whatsapp',
+    title: 'We contact you within 10 to 30 minutes',
+    body: 'A real person messages you on WhatsApp, or emails you if you prefer, to confirm the plan and send secure payment details.',
+  },
+  {
+    icon: 'zap',
+    title: 'Login details and setup help',
+    body: 'As soon as payment clears, your username, password and playlist land on the same thread, and we walk you through the install on your device.',
+  },
+];
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={`${site.url}/checkout/`}
+  noIndex={true}
+  includeSchema={false}
+>
+  <Header />
+
+  <main id="main">
+    <section class="section grid-bg">
+      <div class="container-x">
+        <CheckoutSteps current={1} />
+
+        <div class="mx-auto mt-10 max-w-2xl text-center md:mt-12">
+          <span class="eyebrow">Order confirmation</span>
+          <h1 class="mt-4 text-3xl font-bold text-text-primary sm:text-4xl md:text-[2.75rem]">
+            Where should we send your
+            <span style="background:linear-gradient(135deg,#E4FB8A,#D3F94F 55%,#B8E437 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">IPTV login?</span>
+          </h1>
+          <p class="mt-4 text-sm leading-relaxed text-text-muted sm:text-base">
+            One short step. Fill this in and press confirm — nothing is charged here. We reach out on
+            WhatsApp or email within 10 to 30 minutes to confirm your order, take payment securely, and
+            send your login details.
+          </p>
+        </div>
+
+        <!--
+          The form is JS-driven, so with scripting off there is no way to submit
+          it. Give people the manual route rather than a dead button.
+        -->
+        <noscript>
+          <div class="card mx-auto mt-8 max-w-lg p-6 text-center">
+            <h2 class="text-xl font-bold text-text-primary">JavaScript is switched off</h2>
+            <p class="mt-3 text-sm leading-relaxed text-text-muted">
+              This form needs JavaScript to submit your order. Message us on WhatsApp instead and we will
+              take your order there, no form needed.
+            </p>
+            <a href={waLink()} class="btn-primary mt-5" rel="nofollow noopener noreferrer" target="_blank">
+              Order on WhatsApp
+            </a>
+          </div>
+        </noscript>
+
+        <div class="mt-10 grid gap-6 md:mt-14 lg:grid-cols-12 lg:gap-8">
+          <!-- Form -->
+          <div class="lg:col-span-7 xl:col-span-8">
+            <form class="card p-5 sm:p-7 md:p-8" novalidate data-checkout-form>
+              <h2 class="text-xl font-semibold text-text-primary sm:text-2xl">Your details</h2>
+              <p class="mt-2 text-sm text-text-muted">
+                We use these to contact you and deliver your account, and nothing else. No card details are
+                ever collected on this site.
+              </p>
+
+              <div class="mt-7 grid gap-5 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                  <label for="fullName" class="block text-sm font-semibold text-text-primary">
+                    Full name <span class="text-brand" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    class="field mt-2"
+                    autocomplete="name"
+                    placeholder="Alex Whitfield"
+                    maxlength={FIELD_LIMITS.fullName}
+                    required
+                    aria-describedby="fullName-error"
+                  />
+                  <p class="field-error" id="fullName-error" data-error-for="fullName" hidden></p>
+                </div>
+
+                <div>
+                  <label for="email" class="block text-sm font-semibold text-text-primary">
+                    Email address <span class="text-brand" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="field mt-2"
+                    autocomplete="email"
+                    inputmode="email"
+                    placeholder="you@example.com"
+                    maxlength={FIELD_LIMITS.email}
+                    required
+                    aria-describedby="email-hint email-error"
+                  />
+                  <p class="field-hint" id="email-hint">Your login details are emailed here.</p>
+                  <p class="field-error" id="email-error" data-error-for="email" hidden></p>
+                </div>
+
+                <div>
+                  <label for="phone" class="block text-sm font-semibold text-text-primary">
+                    Phone / WhatsApp number <span class="text-brand" aria-hidden="true">*</span>
+                  </label>
+
+                  <div class="mt-2 flex gap-2">
+                    <div class="w-[112px] shrink-0 sm:w-[118px]">
+                      <SelectMenu
+                        id="dialCode"
+                        name="dialCode"
+                        value={DEFAULT_DIAL_ISO}
+                        options={dialMenuOptions}
+                        searchable
+                        searchPlaceholder="Search country or code"
+                        compact
+                        ariaLabel="Country calling code"
+                      />
+                    </div>
+
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      class="field min-w-0 flex-1"
+                      autocomplete="tel-national"
+                      inputmode="tel"
+                      placeholder="7700 900123"
+                      maxlength={FIELD_LIMITS.phone}
+                      required
+                      aria-describedby="phone-hint phone-error"
+                    />
+                  </div>
+
+                  <p class="field-hint" id="phone-hint">Pick your country, then the number. This is where we confirm your order.</p>
+                  <p class="field-error" id="phone-error" data-error-for="phone" hidden></p>
+                </div>
+
+                {/*
+                  These are <span> rather than <label for="…">: the value behind
+                  a SelectMenu lives in a hidden input, which a label cannot
+                  usefully point at. The trigger is named through
+                  aria-labelledby instead.
+                */}
+                <div>
+                  <span id="orderType-label" class="block text-sm font-semibold text-text-primary">
+                    Is this a new order or a renewal? <span class="text-brand" aria-hidden="true">*</span>
+                  </span>
+                  <div class="mt-2">
+                    <SelectMenu
+                      id="orderType"
+                      name="orderType"
+                      options={orderTypes.map((o) => ({ value: o.value, label: o.label }))}
+                      placeholder="Select an option"
+                      labelledBy="orderType-label"
+                      describedBy="orderType-error"
+                    />
+                  </div>
+                  <p class="field-error" id="orderType-error" data-error-for="orderType" hidden></p>
+                </div>
+
+                <div>
+                  <span id="device-label" class="block text-sm font-semibold text-text-primary">
+                    Which device will you watch on? <span class="text-brand" aria-hidden="true">*</span>
+                  </span>
+                  <div class="mt-2">
+                    <SelectMenu
+                      id="device"
+                      name="device"
+                      options={deviceOptions.map((d) => ({ value: d.value, label: d.label }))}
+                      placeholder="Select your device"
+                      labelledBy="device-label"
+                      describedBy="device-error"
+                    />
+                  </div>
+                  <p class="field-error" id="device-error" data-error-for="device" hidden></p>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <span id="contact-label" class="block text-sm font-semibold text-text-primary">
+                    How should we reach you first? <span class="text-brand" aria-hidden="true">*</span>
+                  </span>
+                  <div class="mt-2">
+                    <SelectMenu
+                      id="contact"
+                      name="contact"
+                      value="whatsapp"
+                      options={contactPreferences.map((c) => ({ value: c.value, label: c.label }))}
+                      labelledBy="contact-label"
+                      describedBy="contact-hint contact-error"
+                    />
+                  </div>
+                  <p class="field-hint" id="contact-hint">We use the other one as a backup if you do not answer.</p>
+                  <p class="field-error" id="contact-error" data-error-for="contact" hidden></p>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label for="notes" class="block text-sm font-semibold text-text-primary">
+                    Anything else we should know? <span class="font-normal text-text-muted">(optional)</span>
+                  </label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    class="field mt-2 min-h-[92px] py-3"
+                    rows="3"
+                    maxlength={FIELD_LIMITS.notes}
+                    placeholder="e.g. I need two connections, or I want the Premium player app set up too."
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Summary of validation failures, announced once on submit. -->
+              <p
+                class="mt-6 hidden rounded-xl px-4 py-3 text-sm font-semibold"
+                style="border:1px solid rgba(248,113,113,.45);background:rgba(248,113,113,.12);color:#FECACA;"
+                role="alert"
+                data-form-alert
+                hidden
+              ></p>
+
+              <button type="submit" class="btn-primary mt-7 w-full text-base" data-submit>
+                <span data-submit-label>Confirm order</span>
+                <Icon name="arrow" size={17} />
+              </button>
+
+              <p class="mt-4 flex items-center justify-center gap-1.5 text-center text-xs font-semibold text-success">
+                <span class="shrink-0"><Icon name="lock" size={12} /></span>
+                No payment taken now &middot; no card details collected &middot; no auto-renewal
+              </p>
+            </form>
+
+            <!-- What happens after Confirm -->
+            <div class="mt-6 rounded-3xl border border-border-subtle p-5 sm:p-7" style="background:rgba(91,46,190,.28);">
+              <h2 class="text-lg font-semibold text-text-primary">What happens next</h2>
+              <ul class="mt-5 space-y-5" role="list">
+                {nextSteps.map((step) => (
+                  <li class="flex gap-3.5">
+                    <span class="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand text-[#241056]">
+                      <Icon name={step.icon} size={17} />
+                    </span>
+                    <div>
+                      <p class="text-sm font-bold text-text-primary">{step.title}</p>
+                      <p class="mt-1 text-[13px] leading-relaxed text-text-muted">{step.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Order summary -->
+          <aside class="lg:col-span-5 xl:col-span-4">
+            <div class="card p-5 sm:p-6 lg:sticky lg:top-24">
+              <div class="flex items-center justify-between gap-3">
+                <h2 class="text-lg font-semibold text-text-primary">Order summary</h2>
+                <a
+                  href="/pricing/"
+                  class="text-xs font-bold text-brand underline underline-offset-4 hover:text-brand-light"
+                >Change plan</a>
+              </div>
+
+              <div class="mt-5 rounded-2xl p-5" style="background:linear-gradient(135deg,#4B22AC,#5B2EBE);">
+                <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-light" data-summary-label>
+                  {fallbackPlan.label} plan
+                </p>
+                <div class="mt-2.5 flex items-end gap-1.5">
+                  <span class="font-display text-4xl font-bold leading-none text-text-primary" data-summary-price>
+                    {site.currencySymbol}{fallbackPlan.price}
+                  </span>
+                  <span class="pb-1 text-sm font-semibold text-text-muted">GBP</span>
+                </div>
+                <p class="mt-2 text-[13px] font-medium text-text-muted" data-summary-permonth>
+                  {site.currencySymbol}{fallbackPlan.perMonth.toFixed(2)} effective per month
+                </p>
+                <p
+                  class="mt-3 inline-flex rounded-full bg-brand px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[#241056]"
+                  data-summary-save
+                  hidden={!fallbackPlan.save}
+                >
+                  {fallbackPlan.save ? `Saves ${site.currencySymbol}${fallbackPlan.save.toFixed(2)} vs monthly` : ''}
+                </p>
+              </div>
+
+              <dl class="mt-5 space-y-3 text-sm">
+                <div class="flex items-center justify-between gap-4">
+                  <dt class="text-text-muted">Subtotal</dt>
+                  <dd class="font-semibold text-text-primary" data-summary-subtotal>
+                    {site.currencySymbol}{fallbackPlan.price} GBP
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-4">
+                  <dt class="text-text-muted">Setup fee</dt>
+                  <dd class="font-semibold text-success">Free</dd>
+                </div>
+                <div class="flex items-center justify-between gap-4 border-t border-border-subtle pt-3">
+                  <dt class="font-bold text-text-primary">Total to pay</dt>
+                  <dd class="font-display text-xl font-bold text-brand" data-summary-total>
+                    {site.currencySymbol}{fallbackPlan.price} GBP
+                  </dd>
+                </div>
+              </dl>
+
+              <p class="mt-3 text-[12px] leading-snug text-text-muted">
+                Payable once we have confirmed your order with you. Nothing is charged on this page.
+              </p>
+
+              <ul class="mt-5 space-y-2.5 border-t border-border-subtle pt-5" role="list">
+                {[
+                  '50,000+ live channels, UK and worldwide',
+                  '200,000+ movies and series on demand',
+                  '4K, FHD and HD, 99.9% uptime servers',
+                  'Instant activation, 24/7 WhatsApp support',
+                  'One-off payment, never an auto-renewal',
+                ].map((line) => (
+                  <li class="flex items-start gap-2.5 text-[13px] leading-snug text-text-primary">
+                    <span class="mt-0.5 inline-flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full bg-brand text-[#241056]">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                    </span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <!--
+                No "order on WhatsApp instead" link here on purpose. The floating
+                WhatsApp button is fixed to the bottom-right of every page and
+                would sit on top of it, and offering an escape hatch inside the
+                order summary talks people out of the form they are already in.
+              -->
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    /*
+      Step 1 controller: resolve ?plan=, validate, mint the order reference,
+      hand off to /checkout/confirmed/ through sessionStorage.
+
+      The plan list and the option lists are imported rather than passed down in
+      an application/json script block. Astro's set:html does no escaping and
+      JSON.stringify does not escape a closing script tag, so that block would
+      be an injection sink the day any label came from somewhere other than a
+      .ts file. Importing removes the sink rather than escaping around it, and
+      Vite bundles the data in.
+    */
+    import {
+      FIELD_LIMITS,
+      buildOrder,
+      clean,
+      isValidEmail,
+      isValidName,
+      isValidPhone,
+      issueOrderNumber,
+      pingWebhook,
+      planFor,
+      saveOrder,
+    } from '../../data/checkout';
+
+    const form = document.querySelector<HTMLFormElement>('[data-checkout-form]');
+    if (form) {
+      const money = (n: number) => `£${n.toFixed(2)}`;
+
+      /* ---- Plan resolution -------------------------------------------- */
+
+      /* ?plan= is never rendered, only looked up: an unknown value falls back
+         to the popular plan rather than reaching the page. */
+      const plan = planFor(new URLSearchParams(window.location.search).get('plan'));
+
+      const setText = (sel: string, value: string) => {
+        const el = document.querySelector<HTMLElement>(sel);
+        if (el) el.textContent = value;
+      };
+
+      if (plan) {
+        setText('[data-summary-label]', `${plan.label} plan`);
+        setText('[data-summary-price]', `£${plan.price}`);
+        setText(
+          '[data-summary-permonth]',
+          plan.perMonth === plan.price
+            ? 'One-off payment, no auto-renewal'
+            : `${money(plan.perMonth)} effective per month`
+        );
+        setText('[data-summary-subtotal]', `£${plan.price} GBP`);
+        setText('[data-summary-total]', `£${plan.price} GBP`);
+
+        const saveEl = document.querySelector<HTMLElement>('[data-summary-save]');
+        if (saveEl) {
+          if (plan.save) {
+            saveEl.textContent = `Saves ${money(plan.save)} vs monthly`;
+            saveEl.hidden = false;
+          } else {
+            saveEl.hidden = true;
+          }
+        }
+      }
+
+      /* ---- Country calling code ---------------------------------------- */
+
+      const dialInput = form.querySelector<HTMLInputElement>('#dialCode');
+      const dialMenu = dialInput?.closest<HTMLElement>('[data-menu]') ?? null;
+      const phoneInput = form.querySelector<HTMLInputElement>('#phone');
+
+      /* SelectMenu keeps the code and the flag on each option row, so the
+         country list is never shipped twice, once as markup and once as JSON. */
+      const dialOptions = () =>
+        Array.from(dialMenu?.querySelectorAll<HTMLElement>('[data-menu-option]') ?? []);
+
+      /* Matched by scanning the rows rather than interpolating the value into a
+         querySelector: the hidden input is customer-writable, and a stray quote
+         in a selector string is a parse error at best. */
+      const dialOption = (iso: string) =>
+        dialOptions().find((opt) => opt.dataset.value === iso) ?? null;
+
+      const currentDial = () =>
+        (dialOption(dialInput?.value ?? '')?.dataset.meta ?? '+44').replace('+', '');
+
+      /*
+        People paste full international numbers into the number box out of
+        habit. A leading "+" is an unambiguous signal that they have included a
+        country code, so match the longest one and move it into the picker.
+        Without the "+" we leave the digits alone: plenty of valid national
+        numbers begin with the same digits as a calling code.
+      */
+      phoneInput?.addEventListener('input', () => {
+        const value = phoneInput.value;
+        if (!value.trimStart().startsWith('+') || !dialMenu) return;
+
+        const digits = value.replace(/[^\d]/g, '');
+        if (!digits) return;
+
+        let bestOption: HTMLElement | null = null;
+        let bestDial = '';
+        dialOptions().forEach((opt) => {
+          const dial = (opt.dataset.meta ?? '').replace('+', '');
+          if (dial && digits.startsWith(dial) && dial.length > bestDial.length) {
+            bestDial = dial;
+            bestOption = opt;
+          }
+        });
+        if (!bestOption) return;
+
+        /* Keep whatever they already chose if it matches the pasted code:
+           +1 could be any of a dozen countries and theirs is as good a guess
+           as ours. Clicking the option reuses SelectMenu's own select path, so
+           the trigger face, the tick and the hidden input all stay in step. */
+        if (currentDial() !== bestDial) (bestOption as HTMLElement).click();
+        phoneInput.value = digits.slice(bestDial.length);
+      });
+
+      /* ---- Validation -------------------------------------------------- */
+
+      /*
+        The predicates live in data/checkout.ts so that this form and the
+        confirmation page's re-read of storage agree on what a valid field is.
+        Only the wording is local. Each value is cleaned first — control
+        characters, angle brackets, length cap — so what is validated is exactly
+        what gets stored.
+      */
+      const rules: Record<string, (value: string) => string | null> = {
+        fullName: (v) =>
+          isValidName(clean(v, FIELD_LIMITS.fullName))
+            ? null
+            : 'Please enter the name your account should be in.',
+        email: (v) =>
+          isValidEmail(clean(v, FIELD_LIMITS.email))
+            ? null
+            : 'Please enter a valid email address so we can send your login details.',
+        phone: (v) =>
+          isValidPhone(clean(v, FIELD_LIMITS.phone))
+            ? null
+            : 'Please enter a reachable phone or WhatsApp number, without the country code.',
+        orderType: (v) => (v ? null : 'Please tell us whether this is a new order or a renewal.'),
+        device: (v) => (v ? null : 'Please choose the device you will watch on.'),
+        contact: (v) => (v ? null : 'Please tell us how you would like us to reach you.'),
+      };
+
+      const fieldEl = (name: string) =>
+        form.querySelector<HTMLInputElement>(`[name="${name}"]`);
+      const errorEl = (name: string) =>
+        form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+
+      /*
+        A SelectMenu field's value sits in a hidden input, which cannot be
+        focused, cannot show an error border and never fires blur. So every
+        visible concern — focus, aria-invalid, the invalid styling — is
+        redirected to its trigger button, while the value is still read from the
+        input like any other field.
+      */
+      const menuOf = (name: string) => fieldEl(name)?.closest<HTMLElement>('[data-menu]') ?? null;
+      const visibleEl = (name: string) =>
+        menuOf(name)?.querySelector<HTMLElement>('[data-menu-trigger]') ?? fieldEl(name);
+
+      const showError = (name: string, message: string | null) => {
+        const input = fieldEl(name);
+        const error = errorEl(name);
+        if (!input || !error) return;
+
+        const menu = menuOf(name);
+        const target = visibleEl(name);
+
+        if (message) {
+          error.textContent = message;
+          error.hidden = false;
+          target?.setAttribute('aria-invalid', 'true');
+          if (menu) menu.setAttribute('data-invalid', '');
+          else input.classList.add('field-invalid');
+        } else {
+          error.hidden = true;
+          target?.removeAttribute('aria-invalid');
+          if (menu) menu.removeAttribute('data-invalid');
+          else input.classList.remove('field-invalid');
+        }
+      };
+
+      const isShowingError = (name: string) => errorEl(name)?.hidden === false;
+
+      /* Re-validate on blur and on change, but on keystrokes only clear an
+         error that is already showing: nagging someone mid-typing about an
+         incomplete email is noise. */
+      Object.keys(rules).forEach((name) => {
+        const input = fieldEl(name);
+        if (!input) return;
+
+        /* Menus dispatch `change` when an option is chosen; text fields fire
+           all three. Registering blur/input on a hidden input is inert. */
+        input.addEventListener('change', () => showError(name, rules[name](input.value)));
+        input.addEventListener('blur', () => showError(name, rules[name](input.value)));
+        input.addEventListener('input', () => {
+          if (isShowingError(name) && !rules[name](input.value)) showError(name, null);
+        });
+      });
+
+      /* ---- Submit ------------------------------------------------------ */
+
+      const alertEl = form.querySelector<HTMLElement>('[data-form-alert]');
+      const submitBtn = form.querySelector<HTMLButtonElement>('[data-submit]');
+      const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]');
+      const notesEl = form.querySelector<HTMLTextAreaElement>('#notes');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const values: Record<string, string> = {};
+        let firstBad: string | null = null;
+
+        Object.keys(rules).forEach((name) => {
+          const input = fieldEl(name);
+          const value = input?.value ?? '';
+          values[name] = value.trim();
+          const message = rules[name](value);
+          showError(name, message);
+          if (message && !firstBad) firstBad = name;
+        });
+
+        if (firstBad) {
+          if (alertEl) {
+            alertEl.textContent = 'Please check the highlighted fields above.';
+            alertEl.hidden = false;
+            alertEl.classList.remove('hidden');
+          }
+          visibleEl(firstBad)?.focus();
+          return;
+        }
+
+        if (alertEl) {
+          alertEl.hidden = true;
+          alertEl.classList.add('hidden');
+        }
+
+        /*
+          buildOrder is the only path into an Order. It re-checks every field,
+          takes the price and every option label from the data files rather than
+          from the form, and refuses anything that does not pass — so a hidden
+          input edited in devtools produces no order at all instead of a cheap
+          one. The plan comes from `plan.id`, never from the query string.
+        */
+        const order = buildOrder(
+          {
+            planId: plan?.id ?? '',
+            fullName: values.fullName,
+            email: values.email,
+            dial: currentDial(),
+            phone: values.phone,
+            phoneCountry: dialInput?.value ?? '',
+            orderType: values.orderType,
+            device: values.device,
+            contact: values.contact,
+            notes: notesEl?.value ?? '',
+          },
+          /* Reserved against this browser's ledger, so no reference it has
+             already handed out can come back. */
+          issueOrderNumber()
+        );
+
+        const fail = (message: string) => {
+          if (!alertEl) return;
+          alertEl.textContent = message;
+          alertEl.hidden = false;
+          alertEl.classList.remove('hidden');
+        };
+
+        if (!order) {
+          fail('Something in the form did not look right. Please check your details and try again.');
+          return;
+        }
+
+        if (!saveOrder(order)) {
+          /* Private mode with storage disabled. Without the order there is
+             nothing for the confirmation page to render, so say so rather than
+             navigating to a screen that would show the generic version. */
+          fail(
+            'Your browser is blocking site storage, so we cannot hold your order. Please disable private browsing, or message us on WhatsApp and we will take the order there.'
+          );
+          return;
+        }
+
+        /* Fire and forget, so a slow or missing relay never holds up the
+           thank-you page. `keepalive` carries it across the navigation. */
+        pingWebhook('order_placed', order);
+
+        if (submitBtn) submitBtn.disabled = true;
+        if (submitLabel) submitLabel.textContent = 'Confirming your order…';
+
+        window.location.assign('/checkout/confirmed/');
+      });
+    }
+  </script>
+
+  <style>
+    .field {
+      @apply w-full rounded-xl border border-border-subtle bg-subtle px-4 py-3 text-[15px] font-medium text-text-primary transition-colors;
+      min-height: 50px;
+    }
+    .field::placeholder { color: #A395CC; @apply font-normal; }
+    .field:hover { @apply border-accent/50; }
+    .field:focus { @apply border-brand outline-none; box-shadow: 0 0 0 3px rgba(211, 249, 79, 0.18); }
+    .field-invalid { border-color: #F87171; background: rgba(248, 113, 113, 0.08); }
+
+    .field-hint { @apply mt-1.5 text-xs leading-snug text-text-muted; }
+    .field-error { @apply mt-1.5 text-xs font-semibold leading-snug; color: #FCA5A5; }
+
+    textarea.field { resize: vertical; }
+  </style>
+</BaseLayout>

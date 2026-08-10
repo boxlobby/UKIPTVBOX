@@ -1,0 +1,63 @@
+---
+/*
+  Two-step progress rail across the checkout funnel. There is no payment step:
+  nothing is charged on the site, so the funnel is details then confirmation.
+
+  Purely informational, so no step is a link: jumping back to /checkout/ from
+  the confirmation page would mint a second order reference for the same
+  customer.
+*/
+export interface Props {
+  /** 1 = details, 2 = confirmed. */
+  current: 1 | 2;
+}
+
+const { current } = Astro.props;
+
+const steps = [
+  { n: 1, label: 'Your details' },
+  { n: 2, label: 'Order confirmed' },
+];
+---
+<ol class="mx-auto flex w-full max-w-md items-center gap-2 sm:gap-3" role="list">
+  {steps.map((step, i) => (
+    <>
+      <li
+        class="flex min-w-0 items-center gap-2.5"
+        aria-current={step.n === current ? 'step' : undefined}
+      >
+        <span
+          class:list={[
+            'inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[13px] font-bold transition-colors',
+            step.n < current && 'bg-success text-white',
+            step.n === current && 'bg-brand text-[#241056] shadow-glow',
+            step.n > current && 'border border-border-subtle bg-elevated text-text-muted',
+          ]}
+        >
+          {step.n < current ? (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          ) : (
+            step.n
+          )}
+        </span>
+        <span
+          class:list={[
+            'hidden truncate text-[13px] font-semibold sm:inline',
+            step.n <= current ? 'text-text-primary' : 'text-text-muted',
+          ]}
+        >{step.label}</span>
+      </li>
+
+      {i < steps.length - 1 && (
+        <li aria-hidden="true" class="h-px min-w-[16px] flex-1 bg-border-subtle">
+          <span class:list={['block h-px', step.n < current ? 'bg-success' : 'bg-transparent']}></span>
+        </li>
+      )}
+    </>
+  ))}
+</ol>
+
+<!-- The labels are hidden below sm, so name the current step for screen readers and small screens. -->
+<p class="mt-3 text-center text-[13px] font-semibold text-text-muted sm:sr-only">
+  Step {current} of 2 &middot; {steps[current - 1].label}
+</p>

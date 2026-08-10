@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { posts } from '../data/posts';
+import { checkoutRoutes } from '../data/checkout';
 
 const SITE = 'https://ukiptvbox.com';
 
@@ -11,8 +12,12 @@ const SITE = 'https://ukiptvbox.com';
  */
 const pageFiles = Object.keys(import.meta.glob('./**/*.astro'));
 
-/** Pages that must never be advertised to search engines. */
-const EXCLUDE = new Set(['/404/']);
+/**
+ * Pages that must never be advertised to search engines. The checkout funnel is
+ * noindex on the pages themselves; listing it here keeps the sitemap from
+ * contradicting that.
+ */
+const EXCLUDE = new Set(['/404/', ...checkoutRoutes]);
 
 function toRoute(file: string): string | null {
   // Dynamic routes are resolved by their static counterparts; skip the template.
