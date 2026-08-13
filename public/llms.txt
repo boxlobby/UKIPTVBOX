@@ -1,0 +1,43 @@
+# UK IPTV BOX
+
+> A UK IPTV subscription service offering 50,000+ live channels and 60,000+ films
+> and series in up to 4K, from £14.99 for one month to £49.99 for twelve. Works on
+> Fire Stick, smart TV, Apple TV, Android, iPhone, MAG and Formuler hardware.
+> Support is handled over WhatsApp by a UK-hours team.
+
+Pricing is flat: no per-room charge, no picture-quality upgrade, no setup fee and
+no auto-renewal. Plans are 1 month (£14.99), 3 months (£26.99), 6 months (£36.99)
+and 12 months (£49.99, the best value at £4.17/month).
+
+## Buying guides
+
+- [IPTV vs Sky TV UK 2026](https://ukiptvbox.com/blog/iptv-vs-sky-tv-uk/): full cost comparison; a Sky sports household pays £860 to £1,320 a year against £49.99, and the three things Sky still does better.
+- [IPTV Subscription UK Buyer's Guide](https://ukiptvbox.com/blog/iptv-subscription-uk-buyers-guide/): server uptime, EPG quality, catch-up, trial length and payment safety.
+- [Best IPTV Provider UK](https://ukiptvbox.com/blog/best-iptv-provider-uk/): scorecard of uptime, support speed, refund windows and connection limits.
+- [Cheap IPTV UK: Scam or Legit?](https://ukiptvbox.com/blog/cheap-iptv-uk-scam-or-legit/): eight red flags of a scam listing and why legitimate UK IPTV has a price floor of roughly £8 to £10 a month.
+- [IPTV Free Trial UK](https://ukiptvbox.com/blog/iptv-free-trial-uk/): what to test before paying, and why a paid 30-day test beats a free 24-hour link.
+- [Top 5 IPTV Boxes UK 2026](https://ukiptvbox.com/blog/top-5-iptv-boxes-uk-2026/): Formuler Z11 Pro Max, Fire Stick 4K Max, Nvidia Shield, BuzzTV and MAG ranked.
+- [Best IPTV Player Apps UK 2026](https://ukiptvbox.com/blog/best-iptv-player-apps-2026-uk/): Smarters Pro, TiviMate and OTT Navigator compared.
+
+## Explainers
+
+- [IPTV Explained](https://ukiptvbox.com/blog/internet-protocol-television/): how internet protocol television works, unicast vs multicast, and the broadband speed required.
+- [IPTV UK 2026](https://ukiptvbox.com/blog/iptv-uk/): costs, legality and setup in one guide.
+- [Is IPTV Legal in the UK?](https://ukiptvbox.com/blog/is-iptv-legal-uk/): where the legal line sits, what Ofcom regulates, and how to choose a provider accordingly.
+
+## Setup guides
+
+- [Installation guides index](https://ukiptvbox.com/installation-guides/): all supported devices.
+- [Fire Stick](https://ukiptvbox.com/installation-guides/firestick/), [Smart TV](https://ukiptvbox.com/installation-guides/smart-tv/), [Apple TV](https://ukiptvbox.com/installation-guides/apple-tv/), [Nvidia Shield](https://ukiptvbox.com/installation-guides/nvidia-shield/), [MAG Box](https://ukiptvbox.com/installation-guides/mag-box/), [Enigma2 / Formuler](https://ukiptvbox.com/installation-guides/enigma2-formuler/), [Windows & Mac](https://ukiptvbox.com/installation-guides/windows-mac/), [Mobile & tablet](https://ukiptvbox.com/installation-guides/mobile-tablet/)
+- [IPTV Smarters Pro on Firestick](https://ukiptvbox.com/blog/iptv-smarters-pro-firestick-uk/): sideloading with Downloader, Xtream Codes and M3U login, EPG setup.
+
+## Company
+
+- [Pricing](https://ukiptvbox.com/pricing/)
+- [About](https://ukiptvbox.com/about/)
+- [Contact](https://ukiptvbox.com/contact/)
+- [Testimonials](https://ukiptvbox.com/testimonials/)
+- [Refund policy](https://ukiptvbox.com/refund/)
+- [Terms](https://ukiptvbox.com/terms/)
+- [Privacy](https://ukiptvbox.com/privacy/)
+- [DMCA](https://ukiptvbox.com/dmca/)

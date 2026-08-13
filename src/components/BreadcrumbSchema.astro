@@ -1,0 +1,27 @@
+---
+import { site } from '../data/site';
+
+/**
+ * Emits BreadcrumbList JSON-LD only. Blog posts and installation guides build
+ * their breadcrumbs inline as part of a larger @graph; this covers the flat
+ * top-level pages (about, contact, pricing, testimonials) that had none.
+ */
+export interface Props {
+  /** Label for the current page, e.g. "Pricing". Home is prepended. */
+  name: string;
+  /** Path with leading and trailing slash, e.g. "/pricing/". */
+  path: string;
+}
+
+const { name, path } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name, item: `${site.url}${path}` },
+  ],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

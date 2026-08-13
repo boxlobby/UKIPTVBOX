@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import FinalCta from '../../components/FinalCta.astro';
 import { postBySlug } from '../../data/posts';
+import { organizationNode, authorNode, authorRef, publisherRef } from '../../data/author';
 import { site, waLink } from '../../data/site';
 
 const post = postBySlug('internet-protocol-television')!;
@@ -111,37 +112,12 @@ const relatedLinks = [
   { href: '/installation-guides/', label: 'Set Up IPTV on Your Device: All Guides' },
 ];
 
-const orgId = `${site.url}/#organization`;
-const authorId = `${site.url}/about#team`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': orgId,
-      name: site.name,
-      url: site.url,
-      logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
-      sameAs: [`${site.url}/about/`],
-      contactPoint: {
-        '@type': 'ContactPoint',
-        contactType: 'customer support',
-        availableLanguage: 'en-GB',
-        url: waLink(),
-      },
-    },
-    {
-      '@type': 'Person',
-      '@id': authorId,
-      name: post.author,
-      url: authorId,
-      jobTitle: 'Independent streaming and broadband consultant',
-      description:
-        'UK-based streaming and broadband consultant with six-plus years evaluating IPTV infrastructure, server stability and home network performance.',
-      knowsAbout: ['IPTV', 'UK broadband', 'Home network troubleshooting', 'Streaming hardware'],
-      worksFor: { '@id': orgId },
-    },
+    organizationNode,
+    authorNode,
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -155,8 +131,8 @@ const jsonLd = {
       headline: post.title,
       description: post.excerpt,
       image: ogImage,
-      author: { '@id': authorId },
-      publisher: { '@id': orgId },
+      author: authorRef,
+      publisher: publisherRef,
       datePublished: post.published,
       dateModified: post.updated,
       mainEntityOfPage: canonical,

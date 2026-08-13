@@ -1,0 +1,594 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { postBySlug } from '../../data/posts';
+import { organizationNode, authorNode, authorRef, publisherRef } from '../../data/author';
+import { site, waLink, packages } from '../../data/site';
+
+const post = postBySlug('iptv-vs-sky-tv-uk')!;
+const canonical = `${site.url}/blog/${post.slug}/`;
+const ogImage = post.image.startsWith('http') ? post.image : site.url + post.image;
+
+const annual = packages.find((p) => p.id === 'annual')!;
+
+/**
+ * Sky line-item pricing observed on sky.com in August 2026 for new-customer
+ * 18-month contracts. Sky repackages and re-prices often, so every figure here
+ * is presented as a typical range rather than a quote.
+ */
+const skyLineItems = [
+  { item: 'Sky Essential TV (entry package)', monthly: '£15 to £22' },
+  { item: 'Sky Ultimate TV (adds Netflix, larger catalogue)', monthly: '£26 to £30' },
+  { item: 'Sky Sports add-on', monthly: '£31 to £35' },
+  { item: 'TNT Sports add-on', monthly: '£28 to £31' },
+  { item: 'Sky Cinema add-on', monthly: '£12 to £14' },
+  { item: 'HD / UHD picture upgrade', monthly: '£6 to £12' },
+  { item: 'Extra room (Sky Stream puck)', monthly: '£6 per room' },
+  { item: 'One-off setup fee', monthly: '£20 to £40 once' },
+];
+
+const households = [
+  {
+    name: 'The basics household',
+    detail: 'Sky Ultimate TV, no sports, one room.',
+    sky: '£28/mo · £336/yr',
+    iptv: `£${annual.price}/yr`,
+    saving: '£286',
+  },
+  {
+    name: 'The football household',
+    detail: 'Sky Ultimate TV plus Sky Sports, UHD, one extra room.',
+    sky: '£72/mo · £864/yr',
+    iptv: `£${annual.price}/yr`,
+    saving: '£814',
+  },
+  {
+    name: 'The full-package household',
+    detail: 'Sky TV, Sky Sports, TNT Sports, Cinema, UHD, two extra rooms.',
+    sky: '£110/mo · £1,320/yr',
+    iptv: `£${annual.price}/yr`,
+    saving: '£1,270',
+  },
+];
+
+const headToHead = [
+  { factor: 'Typical annual cost, sports household', sky: '£860 to £1,320', iptv: `£${annual.price}` },
+  { factor: 'Contract length', sky: '18 or 24 months, exit fees apply', iptv: 'None. Pay a month at a time if you want' },
+  { factor: 'Price rises mid-contract', sky: 'Annual uplift written into the terms', iptv: 'Locked for the term you paid for' },
+  { factor: 'Channel count', sky: 'Roughly 300 on the top bundle', iptv: '50,000+ live channels' },
+  { factor: 'On-demand library', sky: 'Sky Store, Netflix on some tiers', iptv: '60,000+ films and box sets included' },
+  { factor: 'Hardware needed', sky: 'Sky Stream puck or Sky Glass TV', iptv: 'Any Fire Stick, smart TV, phone or box you own' },
+  { factor: 'Simultaneous streams', sky: 'Charged per extra room', iptv: 'Multi-connection plans available' },
+  { factor: 'Recording', sky: 'Sky Q series link and local recording', iptv: 'Catch-up on major channels, no local recording' },
+  { factor: 'Installation time', sky: 'Delivery slot, then activation', iptv: 'Around 15 minutes on a device you already own' },
+  { factor: 'Complaints route', sky: 'Ofcom-regulated ADR scheme', iptv: 'Provider support and card chargeback only' },
+];
+
+const faqs = [
+  {
+    q: 'Is IPTV cheaper than Sky TV?',
+    a: `Yes, and the gap is wide. A full Sky package with Sky Sports, TNT Sports and Cinema runs about £110 a month, or £1,320 across a year. A 12-month UK IPTV BOX subscription is £${annual.price}, which works out at £${annual.perMonth} a month. The saving is roughly £1,270 for that household. Even a basic Sky bundle with no sports at £28 a month costs six times what an annual IPTV subscription does.`,
+  },
+  {
+    q: 'How much does IPTV cost per month in the UK?',
+    a: `Honest UK pricing sits between £4 and £15 a month depending on how long you commit. Our 1-month plan is £${site.price}, the 6-month plan works out at £6.17 a month, and the 12-month plan is £${annual.perMonth} a month. Anything advertised below about £3 a month, or any "lifetime" deal, is a warning sign rather than a bargain.`,
+  },
+  {
+    q: 'Can I keep Sky Broadband if I cancel Sky TV?',
+    a: 'Yes. Sky Broadband and Sky TV are separate contracts and cancelling one does not cancel the other. You will lose any bundle discount that was tied to taking both, so check what your broadband reverts to before you call. Many people keep the broadband, drop the TV, and still come out well ahead.',
+  },
+  {
+    q: 'What do I lose by switching from Sky TV to IPTV?',
+    a: 'You lose three things and they are all real. Sky Q local recording and series link go. The Ofcom-backed complaints route goes, because IPTV providers sit outside that scheme. And you give up the picture consistency that comes from Sky owning the delivery network end to end. What you gain is a much larger catalogue, no contract, and roughly a grand a year back in your account.',
+  },
+  {
+    q: 'Do I need new hardware to switch from Sky to IPTV?',
+    a: 'Almost certainly not. IPTV runs on a Fire Stick, an Android TV box, a Samsung or LG smart TV, an Apple TV, a phone, a tablet or a laptop. If you already own any of those, you are ready. A £40 Fire Stick 4K is the cheapest way in if you do not.',
+  },
+  {
+    q: 'Is switching from Sky TV to IPTV legal in the UK?',
+    a: 'IPTV as a technology is entirely legal and is what BT TV, Now and Sky Stream themselves use. What matters is whether the provider holds distribution rights for what it carries. Our guide to IPTV legality in the UK covers where the line sits and what to check before you subscribe.',
+  },
+  {
+    q: 'How long does it take to set IPTV up after I cancel Sky?',
+    a: 'About fifteen minutes. You install a player app, enter the login details we send you, and let the channel list and TV guide load. Our installation guides cover Fire Stick, smart TV, Apple TV, MAG, Formuler and mobile step by step.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organizationNode,
+    authorNode,
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+      ],
+    },
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: ogImage,
+      author: authorRef,
+      publisher: publisherRef,
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: canonical,
+      articleSection: 'IPTV Comparisons',
+      keywords: post.keywords.join(', '),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+
+const relatedLinks = [
+  { href: '/blog/iptv-subscription-uk-buyers-guide/', label: "IPTV Subscription UK: 2026 Buyer's Guide" },
+  { href: '/blog/is-iptv-legal-uk/', label: 'Is IPTV Legal in the UK? 2026 Explainer' },
+  { href: '/blog/best-iptv-provider-uk/', label: 'Best IPTV Provider UK: An Honest Scorecard' },
+  { href: '/blog/cheap-iptv-uk-scam-or-legit/', label: 'Cheap IPTV UK: Scam or Legit? Red Flags' },
+];
+
+const publishedFmt = new Date(post.published).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+const updatedFmt = new Date(post.updated).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title={`${post.title} | ${site.name}`}
+  description={post.excerpt}
+  canonical={canonical}
+  ogImage={ogImage}
+  includeSchema={false}
+>
+  <Header />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-border-subtle">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div class="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-grad-brand-soft blur-3xl"></div>
+      </div>
+      <div class="container-x pt-14 pb-12 md:pt-20 md:pb-16 max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-xs uppercase tracking-widest text-text-muted">
+          <a href="/" class="hover:text-brand-light">Home</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <a href="/blog/" class="hover:text-brand-light">Blog</a>
+          <span class="mx-2 text-border-subtle">/</span>
+          <span class="text-text-primary">IPTV vs Sky TV</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-text-muted">
+          <span class="eyebrow">{post.category}</span>
+          <span>· {post.readMinutes} min read</span>
+          <span>· By {post.author}</span>
+        </div>
+
+        <h1 class="mt-6 font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
+          {post.title}
+        </h1>
+        <p class="mt-5 text-lg text-text-muted leading-relaxed">
+          <strong>IPTV vs Sky TV</strong> is the cheapest decision most UK households never get round
+          to making. A full Sky package with sports runs past £1,300 a year. A 12-month
+          <a href="/pricing/" class="text-brand-light underline underline-offset-4 decoration-brand/40 hover:decoration-brand-light">UK IPTV subscription</a>
+          costs £{annual.price}. This is the whole comparison, priced line by line, including the
+          three things Sky still does better.
+        </p>
+
+        <p class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-light"></span>
+          Published {publishedFmt} · Updated {updatedFmt}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={waLink('Hi, I read the IPTV vs Sky TV guide: I would like to switch to UK IPTV BOX.')} class="btn-primary" target="_blank" rel="nofollow noopener noreferrer">
+            Switch to UK IPTV BOX
+          </a>
+          <a href="#head-to-head" class="btn-secondary">See the full comparison</a>
+        </div>
+
+        <figure class="mt-10 overflow-hidden rounded-2xl border border-border-subtle bg-elevated/60">
+          <img src={post.image} alt={post.imageAlt} width="1200" height="630" loading="eager" decoding="async" fetchpriority="high" class="w-full h-auto" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="container-x py-14 md:py-20 max-w-3xl is-visible" data-reveal="fade">
+      <article class="legal-prose">
+        <h2>IPTV vs Sky TV: the short answer</h2>
+        <p>
+          Sky sells a smaller catalogue, on a longer contract, for roughly twenty times the money.
+          The rest of this page is the arithmetic behind that sentence, including the parts of it
+          that do not flatter us.
+        </p>
+        <p>
+          The gap is structural rather than clever. Sky pays enormous sums for exclusive Premier
+          League and Champions League rights, funds its own satellite and broadband delivery network,
+          runs UK call centres, and answers to Ofcom. Those costs land on your bill every month. IPTV
+          providers carry none of that overhead, which is why the price difference is so wide and
+          also why the two products are not the same in every respect.
+        </p>
+        <p>
+          So the honest version of <strong>IPTV vs Sky</strong> is more qualified than "IPTV wins".
+          For most households the saving is large and the compromises are minor. For a smaller group,
+          the compromises matter more than the money does. There is enough detail below to work out
+          which of those you are.
+        </p>
+
+        <h2>What Sky TV actually costs in 2026</h2>
+        <p>
+          Sky quotes a headline price for the entry bundle, then charges separately for most of the
+          parts people actually sign up for:
+        </p>
+      </article>
+
+      <div class="mt-8 overflow-x-auto rounded-2xl border border-border-subtle bg-elevated/60">
+        <table class="w-full min-w-[520px] text-left text-sm">
+          <caption class="sr-only">Sky TV package and add-on pricing in the UK, August 2026</caption>
+          <thead>
+            <tr class="border-b border-border-subtle text-xs uppercase tracking-widest text-text-muted">
+              <th scope="col" class="px-5 py-4 font-semibold">Sky line item</th>
+              <th scope="col" class="px-5 py-4 font-semibold">Typical monthly price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {skyLineItems.map((row) => (
+              <tr class="border-b border-border-subtle/60 last:border-0">
+                <td class="px-5 py-4 text-text-primary">{row.item}</td>
+                <td class="px-5 py-4 text-text-muted whitespace-nowrap">{row.monthly}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <article class="legal-prose mt-10">
+        <p>
+          Two details do most of the damage. The first is that sports are add-ons, so any household
+          that wants Premier League and Champions League coverage is buying both Sky Sports and TNT
+          Sports on top of a base package. The second is the annual price rise baked into Sky's terms,
+          which means the number you sign up for is not the number you pay in month thirteen. Ofcom's
+          <a href="https://www.ofcom.org.uk/phones-and-broadband/saving-money/mid-contract-price-rises" target="_blank" rel="noopener noreferrer nofollow">guidance on mid-contract price rises</a>
+          is worth reading before you renew anything.
+        </p>
+
+        <h2>What a UK IPTV subscription costs</h2>
+        <p>
+          Our pricing is the whole price. There are no add-ons to buy, no charge per room, no
+          picture-quality upgrade and no setup fee:
+        </p>
+      </article>
+
+      <div class="mt-8 overflow-x-auto rounded-2xl border border-border-subtle bg-elevated/60">
+        <table class="w-full min-w-[520px] text-left text-sm">
+          <caption class="sr-only">UK IPTV BOX subscription pricing</caption>
+          <thead>
+            <tr class="border-b border-border-subtle text-xs uppercase tracking-widest text-text-muted">
+              <th scope="col" class="px-5 py-4 font-semibold">Plan</th>
+              <th scope="col" class="px-5 py-4 font-semibold">Total</th>
+              <th scope="col" class="px-5 py-4 font-semibold">Per month</th>
+            </tr>
+          </thead>
+          <tbody>
+            {packages.map((p) => (
+              <tr class={`border-b border-border-subtle/60 last:border-0 ${p.popular ? 'bg-brand/5' : ''}`}>
+                <td class="px-5 py-4 text-text-primary whitespace-nowrap">
+                  {p.label}{p.badge && <span class="ml-2 rounded-full bg-brand/20 px-2 py-0.5 text-[10px] uppercase tracking-widest text-brand-light">{p.badge}</span>}
+                </td>
+                <td class="px-5 py-4 text-text-muted whitespace-nowrap">£{p.price}</td>
+                <td class="px-5 py-4 text-text-muted whitespace-nowrap">£{p.perMonth}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <article class="legal-prose mt-10">
+        <p>
+          The full breakdown lives on our <a href="/pricing/">IPTV pricing page</a>. If the numbers
+          above look too low to be real, that instinct is a good one and worth keeping: read
+          <a href="/blog/cheap-iptv-uk-scam-or-legit/">how to tell a cheap IPTV bargain from a scam</a>
+          before you buy from anyone, including us.
+        </p>
+
+        <h2 id="head-to-head">IPTV vs Sky TV, head to head</h2>
+        <p>
+          Price is not the only thing that separates the two:
+        </p>
+      </article>
+
+      <div class="mt-8 overflow-x-auto rounded-2xl border border-border-subtle bg-elevated/60">
+        <table class="w-full min-w-[640px] text-left text-sm">
+          <caption class="sr-only">IPTV vs Sky TV feature and price comparison for UK households in 2026</caption>
+          <thead>
+            <tr class="border-b border-border-subtle text-xs uppercase tracking-widest text-text-muted">
+              <th scope="col" class="px-5 py-4 font-semibold">Factor</th>
+              <th scope="col" class="px-5 py-4 font-semibold">Sky TV</th>
+              <th scope="col" class="px-5 py-4 font-semibold text-brand-light">UK IPTV BOX</th>
+            </tr>
+          </thead>
+          <tbody>
+            {headToHead.map((row) => (
+              <tr class="border-b border-border-subtle/60 last:border-0 align-top">
+                <td class="px-5 py-4 text-text-primary font-medium">{row.factor}</td>
+                <td class="px-5 py-4 text-text-muted">{row.sky}</td>
+                <td class="px-5 py-4 text-text-muted">{row.iptv}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>Three households, three very different savings</h2>
+        <p>
+          What you get back depends entirely on how much Sky you were buying in the first place:
+        </p>
+      </article>
+
+      <ol class="mt-8 space-y-4">
+        {households.map((h, i) => (
+          <li class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/20 text-sm font-bold text-brand-light">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-display text-lg md:text-xl font-semibold text-text-primary">{h.name}</h3>
+                <p class="mt-2 text-text-muted leading-relaxed">{h.detail}</p>
+                <dl class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+                  <div class="rounded-xl border border-border-subtle bg-elevated/60 px-4 py-3">
+                    <dt class="text-xs uppercase tracking-widest text-text-muted">Sky</dt>
+                    <dd class="mt-1 font-semibold text-text-primary">{h.sky}</dd>
+                  </div>
+                  <div class="rounded-xl border border-border-subtle bg-elevated/60 px-4 py-3">
+                    <dt class="text-xs uppercase tracking-widest text-text-muted">IPTV</dt>
+                    <dd class="mt-1 font-semibold text-text-primary">{h.iptv}</dd>
+                  </div>
+                  <div class="rounded-xl border border-brand/40 bg-brand/10 px-4 py-3">
+                    <dt class="text-xs uppercase tracking-widest text-brand-light">You keep</dt>
+                    <dd class="mt-1 font-semibold text-text-primary">{h.saving}</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <article class="legal-prose mt-14">
+        <p>
+          The more Sky you were buying, the more the switch gives back. A household on the entry
+          bundle recovers a useful few hundred pounds a year. A household paying for both sports
+          packages recovers more than most people pay in council tax. That is why sports fans are
+          switching fastest, and why <strong>IPTV vs Sky TV</strong> tends to get asked in front of
+          a £110 bill rather than a £28 one.
+        </p>
+
+        <h2>What Sky still does better</h2>
+        <p>
+          Any <strong>IPTV vs Sky</strong> comparison claiming Sky has no advantages is selling you
+          something. It has three, and they are genuine:
+        </p>
+        <ul>
+          <li>
+            <strong>Recording you own.</strong> Sky Q writes programmes to a box in your living room
+            and keeps them there. IPTV gives you catch-up on major channels, which covers most of the
+            same ground, but it is not the same thing as a personal library.
+          </li>
+          <li>
+            <strong>A regulated complaints route.</strong> Sky sits inside Ofcom's alternative dispute
+            resolution scheme. If a dispute goes badly you have somewhere to escalate. With any IPTV
+            provider your remedies are the provider's own support and, if it comes to it, a card
+            chargeback. That is a real difference in protection and you should weigh it.
+          </li>
+          <li>
+            <strong>End-to-end delivery control.</strong> Sky owns the pipe as well as the content, so
+            picture consistency during a Sunday-night match is its problem to solve rather than yours.
+            IPTV rides on your broadband, which means your ISP and your router become part of the
+            equation.
+          </li>
+        </ul>
+        <p>
+          If those three things matter more to you than a thousand pounds, Sky is the right answer and
+          you should stay. Most people, when they see the annual figure written down, decide otherwise.
+        </p>
+
+        <h2>What IPTV does better</h2>
+        <ul>
+          <li>
+            <strong>Catalogue size.</strong> Around 300 channels on Sky's top bundle against 50,000+
+            live channels and 60,000+ films and box sets on a
+            <a href="/blog/iptv-subscription-uk-buyers-guide/">properly specified IPTV subscription</a>.
+          </li>
+          <li>
+            <strong>No contract.</strong> Nothing to exit, no early-termination fee, no eighteen-month
+            commitment. If a month disappoints you, you stop.
+          </li>
+          <li>
+            <strong>Hardware you already own.</strong> No engineer, no puck, no new television. A Fire
+            Stick, smart TV, Apple TV or phone will do. Our
+            <a href="/blog/top-5-iptv-boxes-uk-2026/">guide to the best IPTV boxes</a> covers the
+            options if you want dedicated hardware.
+          </li>
+          <li>
+            <strong>International channels.</strong> Sky's UK bundles are built for a UK audience. IPTV
+            carries the same British channels plus European, Asian, African and American networks in
+            one subscription, which matters enormously to households that speak more than one language.
+          </li>
+          <li>
+            <strong>Fifteen-minute setup.</strong> Follow our
+            <a href="/installation-guides/">installation guides</a> and you are watching the same
+            evening rather than waiting on a delivery slot.
+          </li>
+        </ul>
+
+        <h2>Is IPTV cheaper than Sky? The maths, once</h2>
+        <p>
+          Take the full-package household. Sky at £110 a month is £1,320 over twelve months, before
+          the annual uplift and before the setup fee. UK IPTV BOX at £{annual.price} for the same
+          twelve months is £{annual.perMonth} a month. The difference is £1,270, which is a family
+          holiday, or roughly two months of an average UK mortgage payment.
+        </p>
+        <p>
+          Even the most conservative comparison favours switching. Strip out sports entirely, put the
+          household on Sky's cheapest realistic bundle at £28 a month, and you are still paying £336 a
+          year against £{annual.price}. The <strong>IPTV price comparison</strong> does not have a
+          scenario where Sky comes out cheaper.
+        </p>
+
+        <h2>How to switch from Sky TV to IPTV without a gap</h2>
+        <p>
+          Do these in order and you will never be without television:
+        </p>
+        <ol>
+          <li>
+            <strong>Check your Sky contract end date first.</strong> Log into My Sky and find your
+            minimum term. Cancelling inside it triggers an early-termination charge that can wipe out
+            several months of savings. If you have time left, line the switch up for the end date.
+          </li>
+          <li>
+            <strong>Test IPTV while Sky is still running.</strong> Take a one-month plan and run both
+            in parallel for thirty days. Our
+            <a href="/blog/iptv-free-trial-uk/">guide to testing an IPTV service properly</a> lists
+            exactly what to check: peak-time stability at 8pm, the channels you actually watch, the
+            TV guide, and how fast support replies.
+          </li>
+          <li>
+            <strong>Install on your main television.</strong> Fifteen minutes with our
+            <a href="/installation-guides/firestick/">Fire Stick guide</a> or
+            <a href="/installation-guides/smart-tv/">smart TV guide</a>. Pick a player app from our
+            <a href="/blog/best-iptv-player-apps-2026-uk/">IPTV player comparison</a> if you want
+            something better than the default.
+          </li>
+          <li>
+            <strong>Give Sky 31 days' notice.</strong> Sky requires a full month, and it must be by
+            phone or through the online cancellation flow. An email will not do it.
+          </li>
+          <li>
+            <strong>Decide about the broadband separately.</strong> Sky Broadband continues after Sky
+            TV ends. Check what your monthly price becomes without the bundle discount, then compare
+            against other providers.
+          </li>
+          <li>
+            <strong>Move to an annual plan once you are happy.</strong> The 12-month plan at
+            £{annual.perMonth} a month is where the £1,000+ saving actually lands.
+          </li>
+        </ol>
+
+        <h2>Before you cancel Sky: the honest checklist</h2>
+        <ul>
+          <li>Confirm the IPTV provider carries every channel your household genuinely watches, not just the famous ones.</li>
+          <li>Test at 8pm on a weeknight and again during a live match. Off-peak performance tells you nothing.</li>
+          <li>Read the provider's <a href="/refund/">refund policy</a> and terms before paying, not after.</li>
+          <li>Confirm how many simultaneous connections you get. A four-television household needs more than one.</li>
+          <li>Understand the legal position. Our <a href="/blog/is-iptv-legal-uk/">guide to whether IPTV is legal in the UK</a> sets out where the line sits.</li>
+          <li>Check the provider against a real standard, not a marketing page. Our <a href="/blog/best-iptv-provider-uk/">best IPTV provider scorecard</a> is the checklist we hold ourselves to.</li>
+          <li>Pay by card or PayPal so a chargeback stays available to you.</li>
+        </ul>
+
+        <h2>Other alternatives to Sky TV, compared honestly</h2>
+        <p>
+          IPTV is not the only Sky TV alternative in the UK, and it would be dishonest to pretend
+          otherwise. The realistic options:
+        </p>
+        <ul>
+          <li>
+            <strong>Freely or Freesat.</strong> Free, legal, and genuinely good for the terrestrial
+            channels plus catch-up. No Sky Sports, no TNT Sports, no film library. The right answer
+            for a household that only ever watched BBC, ITV, Channel 4 and Channel 5.
+          </li>
+          <li>
+            <strong>Now (Sky's own streaming brand).</strong> No contract and month-by-month sports
+            passes, but the Sports membership alone runs about £35 a month and the Entertainment and
+            Cinema passes stack on top. Cheaper than Sky Q, still several times the cost of IPTV.
+          </li>
+          <li>
+            <strong>Virgin Media TV.</strong> A different bundle wrapped around the same expensive
+            sports rights, on a contract of similar length. Worth a quote if you are switching
+            broadband anyway, but it is not a saving of the same order.
+          </li>
+          <li>
+            <strong>A stack of streaming apps.</strong> Netflix, Prime, Disney+ and Apple TV together
+            land around £40 a month and still carry no live sport and no live channels. The bills add
+            up faster than people expect.
+          </li>
+          <li>
+            <strong>IPTV.</strong> The only one of these <strong>alternatives to Sky TV</strong> that
+            covers live channels, sport and an on-demand library in a single subscription at
+            £{annual.perMonth} a month.
+          </li>
+        </ul>
+
+        <h2>Frequently asked questions</h2>
+      </article>
+
+      <div class="mt-8 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-border-subtle bg-elevated/60 p-5 md:p-6 open:border-brand/40">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+              <h3 class="text-base md:text-lg font-semibold text-text-primary">{f.q}</h3>
+              <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle text-brand-light transition group-open:rotate-180">
+                <Icon name="chevron-down" size={14} />
+              </span>
+            </summary>
+            <p class="mt-3 text-text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <article class="legal-prose mt-14">
+        <h2>The verdict on IPTV vs Sky TV in 2026</h2>
+        <p>
+          If you want Sky Q recording, an Ofcom escalation route and a single company accountable for
+          the whole delivery chain, Sky earns its price and you should keep it. Everyone else is
+          paying between £300 and £1,300 a year for a smaller catalogue on a longer contract.
+        </p>
+        <p>
+          For the households actually asking the <strong>IPTV vs Sky TV</strong> question, which is
+          usually a sports household looking at a £110 bill, it is not close. You get more channels,
+          a much bigger on-demand library, no contract, and the difference back in your account.
+        </p>
+        <p>
+          What we would not tell you to do is cancel Sky this afternoon. Run a
+          <a href="/pricing/">one-month UK IPTV subscription</a> alongside it instead, test it at
+          eight o'clock on a match night when the servers are under real load, and then cancel
+          whichever of the two loses.
+        </p>
+        <p>
+          To start that test, <a href={waLink('Hi, I read the IPTV vs Sky TV comparison: I would like to try UK IPTV BOX for a month.')} target="_blank" rel="nofollow noopener noreferrer">message us on WhatsApp</a>
+          and we will have you watching in about fifteen minutes. If you would rather read other
+          people's experience of the switch first, our
+          <a href="/testimonials/">customer reviews</a> are the place to start.
+        </p>
+      </article>
+
+      <aside class="mt-14">
+        <h2 class="font-display text-xl md:text-2xl font-semibold text-text-primary">Related guides</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedLinks.map((g) => (
+            <li><a href={g.href} class="card group flex items-center justify-between gap-3 p-4 transition hover:border-brand/50"><span class="text-sm md:text-base font-medium text-text-primary group-hover:text-brand-light">{g.label}</span><span class="text-brand-light shrink-0"><Icon name="arrow" size={16} /></span></a></li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

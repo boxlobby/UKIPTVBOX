@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 import { site, waLink } from '../data/site';
 
 const contactWaLink = waLink('Hello, I have a question about UKIPTVBOX.');
@@ -309,4 +310,5 @@ const mailtoLink = `mailto:${site.supportEmail}?subject=${encodeURIComponent('UK
 
   </main>
   <Footer />
+  <BreadcrumbSchema name="Contact" path="/contact/" />
 </BaseLayout>

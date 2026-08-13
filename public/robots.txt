@@ -1,4 +1,34 @@
 User-agent: *
 Allow: /
 
+# The checkout funnel is noindex on the pages themselves. It stays crawlable so
+# the noindex directive can actually be read, but there is nothing to rank here.
+Disallow: /checkout/confirmed/
+
+# AI answer engines. Explicitly allowed: the guides are written to be cited, and
+# an unstated policy is treated as ambiguous by several of these crawlers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://ukiptvbox.com/sitemap.xml

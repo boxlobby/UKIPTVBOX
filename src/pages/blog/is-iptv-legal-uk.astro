@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import FinalCta from '../../components/FinalCta.astro';
 import { postBySlug } from '../../data/posts';
+import { organizationNode, authorNode, authorRef, publisherRef } from '../../data/author';
 import { site, waLink } from '../../data/site';
 
 const post = postBySlug('is-iptv-legal-uk')!;
@@ -72,6 +73,8 @@ const faqs = [
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
+    organizationNode,
+    authorNode,
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -85,13 +88,8 @@ const jsonLd = {
       headline: post.title,
       description: post.excerpt,
       image: ogImage,
-      author: { '@type': 'Person', name: post.author, url: `${site.url}/about#team` },
-      publisher: {
-        '@type': 'Organization',
-        name: site.name,
-        url: site.url,
-        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
-      },
+      author: authorRef,
+      publisher: publisherRef,
       datePublished: post.published,
       dateModified: post.updated,
       mainEntityOfPage: canonical,

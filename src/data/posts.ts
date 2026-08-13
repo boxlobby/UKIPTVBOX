@@ -14,6 +14,34 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: 'iptv-vs-sky-tv-uk',
+    // Title tag renders as "<title> | UK IPTV BOX" = 59 chars (target 50–60).
+    title: 'IPTV vs Sky TV UK 2026: The Cost of Switching',
+    // Meta description: 155 chars (target 150–160).
+    excerpt:
+      'IPTV vs Sky TV in the UK, priced honestly. What a full Sky package costs a year, what UK IPTV costs, and why a sports household saves over £1,000 by moving.',
+    category: 'Comparison',
+    image: '/blog/iptv-vs-sky-tv-uk.svg',
+    imageAlt: 'IPTV vs Sky TV UK 2026 annual cost comparison showing £1,320 for a full Sky package against £49.99 for a 12-month IPTV subscription',
+    published: '2026-08-13',
+    updated: '2026-08-13',
+    readMinutes: 13,
+    author: 'Mark Reynolds',
+    keywords: [
+      'iptv vs sky tv',
+      'iptv vs sky',
+      'sky tv alternative uk',
+      'alternatives to sky tv',
+      'is iptv cheaper than sky',
+      'iptv price comparison uk',
+      'how much does iptv cost per month uk',
+      'cancel sky tv',
+      'iptv subscription uk',
+      'best iptv uk',
+      'iptv uk',
+    ],
+  },
+  {
     slug: 'iptv-firestick-uk',
     // Title tag renders as "<title> | UK IPTV BOX" = 55 chars (target 50–60).
     title: 'IPTV Firestick UK: Setup, Speed and Fixes',
@@ -26,7 +54,7 @@ export const posts: BlogPost[] = [
     published: '2026-07-26',
     updated: '2026-07-26',
     readMinutes: 12,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'iptv firestick',
       'fire stick iptv',
@@ -50,7 +78,7 @@ export const posts: BlogPost[] = [
     published: '2026-07-22',
     updated: '2026-07-22',
     readMinutes: 12,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'best iptv provider uk',
       'best uk iptv',
@@ -73,7 +101,7 @@ export const posts: BlogPost[] = [
     published: '2026-07-20',
     updated: '2026-07-20',
     readMinutes: 10,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'internet protocol television',
       'what is iptv',
@@ -96,7 +124,7 @@ export const posts: BlogPost[] = [
     published: '2026-07-24',
     updated: '2026-07-24',
     readMinutes: 13,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'iptv uk',
       'uk iptv',
@@ -117,7 +145,7 @@ export const posts: BlogPost[] = [
     published: '2026-07-14',
     updated: '2026-07-22',
     readMinutes: 10,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'free trial iptv uk',
       'iptv free trial uk',
@@ -141,7 +169,7 @@ export const posts: BlogPost[] = [
     published: '2026-07-07',
     updated: '2026-07-22',
     readMinutes: 9,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'is iptv legal uk',
       'iptv legal uk',
@@ -163,7 +191,7 @@ export const posts: BlogPost[] = [
     published: '2026-06-30',
     updated: '2026-07-22',
     readMinutes: 12,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'iptv subscription uk',
       'uk iptv subscription',
@@ -186,7 +214,7 @@ export const posts: BlogPost[] = [
     published: '2026-06-23',
     updated: '2026-07-22',
     readMinutes: 10,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'cheap iptv',
       'cheap iptv uk',
@@ -209,7 +237,7 @@ export const posts: BlogPost[] = [
     published: '2026-06-16',
     updated: '2026-07-22',
     readMinutes: 11,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'iptv smarters pro firestick',
       'iptv smarters firestick',
@@ -232,7 +260,7 @@ export const posts: BlogPost[] = [
     published: '2026-06-09',
     updated: '2026-07-22',
     readMinutes: 12,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'best iptv player',
       'best iptv app',
@@ -255,7 +283,7 @@ export const posts: BlogPost[] = [
     published: '2026-07-19',
     updated: '2026-07-22',
     readMinutes: 12,
-    author: 'James Whitfield',
+    author: 'Mark Reynolds',
     keywords: [
       'iptv box uk',
       'iptv uk',

@@ -1,4 +1,5 @@
 ---
+import { appLogoAlt } from '../../data/alt';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -310,7 +311,7 @@ const relatedGuides = [
             >
               <img
                 src={app.logo}
-                alt={`${app.name} logo`}
+                alt={appLogoAlt(app.name, 'iPhone, Android and tablet setup')}
                 width="48"
                 height="48"
                 loading="lazy"
@@ -347,7 +348,7 @@ const relatedGuides = [
             <div class="flex items-start gap-4">
               <img
                 src={app.logo}
-                alt={`${app.name} logo`}
+                alt={appLogoAlt(app.name, 'iPhone, Android and tablet setup')}
                 width="72"
                 height="72"
                 loading="lazy"

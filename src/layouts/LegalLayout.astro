@@ -16,8 +16,47 @@ export interface Props {
 }
 
 const { title, description, eyebrow, heading, intro, updated, noIndex = true, includeSchema = false } = Astro.props;
+
+const canonical = `${site.url}${Astro.url.pathname}`;
+
+/**
+ * The indexable legal pages (privacy, terms, refund, DMCA) shipped with no
+ * structured data at all. WebPage + BreadcrumbList brings them in line with the
+ * rest of the site; noindex pages skip it so we never advertise what we hide.
+ */
+const jsonLd = noIndex
+  ? null
+  : {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+            { '@type': 'ListItem', position: 2, name: heading, item: canonical },
+          ],
+        },
+        {
+          '@type': 'WebPage',
+          '@id': canonical,
+          name: title,
+          headline: heading,
+          description,
+          url: canonical,
+          inLanguage: 'en-GB',
+          dateModified: updated,
+          isPartOf: { '@type': 'WebSite', name: site.name, url: site.url },
+          publisher: {
+            '@type': 'Organization',
+            name: site.name,
+            url: site.url,
+            logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+          },
+        },
+      ],
+    };
 ---
-<BaseLayout title={`${title} | ${site.name}`} description={description} noIndex={noIndex} includeSchema={includeSchema}>
+<BaseLayout title={`${title} | ${site.name}`} description={description} canonical={canonical} noIndex={noIndex} includeSchema={includeSchema}>
   <Header />
   <main id="main">
     <!-- Hero -->
@@ -68,4 +107,6 @@ const { title, description, eyebrow, heading, intro, updated, noIndex = true, in
     </section>
   </main>
   <Footer />
+
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 </BaseLayout>

@@ -9,10 +9,67 @@ import { site, waLink } from '../data/site';
 
 const fmt = (d: string) =>
   new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const canonical = `${site.url}/blog/`;
+
+/**
+ * The listing page carried no structured data at all, so Google had no signal
+ * that /blog/ is the hub for the 12 Article pages beneath it. Blog + ItemList
+ * ties the hub to its posts; BreadcrumbList matches every other section.
+ */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: canonical },
+      ],
+    },
+    {
+      '@type': 'Blog',
+      '@id': canonical,
+      name: `${site.name} Blog`,
+      description:
+        'UK IPTV buying guides, app reviews, comparisons and setup walkthroughs, each tested against a live subscription.',
+      url: canonical,
+      inLanguage: 'en-GB',
+      publisher: {
+        '@type': 'Organization',
+        name: site.name,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/og-image.svg` },
+      },
+      blogPost: posts.map((p) => ({
+        '@type': 'BlogPosting',
+        headline: p.title,
+        description: p.excerpt,
+        url: `${site.url}/blog/${p.slug}/`,
+        image: p.image.startsWith('http') ? p.image : site.url + p.image,
+        datePublished: p.published,
+        dateModified: p.updated,
+        author: { '@type': 'Person', name: p.author },
+      })),
+    },
+    {
+      '@type': 'ItemList',
+      itemListOrder: 'https://schema.org/ItemListOrderDescending',
+      numberOfItems: posts.length,
+      itemListElement: posts.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${site.url}/blog/${p.slug}/`,
+        name: p.title,
+      })),
+    },
+  ],
+};
 ---
 <BaseLayout
   title="UKIPTVBOX Blog: UK IPTV Guides, Reviews & Buying Advice"
   description="Honest UK IPTV buying guides, app reviews and setup walkthroughs from UKIPTVBOX. Ranked lists, comparisons and tips to get the most from your IPTV subscription."
+  canonical={canonical}
   includeSchema={false}
 >
   <Header />
@@ -90,4 +147,6 @@ const fmt = (d: string) =>
     <FinalCta />
   </main>
   <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </BaseLayout>

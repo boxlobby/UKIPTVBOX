@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="IPTV vs Sky TV UK 2026 — annual cost compared">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050914"/>
+      <stop offset="55%" stop-color="#0A0F1E"/>
+      <stop offset="100%" stop-color="#0F1B36"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="55%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="cardStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#2563EB" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="barSky" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#94A3B8"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1050" cy="120" r="260" fill="url(#glowA)"/>
+  <circle cx="120" cy="540" r="220" fill="url(#glowB)"/>
+
+  <!-- subtle grid -->
+  <g opacity="0.08" stroke="#94B3FF" stroke-width="1">
+    <path d="M0 90 H1200 M0 180 H1200 M0 270 H1200 M0 360 H1200 M0 450 H1200 M0 540 H1200"/>
+    <path d="M120 0 V630 M240 0 V630 M360 0 V630 M480 0 V630 M600 0 V630 M720 0 V630 M840 0 V630 M960 0 V630 M1080 0 V630"/>
+  </g>
+
+  <!-- eyebrow -->
+  <g transform="translate(80, 84)">
+    <rect x="0" y="0" width="248" height="36" rx="18" fill="#0F1B36" stroke="#22D3EE" stroke-opacity="0.35"/>
+    <circle cx="18" cy="18" r="4" fill="#22D3EE"/>
+    <text x="32" y="24" font-family="Poppins, Inter, sans-serif" font-size="13" font-weight="600" fill="#C7CFE0" letter-spacing="2">COST COMPARISON · 2026</text>
+  </g>
+
+  <!-- Title -->
+  <text x="80" y="208" font-family="Poppins, Inter, sans-serif" font-size="78" font-weight="700" fill="#F5F7FA">IPTV vs Sky TV</text>
+  <text x="80" y="294" font-family="Poppins, Inter, sans-serif" font-size="78" font-weight="700" fill="url(#accent)">UK 2026</text>
+
+  <!-- Subtitle -->
+  <text x="80" y="344" font-family="Inter, sans-serif" font-size="22" fill="#C7CFE0">What a full sports household really pays over twelve months</text>
+
+  <!-- Bars -->
+  <g transform="translate(80, 400)" font-family="Poppins, Inter, sans-serif">
+    <!-- Sky bar -->
+    <text x="0" y="0" font-size="16" font-weight="600" fill="#C7CFE0" letter-spacing="1">SKY TV · FULL PACKAGE</text>
+    <rect x="0" y="14" width="900" height="46" rx="12" fill="url(#barSky)"/>
+    <text x="918" y="46" font-size="30" font-weight="700" fill="#F5F7FA">£1,320</text>
+
+    <!-- IPTV bar -->
+    <text x="0" y="112" font-size="16" font-weight="600" fill="#22D3EE" letter-spacing="1">UK IPTV BOX · 12 MONTHS</text>
+    <rect x="0" y="126" width="34" height="46" rx="12" fill="url(#accent)"/>
+    <text x="52" y="158" font-size="30" font-weight="700" fill="#F5F7FA">£49.99</text>
+
+    <!-- Saving chip -->
+    <g transform="translate(700, 118)">
+      <rect x="0" y="0" width="382" height="62" rx="16" fill="#0F1B36" stroke="url(#cardStroke)"/>
+      <text x="24" y="39" font-size="24" font-weight="700" fill="#22D3EE">You keep £1,270 a year</text>
+    </g>
+  </g>
+
+  <!-- Brand -->
+  <text x="80" y="600" font-family="Poppins, Inter, sans-serif" font-size="20" font-weight="600" fill="#8A94B0" letter-spacing="2">ukiptvbox.com · 50,000+ channels · from £14.99</text>
+</svg>
